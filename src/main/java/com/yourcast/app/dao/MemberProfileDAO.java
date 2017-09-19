@@ -20,12 +20,12 @@ public class MemberProfileDAO {
 		return sqlSession.delete(NAMESPACE+"",profile_num);
 	}
 	public int imgUpdate(MemberProfileVO vo) {
-		return sqlSession.update(NAMESAPCE+"",vo);
+		return sqlSession.update(NAMESPACE+"",vo);
 	}
 	public int contentUpdate(MemberProfileVO vo) {
-		return sqlSession.update(NAMESAPCE+"",vo);
+		return sqlSession.update(NAMESPACE+"",vo);
 	}
 	public int msgUpdate(MemberProfileVO vo) {
-		return sqlSession.update(NAMESAPCE+"",vo);
+		return sqlSession.update(NAMESPACE+"",vo);
 	}
 }
