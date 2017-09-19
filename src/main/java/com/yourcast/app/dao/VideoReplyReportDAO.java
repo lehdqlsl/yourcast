@@ -17,6 +17,6 @@ public class VideoReplyReportDAO {
 	}
 	
 	public int getCount(int vr_num) {
-		return sqlSession.getCount(NAMESPACE + ".",vr_num);
+		return sqlSession.selectOne(NAMESPACE + ".",vr_num);
 	}
 }
