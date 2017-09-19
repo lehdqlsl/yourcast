@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<typeAliases>
+		<!-- alias -->
+		<!--예시 <typeAlias type="com.jhta.app16.vo.MyUsersVo" alias="myusers"/>  -->
+	</typeAliases>
+	
+	
+	<mappers>
+		<!-- Mapper -->
+		<!-- 예시 <mapper resource="com/jhta/mybatis/MyUsersMapper.xml" /> -->
+	</mappers>
+</configuration>
