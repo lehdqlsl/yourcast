@@ -13,20 +13,24 @@ public class BlacklistDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
-	
+	private final String NAMESPACE = "com.jhta.mybatis.BlacklistMapper";
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+
 	public int insert(BlacklistVO vo) {
-		return sqlSession.insert(NAMESPACE + ".",vo);		
+		return sqlSession.insert(NAMESPACE + ".", vo);
 	}
-	
+
 	public int delete(BlacklistVO vo) {
-		return sqlSession.delete(NAMESPACE + ".",vo);
+		return sqlSession.delete(NAMESPACE + ".", vo);
 	}
-	
-	public List<BlacklistVO> getList(int bj_num) {
-		return sqlSession.selectList(NAMESPACE + ".",bj_num);
+
+	public List<BlacklistVO> getList() {
+		return sqlSession.selectList(NAMESPACE + ".getlist");
 	}
-	
+
 	public int getCount() {
 		return sqlSession.selectOne(NAMESPACE + ".");
 	}

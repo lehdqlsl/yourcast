@@ -11,12 +11,16 @@ public class BoardReplyUpDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "";
-	
-	public int insert(BoardReplyUpVO vo) {
-		return sqlSession.insert(NAMESPACE + ".",vo);		
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
 	}
-	
+
+	public int insert(BoardReplyUpVO vo) {
+		return sqlSession.insert(NAMESPACE + ".", vo);
+	}
+
 	public int getCount(int br_num) {
-		return sqlSession.selectOne(NAMESPACE + ".",br_num);
+		return sqlSession.selectOne(NAMESPACE + ".", br_num);
 	}
 }

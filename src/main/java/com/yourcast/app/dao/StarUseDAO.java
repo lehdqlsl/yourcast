@@ -13,15 +13,19 @@ public class StarUseDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "";
-	
-	public int insert(StarUseVO vo) {
-		return sqlSession.insert(NAMESPACE + ".",vo);		
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
 	}
-	
+
+	public int insert(StarUseVO vo) {
+		return sqlSession.insert(NAMESPACE + ".", vo);
+	}
+
 	public List<StarUseVO> getList() {
 		return sqlSession.selectList(NAMESPACE + ".");
 	}
-	
+
 	public int getCount() {
 		return sqlSession.selectOne(NAMESPACE + ".");
 	}

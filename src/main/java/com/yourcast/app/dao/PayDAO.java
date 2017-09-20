@@ -9,19 +9,23 @@ import com.yourcast.app.vo.PayVO;
 
 @Repository
 public class PayDAO {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "";
-	
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+
 	public int insert(PayVO vo) {
-		return sqlSession.insert(NAMESPACE + ".",vo);		
+		return sqlSession.insert(NAMESPACE + ".", vo);
 	}
 
 	public List<PayVO> getList() {
 		return sqlSession.selectList(NAMESPACE + ".");
 	}
-	
+
 	public int getCount() {
 		return sqlSession.selectOne(NAMESPACE + ".");
 	}

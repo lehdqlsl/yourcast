@@ -9,21 +9,27 @@ import com.yourcast.app.vo.NoticeVO;
 
 @Repository
 public class NoticeDAO {
-	@Autowired private SqlSession sqlSession;
-	private final String NAMESPACE="";
+	@Autowired
+	private SqlSession sqlSession;
+	private final String NAMESPACE = "";
+
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
+
 	public int insert(NoticeVO vo) {
-		return sqlSession.insert(NAMESPACE+"",vo);
+		return sqlSession.insert(NAMESPACE + "", vo);
 	}
+
 	public NoticeVO getInfo(int n_num) {
-		return sqlSession.selectOne(NAMESPACE+"",n_num);
+		return sqlSession.selectOne(NAMESPACE + "", n_num);
 	}
-	public List<NoticeVO> getList(){
-		return sqlSession.selectList(NAMESPACE+"");
+
+	public List<NoticeVO> getList() {
+		return sqlSession.selectList(NAMESPACE + "");
 	}
+
 	public int getCount() {
-		return sqlSession.selectOne(NAMESPACE+"");
+		return sqlSession.selectOne(NAMESPACE + "");
 	}
 }

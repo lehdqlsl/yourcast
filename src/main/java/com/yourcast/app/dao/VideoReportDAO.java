@@ -6,15 +6,19 @@ import org.apache.ibatis.session.SqlSession;
 
 @Repository
 public class VideoReportDAO {
-	@Autowired private SqlSession sqlSession;
-	
+	@Autowired
+	private SqlSession sqlSession;
+
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	private final String NAMESPACE="";
+
+	private final String NAMESPACE = "";
+
 	public int insert() {
 		return 1;
 	}
+
 	public int getCount() {
 		return 1;
 	}

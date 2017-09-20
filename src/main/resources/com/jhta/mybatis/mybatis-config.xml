@@ -7,12 +7,12 @@
 	
 	<typeAliases>
 		<!-- alias -->
-		<!--예시 <typeAlias type="com.jhta.app16.vo.MyUsersVo" alias="myusers"/>  -->
+		<typeAlias type="com.yourcast.app.vo.BlacklistVO" alias="blacklist"/>
 	</typeAliases>
 	
 	
 	<mappers>
 		<!-- Mapper -->
-		<!-- 예시 <mapper resource="com/jhta/mybatis/MyUsersMapper.xml" /> -->
+		<mapper resource="com/jhta/mybatis/BlacklistMapper.xml" />
 	</mappers>
 </configuration>

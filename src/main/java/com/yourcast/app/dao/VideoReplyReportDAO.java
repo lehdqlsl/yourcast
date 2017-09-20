@@ -11,12 +11,16 @@ public class VideoReplyReportDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "";
-	
-	public int insert(VideoReplyReportVO vo) {
-		return sqlSession.insert(NAMESPACE + ".",vo);		
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
 	}
-	
+
+	public int insert(VideoReplyReportVO vo) {
+		return sqlSession.insert(NAMESPACE + ".", vo);
+	}
+
 	public int getCount(int vr_num) {
-		return sqlSession.selectOne(NAMESPACE + ".",vr_num);
+		return sqlSession.selectOne(NAMESPACE + ".", vr_num);
 	}
 }

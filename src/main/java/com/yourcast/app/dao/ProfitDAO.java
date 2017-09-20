@@ -9,18 +9,23 @@ import com.yourcast.app.vo.ProfitVO;
 
 @Repository
 public class ProfitDAO {
-	@Autowired private SqlSession sqlSession;
-	
+	@Autowired
+	private SqlSession sqlSession;
+
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	private final String NAMESPACE="";
+
+	private final String NAMESPACE = "";
+
 	public int insert() {
 		return 1;
 	}
+
 	public List<ProfitVO> getList() {
 		return null;
 	}
+
 	public int getCount() {
 		return 1;
 	}

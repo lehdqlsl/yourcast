@@ -14,31 +14,35 @@ public class MsgDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "";
-	
-	public int insert(MsgVO vo) {
-		return sqlSession.insert(NAMESPACE + ".",vo);		
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
 	}
-	
+
+	public int insert(MsgVO vo) {
+		return sqlSession.insert(NAMESPACE + ".", vo);
+	}
+
 	public List<MsgVO> sendList() {
 		return sqlSession.selectList(NAMESPACE + ".");
 	}
-	
+
 	public List<MsgVO> recvList() {
 		return sqlSession.selectList(NAMESPACE + ".");
 	}
-	
+
 	public int sendDelete() {
 		return sqlSession.selectOne(NAMESPACE + ".");
 	}
-	
+
 	public int recvDelete() {
 		return sqlSession.selectOne(NAMESPACE + ".");
 	}
-	
+
 	public int sendCount() {
 		return sqlSession.selectOne(NAMESPACE + ".");
 	}
-	
+
 	public int recvCount() {
 		return sqlSession.selectOne(NAMESPACE + ".");
 	}
