@@ -4,15 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	
+
 	<typeAliases>
 		<!-- alias -->
-		<typeAlias type="com.yourcast.app.vo.BlacklistVO" alias="blacklist"/>
+		<typeAlias type="com.yourcast.app.vo.BlacklistVO" alias="blacklist" />
+		<typeAlias type="com.yourcast.app.vo.BoardUpVO" alias="boardup" />
+		<typeAlias type="com.yourcast.app.vo.CategoryVO" alias="category" />
+		<typeAlias type="com.yourcast.app.vo.VideoUpVO" alias="videoup" />
+		<typeAlias type="com.yourcast.app.vo.SubscribeVO" alias="subscribe" />
+		<typeAlias type="com.yourcast.app.vo.BoardReplyReportVO"
+			alias="boardreplyreport" />
+		<typeAlias type="com.yourcast.app.vo.ExchangeVO" alias="exchange" />
+		<typeAlias type="com.yourcast.app.vo.BroadcastVO" alias="broadcast" />
+
 	</typeAliases>
-	
-	
+
+
 	<mappers>
 		<!-- Mapper -->
 		<mapper resource="com/jhta/mybatis/BlacklistMapper.xml" />
+		<mapper resource="com/jhta/mybatis/BoardUpMapper.xml" />
+		<mapper resource="com/jhta/mybatis/CategoryMapper.xml" />
+		<mapper resource="com/jhta/mybatis/VideoUpMapper.xml" />
+		<mapper resource="com/jhta/mybatis/SubscribeMapper.xml" />
+		<mapper resource="com/jhta/mybatis/BoardReplyReportMapper.xml" />
+		<mapper resource="com/jhta/mybatis/ExchangeMapper.xml" />
+		<mapper resource="com/jhta/mybatis/BroadcastMapper.xml" />
+
 	</mappers>
 </configuration>
