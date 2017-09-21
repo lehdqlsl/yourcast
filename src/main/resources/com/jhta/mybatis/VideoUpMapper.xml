@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.VideoUpMapper">
+	<insert id="insert" parameterType="videoup">
+		insert into video_up values
+		(#{m_num},#{v_num})
+	</insert>
+
+	<select id="getcount" parameterType="int" resultType="int">
+		select
+		NVL(count(*),0) from video_up where v_num = #{v_num}
+	</select>
+</mapper>

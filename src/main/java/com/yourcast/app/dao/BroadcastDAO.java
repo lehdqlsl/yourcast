@@ -12,29 +12,29 @@ import com.yourcast.app.vo.BroadcastVO;
 public class BroadcastDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private static final String NAMESPACE = "";
+	private static final String NAMESPACE = "com.jhta.mybatis.BroadcastMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
-	public BroadcastVO getInfo() {
-		return null;
+	public BroadcastVO getInfo(int m_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getinfo", m_num);
 	}
 
 	public List<BroadcastVO> getList() {
-		return null;
+		return sqlSession.selectList(NAMESPACE + ".getlist");
 	}
 
-	public int insert() {
-		return 1;
+	public int insert(BroadcastVO vo) {
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	public int getCount() {
-		return 1;
+		return sqlSession.selectOne(NAMESPACE + ".getcount");
 	}
 
-	public int update() {
-		return 1;
+	public int update(BroadcastVO vo) {
+		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 }

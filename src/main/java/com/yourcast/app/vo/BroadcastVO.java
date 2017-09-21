@@ -1,7 +1,6 @@
 package com.yourcast.app.vo;
 
 public class BroadcastVO {
-	private int broadcast_num;
 	private String broadcast_title;
 	private String stream_key;
 	private int onair;
@@ -9,10 +8,9 @@ public class BroadcastVO {
 	private int m_num;
 	private int age_grade_num;
 
-	public BroadcastVO(int broadcast_num, String broadcast_title, String stream_key, int onair, int genre_num,
-			int m_num, int age_grade_num) {
+	public BroadcastVO(String broadcast_title, String stream_key, int onair, int genre_num, int m_num,
+			int age_grade_num) {
 		super();
-		this.broadcast_num = broadcast_num;
 		this.broadcast_title = broadcast_title;
 		this.stream_key = stream_key;
 		this.onair = onair;
@@ -23,14 +21,6 @@ public class BroadcastVO {
 
 	public BroadcastVO() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public int getBroadcast_num() {
-		return broadcast_num;
-	}
-
-	public void setBroadcast_num(int broadcast_num) {
-		this.broadcast_num = broadcast_num;
 	}
 
 	public String getBroadcast_title() {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.BuyMapper">
+	<insert id="insert" parameterType="buy">
+		insert into buy values(seq_buy_num.nextval,sysdate,#{buy_ea},#{m_num})
+	</insert>
+	<select id="getList" parameterType="int" resultType="buy">
+		select * from buy where m_num=#{m_num}
+	</select>
+	<select id="getCount" parameterType="int" resultType="int">
+		select NVL(count(buy_num),0) cnt from buy where m_num=#{m_num}
+	</select>
+</mapper>

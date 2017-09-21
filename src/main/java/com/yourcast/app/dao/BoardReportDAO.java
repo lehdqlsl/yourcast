@@ -10,17 +10,17 @@ import com.yourcast.app.vo.MemberProfileVO;
 public class BoardReportDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.BoardReportMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(BoardReportVO vo) {
-		return sqlSession.insert(NAMESPACE + "", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public int getCount() {
-		return sqlSession.selectOne(NAMESPACE + "");
+	public int getCount(int b_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getCount",b_num);
 	}
 }
