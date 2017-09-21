@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.VideoMapper">
+	<select id="insert" resultType="video">
+		insert into Video values(
+						seq_v_num.nextval, #{v_title}, #{v_content}, sysdate, #{v_hit}, #{v_orgfilename}, #{v_savefilename},
+						#{v_delete}, #{genre_num}, #{age_grade_num}, #{m_num}
+						)
+	</select>
+	<update id="update" parameterType="video">
+		update video 
+		set v_title=#{v_title}, v_content=#{v_content}, v_orgfilename=#{v_orgfilename},
+			 v_savefilename=#{v_savefilename}, genre_num=#{genre_num}, 
+			 age_grade_num=#{age_grade_num}
+		where v_num=#{v_num}
+	</update>
+	<select id="getInfo" parameterType="int" resultType="video">
+		select * from video where v_num = #{v_num}
+	</select>
+	<select id="getList" resultType="video">
+		select * from video
+	</select>
+	<update id="delete" parameterType="int">
+		update video
+		set v_delete = 1
+		where v_num=#{v_num}	
+	</update>
+	<update id="hitUpdate" parameterType="int">
+		update video
+		set v_hit = v_hit+1
+		where v_num=#{v_num}
+	</update>
+	<select id="getCount" parameterType="hashmap" resultType="int">
+			select NVL(count(m_num),0) cnt from video 
+			<where>
+				<if test="genre_num == null">
+					m_num = #{m_num}
+				</if>
+				<if test="genre_num != null">
+					genre_num = #{genre_num}
+				</if>
+				and v_delete = 0
+			</where>
+	</select>
+</mapper>

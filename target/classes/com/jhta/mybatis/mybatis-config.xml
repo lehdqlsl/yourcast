@@ -8,11 +8,24 @@
 	<typeAliases>
 		<!-- alias -->
 		<typeAlias type="com.yourcast.app.vo.BlacklistVO" alias="blacklist"/>
+		<typeAlias type="com.yourcast.app.vo.BoardVO" alias="board"/>		
+		<typeAlias type="com.yourcast.app.vo.VideoVO" alias="video"/>		
+		<typeAlias type="com.yourcast.app.vo.BookmarkVO" alias="bookmark"/>		
+		<typeAlias type="com.yourcast.app.vo.ProfitVO" alias="profit"/>		
+		<typeAlias type="com.yourcast.app.vo.FanVO" alias="fan"/>		
+		<typeAlias type="com.yourcast.app.vo.VideoReportVO" alias="videoreport"/>		
 	</typeAliases>
 	
 	
 	<mappers>
 		<!-- Mapper -->
 		<mapper resource="com/jhta/mybatis/BlacklistMapper.xml" />
+		<mapper resource="com/jhta/mybatis/BoardMapper.xml" />
+		<mapper resource="com/jhta/mybatis/VideoMapper.xml" />
+		<mapper resource="com/jhta/mybatis/BookmarkMapper.xml" />	
+		<mapper resource="com/jhta/mybatis/ProfitMapper.xml" />	
+		<mapper resource="com/jhta/mybatis/FanMapper.xml" />
+		<mapper resource="com/jhta/mybatis/VideoReportMapper.xml" />
 	</mappers>
+
 </configuration>
