@@ -8,7 +8,7 @@ public class MsgVO {
 	private String msg_title;
 	private String msg_content;
 	private Date msg_send_date;
-	private Date msg_view_date;
+	private int msg_view_date;
 	private int msg_receive_delete;
 	private int msg_send_delete;
 	private int m_numS;
@@ -16,7 +16,7 @@ public class MsgVO {
 	
 	public MsgVO() {}
 
-	public MsgVO(int msg_num, String msg_title, String msg_content, Date msg_send_date, Date msg_view_date,
+	public MsgVO(int msg_num, String msg_title, String msg_content, Date msg_send_date, int msg_view_date,
 			int msg_receive_delete, int msg_send_delete, int m_numS, int m_numR) {
 		super();
 		this.msg_num = msg_num;
@@ -62,11 +62,11 @@ public class MsgVO {
 		this.msg_send_date = msg_send_date;
 	}
 
-	public Date getMsg_view_date() {
+	public int getMsg_view_date() {
 		return msg_view_date;
 	}
 
-	public void setMsg_view_date(Date msg_view_date) {
+	public void setMsg_view_date(int msg_view_date) {
 		this.msg_view_date = msg_view_date;
 	}
 

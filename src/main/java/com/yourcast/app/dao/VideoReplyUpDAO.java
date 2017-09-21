@@ -10,18 +10,18 @@ public class VideoReplyUpDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.VideoReplyUpMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(VideoReplyUpVO vo) {
-		return sqlSession.insert(NAMESPACE + ".", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	public int getCount(int vr_num) {
-		return sqlSession.selectOne(NAMESPACE + ".", vr_num);
+		return sqlSession.selectOne(NAMESPACE + ".getcount", vr_num);
 	}
 
 }

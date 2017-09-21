@@ -11,25 +11,25 @@ import com.yourcast.app.vo.NoticeVO;
 public class NoticeDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.NoticeMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(NoticeVO vo) {
-		return sqlSession.insert(NAMESPACE + "", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	public NoticeVO getInfo(int n_num) {
-		return sqlSession.selectOne(NAMESPACE + "", n_num);
+		return sqlSession.selectOne(NAMESPACE + ".getInfo", n_num);
 	}
 
 	public List<NoticeVO> getList() {
-		return sqlSession.selectList(NAMESPACE + "");
+		return sqlSession.selectList(NAMESPACE + ".getList");
 	}
 
 	public int getCount() {
-		return sqlSession.selectOne(NAMESPACE + "");
+		return sqlSession.selectOne(NAMESPACE + ".getCount");
 	}
 }

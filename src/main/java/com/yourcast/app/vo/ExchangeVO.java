@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class ExchangeVO {
 	private int e_num;
-	private int e_money;
-	private int e_ea;
+	private int e_count;
+	private double e_ea;
 	private Date e_regdate;
 	private int m_num;
 
-	public ExchangeVO(int e_num, int e_money, int e_ea, Date e_regdate, int m_num) {
+	public ExchangeVO(int e_num, int e_count, double e_ea, Date e_regdate, int m_num) {
 		super();
 		this.e_num = e_num;
-		this.e_money = e_money;
+		this.e_count = e_count;
 		this.e_ea = e_ea;
 		this.e_regdate = e_regdate;
 		this.m_num = m_num;
@@ -30,15 +30,15 @@ public class ExchangeVO {
 		this.e_num = e_num;
 	}
 
-	public int getE_money() {
-		return e_money;
+	public int getE_count() {
+		return e_count;
 	}
 
-	public void setE_money(int e_money) {
-		this.e_money = e_money;
+	public void setE_count(int e_count) {
+		this.e_count = e_count;
 	}
 
-	public int getE_ea() {
+	public double getE_ea() {
 		return e_ea;
 	}
 

@@ -32,6 +32,13 @@ public class MemberVO {
 		this.gender_num = gender_num;
 		this.grade_num = grade_num;
 	}
+	public MemberVO(int m_num,int money,Date limit_date,int star_candy,int grade_num) {
+		this.m_num=m_num;
+		this.money=money;
+		this.limit_date=limit_date;
+		this.star_candy=star_candy;
+		this.grade_num=grade_num;
+	}
 
 	public int getM_num() {
 		return m_num;

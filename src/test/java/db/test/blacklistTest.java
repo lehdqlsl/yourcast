@@ -23,8 +23,39 @@ public class blacklistTest {
 	private BlacklistDAO dao;
 
 	@Test
-	public void getlist() {
-		List<BlacklistVO> list = dao.getList();
+	public void insert() {
+		int n = dao.insert(new BlacklistVO(0,1, 2));
+		boolean a = false;
+		if(n>0) {
+			a = true;
+		}
+		Assert.assertTrue(a);
+	}
+	
+	@Test
+	public void delete() {
+		int n = dao.delete(new BlacklistVO(0, 1, 2));
+		boolean a = false;
+		if(n>0) {
+			a = true;
+		}
+		Assert.assertTrue(a);
+	}
+	
+	@Test
+	public void getList() {
+		List<BlacklistVO> list = dao.getList(1);
 		Assert.assertNotNull(list);
 	}
+	
+	@Test
+	public void getCount() {
+		int n = dao.getCount(2);
+		boolean a = false;
+		if(n>0) {
+			a = true;
+		}
+		Assert.assertTrue(a);
+	}
+
 }
