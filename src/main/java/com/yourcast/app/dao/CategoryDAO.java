@@ -12,29 +12,29 @@ import com.yourcast.app.vo.CategoryVO;
 public class CategoryDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private static final String NAMESPACE = "";
+	private static final String NAMESPACE = "com.jhta.mybatis.CategoryMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
-	public int insert() {
-		return 1;
+	public int insert(CategoryVO vo) {
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public int update() {
-		return 1;
+	public int update(CategoryVO vo) {
+		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
-	public int delete() {
-		return 1;
+	public int delete(CategoryVO vo) {
+		return sqlSession.insert(NAMESPACE + ".delete", vo);
 	}
 
-	public CategoryVO getInfo() {
-		return null;
+	public CategoryVO getInfo(int category_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getinfo", category_num);
 	}
 
-	public List<CategoryVO> getList() {
-		return null;
+	public List<CategoryVO> getList(int m_num) {
+		return sqlSession.selectList(NAMESPACE + ".getlist", m_num);
 	}
 }
