@@ -11,22 +11,22 @@ import com.yourcast.app.vo.BookmarkVO;
 public class BookmarkDAO {
 	@Autowired
 	private SqlSession sqlSession;
+	private final String NAMESPACE = "com.jhta.mybatis.BookmarkMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
-	private final String NAMESPACE = "";
-
-	public int insert() {
-		return 1;
+	public int insert(BookmarkVO vo) {
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	public List<BookmarkVO> getList() {
-		return null;
+		List<BookmarkVO> mlist = sqlSession.selectList(NAMESPACE + ".getList");
+		return mlist;
 	}
 
-	public int delete() {
-		return 1;
+	public int delete(int num) {
+		return sqlSession.delete(NAMESPACE + ".delete", num);
 	}
 }

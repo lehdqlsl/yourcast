@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.VideoReportMapper">
+	<select id="insert" resultType="videoreport">
+		insert into video_report values(#{m_num},#{v_num})
+	</select>
+	<select id="getCount" parameterType="int" resultType="int">
+			select NVL(count(v_num),0) cnt from video_report
+			where v_num = #{v_num}
+	</select>
+</mapper>
