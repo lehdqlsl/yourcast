@@ -1,7 +1,3 @@
 *.class
 *.properties
-<<<<<<< HEAD
 /target/
-=======
-/target/
->>>>>>> branch 'master' of https://github.com/lehdqlsl/yourcast
