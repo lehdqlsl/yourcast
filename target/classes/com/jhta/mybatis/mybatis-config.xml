@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+
 	<typeAliases>
 		<!-- alias -->
 		<typeAlias type="com.yourcast.app.vo.BlacklistVO" alias="blacklist"/>
@@ -36,6 +37,7 @@
 		<typeAlias type="com.yourcast.app.vo.ExchangeVO" alias="exchange" />
 		<typeAlias type="com.yourcast.app.vo.BroadcastVO" alias="broadcast" />
 	</typeAliases>
+
 
 	<mappers>
 		<!-- Mapper -->
