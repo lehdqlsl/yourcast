@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.ProfitMapper">
+	<select id="insert" resultType="profit">
+		insert into profit values(
+					seq_p_num.nextval, #{profit_ea}, sysdate, #{m_num}
+					)
+	</select>
+	<select id="getList" resultType="profit">
+		select * from profit
+	</select>
+	<select id="getCount" parameterType="hashmap" resultType="int">
+			select NVL(count(m_num),0) cnt from profit
+			<where>
+				<if test="m_num != null">
+					m_num = #{m_num}
+				</if>
+			</where>
+	</select>
+</mapper>

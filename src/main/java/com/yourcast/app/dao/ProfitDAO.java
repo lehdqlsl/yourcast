@@ -1,5 +1,6 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,18 @@ public class ProfitDAO {
 		this.sqlSession = sqlSession;
 	}
 
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.ProfitMapper";
 
-	public int insert() {
-		return 1;
+	public int insert(ProfitVO vo) {
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	public List<ProfitVO> getList() {
-		return null;
+		List<ProfitVO> plist = sqlSession.selectList(NAMESPACE + ".getList");
+		return plist;
 	}
 
-	public int getCount() {
-		return 1;
+	public int getCount(HashMap<String, Integer> map) {
+		return sqlSession.selectOne(NAMESPACE + ".getCount",map);
 	}
 }

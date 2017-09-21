@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.BoardMapper">
+	<select id="insert" resultType="board">
+		insert into board values(
+					seq_b_num.nextval,#{b_title},#{b_content},sysdate,
+					#{b_hit},#{b_notice},#{b_delete},#{m_num},#{bj_num},#{category_num}
+					)
+	</select>
+	<update id="update" parameterType="board">
+		update board 
+		set b_title=#{b_title}, b_content = #{b_content}, b_notice=#{b_notice}
+		where b_num=#{b_num} 
+	</update>
+	<select id="getInfo" parameterType="int" resultType="board">
+		select * from board where b_num=#{b_num}
+	</select>
+	<select id="getList" resultType="board">
+		select * from board
+	</select>
+	<update id="delete" parameterType="int">
+		update board
+		set b_delete = 1
+		where b_num=#{b_num}	
+	</update>
+	<update id="hitUpdate" parameterType="int">
+		update board
+		set b_hit = b_hit+1
+		where b_num=#{b_num}
+	</update>
+	<select id="getCount" parameterType="hashmap" resultType="int">
+			select NVL(count(m_num),0) cnt from board 
+			<where>
+				<if test="category_num == null">
+					m_num = #{m_num}
+				</if>
+				<if test="category_num != null">
+					m_num = #{m_num} and category_num = #{category_num}
+				</if>
+				and b_delete = 0
+			</where>
+	</select>
+</mapper>

@@ -7,7 +7,7 @@ public class BoardVO {
 	private String b_title;
 	private String b_content;
 	private Date b_regdate;
-	private int hit;
+	private int b_hit;
 	private int b_notice;
 	private int b_delete;
 	private int m_num;
@@ -16,14 +16,14 @@ public class BoardVO {
 	
 	public BoardVO() {}
 	
-	public BoardVO(int b_num, String b_title, String b_content, Date b_regdate, int hit, int b_notice, int b_delete,
+	public BoardVO(int b_num, String b_title, String b_content, Date b_regdate, int b_hit, int b_notice, int b_delete,
 			int m_num, int bj_num, int category_num) {
 		super();
 		this.b_num = b_num;
 		this.b_title = b_title;
 		this.b_content = b_content;
 		this.b_regdate = b_regdate;
-		this.hit = hit;
+		this.b_hit = b_hit;
 		this.b_notice = b_notice;
 		this.b_delete = b_delete;
 		this.m_num = m_num;
@@ -54,11 +54,11 @@ public class BoardVO {
 	public void setB_regdate(Date b_regdate) {
 		this.b_regdate = b_regdate;
 	}
-	public int getHit() {
-		return hit;
+	public int getB_hit() {
+		return b_hit;
 	}
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setB_hit(int b_hit) {
+		this.b_hit = b_hit;
 	}
 	public int getB_notice() {
 		return b_notice;
@@ -90,6 +90,4 @@ public class BoardVO {
 	public void setCategory_num(int category_num) {
 		this.category_num = category_num;
 	}
-	
-	
 }
