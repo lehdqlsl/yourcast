@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.StarUseMapper">
+
+	<insert id="insert" parameterType="staruse">
+		insert into use values(seq_use_num.nextval,sysdate,#{use_ea},#{m_num},#{bj_num})
+	</insert>
+	
+	<select id="getsendlist" resultType="staruse" parameterType="int">
+		select * from use where m_num=#{m_num}
+	</select>
+	
+	<select id="getrecvlist" resultType="staruse" parameterType="int">
+		select * from use where bj_num=#{bj_num}
+	</select>
+	
+	<select id="getsendcount" resultType="int">
+		select NVL(count(bj_num),0) cnt from use where m_num=#{m_num}
+	</select>
+	
+	<select id="getrecvcount" resultType="int">
+		select NVL(count(m_num),0) cnt from use where bj_num=#{bj_num}
+	</select>
+	
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.VideoReplyReportMapper">
+
+	<insert id="insert" parameterType="videoreplyreport">
+		insert into video_reply_report values(#{m_num},#{vr_num})
+	</insert>
+
+	<select id="getcount" resultType="int">
+		select NVL(count(m_num),0) cnt from video_reply_report where vr_num=#{vr_num}
+	</select>
+	
+</mapper>

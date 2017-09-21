@@ -3,7 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.BlacklistMapper">
-	<select id="getlist" resultType="blacklist">
-		select * from blacklist
+
+	<insert id="insert" parameterType="blacklist">
+		insert into blacklist values(seq_bl_num.nextval,#{m_num},#{bj_num})
+	</insert>
+	
+	<delete id="delete" parameterType="blacklist">
+		delete from blacklist where bj_num=#{bj_num} and m_num=#{m_num}
+	</delete>
+	
+	<select id="getlist" resultType="blacklist" parameterType="int">
+		select * from blacklist where bj_num=#{bj_num}
 	</select>
+	
+	<select id="getcount" resultType="int">
+		select NVL(count(m_num),0) cnt from blacklist where bj_num=#{bj_num}
+	</select>
+	
 </mapper>

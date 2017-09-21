@@ -20,18 +20,18 @@ public class BlacklistDAO {
 	}
 
 	public int insert(BlacklistVO vo) {
-		return sqlSession.insert(NAMESPACE + ".", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	public int delete(BlacklistVO vo) {
-		return sqlSession.delete(NAMESPACE + ".", vo);
+		return sqlSession.delete(NAMESPACE + ".delete", vo);
 	}
 
-	public List<BlacklistVO> getList() {
-		return sqlSession.selectList(NAMESPACE + ".getlist");
+	public List<BlacklistVO> getList(int bj_num) {
+		return sqlSession.selectList(NAMESPACE + ".getlist",bj_num);
 	}
 
-	public int getCount() {
-		return sqlSession.selectOne(NAMESPACE + ".");
+	public int getCount(int bj_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getcount",bj_num);
 	}
 }
