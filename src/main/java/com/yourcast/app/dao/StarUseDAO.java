@@ -12,21 +12,29 @@ public class StarUseDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.StarUseMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(StarUseVO vo) {
-		return sqlSession.insert(NAMESPACE + ".", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public List<StarUseVO> getList() {
-		return sqlSession.selectList(NAMESPACE + ".");
+	public List<StarUseVO> getSendList(int m_num) {
+		return sqlSession.selectList(NAMESPACE + ".getsendlist",m_num);
+	}
+	
+	public List<StarUseVO> getRecvList(int bj_num) {
+		return sqlSession.selectList(NAMESPACE + ".getrecvlist",bj_num);
 	}
 
-	public int getCount() {
-		return sqlSession.selectOne(NAMESPACE + ".");
+	public int getSendCount(int m_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getsendcount",m_num);
+	}
+	
+	public int getRecvCount(int bj_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getrecvcount",bj_num);
 	}
 }

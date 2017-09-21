@@ -9,8 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.yourcast.app.dao.BlacklistDAO;
-import com.yourcast.app.vo.BlacklistVO;
+import com.yourcast.app.dao.StarUseDAO;
+import com.yourcast.app.vo.StarUseVO;
 
 import junit.framework.Assert;
 
@@ -18,13 +18,13 @@ import junit.framework.Assert;
 @ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
 @WebAppConfiguration
-public class blacklistTest {
+public class StarUseTest {
 	@Autowired
-	private BlacklistDAO dao;
+	private StarUseDAO dao;
 
 	@Test
 	public void insert() {
-		int n = dao.insert(new BlacklistVO(0,1, 2));
+		int n = dao.insert(new StarUseVO(0,null,1,1,2));
 		boolean a = false;
 		if(n>0) {
 			a = true;
@@ -33,29 +33,34 @@ public class blacklistTest {
 	}
 	
 	@Test
-	public void delete() {
-		int n = dao.delete(new BlacklistVO(0, 1, 2));
-		boolean a = false;
-		if(n>0) {
-			a = true;
-		}
-		Assert.assertTrue(a);
-	}
-	
-	@Test
-	public void getList() {
-		List<BlacklistVO> list = dao.getList(1);
+	public void getSendList() {
+		List<StarUseVO> list = dao.getSendList(1);
 		Assert.assertNotNull(list);
 	}
 	
 	@Test
-	public void getCount() {
-		int n = dao.getCount(2);
+	public void getRecvList() {
+		List<StarUseVO> list = dao.getRecvList(1);
+		Assert.assertNotNull(list);
+	}
+	
+	@Test
+	public void getSendCount() {
+		int n = dao.getSendCount(1);
 		boolean a = false;
 		if(n>0) {
 			a = true;
 		}
 		Assert.assertTrue(a);
 	}
-
+	
+	@Test
+	public void getRecvCount() {
+		int n = dao.getRecvCount(2);
+		boolean a = false;
+		if(n>0) {
+			a = true;
+		}
+		Assert.assertTrue(a);
+	}
 }

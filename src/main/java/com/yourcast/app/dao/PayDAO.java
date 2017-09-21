@@ -12,21 +12,21 @@ public class PayDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.PayMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(PayVO vo) {
-		return sqlSession.insert(NAMESPACE + ".", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public List<PayVO> getList() {
-		return sqlSession.selectList(NAMESPACE + ".");
+	public List<PayVO> getList(int m_num) {
+		return sqlSession.selectList(NAMESPACE + ".getlist",m_num);
 	}
 
-	public int getCount() {
-		return sqlSession.selectOne(NAMESPACE + ".");
+	public int getCount(int m_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getcount",m_num);
 	}
 }
