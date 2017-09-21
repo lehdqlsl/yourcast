@@ -12,21 +12,21 @@ import com.yourcast.app.vo.SubscribeVO;
 public class SubscribeDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private static final String NAMESPACE = "";
+	private static final String NAMESPACE = "com.jhta.mybatis.SubscribeMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
-	public int delete() {
-		return 1;
+	public int delete(SubscribeVO vo) {
+		return sqlSession.delete(NAMESPACE + ".delete", vo);
 	}
 
-	public int insert() {
-		return 1;
+	public int insert(SubscribeVO vo) {
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public List<SubscribeVO> getList() {
-		return null;
+	public List<SubscribeVO> getList(int m_num) {
+		return sqlSession.selectList(NAMESPACE + ".getlist", m_num);
 	}
 }

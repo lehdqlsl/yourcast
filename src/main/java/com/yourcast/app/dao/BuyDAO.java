@@ -11,21 +11,21 @@ import com.yourcast.app.vo.BuyVO;
 public class BuyDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.BuyMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(BuyVO vo) {
-		return sqlSession.insert(NAMESPACE + "", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public List<BuyVO> getInfo() {
-		return sqlSession.selectList(NAMESPACE + "");
+	public List<BuyVO> getList(int m_num) {
+		return sqlSession.selectList(NAMESPACE + ".getList",m_num);
 	}
 
-	public int getCount() {
-		return sqlSession.selectOne(NAMESPACE + "");
+	public int getCount(int m_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getCount",m_num);
 	}
 }

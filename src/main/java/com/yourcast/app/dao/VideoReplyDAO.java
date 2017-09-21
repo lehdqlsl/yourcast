@@ -12,29 +12,29 @@ import com.yourcast.app.vo.VideoReplyVO;
 public class VideoReplyDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.VideoReplyMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(VideoReplyVO vo) {
-		return sqlSession.insert(NAMESPACE + "", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	public int delete(int vr_num) {
-		return sqlSession.delete(NAMESPACE + "", vr_num);
+		return sqlSession.delete(NAMESPACE + ".delete", vr_num);
 	}
 
 	public int update(VideoReplyVO vo) {
-		return sqlSession.update(NAMESPACE + "", vo);
+		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
 	public VideoReplyVO getInfo(int vr_num) {
-		return sqlSession.selectOne(NAMESPACE + "", vr_num);
+		return sqlSession.selectOne(NAMESPACE + ".getInfo", vr_num);
 	}
 
-	public List<VideoReplyVO> getList() {
-		return sqlSession.selectList(NAMESPACE + "");
+	public List<VideoReplyVO> getList(int v_num) {
+		return sqlSession.selectList(NAMESPACE + ".getList",v_num);
 	}
 }

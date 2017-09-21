@@ -13,21 +13,21 @@ import com.yourcast.app.vo.ExchangeVO;
 public class ExchangeDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private static final String NAMESPACE = "";
+	private static final String NAMESPACE = "com.jhta.mybatis.ExchangeMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
-	public List<ExchangeVO> getList() {
-		return null;
+	public List<ExchangeVO> getList(int m_num) {
+		return sqlSession.selectList(NAMESPACE + ".getlist", m_num);
 	}
 
-	public int getCount() {
-		return 1;
+	public int getCount(int m_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getcount", m_num);
 	}
 
-	public int insert() {
-		return 1;
+	public int insert(ExchangeVO vo) {
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 }

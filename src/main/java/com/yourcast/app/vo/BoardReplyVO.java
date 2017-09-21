@@ -8,18 +8,20 @@ public class BoardReplyVO {
 	private Date br_regdate;
 	private int br_delete;
 	private int b_num;
+	private int m_num;
 	
 	public BoardReplyVO() {
 		
 	}
 
-	public BoardReplyVO(int br_num, String br_content, Date br_regdate, int br_delete, int b_num) {
+	public BoardReplyVO(int br_num, String br_content, Date br_regdate, int br_delete, int b_num, int m_num) {
 		super();
 		this.br_num = br_num;
 		this.br_content = br_content;
 		this.br_regdate = br_regdate;
 		this.br_delete = br_delete;
 		this.b_num = b_num;
+		this.m_num = m_num;
 	}
 
 	public int getBr_num() {
@@ -61,5 +63,14 @@ public class BoardReplyVO {
 	public void setB_num(int b_num) {
 		this.b_num = b_num;
 	}
-	
+
+	public int getM_num() {
+		return m_num;
+	}
+
+	public void setM_num(int m_num) {
+		this.m_num = m_num;
+	}
+
+
 }
