@@ -17,6 +17,10 @@ public class MemberProfileVO {
 		this.profile_savefilename = profile_savefilename;
 		this.m_num = m_num;
 	}
+	
+	public MemberProfileVO() {
+		
+	}
 	public int getProfile_num() {
 		return profile_num;
 	}

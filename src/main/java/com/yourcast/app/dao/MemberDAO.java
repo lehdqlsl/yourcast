@@ -11,41 +11,41 @@ import com.yourcast.app.vo.MemberVO;
 public class MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.MemberMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(MemberVO vo) {
-		return sqlSession.insert(NAMESPACE + "", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	public int update(MemberVO vo) {
-		return sqlSession.update(NAMESPACE + "", vo);
+		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
 	public MemberVO getInfo(int m_num) {
-		return sqlSession.selectOne(NAMESPACE + "", m_num);
+		return sqlSession.selectOne(NAMESPACE + ".getInfo", m_num);
 	}
 
 	public List<MemberVO> getList() {
-		return sqlSession.selectList(NAMESPACE + "");
+		return sqlSession.selectList(NAMESPACE + ".getList");
 	}
 
 	public int moneyUpdate(MemberVO vo) {
-		return sqlSession.update(NAMESPACE + "", vo);
+		return sqlSession.update(NAMESPACE + ".moneyUpdate", vo);
 	}
 
 	public int limitUpdate(MemberVO vo) {
-		return sqlSession.update(NAMESPACE + "", vo);
+		return sqlSession.update(NAMESPACE + ".limitUpdate", vo);
 	}
 
 	public int gradeUpdate(MemberVO vo) {
-		return sqlSession.update(NAMESPACE + "", vo);
+		return sqlSession.update(NAMESPACE + ".gradeUpdate", vo);
 	}
 
 	public int starcandyUpdate(MemberVO vo) {
-		return sqlSession.update(NAMESPACE + "", vo);
+		return sqlSession.update(NAMESPACE + ".starcandyUpdate", vo);
 	}
 }
