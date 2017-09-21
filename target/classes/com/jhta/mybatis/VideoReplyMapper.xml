@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.VideoReplyMapper">
+	<insert id="insert" parameterType="videoreply">
+		insert into video_reply values(seq_vr_num.nextval, #{vr_content},sysdate,#{vr_delete},#{v_num},#{m_num})
+	</insert>
+	<update id="delete" parameterType="int">
+		update video_reply set vr_delete=1 where vr_num=#{vr_num}
+	</update>
+	<update id="update" parameterType="videoreply">
+		update video_reply set vr_content=#{vr_content},vr_regdate=sysdate where vr_num=#{vr_num}
+	</update>
+	<select id="getInfo" parameterType="int" resultType="videoreply">
+		select * from video_reply where vr_num=#{vr_num}
+	</select>
+	<select id="getList" parameterType="int" resultType="videoreply">
+		select * from video_reply where v_num=#{vr_num} and vr_delete=0
+	</select>
+</mapper>

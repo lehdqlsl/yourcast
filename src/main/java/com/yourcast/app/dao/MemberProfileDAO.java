@@ -9,30 +9,27 @@ import com.yourcast.app.vo.MemberProfileVO;
 public class MemberProfileDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "";
+	private final String NAMESPACE = "com.jhta.mybatis.MemberProfileMapper";
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(MemberProfileVO vo) {
-		return sqlSession.insert(NAMESPACE + "", vo);
+		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
-
-	// 얘가 왜있을까요...
-	public int delete(int profile_num) {
-		return sqlSession.delete(NAMESPACE + "", profile_num);
-	}
-
 	public int imgUpdate(MemberProfileVO vo) {
-		return sqlSession.update(NAMESPACE + "", vo);
+		return sqlSession.update(NAMESPACE + ".imgUpdate", vo);
 	}
 
 	public int contentUpdate(MemberProfileVO vo) {
-		return sqlSession.update(NAMESPACE + "", vo);
+		return sqlSession.update(NAMESPACE + ".contentUpdate", vo);
 	}
 
 	public int msgUpdate(MemberProfileVO vo) {
-		return sqlSession.update(NAMESPACE + "", vo);
+		return sqlSession.update(NAMESPACE + ".msgUpdate", vo);
+	}
+	public MemberProfileVO getInfo(int profile_num) {
+		return sqlSession.selectOne(NAMESPACE+".getInfo",profile_num);
 	}
 }

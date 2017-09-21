@@ -7,6 +7,14 @@
 
 	<typeAliases>
 		<!-- alias -->
+		<typeAlias type="com.yourcast.app.vo.BlacklistVO" alias="blacklist"/>
+		<typeAlias type="com.yourcast.app.vo.MemberVO" alias="member"/>
+		<typeAlias type="com.yourcast.app.vo.BoardReplyVO" alias="boardreply"/>
+		<typeAlias type="com.yourcast.app.vo.VideoReplyVO" alias="videoreply"/>
+		<typeAlias type="com.yourcast.app.vo.NoticeVO" alias="notice"/>
+		<typeAlias type="com.yourcast.app.vo.BuyVO" alias="buy"/>
+		<typeAlias type="com.yourcast.app.vo.MemberProfileVO" alias="profile"/>
+		<typeAlias type="com.yourcast.app.vo.BoardReportVO" alias="boardreport"/>
 		<typeAlias type="com.yourcast.app.vo.BlacklistVO" alias="blacklist" />
 		<typeAlias type="com.yourcast.app.vo.BoardUpVO" alias="boardup" />
 		<typeAlias type="com.yourcast.app.vo.CategoryVO" alias="category" />
@@ -16,13 +24,19 @@
 			alias="boardreplyreport" />
 		<typeAlias type="com.yourcast.app.vo.ExchangeVO" alias="exchange" />
 		<typeAlias type="com.yourcast.app.vo.BroadcastVO" alias="broadcast" />
-
 	</typeAliases>
 
 
 	<mappers>
 		<!-- Mapper -->
 		<mapper resource="com/jhta/mybatis/BlacklistMapper.xml" />
+		<mapper resource="com/jhta/mybatis/MemberMapper.xml" />
+		<mapper resource="com/jhta/mybatis/BoardReplyMapper.xml" />
+		<mapper resource="com/jhta/mybatis/VideoReplyMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/NoticeMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/BuyMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/MemberProfileMapper.xml"/>
+		<mapper resource="com/jhta/mybatis/BoardReportMapper.xml"/>
 		<mapper resource="com/jhta/mybatis/BoardUpMapper.xml" />
 		<mapper resource="com/jhta/mybatis/CategoryMapper.xml" />
 		<mapper resource="com/jhta/mybatis/VideoUpMapper.xml" />
@@ -30,6 +44,5 @@
 		<mapper resource="com/jhta/mybatis/BoardReplyReportMapper.xml" />
 		<mapper resource="com/jhta/mybatis/ExchangeMapper.xml" />
 		<mapper resource="com/jhta/mybatis/BroadcastMapper.xml" />
-
 	</mappers>
 </configuration>
