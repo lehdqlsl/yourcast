@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.BoardReplyUpMapper">
+
+	<insert id="insert" parameterType="boardreplyup">
+		insert into board_reply_up values(#{m_num},#{br_num})
+	</insert>
+	
+	<select id="getcount" parameterType="int" resultType="int">
+		select NVL(count(m_num),0) cnt from board_reply_up where br_num=#{br_num}
+	</select>
+	
+</mapper>
