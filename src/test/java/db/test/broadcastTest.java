@@ -12,9 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.yourcast.app.dao.BroadcastDAO;
-import com.yourcast.app.dao.CategoryDAO;
 import com.yourcast.app.vo.BroadcastVO;
-import com.yourcast.app.vo.CategoryVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",

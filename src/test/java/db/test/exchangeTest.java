@@ -11,14 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.yourcast.app.dao.BlacklistDAO;
-import com.yourcast.app.dao.BoardUpDAO;
 import com.yourcast.app.dao.ExchangeDAO;
-import com.yourcast.app.vo.BlacklistVO;
-import com.yourcast.app.vo.BoardUpVO;
 import com.yourcast.app.vo.ExchangeVO;
-
-import junit.framework.Assert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",

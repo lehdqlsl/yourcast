@@ -2,7 +2,6 @@ package db.test;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Update;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

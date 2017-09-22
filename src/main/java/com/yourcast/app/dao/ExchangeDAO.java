@@ -1,6 +1,5 @@
 package com.yourcast.app.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
