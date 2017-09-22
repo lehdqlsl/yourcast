@@ -25,7 +25,14 @@ public class HomeController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String personnel(Locale locale, Model model) {
-		return "personnel/home";
+		model.addAttribute("list", "°Ô½ÃÆÇ1");
+		
+		return ".personnel";
+	}
+
+	@RequestMapping(value = "/{id}/test", method = RequestMethod.GET)
+	public String test1(Locale locale, Model model) {
+		return ".personnel.board.test";
 	}
 
 }

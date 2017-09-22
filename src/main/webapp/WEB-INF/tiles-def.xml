@@ -25,6 +25,23 @@
 	</definition>
 
 	<!-- 개인홈 페이지 타일즈 -->
+	<definition name=".personnel" template="/WEB-INF/views/personnel/layout.jsp">
+		<put-attribute name="sidebar"
+			value="/WEB-INF/views/personnel/sidebar.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/personnel/home.jsp"></put-attribute>
+	</definition>
+
+	<definition name=".*.*.*" extends=".personnel">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp"></put-attribute>
+	</definition>
+
+	<definition name=".*.*" extends=".personnel">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+	</definition>
+
+	<definition name=".*" extends=".personnel">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
 
 
