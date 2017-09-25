@@ -38,13 +38,13 @@
 		
 		<script type="text/javascript">
 			function cancel(){
-				window.location.href="<c:url value='/id/list'/>";	
+				window.location.href="<c:url value='/${requestScope.id}/video/list'/>";	
 			}
 		</script>
 
 		<h1>동영상 수정</h1>
-		<form method="post" action="<c:url value="/id/update"/>" enctype="multipart/form-data">
-		<input type="hidden" value="${vo.v_num }">
+		<form method="post" action="<c:url value='/${requestScope.id}/video/update'/>" enctype="multipart/form-data">
+		<input type="hidden" value="${vo.v_num }" name="v_num">
 		<table>
 			<tr>
 				<th>장르</th>

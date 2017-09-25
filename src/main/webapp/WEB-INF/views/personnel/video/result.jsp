@@ -6,7 +6,7 @@
 	function result(){
 		var result = document.getElementsByName("result")[0].value;
 		alert(result);
-		window.location.href="<c:url value='/id/list'/>";	
+		window.location.href="<c:url value='/${requestScope.id}/video/list'/>";	
 	}
 </script>
 		

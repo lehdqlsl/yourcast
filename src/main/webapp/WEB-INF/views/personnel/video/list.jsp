@@ -48,15 +48,49 @@
 					}
 				}
 			}
+			function delete(){
+				var chk = document.getElementsByName("chk");
+				var cnt = 0;
+				for(var i=0;i<chk.length;i++){
+					if(chk[i].checked){
+						v_num.value = chk[i].value;
+						cnt++;
+					}
+				}
+				if(cnt==0){
+					alert("항목을 선택해주세요.");
+					return false;
+				}else{
+					return true;
+				}
+			}
+			function update(){
+				var chk = document.getElementsByName("chk");
+				var v_num = document.getElementsByName("v_num")[0];
+				var cnt = 0;
+				for(var i=0;i<chk.length;i++){
+					if(chk[i].checked){
+						v_num.value = chk[i].value;
+						cnt++;
+					}
+				}
+				if(cnt>1){
+					alert("하나의 항목만 선택해주세요.");
+					return false;
+				}else if(cnt==0){
+					alert("항목을 선택해주세요.");
+				}else if(cnt==1){
+					return true;
+				}
+			}
 		</script>
 
 		<h1>Video목록</h1>
-		<form method="post" action="<c:url value='/id/delete'/>">
+		<form method="post" action="<c:url value='/${requestScope.id}/video/delete'/>" onsubmit="return delete()">
 		<table border="1">
-		
 			<tr>
 				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>관람등급</th><th>장르</th><th>제목</th><th>내용</th><th>등록일</th>
-				<th>썸네일</th><th>조회수</th><th>수정</th>
+				<th>썸네일</th><th>조회수</th>
 			</tr>
 			
 			<c:forEach var="vo" items="${list }">
@@ -68,19 +102,74 @@
 					<td>${vo.v_title }</td>
 					<td>${vo.v_content }</td>
 					<td>${vo.v_regdate }</td>				
-					<td><a href="<c:url value="/id/detail?v_num=${vo.v_num }"/>">
+					<td><a href="<c:url value="/${id}/video/detail?v_num=${vo.v_num }"/>">
 							<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="width:50px;height:50px;">
 							</a></td>
 					<td>${vo.v_hit }</td>
-					<td><a href="<c:url value="/id/update?v_num=${vo.v_num }"/>">수정</a></td>
 				</tr>
 			</c:forEach>
-					
 		</table>
+		<c:if test="${sessionScope.id==requestScope.id }">
 			<input type="submit" value="삭제">
+		</c:if>
 		</form>	
 		
-			<a href="<c:url value="/id/insert"/>">동영상업로드</a>
+		<c:if test="${sessionScope.id==requestScope.id }">
+			<form method="get" action="<c:url value='/${requestScope.id}/video/update'/>" onsubmit="return update()">
+				<input type="hidden" value="1" name="v_num">
+				<input type="submit" value="수정">
+			</form>	
+		</c:if>
+		
+		<c:if test="${sessionScope.id==requestScope.id }">
+			<a href="<c:url value="/${requestScope.id}/video/insert"/>">동영상업로드</a>
+		</c:if>
+		
+		<!-- 페이징 -->
+		<div>
+		<c:choose>
+			<c:when test="${pu.startPageNum>1 }">
+				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${1 }'/>">[처음으로]</a>
+			</c:when>
+			<c:otherwise>
+				[처음으로]
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${pu.startPageNum>5 }">
+				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.startPageNum-1 }'/>">[이전]</a>
+			</c:when>
+			<c:otherwise>
+				[이전]
+			</c:otherwise>
+		</c:choose>
+			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+				<c:choose>
+					<c:when test="${i==pu.pageNum }">
+						<span style="color:blue">[${i }]</span>
+					</c:when>
+					<c:otherwise>
+						<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${i }'/>"><span style="color:#555">[${i }]</span></a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		<c:choose>
+			<c:when test="${pu.endPageNum<pu.totalPageCount }">
+				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.endPageNum+1 }'/>">[다음]</a>
+			</c:when>
+			<c:otherwise>
+				[다음]
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${pu.startPageNum<pu.totalPageCount }">
+				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.totalPageCount }'/>">[끝으로]</a>
+			</c:when>
+			<c:otherwise>
+				[끝으로]
+			</c:otherwise>
+		</c:choose>
+		</div>
 
 		<!-- 작성END -->
 
