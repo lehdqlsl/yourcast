@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.ExchangeMapper">
 	<insert id="insert" parameterType="exchange">
-		insert into exchange values (seq_e_num.nextval,#{e_count},#{e_ea},sysdate,#{m_num})
+		insert into exchange values (seq_e_num.nextval,#{e_count},#{e_ea},TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),#{m_num})
 	</insert>
 	
 	<select id="getcount" parameterType="int" resultType="int">

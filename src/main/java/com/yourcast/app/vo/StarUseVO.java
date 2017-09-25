@@ -1,21 +1,19 @@
 package com.yourcast.app.vo;
 
-import java.sql.Date;
-
 public class StarUseVO {
 
 	private int use_num;
-	private Date use_regdate;
+	private String use_regString;
 	private int use_ea;
 	private int m_num;
 	private int bj_num;
 	
 	public StarUseVO() {}
 
-	public StarUseVO(int use_num, Date use_regdate, int use_ea, int m_num, int bj_num) {
+	public StarUseVO(int use_num, String use_regString, int use_ea, int m_num, int bj_num) {
 		super();
 		this.use_num = use_num;
-		this.use_regdate = use_regdate;
+		this.use_regString = use_regString;
 		this.use_ea = use_ea;
 		this.m_num = m_num;
 		this.bj_num = bj_num;
@@ -29,12 +27,12 @@ public class StarUseVO {
 		this.use_num = use_num;
 	}
 
-	public Date getUse_regdate() {
-		return use_regdate;
+	public String getUse_regString() {
+		return use_regString;
 	}
 
-	public void setUse_regdate(Date use_regdate) {
-		this.use_regdate = use_regdate;
+	public void setUse_regString(String use_regString) {
+		this.use_regString = use_regString;
 	}
 
 	public int getUse_ea() {
