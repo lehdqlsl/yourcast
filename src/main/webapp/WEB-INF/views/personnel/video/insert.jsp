@@ -37,7 +37,7 @@
 		<!-- 여기작성 -->
 
 		<h1>동영상업로드</h1>
-		<form method="post" action="<c:url value="/id/insert"/>" enctype="multipart/form-data">
+		<form method="post" action="<c:url value="/${requestScope.id}/video/insert"/>" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>장르</th>

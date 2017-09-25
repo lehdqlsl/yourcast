@@ -45,12 +45,12 @@ public class VideoDAO {
 		List<VideoVO> vlist = sqlSession.selectList(NAMESPACE + ".getList");
 		return vlist;
 	}
-	public int getCount(HashMap<String, Integer>map) {
+	public int getCount(HashMap<String, Object>map) {
 		return sqlSession.selectOne(NAMESPACE + ".getCount",map);
 	}
 	
-	public List<VideoVO> getMemberList(int m_num){
-		return sqlSession.selectList(NAMESPACE + ".getMemberList",m_num);
+	public List<VideoVO> getMemberList(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".getMemberList",map);
 	}
 	
 	public List<VideoVO> getGenreList(int genre_num){

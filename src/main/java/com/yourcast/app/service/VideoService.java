@@ -33,12 +33,12 @@ public class VideoService {
 	public List<VideoVO> getList(){
 		return dao.getList();
 	}
-	public int getCount(HashMap<String, Integer> map) {
+	public int getCount(HashMap<String, Object> map) {
 		return dao.getCount(map);
 	}
 	
-	public List<VideoVO> getMemberList(int m_num){
-		return dao.getMemberList(m_num);
+	public List<VideoVO> getMemberList(HashMap<String, Object> map){
+		return dao.getMemberList(map);
 	}
 	public List<VideoVO> getGenreList(int genre_num){
 		return dao.getGenreList(genre_num);
