@@ -1,22 +1,20 @@
 package com.yourcast.app.vo;
 
-import java.sql.Date;
-
 public class PayVO {
 
 	private int pay_num;
 	private int pay_money;
-	private Date pay_regdate;
+	private String pay_regString;
 	private int m_num;
 	private int p_num;
 	
 	public PayVO() {}
 
-	public PayVO(int pay_num, int pay_money, Date pay_regdate, int m_num, int p_num) {
+	public PayVO(int pay_num, int pay_money, String pay_regString, int m_num, int p_num) {
 		super();
 		this.pay_num = pay_num;
 		this.pay_money = pay_money;
-		this.pay_regdate = pay_regdate;
+		this.pay_regString = pay_regString;
 		this.m_num = m_num;
 		this.p_num = p_num;
 	}
@@ -37,12 +35,12 @@ public class PayVO {
 		this.pay_money = pay_money;
 	}
 
-	public Date getPay_regdate() {
-		return pay_regdate;
+	public String getPay_regString() {
+		return pay_regString;
 	}
 
-	public void setPay_regdate(Date pay_regdate) {
-		this.pay_regdate = pay_regdate;
+	public void setPay_regString(String pay_regString) {
+		this.pay_regString = pay_regString;
 	}
 
 	public int getM_num() {

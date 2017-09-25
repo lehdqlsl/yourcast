@@ -36,18 +36,32 @@
 
 		<!-- 여기작성 -->
 
-		<h1>내용</h1>
-		<table>
-			<tr>
-				<th>테스트</th>
-				<th>테스트</th>
-			</tr>
-
-			<tr>
-				<td>1</td>
-				<td>2</td>
-			</tr>
-		</table>
+		<form method="post" action='<c:url value="/board/insert?id=${id}"/>' >
+			<table border="1" id="board">
+				<tr>
+					<td>
+						게시판
+					</td>
+					<td>
+						<select>
+								<c:forEach var="vo" items="${clist }">
+									<option name="cate_list">${vo.category_name}</option>
+								</c:forEach>
+						</select>
+						&nbsp;<input type="checkbox" name="notice">게시판 공지
+					</td>
+				</tr>
+				<tr>
+					<th>제목</th>
+					<td><input type="text" name="title"></td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td><textarea rows="5" cols="50" name="content"></textarea></td>
+				</tr>
+			</table>
+			<input type="submit" value="등록">
+		</form>
 
 		<!-- 작성END -->
 

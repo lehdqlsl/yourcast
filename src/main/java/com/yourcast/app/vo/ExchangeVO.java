@@ -1,20 +1,18 @@
 package com.yourcast.app.vo;
 
-import java.util.Date;
-
 public class ExchangeVO {
 	private int e_num;
 	private int e_count;
 	private double e_ea;
-	private Date e_regdate;
+	private String e_regString;
 	private int m_num;
 
-	public ExchangeVO(int e_num, int e_count, double e_ea, Date e_regdate, int m_num) {
+	public ExchangeVO(int e_num, int e_count, double e_ea, String e_regString, int m_num) {
 		super();
 		this.e_num = e_num;
 		this.e_count = e_count;
 		this.e_ea = e_ea;
-		this.e_regdate = e_regdate;
+		this.e_regString = e_regString;
 		this.m_num = m_num;
 	}
 
@@ -46,12 +44,12 @@ public class ExchangeVO {
 		this.e_ea = e_ea;
 	}
 
-	public Date getE_regdate() {
-		return e_regdate;
+	public String getE_regString() {
+		return e_regString;
 	}
 
-	public void setE_regdate(Date e_regdate) {
-		this.e_regdate = e_regdate;
+	public void setE_regString(String e_regString) {
+		this.e_regString = e_regString;
 	}
 
 	public int getM_num() {

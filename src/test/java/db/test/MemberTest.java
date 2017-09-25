@@ -32,7 +32,7 @@ public class MemberTest {
 	}
 	@Test
 	public void getInfo() {
-		MemberVO vo= dao.getInfo(1);
+		MemberVO vo= dao.getInfo("2");
 		Assert.assertNotNull(vo);	
 	}
 	@Test

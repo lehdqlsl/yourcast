@@ -159,5 +159,4 @@ public class VideoVO {
 	public void setM_num(int m_num) {
 		this.m_num = m_num;
 	}
-	
 }

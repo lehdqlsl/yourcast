@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.StarUseMapper">
 
 	<insert id="insert" parameterType="staruse">
-		insert into use values(seq_use_num.nextval,sysdate,#{use_ea},#{m_num},#{bj_num})
+		insert into use values(seq_use_num.nextval,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),#{use_ea},#{m_num},#{bj_num})
 	</insert>
 	
 	<select id="getsendlist" resultType="staruse" parameterType="int">

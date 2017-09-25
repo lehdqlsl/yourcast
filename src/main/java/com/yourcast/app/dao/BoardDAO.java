@@ -33,8 +33,8 @@ public class BoardDAO {
 		return vo;
 	}
 
-	public List<BoardVO> getList() {
-		List<BoardVO> blist = sqlSession.selectList(NAMESPACE + ".getlist");
+	public List<BoardVO> getList(int category_num) {
+		List<BoardVO> blist = sqlSession.selectList(NAMESPACE + ".getList", category_num);
 		return blist;
 	}
 
