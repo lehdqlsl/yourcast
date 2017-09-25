@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.BuyMapper">
 	<insert id="insert" parameterType="buy">
-		insert into buy values(seq_buy_num.nextval,sysdate,#{buy_ea},#{m_num})
+		insert into buy values(seq_buy_num.nextval,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),#{buy_ea},#{m_num})
 	</insert>
 	<select id="getList" parameterType="int" resultType="buy">
 		select * from buy where m_num=#{m_num}

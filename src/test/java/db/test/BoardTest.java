@@ -49,7 +49,7 @@ public class BoardTest {
 	}
 	@Test
 	public void getList() {
-		List<BoardVO> blist = dao.getList();
+		List<BoardVO> blist = dao.getList(1);
 		Assert.assertNotNull(blist);
 	}
 	@Test

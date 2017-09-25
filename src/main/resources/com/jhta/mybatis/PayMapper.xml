@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.PayMapper">
 
 	<insert id="insert" parameterType="pay">
-		insert into charge values(seq_pay_num.nextval,#{pay_money},sysdate,#{m_num},#{p_num})
+		insert into charge values(seq_pay_num.nextval,#{pay_money},TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),#{m_num},#{p_num})
 	</insert>
 
 	<select id="getlist" resultType="pay" parameterType="int">

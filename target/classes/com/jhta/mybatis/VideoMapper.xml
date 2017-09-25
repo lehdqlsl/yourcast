@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.VideoMapper">
 	<select id="insert" resultType="video">
 		insert into Video values(
-						seq_v_num.nextval, #{v_title}, #{v_content}, sysdate, #{v_hit}, #{v_orgfilename}, #{v_savefilename},
+						seq_v_num.nextval, #{v_title}, #{v_content}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{v_hit}, #{v_orgfilename}, #{v_savefilename},
 						#{v_delete}, #{genre_num}, #{age_grade_num}, #{m_num}
 						)
 	</select>

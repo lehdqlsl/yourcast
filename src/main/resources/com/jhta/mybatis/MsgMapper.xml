@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.MsgMapper">
 
 	<insert id="insert" parameterType="msg">
-		insert into message values(seq_msg_num.nextval,#{msg_title},#{msg_content},sysdate,#{msg_view_date},#{msg_receive_delete},#{msg_send_delete},#{m_numS},#{m_numR})
+		insert into message values(seq_msg_num.nextval,#{msg_title},#{msg_content},TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),#{msg_view_date},#{msg_receive_delete},#{msg_send_delete},#{m_numS},#{m_numR})
 	</insert>
 	
 	<select id="getsendlist" resultType="msg" parameterType="int">

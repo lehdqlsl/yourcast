@@ -24,8 +24,8 @@ public class BoardService {
 	public BoardVO getInfo(int num) {
 		return dao.getInfo(num);
 	}
-	public List<BoardVO> getList(){
-		return dao.getList();
+	public List<BoardVO> getList(int category_num){
+		return dao.getList(category_num);
 	}
 	public int delete(int num) {
 		return dao.delete(num);

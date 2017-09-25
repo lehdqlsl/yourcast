@@ -27,10 +27,6 @@ public class MemberDAO {
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
-	public MemberVO getInfo(int m_num) {
-		return sqlSession.selectOne(NAMESPACE + ".getInfo", m_num);
-	}
-
 	public List<MemberVO> getList() {
 		return sqlSession.selectList(NAMESPACE + ".getList");
 	}
@@ -50,9 +46,11 @@ public class MemberDAO {
 	public int starcandyUpdate(MemberVO vo) {
 		return sqlSession.update(NAMESPACE + ".starcandyUpdate", vo);
 	}
+	public MemberVO getInfo(String id) {
+		return sqlSession.selectOne(NAMESPACE + ".getInfo", id);
+	}
 
 	public MemberVO isMember(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE + ".isMember", map);
-	}
-
+  }
 }

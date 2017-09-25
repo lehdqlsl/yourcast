@@ -1,12 +1,10 @@
 package com.yourcast.app.vo;
 
-import java.sql.Date;
-
 public class VideoVO {
 	private int v_num; 
 	private String v_title;
 	private String v_content;
-	private Date v_regdate;
+	private String v_regString;
 	private int v_hit;
 	private String v_orgfilename;
 	private String v_savefilename;
@@ -17,13 +15,13 @@ public class VideoVO {
 	
 	public VideoVO() {}
 	
-	public VideoVO(int v_num, String v_title, String v_content, Date v_regdate, int v_hit, String v_orgfilename,
+	public VideoVO(int v_num, String v_title, String v_content, String v_regString, int v_hit, String v_orgfilename,
 			String v_savefilename, int v_delete, int genre_num, int age_grade_num, int m_num) {
 		super();
 		this.v_num = v_num;
 		this.v_title = v_title;
 		this.v_content = v_content;
-		this.v_regdate = v_regdate;
+		this.v_regString = v_regString;
 		this.v_hit = v_hit;
 		this.v_orgfilename = v_orgfilename;
 		this.v_savefilename = v_savefilename;
@@ -50,11 +48,11 @@ public class VideoVO {
 	public void setV_content(String v_content) {
 		this.v_content = v_content;
 	}
-	public Date getV_regdate() {
-		return v_regdate;
+	public String getV_regString() {
+		return v_regString;
 	}
-	public void setV_regdate(Date v_regdate) {
-		this.v_regdate = v_regdate;
+	public void setV_regString(String v_regString) {
+		this.v_regString = v_regString;
 	}
 	public int getV_hit() {
 		return v_hit;
