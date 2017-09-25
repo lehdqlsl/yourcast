@@ -17,7 +17,7 @@
 						class="w3-bar-item w3-button">로그인</a>
 				</c:when>
 				<c:otherwise>
-					<a href="#" class="w3-bar-item w3-button"">${sessionScope.id }</a>
+					<a href="<c:url value='/${sessionScope.id }'/>" class="w3-bar-item w3-button">${sessionScope.id }</a>
 					<a href="<c:url value='/member/logout'/>"
 						class="w3-bar-item w3-button">로그아웃</a>
 				</c:otherwise>

@@ -36,7 +36,7 @@ public class MemberController {
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public String loginForm(Locale locale, Model model) {
-		return ".join.login";
+		return ".member.join.login";
 	}
 
 	// 로그인
@@ -56,8 +56,7 @@ public class MemberController {
 			session.setAttribute("id", id);
 			return ".main";
 		} else {
-			System.out.println("저기저기");
-			return ".join.login";
+			return ".member.join.login";
 		}
 	}
 

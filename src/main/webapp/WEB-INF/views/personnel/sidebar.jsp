@@ -15,7 +15,8 @@
 	<button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom" style="width: 100%" id="btn1"><i class="fa fa-pencil fa-fw w3-margin-right"></i>글 쓰 기</button>
   <div class="w3-bar-block">
     <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal" ><i class="fa fa-th-large fa-fw w3-margin-right"></i>PORTFOLIO</a> 
-    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
+    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a>
+     
 	<c:forEach var="vo" items="${clist }">
     	<a href="<c:url value='/board/list?category_num=${vo.category_num }&id=${id }'/>" class="w3-bar-item w3-button w3-padding">
     	<i class="fa fa-bars fa-fw w3-margin-right"></i>${vo.category_name }</a>
