@@ -36,4 +36,11 @@ public class VideoService {
 	public int getCount(HashMap<String, Integer> map) {
 		return dao.getCount(map);
 	}
+	
+	public List<VideoVO> getMemberList(int m_num){
+		return dao.getMemberList(m_num);
+	}
+	public List<VideoVO> getGenreList(int genre_num){
+		return dao.getGenreList(genre_num);
+	}
 }

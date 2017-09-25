@@ -32,7 +32,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/{id}/test", method = RequestMethod.GET)
 	public String test1(Locale locale, Model model) {
-		return ".personnel.board.test";
+		return ".personnel.video.test";
 	}
 
 }

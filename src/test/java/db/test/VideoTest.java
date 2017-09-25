@@ -26,16 +26,17 @@ public class VideoTest {
 	
 	@Test
 	public void insert() {
-		int n = dao.insert(new VideoVO(0, "test2", "test.....", null, 0, "orgfile1", "savefile1", 0 , 1, 1, 1));
+		int n = dao.insert(new VideoVO(0, "제목test", "내용test", null, 0, "원본파일이름", "저장파일이름", "원본썸네일이름", "저장썸네일이름", 0, 1, 1,null,null, 1));
 		boolean a = false;
 		if(n>0) {
 			a = true;
 		}
 		Assert.assertTrue(a);
 	}
+	
 	@Test
 	public void update() {
-		int n = dao.update(new VideoVO(2, "test2-2", "test2.....2", null, 0, "org111", "save222", 0, 1, 1, 1));
+		int n = dao.update(new VideoVO(42, "test2-2", "test2.....2", null, 0, "org111", "save222","orgimg1","saveimg22222", 0, 1, 1,null,null, 1));
 		boolean a = false;
 		if(n>0) {
 			a=true;
@@ -84,5 +85,17 @@ public class VideoTest {
 		map.put("category_num", 2);
 		int n = dao.getCount(map);
 		System.out.println(n);
+	}
+	
+	@Test
+	public void getMemberList() {
+		List<VideoVO> list = dao.getMemberList(3);
+		Assert.assertNotNull(list);
+	}
+	
+	@Test
+	public void getGenreList() {
+		List<VideoVO> list = dao.getGenreList(1);
+		Assert.assertNotNull(list);
 	}
 }
