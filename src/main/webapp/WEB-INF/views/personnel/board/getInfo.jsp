@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -35,34 +34,29 @@
 		</header>
 
 		<!-- 여기작성 -->
-
-		<form method="post" action='<c:url value="/${requestScope.id}/board/insert"/>' >
-			<input type="hidden" value="${sessionScope.id }" name="sid">
-			<table border="1" id="board">
-				<tr>
-					<td>
-						게시판
-					</td>
-					<td>
-						<select name="cate_list">
-								<c:forEach var="vo" items="${clist }">
-									<option value="${vo.category_num}">${vo.category_name}</option>
-								</c:forEach>
-						</select>
-						&nbsp;<input type="checkbox" name="notice">게시판 공지
-					</td>
-				</tr>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="title"></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><textarea rows="5" cols="50" name="content"></textarea></td>
-				</tr>
-			</table>
-			<input type="submit" value="등록">
-		</form>
+	
+		<div>
+			<h2>${vo.b_title }</h2>
+			<div id="info">
+				<!-- 이미지 -->
+				작성자 : ${vo.id }&nbsp;&nbsp;${vo.b_regdate }
+			</div>
+			<div id="etc">
+				${vo.b_hit }&nbsp;&nbsp;<a href=""><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</a>
+			</div>
+			<div id="b_content">
+				${vo.b_content}
+			</div>
+			<c:if test="${requestScope.id eq vo.id }">
+				<div id="edit">
+					<a href='<c:url value="/${sessionScope.id}/board/delete?b_num=${vo.b_num }&category_num=${vo.category_num }"/>'>삭제</a>&nbsp;&nbsp;
+					<a href='<c:url value="/${sessionScope.id}/board/update?b_num=${vo.b_num }&category_num=${vo.category_num }"/>'>수정</a>
+				</div>
+			</c:if>
+			<div id="reply">
+				
+			</div>
+		</div>
 
 		<!-- 작성END -->
 
