@@ -55,10 +55,8 @@ public class MemberService {
 	public boolean isMembers(HashMap<String, String> map) {
 		MemberVO vo = dao.isMember(map);
 		if(vo != null) {
-			System.out.println("널이아님");
 			return true;
 		}else {
-			System.out.println("널");
 			return false;
 		}
 	}

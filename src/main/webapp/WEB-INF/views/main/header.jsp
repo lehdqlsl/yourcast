@@ -6,6 +6,7 @@
 	<div class="w3-bar w3-white w3-wide w3-padding w3-card-2">
 		<a href="<c:url value='/'/>" class="w3-bar-item w3-button"><b>Your</b>
 			BroadCast...</a>
+			
 		<!-- 오른쪽 메뉴 -->
 		<div class="w3-right w3-hide-small">
 			<a href="#projects" class="w3-bar-item w3-button"></a> <a
