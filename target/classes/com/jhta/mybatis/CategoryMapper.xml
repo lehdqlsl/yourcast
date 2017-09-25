@@ -18,7 +18,7 @@
 		category_delete = 1 where category_num = #{category_num}
 	</update>
 
-	<select id="getinfo" parameterType="int" resultType="category">
+	<select id="getInfo" parameterType="int" resultType="category">
 		select * from category where category_num = #{category_num}
 	</select>
 	
