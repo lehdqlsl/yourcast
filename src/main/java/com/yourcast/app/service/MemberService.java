@@ -27,11 +27,9 @@ public class MemberService {
 	public int update(MemberVO vo) {
 		return dao.update(vo);
 	}
+
 	public MemberVO getInfo(String id) {
 		return dao.getInfo(id);
-
-	public MemberVO getInfo(int m_num) {
-		return dao.getInfo(m_num);
 	}
 
 	public List<MemberVO> getList() {
@@ -56,11 +54,9 @@ public class MemberService {
 
 	public boolean isMembers(HashMap<String, String> map) {
 		MemberVO vo = dao.isMember(map);
-		if(vo != null) {
-			System.out.println("³ÎÀÌ¾Æ´Ô");
+		if (vo != null) {
 			return true;
-		}else {
-			System.out.println("³Î");
+		} else {
 			return false;
 		}
 	}
