@@ -11,12 +11,12 @@ public class BoardVO {
 	private int m_num;
 	private int bj_num;
 	private int category_num;
-
+	private String id;
 	public BoardVO() {
 	}
 
 	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
-			int m_num, int bj_num, int category_num) {
+			int m_num, int bj_num, int category_num,String id) {
 		super();
 		this.b_num = b_num;
 		this.b_title = b_title;
@@ -28,6 +28,21 @@ public class BoardVO {
 		this.m_num = m_num;
 		this.bj_num = bj_num;
 		this.category_num = category_num;
+		this.id=id;
+	}
+	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
+			int m_num, int bj_num, int category_num) {
+		this.b_num = b_num;
+		this.b_title = b_title;
+		this.b_content = b_content;
+		this.b_regdate = b_regdate;
+		this.b_hit = b_hit;
+		this.b_notice = b_notice;
+		this.b_delete = b_delete;
+		this.m_num = m_num;
+		this.bj_num = bj_num;
+		this.category_num = category_num;
+	
 	}
 
 	public int getB_num() {
@@ -108,5 +123,13 @@ public class BoardVO {
 
 	public void setCategory_num(int category_num) {
 		this.category_num = category_num;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

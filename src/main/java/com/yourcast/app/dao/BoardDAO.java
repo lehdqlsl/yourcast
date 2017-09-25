@@ -29,12 +29,12 @@ public class BoardDAO {
 	}
 
 	public BoardVO getInfo(int num) {
-		BoardVO vo = sqlSession.selectOne(NAMESPACE + ".getinfo", num);
+		BoardVO vo = sqlSession.selectOne(NAMESPACE + ".getInfo", num);
 		return vo;
 	}
 
-	public List<BoardVO> getList(int category_num) {
-		List<BoardVO> blist = sqlSession.selectList(NAMESPACE + ".getList", category_num);
+	public List<BoardVO> getList(HashMap<String, Integer> map) {
+		List<BoardVO> blist = sqlSession.selectList(NAMESPACE + ".getList", map);
 		return blist;
 	}
 

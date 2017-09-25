@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -36,7 +35,7 @@
 
 		<!-- 여기작성 -->
 
-		<form method="post" action='<c:url value="/${requestScope.id}/board/insert"/>' >
+		<form method="post" action='<c:url value="/${requestScope.id}/board/update?b_num=${vo.b_num }"/>' >
 			<input type="hidden" value="${sessionScope.id }" name="sid">
 			<table border="1" id="board">
 				<tr>
@@ -54,14 +53,15 @@
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td><input type="text" name="title"></td>
+					<td><input type="text" name="title" value="${vo.b_title }"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea rows="5" cols="50" name="content"></textarea></td>
+					<td><textarea rows="5" cols="50" name="content">${vo.b_content }</textarea></td>
 				</tr>
 			</table>
-			<input type="submit" value="등록">
+			<input type="submit" value="수정">
+			<input type="reset" value="취소">
 		</form>
 
 		<!-- 작성END -->

@@ -47,9 +47,10 @@ public class BoardTest {
 		BoardVO vo=dao.getInfo(1);
 		Assert.assertNotNull(vo);
 	}
-	@Test
+	@Test//¿¡·¯
 	public void getList() {
-		List<BoardVO> blist = dao.getList(1);
+		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		List<BoardVO> blist = dao.getList(map);
 		Assert.assertNotNull(blist);
 	}
 	@Test
