@@ -4,24 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.VideoMapper">
 	<select id="insert" resultType="video">
-		insert into Video values(
-						seq_v_num.nextval, #{v_title}, #{v_content}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{v_hit}, #{v_orgfilename}, #{v_savefilename},
-						#{v_delete}, #{genre_num}, #{age_grade_num}, #{m_num}
-						)
+		insert into Video values(seq_v_num.nextval, #{v_title}, #{v_content}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{v_hit}, #{v_orgfilename}, #{v_savefilename},#{v_delete}, #{genre_num}, #{age_grade_num}, #{m_num},#{v_orgthumbnail},#{v_savethumbnail})
 	</select>
 	<update id="update" parameterType="video">
 		update video 
-		set v_title=#{v_title}, v_content=#{v_content}, v_orgfilename=#{v_orgfilename},
-			 v_savefilename=#{v_savefilename}, genre_num=#{genre_num}, 
-			 age_grade_num=#{age_grade_num}
+		set v_title=#{v_title}, v_content=#{v_content}, 
+			 v_orgfilename=#{v_orgfilename}, v_savefilename=#{v_savefilename}, 
+			 v_orgthumbnail=#{v_orgthumbnail}, v_savethumbnail=#{v_savethumbnail},
+			 genre_num=#{genre_num}, age_grade_num=#{age_grade_num}
 		where v_num=#{v_num}
 	</update>
 	<select id="getInfo" parameterType="int" resultType="video">
 		select * from video where v_num = #{v_num}
 	</select>
 	<select id="getList" resultType="video">
-		select * from video
+		select * from video where v_delete=0
 	</select>
+	
+	<select id="getMemberList" resultType="video" parameterType="int">
+		select b.*,g.GENRE_NAME,a.AGE_GRADE_NAME 
+		from genre g,age_grade a,(select * from video where m_num=#{m_num} and v_delete=0) b 
+		where g.genre_num=b.genre_num and a.age_grade_num=b.age_grade_num
+	</select>
+	<select id="getGenreList" resultType="video" parameterType="int">
+		select * from video where genre_num=#{genre_num}
+	</select>	
+	
 	<update id="delete" parameterType="int">
 		update video
 		set v_delete = 1
