@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.BoardMapper">
 	<select id="insert" resultType="board">
 		insert into board values(
-					seq_b_num.nextval,#{b_title},#{b_content},sysdate,
+					seq_b_num.nextval,#{b_title},#{b_content},TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),
 					#{b_hit},#{b_notice},#{b_delete},#{m_num},#{bj_num},#{category_num}
 					)
 	</select>
@@ -17,8 +17,9 @@
 	<select id="getInfo" parameterType="int" resultType="board">
 		select * from board where b_num=#{b_num}
 	</select>
-	<select id="getList" resultType="board">
-		select * from board
+	<select id="getList" resultType="board" parameterType="int">
+		select * from board 
+		where category_num = #{category_num}
 	</select>
 	<update id="delete" parameterType="int">
 		update board

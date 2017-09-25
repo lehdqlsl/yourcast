@@ -1,20 +1,18 @@
 package com.yourcast.app.vo;
 
-import java.sql.Date;
-
 public class ProfitVO {
 	private int profit_num;
 	private int profit_ea;
-	private Date profit_regdate;
+	private String profit_regString;
 	private int m_num;
 	
 	public ProfitVO() {}
 	
-	public ProfitVO(int profit_num, int profit_ea, Date profit_regdate, int m_num) {
+	public ProfitVO(int profit_num, int profit_ea, String profit_regString, int m_num) {
 		super();
 		this.profit_num = profit_num;
 		this.profit_ea = profit_ea;
-		this.profit_regdate = profit_regdate;
+		this.profit_regString = profit_regString;
 		this.m_num = m_num;
 	}
 	public int getProfit_num() {
@@ -29,11 +27,11 @@ public class ProfitVO {
 	public void setProfit_ea(int profit_ea) {
 		this.profit_ea = profit_ea;
 	}
-	public Date getProfit_regdate() {
-		return profit_regdate;
+	public String getProfit_regString() {
+		return profit_regString;
 	}
-	public void setProfit_regdate(Date profit_regdate) {
-		this.profit_regdate = profit_regdate;
+	public void setProfit_regString(String profit_regString) {
+		this.profit_regString = profit_regString;
 	}
 	public int getM_num() {
 		return m_num;

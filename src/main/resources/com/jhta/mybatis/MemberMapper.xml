@@ -9,8 +9,8 @@
 	<update id="update" parameterType="member">
 		update member set id=#{id},pwd=#{pwd},name=#{name} where m_num=#{m_num}
 	</update>
-	<select id="getInfo" parameterType="int" resultType="member">
-		select * from member where m_num=#{m_num}
+	<select id="getInfo" parameterType="string" resultType="member">
+		select * from member where id=#{id}
 	</select>
 	<select id="getList" resultType="member">
 		select * from member

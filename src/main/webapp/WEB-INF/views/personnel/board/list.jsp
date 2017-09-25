@@ -36,19 +36,39 @@
 
 		<!-- 여기작성 -->
 
-		<h1>내용</h1>
-		<table>
+		<table border="1" width="500">
 			<tr>
-				<th>테스트</th>
-				<th>테스트</th>
+				<th>글번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>작성일</th>
 			</tr>
-
-			<tr>
-				<td>1</td>
-				<td>2</td>
-			</tr>
+			<c:forEach var="vo" items="${blist }">
+				<tr>
+					<td>${vo.b_num }</td>
+					<td>${vo.b_title }</td>
+					<td>${vo.m_num }</td>
+					<td>${vo.b_hit }</td>
+					<td>${vo.b_regdate }</td>
+				</tr>
+			</c:forEach>
 		</table>
-
+		<br>
+		<div>
+	<%-- 		<!-- 페이징 -->
+			<c:set var="pms"
+				value="&writer=${writer }&title=${title }&content=${content }&keyword=${keyword }" />
+			<c:forEach var="i" begin="${pu.startPageNum }"
+				end="${pu.endPageNum }">
+				<c:choose>
+					<c:when test="${i==pu.pageNum }">
+						<!-- 현재페이지인 경우(색상다르게 표시) -->
+						<a href="list?pageNum=${i }${pms}"><span style="color: blue">[${i }]</span></a>
+					</c:when>
+					<c:otherwise>
+						<a href="list?pageNum=${i }${pms }"><span style="color: #555">[${i }]</span></a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		</div>
+ --%>
 		<!-- 작성END -->
 
 		<footer class="w3-container w3-padding-32 w3-dark-grey">
