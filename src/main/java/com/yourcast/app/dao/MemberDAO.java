@@ -1,5 +1,6 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -49,4 +50,9 @@ public class MemberDAO {
 	public int starcandyUpdate(MemberVO vo) {
 		return sqlSession.update(NAMESPACE + ".starcandyUpdate", vo);
 	}
+
+	public MemberVO isMember(HashMap<String, String> map) {
+		return sqlSession.selectOne(NAMESPACE + ".isMember", map);
+	}
+
 }
