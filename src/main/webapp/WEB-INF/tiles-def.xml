@@ -13,15 +13,15 @@
 
 
 	<definition name=".*.*.*" extends=".main">
-		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/main/{1}/{2}/{3}.jsp"></put-attribute>
 	</definition>
 
 	<definition name=".*.*" extends=".main">
-		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/main/{1}/{2}.jsp"></put-attribute>
 	</definition>
 
 	<definition name=".*" extends=".main">
-		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/main/{1}.jsp"></put-attribute>
 	</definition>
 
 	<!-- 개인홈 페이지 타일즈 -->
@@ -32,15 +32,35 @@
 	</definition>
 
 	<definition name=".*.*.*" extends=".personnel">
-		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/personnel/{1}/{2}/{3}.jsp"></put-attribute>
 	</definition>
 
 	<definition name=".*.*" extends=".personnel">
-		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/personnel/{1}/{2}.jsp"></put-attribute>
 	</definition>
 
 	<definition name=".*" extends=".personnel">
-		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/personnel/{1}.jsp"></put-attribute>
+	</definition>
+
+
+	<!--회원관련페이지 타일즈 -->
+	<definition name=".member" template="/WEB-INF/views/member/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/member/join/join.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+
+	<definition name=".*.*.*" extends=".member">
+		<put-attribute name="content" value="/WEB-INF/views/member/{1}/{2}/{3}.jsp"></put-attribute>
+	</definition>
+
+	<definition name=".*.*" extends=".member">
+		<put-attribute name="content" value="/WEB-INF/views/member/{1}/{2}.jsp"></put-attribute>
+	</definition>
+
+	<definition name=".*" extends=".member">
+		<put-attribute name="content" value="/WEB-INF/views/member/{1}.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>
 

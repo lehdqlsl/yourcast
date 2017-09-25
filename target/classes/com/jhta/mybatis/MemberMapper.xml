@@ -27,4 +27,8 @@
 	<update id="starcandyUpdate" parameterType="member">
 		update member set star_candy=#{star_candy} where m_num=#{m_num}
 	</update>
+	
+	<select id="isMember" parameterType="hashmap" resultType="member">
+		select * from member where id=#{id} and pwd=#{pwd}
+	</select>
 </mapper>
