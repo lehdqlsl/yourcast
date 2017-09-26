@@ -31,7 +31,7 @@ public class CategoryDAO {
 	}
 
 	public CategoryVO getInfo(int category_num) {
-		return sqlSession.selectOne(NAMESPACE + ".getinfo", category_num);
+		return sqlSession.selectOne(NAMESPACE + ".getInfo", category_num);
 	}
 
 	public List<CategoryVO> getList(int m_num) {

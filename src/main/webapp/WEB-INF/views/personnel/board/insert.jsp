@@ -36,16 +36,17 @@
 
 		<!-- 여기작성 -->
 
-		<form method="post" action='<c:url value="/board/insert?id=${id}"/>' >
+		<form method="post" action='<c:url value="/${requestScope.id}/board/insert"/>' >
+			<input type="hidden" value="${sessionScope.id }" name="sid">
 			<table border="1" id="board">
 				<tr>
 					<td>
 						게시판
 					</td>
 					<td>
-						<select>
+						<select name="cate_list">
 								<c:forEach var="vo" items="${clist }">
-									<option name="cate_list">${vo.category_name}</option>
+									<option value="${vo.category_num}">${vo.category_name}</option>
 								</c:forEach>
 						</select>
 						&nbsp;<input type="checkbox" name="notice">게시판 공지

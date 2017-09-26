@@ -21,10 +21,12 @@
 		select * from video where v_delete=0
 	</select>
 	
-	<select id="getMemberList" resultType="video" parameterType="int">
-		select b.*,g.GENRE_NAME,a.AGE_GRADE_NAME 
-		from genre g,age_grade a,(select * from video where m_num=#{m_num} and v_delete=0) b 
-		where g.genre_num=b.genre_num and a.age_grade_num=b.age_grade_num
+	<select id="getMemberList" resultType="video" parameterType="hashmap">
+		select * from
+		(select b.*,g.GENRE_NAME,a.AGE_GRADE_NAME,rownum rnum 
+		from genre g,age_grade a,(select * from video where m_num=#{m_num} and v_delete=0 order by v_num desc) b 
+		where g.genre_num=b.genre_num and a.age_grade_num=b.age_grade_num)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>	
 	</select>
 	<select id="getGenreList" resultType="video" parameterType="int">
 		select * from video where genre_num=#{genre_num}

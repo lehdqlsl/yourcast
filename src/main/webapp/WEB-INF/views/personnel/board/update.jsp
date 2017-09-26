@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -36,45 +35,35 @@
 
 		<!-- 여기작성 -->
 
-		<h1>동영상업로드</h1>
-		<form method="post" action="<c:url value="/${requestScope.id}/video/insert"/>" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<th>장르</th>
-				<td><select name="genre">
-						<option value="1">english</option>
-						<option value="2">music</option>
-						<option value="3">game</option>
+		<form method="post" action='<c:url value="/${requestScope.id}/board/update?b_num=${vo.b_num }"/>' >
+			<input type="hidden" value="${sessionScope.id }" name="sid">
+			<table border="1" id="board">
+				<tr>
+					<td>
+						게시판
+					</td>
+					<td>
+						<select name="cate_list">
+								<c:forEach var="vo" items="${clist }">
+									<option value="${vo.category_num}">${vo.category_name}</option>
+								</c:forEach>
 						</select>
-				</td>
-			</tr>
-			<tr>
-				<th>관람등급</th>
-				<td><select name="age_grade">
-						<option value="1">19</option>
-						<option value="2">15</option>
-						<option value="3">12</option>
-						</select>
-				</td>
-			</tr>
-			<tr>
-				<th>제목</th><td><input type="text" name="v_title"><td>
-			</tr>
-			<tr>
-				<th>내용</th><td><input type="text" name="v_content"></td>
-			</tr>
-			<tr>
-				<th>동영상</th><td><input type="file" name="vfile"></td>
-			</tr>
-			<tr>
-				<th>썸네일</th><td><input type="file" name="imgfile"></td>
-			</tr>
-			<tr>
-				<th colspan="2"><input type="submit" value="업로드"><input type="reset" value="다시입력"></th>
-			</tr>
-		</table>
+						&nbsp;<input type="checkbox" name="notice">게시판 공지
+					</td>
+				</tr>
+				<tr>
+					<th>제목</th>
+					<td><input type="text" name="title" value="${vo.b_title }"></td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td><textarea rows="5" cols="50" name="content">${vo.b_content }</textarea></td>
+				</tr>
+			</table>
+			<input type="submit" value="수정">
+			<input type="reset" value="취소">
 		</form>
-		
+
 		<!-- 작성END -->
 
 		<footer class="w3-container w3-padding-32 w3-dark-grey">
