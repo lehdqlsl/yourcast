@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/list.css'/>?ver=2">
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -35,29 +35,36 @@
 		</header>
 
 		<!-- 여기작성 -->
-
-		<table border="1" width="500">
-			<tr>
-				<th>글번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>조회수</th>
-				<th>작성일</th>
-			</tr>
-			<c:forEach var="vo" items="${blist }">
-				<tr>
-					<td>${vo.b_num }</td>
-					<td><a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${category_num }"/>'>${vo.b_title }</a></td>
-					<td>${vo.id }</td>
-					<td>${vo.b_hit }</td>
-					<td>${vo.b_regdate }</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<br>
+		<c:forEach var="vo" items="${blist }">
+		<ul>
+			<li class="notice" id="list_item_26185726">
+				<div class="wrap_view">
+					<div class="img_profile">
+						<img src=""
+							onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';">
+					</div>
+					<div class="v_article">
+						<div class="name">
+							<div class="bj_name"> ${vo.id } &nbsp;&nbsp; ${vo.b_regdate } <span
+								class="u_id"></span>
+							</div><span class="time"></span>
+						</div>
+						<div class="v_title">
+						<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${category_num }"/>'>${vo.b_title }</a>
+							<span class="noti"></span>
+						</div>
+						<div class="view">${vo.b_content }</div>
+					</div>
+					<div class="watch_area">
+						<span class="btn_up " id="likeT_26185493"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>추천수</span>
+						<span class="btn_comment"><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i>댓글수</span>
+					</div>			
+				</div>
+			</li>
+		</ul>
+		</c:forEach>
 		<!-- 페이징 -->
 		<div>
-			
 			<!-- 이전 -->
 			<c:choose>
 				<c:when test="${pu.startPageNum>5 }">
@@ -89,8 +96,7 @@
 			</c:choose>
 		</div>
 		<div>
-		
-			<!-- 작성END -->
+		<!-- 작성END -->
 
 			<footer class="w3-container w3-padding-32 w3-dark-grey">
 				<div class="w3-row-padding">
