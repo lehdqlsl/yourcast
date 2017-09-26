@@ -1,5 +1,6 @@
 package com.yourcast.app.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,10 @@ public class BoardReplyService {
 	public BoardReplyVO getInfo(int br_num) {
 		return dao.getInfo(br_num);
 	}
-	public List<BoardReplyVO> getList(int b_num){
-		return dao.getList(b_num);
+	public List<BoardReplyVO> getList(HashMap<String, Integer> map){
+		return dao.getList(map);
+	}
+	public int getCount(int b_num) {
+		return dao.getCount(b_num);
 	}
 }

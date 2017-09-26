@@ -1,5 +1,6 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -34,7 +35,10 @@ public class BoardReplyDAO {
 		return sqlSession.selectOne(NAMESPACE + ".getInfo", br_num);
 	}
 
-	public List<BoardReplyVO> getList(int b_num) {
-		return sqlSession.selectList(NAMESPACE + ".getList",b_num);
+	public List<BoardReplyVO> getList(HashMap<String, Integer> map) {
+		return sqlSession.selectList(NAMESPACE + ".getList",map);
+	}
+	public int getCount(int b_num) {
+		return sqlSession.selectOne(NAMESPACE+".getCount",b_num);
 	}
 }
