@@ -77,13 +77,13 @@
 			<!-- 숫자부분 -->
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
-				<c:when test="${i==pu.pageNum }"><!-- 현재페이지인 경우(색상다르게 표시) -->
-					<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:blue">[${i }]</span></a>
-				</c:when>
-				<c:otherwise>
-					<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:#555">[${i }]</span></a>
-				</c:otherwise>
-			</c:choose>
+					<c:when test="${i==pu.pageNum }"><!-- 현재페이지인 경우(색상다르게 표시) -->
+						<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:blue">[${i }]</span></a>
+					</c:when>
+					<c:otherwise>
+						<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:#555">[${i }]</span></a>
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
 			<!-- 다음 -->
 			<c:choose>
