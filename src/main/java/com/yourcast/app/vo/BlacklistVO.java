@@ -5,6 +5,7 @@ public class BlacklistVO {
 	private int bl_num;
 	private int m_num;
 	private int bj_num;
+	private String id;
 	
 	public BlacklistVO() {}
 
@@ -13,6 +14,22 @@ public class BlacklistVO {
 		this.bl_num = bl_num;
 		this.m_num = m_num;
 		this.bj_num = bj_num;
+	}
+
+	public BlacklistVO(int bl_num, int m_num, int bj_num, String id) {
+		super();
+		this.bl_num = bl_num;
+		this.m_num = m_num;
+		this.bj_num = bj_num;
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public int getBl_num() {

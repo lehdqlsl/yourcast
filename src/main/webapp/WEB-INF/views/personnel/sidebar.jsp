@@ -7,10 +7,15 @@
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <img src="/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"><br><br>
+    <img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width:45%;" class="w3-round"><br><br>
     <h4><b>PORTFOLIO</b></h4>
-    <p class="w3-text-grey">Template by W3.CSS</p>
-    <p class="w3-text-grey" id="id">${requestScope.id}&nbsp&nbsp&nbsp<a href="<c:url value="/${requestScope.id }/setting/info"/>" style="text-decoration: none;" class="fa fa-cog w3-hover-opacity"></a></p>
+    <p class="w3-text-grey">${voMP.profile_content }</p>
+    
+    <span class="w3-text-grey" id="id">${requestScope.id}</span>
+    <c:if test="${requestScope.id==sessionScope.id}">	
+    	&nbsp&nbsp<span><a href="<c:url value="/${requestScope.id }/setting/info"/>" style="text-decoration: none;" class="fa fa-cog w3-hover-opacity"></a></span>
+    </c:if>
+    
   </div>
 	<button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom" style="width: 100%" id="btn1"><i class="fa fa-pencil fa-fw w3-margin-right"></i>글 쓰 기</button>
   <div class="w3-bar-block">

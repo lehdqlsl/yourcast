@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.junit.runners.Parameterized.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.util.page.PageUtil;
 import com.yourcast.app.service.BoardService;
 import com.yourcast.app.service.CategoryService;
+import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.vo.BoardVO;
 import com.yourcast.app.vo.CategoryVO;
+import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
 
 @Controller
@@ -31,6 +31,7 @@ public class BoardController {
 	@Autowired
 	private CategoryService c_service;
 	@Autowired private MemberService m_service;
+	@Autowired private MemberProfileService mp_service;
 	//insert : get
 	@RequestMapping(value = "/{id}/board/insert", method = RequestMethod.GET)
 	public String insertForm(@PathVariable(value="id") String id, Model model) {
@@ -38,6 +39,8 @@ public class BoardController {
 		List<CategoryVO> clist=c_service.getList(vo.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id",id);
+		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
+		model.addAttribute("voMP", voMP);		
 		return ".personnel.board.insert";
 	}
 	//insert : post
@@ -80,6 +83,9 @@ public class BoardController {
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
 		
+		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		model.addAttribute("id", id);
 		model.addAttribute("pu", pu);
 		model.addAttribute("category_num", category_num);
@@ -114,6 +120,9 @@ public class BoardController {
 		model.addAttribute("clist", clist);
 		model.addAttribute("blist", blist);
 		
+		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		return ".personnel.board.list";
 	}
 	//update
@@ -127,6 +136,9 @@ public class BoardController {
 		model.addAttribute("id", id);
 		model.addAttribute("clist", clist);
 		model.addAttribute("vo",bvo);
+		
+		MemberProfileVO voMP = mp_service.getInfo(cvo.getM_num());
+		model.addAttribute("voMP", voMP);
 		
 		return ".personnel.board.update";
 	}
@@ -183,6 +195,9 @@ public class BoardController {
 		model.addAttribute("clist", clist);
 		model.addAttribute("blist", blist);
 		
+		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		return ".personnel.board.list";
 	}
 	//getInfo
@@ -197,6 +212,10 @@ public class BoardController {
 		model.addAttribute("clist", clist);
 		//model.addAttribute("blist", blist);
 		model.addAttribute("vo",bvo);
+		
+		MemberProfileVO voMP = mp_service.getInfo(cvo.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		return ".personnel.board.getInfo";
 	}
 	//getList
@@ -221,6 +240,10 @@ public class BoardController {
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("clist", clist);
 		model.addAttribute("blist", blist);
+		
+		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		return ".personnel.board.list";
 	}
 }

@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<body class="w3-light-grey w3-content" style="max-width: 1600px">
+<script type="text/javascript">
+	function result(){
+		var result = document.getElementsByName("result")[0].value;
+		alert(result);
+		window.location.href="<c:url value='/${requestScope.id}/setting/info'/>";	
+	}
+</script>
+		
+<body class="w3-light-grey w3-content" style="max-width: 1600px" onload="result()">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
 
@@ -33,37 +40,11 @@
 				</div>
 			</div>
 		</header>
-
+		
 		<!-- 여기작성 -->
-
-		<form method="post" action='<c:url value="/${requestScope.id}/board/insert"/>' >
-			<input type="hidden" value="${sessionScope.id }" name="sid">
-			<table border="1" id="board">
-				<tr>
-					<td>
-						게시판
-					</td>
-					<td>
-						<select name="cate_list">
-								<c:forEach var="vo" items="${clist }">
-									<option value="${vo.category_num}">${vo.category_name}</option>
-								</c:forEach>
-						</select>
-						&nbsp;<input type="checkbox" name="notice">게시판 공지
-					</td>
-				</tr>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="title"></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><textarea rows="5" cols="50" name="content"></textarea></td>
-				</tr>
-			</table>
-			<input type="submit" value="등록">
-		</form>
-
+		
+		<input type="hidden" value="${result}" name="result">
+		
 		<!-- 작성END -->
 
 		<footer class="w3-container w3-padding-32 w3-dark-grey">

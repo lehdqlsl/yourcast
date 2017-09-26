@@ -15,7 +15,7 @@
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
 				<h1>
-					<b>My Portfolio</b>
+					<b>${voMP.profile_msg }</b>
 				</h1>
 				<div class="w3-section w3-bottombar w3-padding-16">
 					<span class="w3-margin-right">Filter:</span>

@@ -16,7 +16,7 @@
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
 				<h1>
-					<b>My Portfolio</b>
+					<b>${voMP.profile_msg }</b>
 				</h1>
 				<div class="w3-section w3-bottombar w3-padding-16">
 					<span class="w3-margin-right">Filter:</span>
@@ -48,7 +48,7 @@
 					}
 				}
 			}
-			function delete(){
+			function deleteV(){
 				var chk = document.getElementsByName("chk");
 				var cnt = 0;
 				for(var i=0;i<chk.length;i++){
@@ -64,7 +64,7 @@
 					return true;
 				}
 			}
-			function update(){
+			function updateV(){
 				var chk = document.getElementsByName("chk");
 				var v_num = document.getElementsByName("v_num")[0];
 				var cnt = 0;
@@ -86,7 +86,7 @@
 		</script>
 
 		<h1>Video목록</h1>
-		<form method="post" action="<c:url value='/${requestScope.id}/video/delete'/>" onsubmit="return delete()">
+		<form method="post" action="<c:url value='/${requestScope.id}/video/delete'/>" onsubmit="return deleteV()">
 		<table border="1">
 			<tr>
 				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>관람등급</th><th>장르</th><th>제목</th><th>내용</th><th>등록일</th>
@@ -115,7 +115,7 @@
 		</form>	
 		
 		<c:if test="${sessionScope.id==requestScope.id }">
-			<form method="get" action="<c:url value='/${requestScope.id}/video/update'/>" onsubmit="return update()">
+			<form method="get" action="<c:url value='/${requestScope.id}/video/update'/>" onsubmit="return updateV()">
 				<input type="hidden" value="1" name="v_num">
 				<input type="submit" value="수정">
 			</form>	
