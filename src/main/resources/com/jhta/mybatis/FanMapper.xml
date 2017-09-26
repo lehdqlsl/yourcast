@@ -3,9 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.FanMapper">
-	<select id="insert" resultType="fan">
+	<insert id="insert" parameterType="fan">
 		insert into fan values(
 					seq_fan_num.nextval,#{m_num},#{bj_num}
 					)
+	</insert>
+	
+	<select id="getList" parameterType="hashmap" resultType="fan">
+		select * from
+		(select bb.*,aa.id,aa.name,rownum rnum 
+		from member aa,(select * from fan where bj_num=#{bj_num})bb 
+		where aa.m_num = bb.m_num)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	
+	<select id="getCount" parameterType="int" resultType="int">
+		select NVL(count(m_num),0) cnt from fan where bj_num=#{bj_num}
 	</select>
 </mapper>

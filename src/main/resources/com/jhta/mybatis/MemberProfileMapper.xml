@@ -18,4 +18,10 @@
 	<update id="contentUpdate" parameterType="profile">
 		update member_profile set profile_content=#{profile_content} where profile_num=#{profile_num}
 	</update>
+	
+	<update id="update">
+		update member_profile set profile_msg=#{profile_msg},profile_content=#{profile_content},
+		profile_orgfilename=#{profile_orgfilename},profile_savefilename=#{profile_savefilename},
+		m_num=#{m_num} where profile_num=#{profile_num}
+	</update>
 </mapper>

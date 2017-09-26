@@ -9,11 +9,12 @@
 	</insert>
 	
 	<delete id="delete" parameterType="blacklist">
-		delete from blacklist where bj_num=#{bj_num} and m_num=#{m_num}
+		delete from blacklist where m_num=#{m_num} and bj_num=#{bj_num}
 	</delete>
 	
 	<select id="getlist" resultType="blacklist" parameterType="int">
-		select * from blacklist where bj_num=#{bj_num}
+		select bb.*,aa.id from member aa,(select * from blacklist where bj_num=#{bj_num})bb
+		where aa.m_num = bb.m_num
 	</select>
 	
 	<select id="getcount" resultType="int">

@@ -22,9 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.util.page.PageUtil;
 import com.yourcast.app.service.CategoryService;
+import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.VideoService;
 import com.yourcast.app.vo.CategoryVO;
+import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.VideoVO;
 
@@ -36,6 +38,7 @@ public class VideoController {
 	@Autowired private VideoService v_service;
 	@Autowired private MemberService m_service;
 	@Autowired private CategoryService c_service;
+	@Autowired private MemberProfileService mp_service;
 	
 	@RequestMapping(value = "/{id}/video/detail", method = RequestMethod.GET)
 	public String videoDetail(@PathVariable(value = "id") String id, Model model, int v_num) {
@@ -46,6 +49,10 @@ public class VideoController {
 		model.addAttribute("clist", clist);
 		model.addAttribute("id",id);
 		model.addAttribute("vo",vo);
+		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		return ".personnel.video.detail";
 	}
 	
@@ -68,6 +75,9 @@ public class VideoController {
 		model.addAttribute("list",list);
 		model.addAttribute("pu",pu);
 		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		return ".personnel.video.list";
 	}
 	
@@ -80,6 +90,9 @@ public class VideoController {
 		List<CategoryVO> clist=c_service.getList(voM.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id",id);
+		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+		model.addAttribute("voMP", voMP);
 		
 		new File(path + "//" + vo.getV_savefilename()).delete();
 		new File(path + "//" + vo.getV_savethumbnail()).delete();
@@ -100,6 +113,10 @@ public class VideoController {
 		List<CategoryVO> clist=c_service.getList(voM.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id",id);
+		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		int n = 0;
 		for(int i=0;i<chk.length;i++) {
 			VideoVO v = v_service.getInfo(chk[i]);
@@ -124,8 +141,11 @@ public class VideoController {
 		List<CategoryVO> clist=c_service.getList(voM.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id",id);
-		
 		model.addAttribute("vo", vo);
+		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		return ".personnel.video.update";
 	}
 	
@@ -140,6 +160,9 @@ public class VideoController {
 			List<CategoryVO> clist=c_service.getList(voM.getM_num());
 			model.addAttribute("clist", clist);
 			model.addAttribute("id",id);
+			
+			MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+			model.addAttribute("voMP", voMP);
 			
 			String path = session.getServletContext().getRealPath("/resources/upload");
 			String orgfilename = vfile.getOriginalFilename();
@@ -202,6 +225,10 @@ public class VideoController {
 		List<CategoryVO> clist=c_service.getList(voM.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id",id);
+		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+		model.addAttribute("voMP", voMP);
+		
 		return ".personnel.video.insert";
 	}
 	
@@ -214,6 +241,9 @@ public class VideoController {
 		List<CategoryVO> clist=c_service.getList(voM.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id",id);
+		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+		model.addAttribute("voMP", voMP);
 		
 		String path = session.getServletContext().getRealPath("/resources/upload");
 		String orgfilename = vfile.getOriginalFilename();

@@ -27,4 +27,8 @@ public class MemberProfileService {
 	public MemberProfileVO getInfo(int profile_num) {
 		return dao.getInfo(profile_num);
 	}
+	
+	public int update(MemberProfileVO vo) {
+		return dao.update(vo);
+	}
 }

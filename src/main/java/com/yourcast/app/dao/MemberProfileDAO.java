@@ -33,4 +33,8 @@ public class MemberProfileDAO {
 	public MemberProfileVO getInfo(int profile_num) {
 		return sqlSession.selectOne(NAMESPACE+".getInfo",profile_num);
 	}
+	
+	public int update(MemberProfileVO vo) {
+		return sqlSession.update(NAMESPACE + ".update",vo);
+	}
 }

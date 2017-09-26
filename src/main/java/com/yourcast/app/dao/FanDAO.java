@@ -1,5 +1,8 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,5 +22,13 @@ public class FanDAO {
 
 	public int insert(FanVO vo) {
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
+	}
+	
+	public List<FanVO> getList(HashMap<String, Integer> map){
+		return sqlSession.selectList(NAMESPACE + ".getList",map);
+	}
+	
+	public int getCount(int bj_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getCount",bj_num);
 	}
 }

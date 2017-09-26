@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yourcast.app.service.CategoryService;
+import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.vo.CategoryVO;
+import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
 
 /**
@@ -26,6 +28,9 @@ public class HomeController {
 	
 	@Autowired
 	private MemberService m_sevice;
+	
+	@Autowired
+	private MemberProfileService mp_service;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -38,8 +43,10 @@ public class HomeController {
 	public String personnel(@PathVariable(value = "id") String id, Model model) {
 		MemberVO vo = m_sevice.getInfo(id);
 		List<CategoryVO> clist = service.getList(vo.getM_num());
+		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id", id);
+		model.addAttribute("voMP",voMP);
 		return ".personnel";
 	}
 }
