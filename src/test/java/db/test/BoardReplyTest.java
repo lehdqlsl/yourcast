@@ -1,5 +1,6 @@
 package db.test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
@@ -54,9 +55,13 @@ public class BoardReplyTest {
 		BoardReplyVO vo=dao.getInfo(1);
 		Assert.assertNotNull(vo);
 	}
-	@Test
+	@Test//에러(sql문은 맞음)
 	public void getList() {
-		List<BoardReplyVO> list=dao.getList(1);
+		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		map.put("b_num", 65);
+		map.put("rnum", 1);
+		map.put("rnum", 5);
+		List<BoardReplyVO> list=dao.getList(map);
 		Assert.assertNotNull(list);
 	}
 }

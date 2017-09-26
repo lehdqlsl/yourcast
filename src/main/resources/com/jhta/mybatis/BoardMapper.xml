@@ -19,7 +19,8 @@
 	</select>
 	<select id="getList" resultType="board" parameterType="hashmap">
 		<!--  select b.*,m.id from board b, member m where b.bj_num=m.m_num and b.category_num=#{category_num} and b.b_delete=0 order by b.b_num desc-->
-		select * from(select aa.*,rownum rnum from(select b.*,m.id from board b, member m where b.bj_num=m.m_num and b.category_num=#{category_num} and b.b_delete=0 order by b.b_num desc) aa)<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+		select * from(select aa.*,rownum rnum from(select b.*,m.id from board b, member m where b.m_num=m.m_num and b.category_num=#{category_num} 
+		and b.b_delete=0 order by b.b_num desc) aa)<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	<update id="delete" parameterType="int">
 		update board
@@ -35,10 +36,10 @@
 			select NVL(count(m_num),0) cnt from board 
 			<where>
 				<if test="category_num == null">
-					m_num = #{m_num}
+					and m_num = #{m_num}
 				</if>
 				<if test="category_num != null">
-					m_num = #{m_num} and category_num = #{category_num}
+					and category_num = #{category_num}
 				</if>
 				and b_delete = 0
 			</where>
