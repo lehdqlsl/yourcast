@@ -10,7 +10,8 @@ body {
 }
 
 h2 {
-  color: #000000;
+  font-family: "Sofia", cursive;
+  color: #6D7781;
   font-size: 15px;
   font-weight: bold;
   font-size: 3.6em;
@@ -49,8 +50,8 @@ label {
   display: block;
   position: absolute;
   margin-right: 10px;
-  width: 8px;
-  height: 8px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: transparent;
   content: "";
