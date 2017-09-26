@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/join.css'/>?ver=1">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
@@ -33,12 +32,12 @@
 </body>
 <script type="text/javascript">
 	$("#datepicker").datepicker({
+		showMonthAfterYear: true,
 		dateFormat:"yy/mm/dd", //날짜포맷형식
-		showOn:"button",
-		buttonText:"달력",
 		changeMonth:true,
 		changeYear:true,
-		showAnim:"fold"
+		yearSuffix:" ",
+		showAnim:"slide"
 	});
 </script>
 </html>
