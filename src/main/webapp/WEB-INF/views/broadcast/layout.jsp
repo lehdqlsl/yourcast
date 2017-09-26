@@ -12,7 +12,7 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
-
+<script type="text/javascript" src="<c:url value='/resources/jwplayer/jwplayer.js'/>"></script>
 </head>
 <!-- 메인페이지 레이아웃 -->
 <body id="body">
@@ -31,13 +31,15 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$("#datepicker").datepicker({
-		showMonthAfterYear: true,
-		dateFormat:"yy/mm/dd", //날짜포맷형식
-		changeMonth:true,
-		changeYear:true,
-		yearSuffix:" ",
-		showAnim:"slide"
+	jwplayer("container").setup({
+		sources : [ {
+			file : '${requestScope.url}'
+		} ],
+		image : "bg.jpg",
+		autostart : true,
+		width : 1300,
+		height : 735,
+		primary : "flash"
 	});
 </script>
 </html>

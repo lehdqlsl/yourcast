@@ -27,6 +27,14 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
 
+	<!-- 방송페이지 관련 타일즈 -->
+	<definition name=".broadcast" template="/WEB-INF/views/broadcast/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="content"
+			value="/WEB-INF/views/broadcast/main.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+	
 
 	<!-- 개인홈페이지 -->
 	<definition name=".personnel.*.*" extends=".personnel">
@@ -53,14 +61,19 @@
 		<put-attribute name="content" value="/WEB-INF/views/member/{1}/{2}.jsp"></put-attribute>
 	</definition>
 
-
 	<definition name=".member.*" extends=".member">
 		<put-attribute name="content" value="/WEB-INF/views/member/{1}.jsp"></put-attribute>
 	</definition>
 
+	<!-- 방송 -->
 
+	<definition name=".broadcast.*.*" extends=".broadcast">
+		<put-attribute name="content" value="/WEB-INF/views/broadcast/{1}/{2}.jsp"></put-attribute>
+	</definition>
 
-
+	<definition name=".broadcast.*" extends=".broadcast">
+		<put-attribute name="content" value="/WEB-INF/views/broadcast/{1}.jsp"></put-attribute>
+	</definition>
 	
 
 </tiles-definitions>

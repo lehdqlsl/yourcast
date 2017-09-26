@@ -4,23 +4,34 @@ package com.yourcast.app.vo;
 public class BoardReplyVO {
 	private int br_num;
 	private String br_content;
-	private String br_regString;
+	private String br_regdate;
 	private int br_delete;
 	private int b_num;
 	private int m_num;
+	private String id;
 	
 	public BoardReplyVO() {
 		
 	}
 
-	public BoardReplyVO(int br_num, String br_content, String br_regString, int br_delete, int b_num, int m_num) {
-		super();
+	public BoardReplyVO(int br_num, String br_content, String br_regdate, int br_delete, int b_num, int m_num) {
+		//super();
 		this.br_num = br_num;
 		this.br_content = br_content;
-		this.br_regString = br_regString;
+		this.br_regdate = br_regdate;
 		this.br_delete = br_delete;
 		this.b_num = b_num;
 		this.m_num = m_num;
+	}
+	public BoardReplyVO(int br_num, String br_content, String br_regdate, int br_delete, int b_num, int m_num,String id) {
+		//super();
+		this.br_num = br_num;
+		this.br_content = br_content;
+		this.br_regdate = br_regdate;
+		this.br_delete = br_delete;
+		this.b_num = b_num;
+		this.m_num = m_num;
+		this.id=id;
 	}
 
 	public int getBr_num() {
@@ -39,12 +50,12 @@ public class BoardReplyVO {
 		this.br_content = br_content;
 	}
 
-	public String getBr_regString() {
-		return br_regString;
+	public String getBr_regdate() {
+		return br_regdate;
 	}
 
-	public void setBr_regString(String br_regString) {
-		this.br_regString = br_regString;
+	public void setBr_regdate(String br_regdate) {
+		this.br_regdate = br_regdate;
 	}
 
 	public int getBr_delete() {
@@ -71,5 +82,13 @@ public class BoardReplyVO {
 		this.m_num = m_num;
 	}
 
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
 }

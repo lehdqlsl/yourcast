@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul {
+	list-style: none;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.wrap_view {
+	border-bottom: 1px solid #CFCFCF;
+	width:980px; 
+	margin:auto;
+}
+
+.img_profile {
+	float: left;
+	margin-right: 10px;
+}
+
+.v_title {
+	font-size: 20px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+}
+
+.view{
+	margin-left: 72px;
+	text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+}
+
+.watch_area {
+	margin-left: 72px;
+	margin-top: 40px;
+}

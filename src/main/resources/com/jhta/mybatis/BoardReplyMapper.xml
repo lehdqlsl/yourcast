@@ -15,7 +15,10 @@
 	<select id="getInfo" parameterType="int" resultType="boardreply">
 		select * from board_reply where br_num=#{br_num}
 	</select>
-	<select id="getList" parameterType="int" resultType="boardreply">
-		select * from board_reply where b_num=#{b_num} and br_delete=0
+	<select id="getList" parameterType="hashmap" resultType="boardreply">
+		select * from(select aa.*,rownum rnum from(select br.*,m.id from board_reply br, member m where br.m_num=m.m_num and br_delete=0 and b_num=#{b_num} order by br_num desc) aa) <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	<select id="getCount" parameterType="int" resultType="int">
+		select NVL(count(br_num),0) cnt from board_reply where b_num=#{b_num} and br_delete=0
 	</select>
 </mapper>

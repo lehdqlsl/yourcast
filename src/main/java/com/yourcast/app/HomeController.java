@@ -37,10 +37,7 @@ public class HomeController {
 		return ".main";
 	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test(Locale locale, Model model) {
-		return ".main.test";
-	}
+
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String personnel(@PathVariable(value = "id") String id, Model model) {
