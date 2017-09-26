@@ -39,6 +39,25 @@ public class VideoVO {
 		this.age_grade_name = age_grade_name;
 		this.m_num = m_num;
 	}
+	
+	public VideoVO(int v_num, String v_title, String v_content, String v_regdate, int v_hit, String v_orgfilename,
+			String v_savefilename, String v_orgthumbnail, String v_savethumbnail, int v_delete, int genre_num,
+			int age_grade_num, int m_num) {
+		super();
+		this.v_num = v_num;
+		this.v_title = v_title;
+		this.v_content = v_content;
+		this.v_regdate = v_regdate;
+		this.v_hit = v_hit;
+		this.v_orgfilename = v_orgfilename;
+		this.v_savefilename = v_savefilename;
+		this.v_orgthumbnail = v_orgthumbnail;
+		this.v_savethumbnail = v_savethumbnail;
+		this.v_delete = v_delete;
+		this.genre_num = genre_num;
+		this.age_grade_num = age_grade_num;
+		this.m_num = m_num;
+	}
 
 	public String getGenre_name() {
 		return genre_name;

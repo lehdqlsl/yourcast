@@ -35,6 +35,12 @@
 		</header>
 
 		<!-- 여기작성 -->
+		
+		<script type="text/javascript">
+			function cancel(){
+				window.location.href="<c:url value='/${requestScope.id}/video/list'/>";	
+			}
+		</script>
 
 		<h1>Datail</h1>
 		<table>
@@ -48,6 +54,9 @@
 				<th>영상</th><td><video controls="controls" >
 											<source src="<c:url value='/resources/upload/${vo.v_savefilename}'/>" type="video/mp4">
 										</video></td>
+			</tr>
+			<tr>
+				<th colspan="2"><input type="button" value="취소" onclick="cancel()"></th>
 			</tr>
 		</table>
 

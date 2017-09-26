@@ -11,15 +11,15 @@
 	</select>
 	<update id="update" parameterType="board">
 		update board 
-		set b_title=#{b_title}, b_content = #{b_content}, b_notice=#{b_notice}
-		where b_num=#{b_num} 
+		set b_title=#{b_title}, b_content = #{b_content}, b_notice=#{b_notice},category_num=#{category_num} 
+		where b_num=#{b_num}
 	</update>
 	<select id="getInfo" parameterType="int" resultType="board">
-		select * from board where b_num=#{b_num}
+		select b.*,m.id from board b, member m where b.bj_num=m.m_num and b_num=#{b_num}
 	</select>
-	<select id="getList" resultType="board" parameterType="int">
-		select * from board 
-		where category_num = #{category_num}
+	<select id="getList" resultType="board" parameterType="hashmap">
+		<!--  select b.*,m.id from board b, member m where b.bj_num=m.m_num and b.category_num=#{category_num} and b.b_delete=0 order by b.b_num desc-->
+		select * from(select aa.*,rownum rnum from(select b.*,m.id from board b, member m where b.bj_num=m.m_num and b.category_num=#{category_num} and b.b_delete=0 order by b.b_num desc) aa)<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	<update id="delete" parameterType="int">
 		update board

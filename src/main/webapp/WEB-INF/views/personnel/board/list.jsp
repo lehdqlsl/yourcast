@@ -47,32 +47,49 @@
 			<c:forEach var="vo" items="${blist }">
 				<tr>
 					<td>${vo.b_num }</td>
-					<td>${vo.b_title }</td>
-					<td>${vo.m_num }</td>
+					<td><a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${category_num }"/>'>${vo.b_title }</a></td>
+					<td>${vo.id }</td>
 					<td>${vo.b_hit }</td>
 					<td>${vo.b_regdate }</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<br>
+		<!-- 페이징 -->
 		<div>
-			<%-- 		<!-- 페이징 -->
-			<c:set var="pms"
-				value="&writer=${writer }&title=${title }&content=${content }&keyword=${keyword }" />
-			<c:forEach var="i" begin="${pu.startPageNum }"
-				end="${pu.endPageNum }">
+			
+			<!-- 이전 -->
+			<c:choose>
+				<c:when test="${pu.startPageNum>5 }">
+					<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.startPageNum-1 }&category_num=${category_num }"/>'>[이전]</a>
+				</c:when>
+				<c:otherwise>
+					[이전]
+				</c:otherwise>
+			</c:choose>
+			<!-- 숫자부분 -->
+			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
-					<c:when test="${i==pu.pageNum }">
-						<!-- 현재페이지인 경우(색상다르게 표시) -->
-						<a href="list?pageNum=${i }${pms}"><span style="color: blue">[${i }]</span></a>
-					</c:when>
-					<c:otherwise>
-						<a href="list?pageNum=${i }${pms }"><span style="color: #555">[${i }]</span></a>
-					</c:otherwise>
-				</c:choose>
+				<c:when test="${i==pu.pageNum }"><!-- 현재페이지인 경우(색상다르게 표시) -->
+					<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:blue">[${i }]</span></a>
+				</c:when>
+				<c:otherwise>
+					<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:#555">[${i }]</span></a>
+				</c:otherwise>
+			</c:choose>
 			</c:forEach>
+			<!-- 다음 -->
+			<c:choose>
+				<c:when test="${pu.endPageNum<pu.totalPageCount }">
+					<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.endPageNum+1 }&category_num=${category_num }"/>'>[다음]</a>
+				</c:when>
+				<c:otherwise>
+					[다음]
+				</c:otherwise>
+			</c:choose>
 		</div>
- --%>
+		<div>
+		
 			<!-- 작성END -->
 
 			<footer class="w3-container w3-padding-32 w3-dark-grey">

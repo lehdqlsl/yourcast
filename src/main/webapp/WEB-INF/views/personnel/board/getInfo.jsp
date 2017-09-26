@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -35,46 +34,30 @@
 		</header>
 
 		<!-- 여기작성 -->
+	
+		<div>
+			<h2>${vo.b_title }</h2>
+			<div id="info">
+				<!-- 이미지 -->
+				작성자 : ${vo.id }&nbsp;&nbsp;${vo.b_regdate }
+			</div>
+			<div id="etc">
+				${vo.b_hit }&nbsp;&nbsp;<a href=""><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</a>
+			</div>
+			<div id="b_content">
+				${vo.b_content}
+			</div>
+			<c:if test="${requestScope.id eq vo.id }">
+				<div id="edit">
+					<a href='<c:url value="/${sessionScope.id}/board/delete?b_num=${vo.b_num }&category_num=${vo.category_num }"/>'>삭제</a>&nbsp;&nbsp;
+					<a href='<c:url value="/${sessionScope.id}/board/update?b_num=${vo.b_num }&category_num=${vo.category_num }"/>'>수정</a>
+				</div>
+			</c:if>
+			<div id="reply">
+				
+			</div>
+		</div>
 
-		<h1>동영상업로드</h1>
-		<form method="post" action="<c:url value="/${requestScope.id}/video/insert"/>" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<th>장르</th>
-				<td><select name="genre">
-						<option value="1">english</option>
-						<option value="2">music</option>
-						<option value="3">game</option>
-						</select>
-				</td>
-			</tr>
-			<tr>
-				<th>관람등급</th>
-				<td><select name="age_grade">
-						<option value="1">19</option>
-						<option value="2">15</option>
-						<option value="3">12</option>
-						</select>
-				</td>
-			</tr>
-			<tr>
-				<th>제목</th><td><input type="text" name="v_title"><td>
-			</tr>
-			<tr>
-				<th>내용</th><td><input type="text" name="v_content"></td>
-			</tr>
-			<tr>
-				<th>동영상</th><td><input type="file" name="vfile"></td>
-			</tr>
-			<tr>
-				<th>썸네일</th><td><input type="file" name="imgfile"></td>
-			</tr>
-			<tr>
-				<th colspan="2"><input type="submit" value="업로드"><input type="reset" value="다시입력"></th>
-			</tr>
-		</table>
-		</form>
-		
 		<!-- 작성END -->
 
 		<footer class="w3-container w3-padding-32 w3-dark-grey">
