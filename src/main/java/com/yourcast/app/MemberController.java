@@ -9,11 +9,15 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.vo.MemberVO;
@@ -38,7 +42,12 @@ public class MemberController {
 	public String loginForm(Locale locale, Model model) {
 		return ".member.join.login";
 	}
-
+	// 약관
+		@RequestMapping(value = "/member/service", method = RequestMethod.GET)
+		public String service(Locale locale, Model model) {
+			return ".member.join.service";
+		}
+	
 	// 로그인
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
 	public String login(Model model, HttpServletRequest request) {
@@ -51,11 +60,11 @@ public class MemberController {
 		boolean r = mservice.isMembers(map);
 		if (r) {
 			// 로그인 성공
-			System.out.println("여기여기");
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			return ".main";
 		} else {
+			request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			return ".member.join.login";
 		}
 	}
@@ -87,5 +96,19 @@ public class MemberController {
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
 		return ".main";
+	}
+	
+	//아이디 중복
+	@RequestMapping(value="/usingid/json",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String usingId(String id) {
+		MemberVO vo=mservice.getInfo(id);
+		JSONObject json=new JSONObject();
+		if(vo!=null) {
+			json.put("using",true);
+		}else {
+			json.put("using", false);
+		}
+		return json.toString();
 	}
 }

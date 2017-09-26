@@ -21,7 +21,7 @@
     	<a href="<c:url value='/board/list?category_num=${vo.category_num }&id=${id }'/>" class="w3-bar-item w3-button w3-padding">
     	<i class="fa fa-bars fa-fw w3-margin-right"></i>${vo.category_name }</a>
 	</c:forEach>
-      <a href="<c:url value="/${requestScope.id }/list"/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bars fa-fw w3-margin-right"></i>Video</a
+      <a href="<c:url value="/${requestScope.id }/list"/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bars fa-fw w3-margin-right"></i>Video</a>
   </div>
   <div class="w3-panel w3-large">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
