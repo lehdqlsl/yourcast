@@ -45,7 +45,9 @@
 					<td>
 						<select name="cate_list">
 								<c:forEach var="vo" items="${clist }">
-									<option value="${vo.category_num}">${vo.category_name}</option>
+									<c:if test="${vo.category_name ne '전체보기'}">
+										<option value="${vo.category_num}">${vo.category_name}</option>
+									</c:if>
 								</c:forEach>
 						</select>
 						&nbsp;<input type="checkbox" name="notice">게시판 공지

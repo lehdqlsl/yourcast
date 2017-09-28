@@ -33,7 +33,7 @@ public class BoardDAO {
 		return vo;
 	}
 
-	public List<BoardVO> getList(HashMap<String, Integer> map) {
+	public List<BoardVO> getList(HashMap<String, Object> map) {
 		List<BoardVO> blist = sqlSession.selectList(NAMESPACE + ".getList", map);
 		return blist;
 	}
@@ -46,7 +46,7 @@ public class BoardDAO {
 		return sqlSession.update(NAMESPACE + ".hitUpdate", b_num);
 	}
 
-	public int getCount(HashMap<String, Integer>map) {
+	public int getCount(HashMap<String, Object>map) {
 		return sqlSession.selectOne(NAMESPACE + ".getCount",map);
 	}
 }

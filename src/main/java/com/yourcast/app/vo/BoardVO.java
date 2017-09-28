@@ -12,11 +12,13 @@ public class BoardVO {
 	private int bj_num;
 	private int category_num;
 	private String id;
+	private String category_name;
+	private int brcnt;//´ñ±Û °³¼ö
 	public BoardVO() {
 	}
 
 	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
-			int m_num, int bj_num, int category_num,String id) {
+			int m_num, int bj_num, int category_num,String id,String category_name,int brcnt) {
 		super();
 		this.b_num = b_num;
 		this.b_title = b_title;
@@ -29,6 +31,8 @@ public class BoardVO {
 		this.bj_num = bj_num;
 		this.category_num = category_num;
 		this.id=id;
+		this.category_name=category_name;
+		this.brcnt=brcnt;
 	}
 	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
 			int m_num, int bj_num, int category_num) {
@@ -44,6 +48,20 @@ public class BoardVO {
 		this.category_num = category_num;
 	
 	}
+	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
+			int m_num, int bj_num, int category_num,int brcnt) {
+		this.b_num = b_num;
+		this.b_title = b_title;
+		this.b_content = b_content;
+		this.b_regdate = b_regdate;
+		this.b_hit = b_hit;
+		this.b_notice = b_notice;
+		this.b_delete = b_delete;
+		this.m_num = m_num;
+		this.bj_num = bj_num;
+		this.category_num = category_num;
+		this.brcnt=brcnt;
+	}
 
 	public int getB_num() {
 		return b_num;
@@ -51,6 +69,14 @@ public class BoardVO {
 
 	public void setB_num(int b_num) {
 		this.b_num = b_num;
+	}
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
 	}
 
 	public String getB_title() {
@@ -131,5 +157,12 @@ public class BoardVO {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	public int getBrcnt() {
+		return brcnt;
+	}
+
+	public void setBrcnt(int brcnt) {
+		this.brcnt = brcnt;
 	}
 }
