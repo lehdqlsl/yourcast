@@ -22,4 +22,7 @@ public class BoardUpService {
 	public int getCount(int b_num) {
 		return dao.getCount(b_num);
 	}
+	public BoardUpVO isCheck(BoardUpVO vo) {
+		return dao.isCheck(vo);
+	}
 }

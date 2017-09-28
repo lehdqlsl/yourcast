@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +15,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.util.page.PageUtil;
 import com.yourcast.app.service.BoardReplyService;
+import com.yourcast.app.service.BoardReportService;
 import com.yourcast.app.service.BoardService;
+import com.yourcast.app.service.BoardUpService;
 import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.vo.BoardReplyVO;
+import com.yourcast.app.vo.BoardReportVO;
+import com.yourcast.app.vo.BoardUpVO;
 import com.yourcast.app.vo.BoardVO;
 import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.MemberProfileVO;
@@ -29,16 +35,14 @@ import com.yourcast.app.vo.MemberVO;
 
 @Controller
 public class BoardController {
-	@Autowired
-	private BoardService b_service;
-	@Autowired
-	private CategoryService c_service;
-	@Autowired
-	private MemberService m_service;
-	@Autowired
-	private MemberProfileService mp_service;
-	@Autowired
-	private BoardReplyService br_service;
+
+	@Autowired private BoardService b_service;
+	@Autowired private CategoryService c_service;
+	@Autowired private BoardReportService r_service;
+	@Autowired private MemberService m_service;
+	@Autowired private MemberProfileService mp_service;
+	@Autowired private BoardReplyService br_service;
+	@Autowired private BoardUpService bu_service;
 
 	@RequestMapping(value = "/{id}/board/insert", method = RequestMethod.GET)
 	public String insertForm(@PathVariable(value = "id") String id, Model model) {
@@ -50,7 +54,6 @@ public class BoardController {
 		model.addAttribute("voMP", voMP);
 		return ".personnel.board.insert";
 	}
-
 	// insert : post
 	@RequestMapping(value = "/{id}/board/insert", method = RequestMethod.POST)
 	public String insert(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
@@ -187,6 +190,7 @@ public class BoardController {
 		b_service.update(bvo);
 
 		// 카테고리 리스트 지정
+
 		CategoryVO vo = c_service.getInfo(category_num);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("m_num", vo.getM_num());
@@ -228,7 +232,9 @@ public class BoardController {
 		PageUtil pu = new PageUtil(pageNum, 5, 1, totalRowCount);
 		map.put("startRow", 1);
 		map.put("endRow", 5);
+
 		List<BoardReplyVO> brlist = br_service.getList(map);// 처음 댓글 다섯개만 불러오기
+
 		///////////////////////////////////////////
 
 		model.addAttribute("id", id);
@@ -258,11 +264,6 @@ public class BoardController {
 			category_num = null;
 		}
 		
-		//map.put("category_name", cvo.getCategory_name());
-		//CategoryVO cvo =c_service.getInfo(category_num);
-		//map.put("category_name", cvo.getCategory_name());
-		//페이징 처리
-		
 		int totalRowCount=b_service.getCount(map);
 		
 		System.out.println("totalRowCount:" +totalRowCount);
@@ -270,7 +271,7 @@ public class BoardController {
 		PageUtil pu=new PageUtil(pageNum,15,5,totalRowCount);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-		
+
 		//getList처리
 		List<CategoryVO> clist = c_service.getList(mvo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
@@ -297,5 +298,46 @@ public class BoardController {
 		model.addAttribute("voMP", voMP);
 		
 		return ".personnel.board.list";
+	}
+	//�Ű�
+	@RequestMapping(value="/report/insert",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String insert(int b_num,String m_num) {
+		MemberVO mvo= m_service.getInfo(m_num);
+		//int mnum=Integer.parseInt(m_num);
+		BoardReportVO vo=new BoardReportVO(b_num,mvo.getM_num());
+		BoardReportVO br1= r_service.isCheck(vo);
+		
+		JSONObject json = new JSONObject();
+			
+		if(br1!=null) { // �Ű� �� ��� 
+			//json.put("insert",true); 
+			json.put("result", "true");
+		}else { // �Ű� ���� ���
+			//json.put("insert", false);
+			r_service.insert(vo);
+			json.put("result", "false");
+		}
+		return json.toString();
+	}
+	@RequestMapping(value="/boardup/insert",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String up_insert(String m_num,int b_num) {
+		MemberVO mvo= m_service.getInfo(m_num);
+		BoardUpVO vo = new BoardUpVO(mvo.getM_num(),b_num);
+		BoardUpVO br1 =  bu_service.isCheck(vo);
+		int bucount= bu_service.getCount(b_num);
+		
+		JSONObject json = new JSONObject();
+		
+		if(br1!=null) { // ��õ� �� ��� 
+			json.put("result", "true");
+			//json.put("bucount", bucount);
+		}else { // ��õ� ���� ���
+			bu_service.insert(vo);
+			json.put("result", "false");
+			//json.put("bucount", bucount);
+		}
+		return json.toString();
 	}
 }

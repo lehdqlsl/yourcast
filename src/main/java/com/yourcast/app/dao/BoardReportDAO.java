@@ -23,4 +23,7 @@ public class BoardReportDAO {
 	public int getCount(int b_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getCount",b_num);
 	}
+	public BoardReportVO isCheck(BoardReportVO vo) {
+		return sqlSession.selectOne(NAMESPACE + ".isCheck",vo);
+	}
 }

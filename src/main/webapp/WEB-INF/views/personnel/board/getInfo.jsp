@@ -67,6 +67,45 @@
 		
 			
 		});
+			/* $("#report").click(function(){
+				$.ajax({
+					url:"<c:url value='/report/insert'/>",
+					dataType:"json",
+					success:function(data){
+						
+					}				
+				});
+			}); */
+		 $("#report").click(function() {
+			var b_report = confirm("신고 하시겠습니까?");
+			if(b_report == true){
+				$.ajax({
+					url:"<c:url value='/report/insert?b_num=${b_num}&m_num=${sessionScope.id}'/>",
+					dataType:"json",
+					success:function(data){
+						if(data.result=="true"){
+							alert("이미 신고하셨습니다.");
+						}
+						else{
+							alert("신고 되었습니다.");
+						}
+					}		
+				});
+			}
+		});
+		$("#thumbs_up").click(function() {
+			$.ajax({
+				url:"<c:url value='/boardup/insert?b_num=${b_num}&m_num=${sessionScope.id}'/>",
+				dataType:"json",
+				success:function(data) {
+					if(data.result=="true") {
+						alert("이미 추천 하셨습니다.");
+					} else {
+						alert("추천 하였습니다.");
+					}
+				}
+			});
+		});
 	});
 </script>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
@@ -109,26 +148,26 @@
 				작성자 : ${vo.id }&nbsp;&nbsp;${vo.b_regdate }
 			</div>
 			<div id="etc">
-				${vo.b_hit }&nbsp;&nbsp;<a href=""><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</a>
+				${vo.b_hit }&nbsp;&nbsp;
 			</div>
 			<div id="b_content">
 				${vo.b_content}
 			</div>
-			
+
 			<div id="edit">
 				<c:choose>
-				  	
 					<c:when test="${sessionScope.id eq vo.id }">
 						<button class="w3-button w3-black w3-round-large" id="b_delete">삭제</button>
 						<button class="w3-button w3-black w3-round-large" id="b_update">수정</button>
 					</c:when>
 					<c:otherwise>
-						<a href=''>신고</a>&nbsp;&nbsp;
-						<a href=''>추천</a>
+						<a id="report"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</a>
+						<a id="thumbs_up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>추천</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
 			<br>
+
 			<!-- 댓글 영역 -->
 			<form method="post" action='<c:url value="/${sessionScope.id }/boardreply/insert"/>'>
 				<input type="hidden" value="${vo.b_num }" name="b_num">
@@ -139,7 +178,7 @@
 				<input type="reset" value="취소" id="br_reg">
 			</form>
 			<div id="replylist">
-				<h6>댓글 : ${pu.totalRowCount } 개</h6>
+				<h6>댓글 : ${pu.totalRowCount } </h6>
 				<c:forEach var="vo" items="${brlist }">
 					<p class="reply">${vo.id }&nbsp;&nbsp;${vo.br_content}&nbsp;&nbsp;${vo.br_regdate }&nbsp;&nbsp;
 					<c:choose>
@@ -216,8 +255,5 @@
 			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
 				title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a>
 		</div>
-
-
-
 	</div>
 </body>

@@ -66,7 +66,7 @@ function getCookie(cookieName) {
 <div class='login'>
 <h2>LOGIN</h2>
 <form method="post" action="<c:url value='/member/login'/>">
-	<input name='id' placeholder='Id' type='text'>
+	<input name='id' placeholder='Id' type='text' autocomplete=off>
 	<input id='pw' placeholder='Password' type='password' name='pwd'>
 	<div id="errMsg" style="font-size: small;color: red;">${requestScope.errMsg}</div>
 	<div class='agree'>

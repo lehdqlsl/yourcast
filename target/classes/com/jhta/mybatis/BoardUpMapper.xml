@@ -6,8 +6,10 @@
 	<insert id="insert" parameterType="boardup">
 		insert into board_up values (#{m_num},#{b_num})
 	</insert>
-	
 	<select id="getcount" parameterType="int" resultType="int">
 		select NVL(count(*),0) from board_up where b_num = #{b_num}
+	</select>
+	<select id="isCheck" parameterType="boardup" resultType="boardup">
+		select * from board_up where m_num=#{m_num} and b_num=#{b_num} 
 	</select>
 </mapper>

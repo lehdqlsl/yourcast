@@ -23,4 +23,7 @@ public class BoardUpDAO {
 	public int getCount(int b_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getcount", b_num);
 	}
+	public BoardUpVO isCheck(BoardUpVO vo) {
+		return sqlSession.selectOne(NAMESPACE + ".isCheck",vo);
+	}
 }

@@ -18,4 +18,7 @@ public class BoardReportService {
 	public int getCount(int b_num) {
 		return dao.getCount(b_num);
 	}
+	public BoardReportVO isCheck(BoardReportVO vo) {
+		return dao.isCheck(vo);
+	}
 }
