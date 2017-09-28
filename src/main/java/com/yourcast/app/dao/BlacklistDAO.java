@@ -34,5 +34,9 @@ public class BlacklistDAO {
 	public int getCount(int bj_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getcount",bj_num);
 	}
+	
+	public BlacklistVO check(BlacklistVO vo) {
+		return sqlSession.selectOne(NAMESPACE + ".check",vo);
+	}
 
 }

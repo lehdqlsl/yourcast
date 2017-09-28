@@ -9,11 +9,11 @@
     </a>
     <img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width:45%;" class="w3-round"><br><br>
     <h4><b>PORTFOLIO</b></h4>
-    <p class="w3-text-grey">${voMP.profile_content }</p>
+    <p class="w3-text-grey">${voMP.profile_msg }</p>
     
     <span class="w3-text-grey" id="id">${requestScope.id}</span>
     <c:if test="${requestScope.id==sessionScope.id}">	
-    	&nbsp&nbsp<span><a href="<c:url value="/${requestScope.id }/setting/info"/>" style="text-decoration: none;" class="fa fa-cog w3-hover-opacity"></a></span>
+    	&nbsp&nbsp<span><a href="<c:url value='/${requestScope.id }/setting/info'/>" style="text-decoration: none;" class="fa fa-cog w3-hover-opacity"></a></span>
     </c:if>
     
   </div>

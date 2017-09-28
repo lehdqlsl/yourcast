@@ -20,7 +20,7 @@
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
 				<h1>
-					<b>${voMP.profile_msg }</b>
+					<b>${voMP.profile_title }</b>
 				</h1>
 				<div class="w3-section w3-bottombar w3-padding-16">
 					<span class="w3-margin-right">Filter:</span>
@@ -45,26 +45,38 @@
 				$('#tabMenu').tabs();
 			});
 		</script>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#tab1").on('click',function(){
+					window.location.href="<c:url value='/${requestScope.id }/setting/info'/>";
+				});
+			});
+		</script>
       
 		<div id="tabMenu">
 			<ul style="background-color: #f1f1f1!important;border-color:#f1f1f1!important ">
 				<li><a href="#tabs-1" id="tab1">기본정보관리</a></li>
-				<li><a href="#tabs-2" id="tab2">대문관리</a></li>
-				<li><a href="#tabs-3" id="tab3">팬 목록</a></li>
-				<li><a href="#tabs-4" id="tab4">블랙리스트</a></li>
+				<li><a href="#tabs-2" id="tab2">게시판관리</a></li>
+				<li><a href="#tabs-3" id="tab3">대문관리</a></li>
+				<li><a href="#tabs-4" id="tab4">팬 목록</a></li>
+				<li><a href="#tabs-5" id="tab5">블랙리스트</a></li>
 			</ul>
 			
 			<div id="tabs-1" class="divTab">
 				<form method="post" action="<c:url value='/${requestScope.id}/setting/baseinfo_update'/>" enctype="multipart/form-data">
 					<table>
 						<tr>
-							<th>방송국이름</th><td><input type="text" name="profile_msg" value="${voMP.profile_msg }"></td>
+							<th>방송국이름</th><td><input type="text" name="profile_title" value="${voMP.profile_title }"></td>
 						</tr>
 						<tr>
 							<th>로고</th><td><input type="file" name="profileImg"></td>
 						</tr>
 						<tr>
-							<th>프로필</th><td><input type="text" name="profile_content" value="${voMP.profile_content }"></td>
+							<th>프로필</th><td><input type="text" name="profile_msg" value="${voMP.profile_msg }"></td>
+						</tr>
+						<tr>
+							<th>내용</th><td><input type="text" name="profile_content" value="${voMP.profile_content }"></td>
 						</tr>
 						<tr>
 							<th colspan="2"><input type="submit" value="확인"></th>
@@ -73,98 +85,215 @@
 				</form>
 			</div>
 			
+			<script type="text/javascript">
+				$(function(){
+					$("#c_delete").click(function(){
+						var opt = document.createElement("option");
+						var optionV = $("#menulist option:selected").val();
+						if(optionV==null || optionV==""){
+							return false;
+						}
+						$("#menulist option:selected").remove();						
+						$.ajax({
+							url:"<c:url value='/${requestScope.id}/setting/category_delete'/>",
+							data:{"option":optionV},
+							success:function(data){
+								$("#c_keyword").focus().val("");
+							}
+						});
+					});
+					$("#c_insert").click(function(){
+						var opt = document.createElement("option");
+						var c_keyword = $("#c_keyword").val();
+						if(c_keyword==null || c_keyword==""){
+							return false;
+						}
+						$.ajax({
+							url:"<c:url value='/${requestScope.id}/setting/category_insert'/>",
+							data:{"keyword":c_keyword},
+							success:function(data){
+								$("#menulist").append("<option value='" + data + "'>" + c_keyword + "</option>");
+								$("#c_keyword").focus().val("");
+							}
+						});
+					});
+				});				
+			</script>
+			
 			<div id="tabs-2" class="divTab">
-					대문관리
+				<div>
+				<input type="text" id="c_keyword">
+					<input type="button" value="추가" id="c_insert">
+					<input type="button" value="삭제" id="c_delete">
+				</div>				
+			
+				<select id="menulist" name="menulist" size="10" style="width:200px;">
+					<c:forEach var="cvo" items="${clist }">
+						<option value="${cvo.category_num }">${cvo.category_name }</option>
+					</c:forEach>
+				</select>
+				
+			</div>
+			
+			<div id="tabs-3" class="divTab">
+				대문관리
 			</div>
 			
 			<script type="text/javascript">
 				$(function(){
-					$("#pre a").click(function(){
-						var pageNum = ${pu.startPageNum-1};
+					$(".base").filter(':first').css('color','red');
+					$("#pre a").on('click',function(){
+						var pageNum = parseInt($(".base").filter(':first').text()) - 1;
+						if(pageNum<5){
+							return false;
+						}
+						$("tbody").empty();
 						$.ajax({
 							url:"<c:url value='/${requestScope.id}/setting/page'/>",
 							data:{"pageNum":pageNum},
-							dataType:"xml",
 							success:function(data){
-								alert("asd");
+								$(data).find("list").each(function(){
+									var fan_num = $(this).find("fan_num").text();
+									var id = $(this).find("id").text();
+									var name = $(this).find("name").text();
+									var cnt = $(this).find("cnt").text();
+									$("#fanlist").append("<tr class='fantr'><th>" + fan_num + "</th><th>" + id + "</th><th>" + name + "</th><th>" + cnt + "</th></tr>");						
+								});
+							}
+						});
+						$("#baseB").empty();
+						$.ajax({
+							url:"<c:url value='/${requestScope.id}/setting/pagePre'/>",
+							data:{"pageNum":pageNum},
+							success:function(data){
+								for(var i=data-4;i<=data;i++){
+									$("<a href='#' class='base'>" + i + "</a>").appendTo("#baseB").css('margin','4px').on('click',function(){
+										var pageNum1 = $(this).text();
+										$("tbody").empty();
+										$(".base").removeAttr('style');
+										$(".base").css('margin','5px')
+										$(this).css('color','red');
+										$.ajax({
+											url:"<c:url value='/${requestScope.id}/setting/page'/>",
+											data:{"pageNum":pageNum1},
+											success:function(data){
+												$(data).find("list").each(function(){
+													var fan_num = $(this).find("fan_num").text();
+													var id = $(this).find("id").text();
+													var name = $(this).find("name").text();
+													var cnt = $(this).find("cnt").text();
+													$("#fanlist").append("<tr class='fantr'><th>" + fan_num + "</th><th>" + id + "</th><th>" + name + "</th><th>" + cnt + "</th></tr>");						
+												});
+											}
+										});
+									});
+								}
+								$(".base").filter(':first').css('color','red');
 							}
 						});
 					});
-					$("#base a").click(function(){
+					$(".base").on('click',function move(){
 						var pageNum = $(this).text();
+						$("tbody").empty();
+						$(".base").removeAttr('style');
+						$(this).css('color','red');
 						$.ajax({
 							url:"<c:url value='/${requestScope.id}/setting/page'/>",
 							data:{"pageNum":pageNum},
-							dataType:"xml",
 							success:function(data){
 								$(data).find("list").each(function(){
-									var ffan_num = $(this).find("fan_num").text();
-									var fid = $(this).find("id").text();
-									var fname = $(this).find("name").text();
-									alert(ffan_num);
-									$("#ffan_num").text(ffan_num);
-									$("#fid").text(fid);
-									$("#fname").text(fname);
+									var fan_num = $(this).find("fan_num").text();
+									var id = $(this).find("id").text();
+									var name = $(this).find("name").text();
+									var cnt = $(this).find("cnt").text();
+									$("#fanlist").append("<tr class='fantr'><th>" + fan_num + "</th><th>" + id + "</th><th>" + name + "</th><th>" + cnt + "</th></tr>");						
 								});
 							}
 						});
 					});
-					$("#next a").click(function(){
-						var pageNum = ${pu.endPageNum+1};
+					$("#next a").on('click',function(){
+						var pageNum = parseInt($(".base").filter(':last').text()) + 1;
+						if(pageNum%5!=0){
+							return false;
+						}
+						$("tbody").empty();
 						$.ajax({
 							url:"<c:url value='/${requestScope.id}/setting/page'/>",
 							data:{"pageNum":pageNum},
-							dataType:"xml",
 							success:function(data){
-								alert("asd");
+								$(data).find("list").each(function(){
+									var fan_num = $(this).find("fan_num").text();
+									var id = $(this).find("id").text();
+									var name = $(this).find("name").text();
+									var cnt = $(this).find("cnt").text();
+									$("#fanlist").append("<tr class='fantr'><th>" + fan_num + "</th><th>" + id + "</th><th>" + name + "</th><th>" + cnt + "</th></tr>");						
+								});
+							}
+						});
+						$("#baseB").empty();
+						$.ajax({
+							url:"<c:url value='/${requestScope.id}/setting/pageNext'/>",
+							data:{"pageNum":pageNum},
+							success:function(data){
+								for(var i=pageNum;i<=data;i++){
+									$("<a href='#' class='base'>" + i + "</a>&nbsp;").appendTo("#baseB").css('margin','4px').on('click',function(){
+										var pageNum1 = $(this).text();
+										$("tbody").empty();
+										$(".base").removeAttr('style');
+										$(".base").css('margin','5px')
+										$(this).css('color','red');
+										$.ajax({
+											url:"<c:url value='/${requestScope.id}/setting/page'/>",
+											data:{"pageNum":pageNum1},
+											success:function(data){
+												$(data).find("list").each(function(){
+													var fan_num = $(this).find("fan_num").text();
+													var id = $(this).find("id").text();
+													var name = $(this).find("name").text();
+													var cnt = $(this).find("cnt").text();
+													$("#fanlist").append("<tr class='fantr'><th>" + fan_num + "</th><th>" + id + "</th><th>" + name + "</th><th>" + cnt + "</th></tr>");						
+												});
+											}
+										});
+									});
+								}
+								$(".base").filter(':first').css('color','red');
 							}
 						});
 					});
 				});		
 			</script>
 			
-			<div id="tabs-3" class="divTab">
-				<table border="1">
+			<div id="tabs-4" class="divTab">
+				<table border="1" id="fanlist">
+					<thead>
 					<tr>
-						<th>팬 번호</th><th>팬아이디</th><th>팬이름</th>
+						<th>팬 번호</th><th>팬아이디</th><th>팬이름</th><th>사용량</th>
 					</tr>
+					</thead>
+					<tbody>
 					<c:forEach var="voF" items="${listF }">
-						<tr>
-							<th id="ffan_num">${voF.fan_num }</th>
-							<th id="fid">${voF.id }</th>
-							<th id="fname">${voF.name }</th>
+						<tr class="fantr">
+							<th>${voF.fan_num }</th>
+							<th>${voF.id }</th>
+							<th>${voF.name }</th>
+							<th>${voF.cnt }</th>
 						</tr>
 					</c:forEach>
+					</tbody>
 				</table>
 				
 				<!-- 페이징 -->
 					<div>
-					<c:choose>
-						<c:when test="${pu.startPageNum>5 }">
-							<span id="pre"><a href="#">[이전]</a></span>
-						</c:when>
-						<c:otherwise>
-							[이전]
-						</c:otherwise>
-					</c:choose>
+						<span id="pre"><a href="#">[이전]</a></span>
+						
+						<span id="baseB">
 						<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-							<c:choose>
-								<c:when test="${i==pu.pageNum }">
-									<span style="color:blue">[${i }]</span>
-								</c:when>
-								<c:otherwise>
-									<span id="base" style="color:#555"><a href="#">${i }</a></span>
-								</c:otherwise>
-							</c:choose>
+							<a href="#" class="base">${i }</a>
 						</c:forEach>
-					<c:choose>
-						<c:when test="${pu.endPageNum<pu.totalPageCount }">
-							<span id="next"><a href="#">[다음]</a></span>
-						</c:when>
-						<c:otherwise>
-							[다음]
-						</c:otherwise>
-					</c:choose>
+						</span>
+						
+						<span id="next"><a href="#">[다음]</a></span>
 					</div>
 				
 				
@@ -174,43 +303,52 @@
 				$(function(){
 					$("#blacklistI").click(function(){
 						var opt = document.createElement("option");
-						var optionV = $("#listA option:selected").val();
-						var optionT = $("#listA option:selected").text();
-						$("#listA option:selected").remove();
-						$("#listB").append("<option value='" + optionV + "'>" + optionT + "</option>");
-						
+						var option = $("#black").val();
+						if(option==null || option==""){
+							return false;
+						}
 						$.ajax({
 							url:"<c:url value='/${requestScope.id}/setting/blacklistI'/>",
-							data:{"option":optionV},
-							dataType:"xml"
+							data:{"option":option},
+							success:function(data){
+								if(data==0){
+									alert("이미 추가된 아이디입니다.");	
+								}else{
+									alert(option + "님을 블랙리스트에 추가하였습니다.");	
+									$("#listB").append("<option value='" + data + "'>" + option + "</option>");
+								}
+							},
+							error:function(data){
+								alert("존재하지 않는 아이디입니다.");	
+							}
 						});
+						$("#black").focus().val("");
 					});
 					$("#blacklistD").click(function(){
 						var opt = document.createElement("option");
 						var optionV = $("#listB option:selected").val();
 						var optionT = $("#listB option:selected").text();
+						if(optionV==null || optionV==""){
+							return false;
+						}
 						$("#listB option:selected").remove();
-						$("#listA").append("<option value='" + optionV + "'>" + optionT + "</option>");
-						
 						$.ajax({
 							url:"<c:url value='/${requestScope.id}/setting/blacklistD'/>",
-							data:{"option":optionV},
-							dataType:"xml"
+							data:{"option":optionV}
 						});
+						alert(optionT + "님을 블랙리스트에서 삭제하였습니다.");
+						$("#black").focus().val("");
 					});
 				});				
 			</script>
 			
-			<div id="tabs-4" class="divTab">
+			<div id="tabs-5" class="divTab">
 					
-				<select id="listA" name="listA" size="10" style="width:300px;">
-					<c:forEach var="voAll" items="${listM }">
-						<option value="${voAll.m_num }">${voAll.id }</option>
-					</c:forEach>
-				</select>
-				
-				<input type="button" value="블랙리스트 추가" onclick="blackListInsert()" id="blacklistI" name="blacklistI">
-				<input type="button" value="블랙리스트 삭제" onclick="blackListDelete()" id="blacklistD" name="blacklistD">
+				<div>
+				<input type="text" id="black">
+					<input type="button" value="블랙리스트 추가" onclick="blackListInsert()" id="blacklistI" name="blacklistI">
+					<input type="button" value="블랙리스트 삭제" onclick="blackListDelete()" id="blacklistD" name="blacklistD">
+				</div>	
 				
 				<select id="listB" name="listB" size="10" style="width:300px;">
 					<c:forEach var="voB" items="${listB }">

@@ -31,5 +31,9 @@ public class BlacklistService {
 	public int getCount(int bj_num) {
 		return dao.getCount(bj_num);
 	}
+	
+	public BlacklistVO check(BlacklistVO vo) {
+		return dao.check(vo);
+	}
 
 }

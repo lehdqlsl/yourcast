@@ -17,6 +17,10 @@
 		where aa.m_num = bb.m_num
 	</select>
 	
+	<select id="check" resultType="blacklist" parameterType="blacklist">
+		select * from blacklist where m_num=#{m_num} and bj_num=#{bj_num}
+	</select>
+	
 	<select id="getcount" resultType="int">
 		select NVL(count(m_num),0) cnt from blacklist where bj_num=#{bj_num}
 	</select>

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.MemberProfileMapper">
 	<insert id="insert" parameterType="profile">
-		insert into member_profile values(seq_profile_num.nextval,#{profile_msg},#{profile_content},#{profile_orgfilename},#{profile_savefilename},#{m_num})
+		insert into member_profile values(seq_profile_num.nextval,#{profile_msg},#{profile_content},#{profile_orgfilename},#{profile_savefilename},#{m_num},#{profile_title})
 	</insert>
 	<select id="getInfo" parameterType="int" resultType="profile">
 		select * from member_profile where m_num=#{m_num}
@@ -22,6 +22,6 @@
 	<update id="update">
 		update member_profile set profile_msg=#{profile_msg},profile_content=#{profile_content},
 		profile_orgfilename=#{profile_orgfilename},profile_savefilename=#{profile_savefilename},
-		m_num=#{m_num} where profile_num=#{profile_num}
+		m_num=#{m_num},profile_title=#{profile_title} where profile_num=#{profile_num}
 	</update>
 </mapper>

@@ -10,6 +10,7 @@ public class FanVO {
 	private int bj_num;
 	private String id;
 	private String name;
+	private int cnt;
 	
 	public FanVO() {}
 	
@@ -19,6 +20,14 @@ public class FanVO {
 		this.m_num = m_num;
 		this.bj_num = bj_num;
 	}
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -35,13 +44,14 @@ public class FanVO {
 		this.name = name;
 	}
 
-	public FanVO(int fan_num, int m_num, int bj_num, String id, String name) {
+	public FanVO(int fan_num, int m_num, int bj_num, String id, String name, int cnt) {
 		super();
 		this.fan_num = fan_num;
 		this.m_num = m_num;
 		this.bj_num = bj_num;
 		this.id = id;
 		this.name = name;
+		this.cnt = cnt;
 	}
 
 	public int getFan_num() {
