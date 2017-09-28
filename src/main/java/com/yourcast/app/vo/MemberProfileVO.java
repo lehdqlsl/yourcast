@@ -7,8 +7,10 @@ public class MemberProfileVO {
 	private String profile_orgfilename;
 	private String profile_savefilename;
 	private int m_num;
+	private String profile_title;
+	
 	public MemberProfileVO(int profile_num, String profile_msg, String profile_content, String profile_orgfilename,
-			String profile_savefilename, int m_num) {
+			String profile_savefilename, int m_num,String profile_title) {
 		super();
 		this.profile_num = profile_num;
 		this.profile_msg = profile_msg;
@@ -16,8 +18,17 @@ public class MemberProfileVO {
 		this.profile_orgfilename = profile_orgfilename;
 		this.profile_savefilename = profile_savefilename;
 		this.m_num = m_num;
+		this.profile_title = profile_title;
 	}
 	
+	public String getProfile_title() {
+		return profile_title;
+	}
+
+	public void setProfile_title(String profile_title) {
+		this.profile_title = profile_title;
+	}
+
 	public MemberProfileVO() {
 		
 	}

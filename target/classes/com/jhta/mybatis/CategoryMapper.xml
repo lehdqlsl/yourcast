@@ -22,8 +22,12 @@
 		select * from category where category_num = #{category_num}
 	</select>
 	
-	<select id="getlist" parameterType="int" resultType="category">
-		select * from category where m_num = #{m_num}
+	<select id="getlist" parameterType="category" resultType="category">
+		select * from category where m_num = #{m_num} and category_delete = 0
+	</select>
+	
+	<select id="getCate_num" parameterType="category" resultType="int">
+		select * from category where m_num=#{m_num} and category_name=#{category_name}
 	</select>
 
 </mapper>

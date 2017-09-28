@@ -60,6 +60,9 @@ public class VideoController {
 	public String videoList(@PathVariable(value = "id") String id, Model model,
 									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
 		MemberVO voM = m_service.getInfo(id);
+		
+		System.out.println(voM.getM_num());
+		
 		List<CategoryVO> clist=c_service.getList(voM.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id",id);

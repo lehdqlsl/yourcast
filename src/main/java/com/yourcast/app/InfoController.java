@@ -28,6 +28,7 @@ import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.vo.BlacklistVO;
 import com.yourcast.app.vo.CategoryVO;
+import com.yourcast.app.vo.FanPagingVO;
 import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
@@ -71,70 +72,64 @@ public class InfoController {
 	
 	@RequestMapping(value = "/{id}/setting/page", method = RequestMethod.GET)
 	@ResponseBody
-	public int fanPaging(@PathVariable(value = "id") String id, Model model,
+	public FanPagingVO fanPaging(@PathVariable(value = "id") String id, Model model,
 									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
+		MemberVO voM = m_sevice.getInfo(id);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
-		System.out.println(pageNum);
-		
+		map.put("bj_num", voM.getM_num());
+		int totalRowCount=f_service.getCount(voM.getM_num());
+
+		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
+		map.put("startRow",pu.getStartRow());
+		map.put("endRow",pu.getEndRow());
+
+		List<FanVO> listF = f_service.getList(map);
+		FanPagingVO list1 = new FanPagingVO();
+		list1.setList(listF);
+
+		return list1;
+	}
+	
+	@RequestMapping(value = "/{id}/setting/pageNext", method = RequestMethod.GET)
+	@ResponseBody
+	public int fanPagingNext(@PathVariable(value = "id") String id, Model model,
+									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
 		MemberVO voM = m_sevice.getInfo(id);
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
 		
-		System.out.println(totalRowCount);
-		
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
-		map.put("startRow",pu.getStartRow());
-		map.put("endRow",pu.getEndRow());
-		
-		System.out.println(pu.getStartRow());
-		System.out.println(pu.getEndRow());
-		
-		List<FanVO> listF = f_service.getList(map);
+		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);
 
-		return 0;
+		int endPageNum = pu.getEndPageNum();
+
+		return endPageNum;
 	}
 	
-	@RequestMapping(value = "/{id}/setting/baseinfo_insert", method = RequestMethod.POST)
-	public String baseInfoInsert(@PathVariable(value = "id") String id, Model model,
-										String profile_msg, String profile_content, 
-										MultipartFile profileImg, HttpSession session) {
-		MemberVO vo = m_sevice.getInfo(id);
-		List<CategoryVO> clist = c_service.getList(vo.getM_num());
-		model.addAttribute("clist", clist);
-		model.addAttribute("id", id);
+	@RequestMapping(value = "/{id}/setting/pagePre", method = RequestMethod.GET)
+	@ResponseBody
+	public int fanPagingPre(@PathVariable(value = "id") String id, Model model,
+									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {		
+		MemberVO voM = m_sevice.getInfo(id);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
-		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
-		model.addAttribute("voMP", voMP);
-		
-		String path = session.getServletContext().getRealPath("/resources/upload");
-		String profile_orgfilename = profileImg.getOriginalFilename();
-		String profile_savefilename = UUID.randomUUID() + "_" + profile_orgfilename;
-		
-		try {
-			FileCopyUtils.copy(profileImg.getInputStream(), new FileOutputStream(path + "\\" + profile_savefilename));
-			System.out.println(path + "\\" + profile_savefilename + "프로필사진 업로드 성공");
-			
-			int n = mp_service.insert(new MemberProfileVO(0, profile_msg, profile_content, profile_orgfilename, profile_savefilename, vo.getM_num()));
-			if(n>0) {
-				model.addAttribute("result","기본정보 추가 완료");
-				model.addAttribute("profile_savefilename",profile_savefilename);
-			}else {
-				model.addAttribute("result","기본정보 추가 실패");
-			}	
-			return ".personnel.setting.result";
-		}catch(IOException ie) {
-			System.out.println(ie.getMessage());
-			model.addAttribute("result","에러로 인한 실패");
-			return ".personnel.setting.result";
-		}
+		map.put("bj_num", voM.getM_num());
+		int totalRowCount=f_service.getCount(voM.getM_num());
+
+		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
+
+		int endPageNum = pu.getEndPageNum();
+
+		return endPageNum;
 	}
 	
 	@RequestMapping(value = "/{id}/setting/baseinfo_update", method = RequestMethod.POST)
 	public String baseInfoUpdate(@PathVariable(value = "id") String id, Model model,
-										String profile_msg, String profile_content, 
+										String profile_msg, String profile_content, String profile_title,
 										MultipartFile profileImg, HttpSession session) {
+
 		MemberVO vo = m_sevice.getInfo(id);
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
@@ -161,7 +156,7 @@ public class InfoController {
 			}
 		}
 		
-		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, profile_content, profile_orgfilename, profile_savefilename, vo.getM_num()));
+		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, profile_content, profile_orgfilename, profile_savefilename, vo.getM_num(),profile_title));
 		if(n>0) {
 			model.addAttribute("result","기본정보 수정 성공");
 		}else {
@@ -173,11 +168,16 @@ public class InfoController {
 	
 	@RequestMapping(value = "/{id}/setting/blacklistI", method = RequestMethod.GET)
 	@ResponseBody
-	public int blacklistInsert(@PathVariable(value = "id") String id,int option) {
+	public int blacklistInsert(@PathVariable(value = "id") String id,String option) {
 		int bj_num = m_sevice.getInfo(id).getM_num();
-		BlacklistVO vo = new BlacklistVO(0, option, bj_num);
-		int n = b_service.insert(vo);		
-		return n;
+		int m_num = m_sevice.getInfo(option).getM_num();
+		BlacklistVO vo = new BlacklistVO(0, m_num, bj_num);
+		if(b_service.check(vo)==null) {
+			b_service.insert(vo);
+			return m_num;
+		}else {
+			return 0;
+		}		
 	}
 	
 	@RequestMapping(value = "/{id}/setting/blacklistD", method = RequestMethod.GET)
@@ -187,5 +187,21 @@ public class InfoController {
 		BlacklistVO vo = new BlacklistVO(0, option, bj_num);
 		int n = b_service.delete(vo);		
 		return n;
+	}
+	
+	@RequestMapping(value = "/{id}/setting/category_delete", method = RequestMethod.GET)
+	@ResponseBody
+	public int category_Delete(int option) {
+		int n = c_service.delete(new CategoryVO(option, null, 0, 0));		
+		return n;
+	}
+	
+	@RequestMapping(value = "/{id}/setting/category_insert", method = RequestMethod.GET)
+	@ResponseBody
+	public int category_Insert(@PathVariable(value = "id") String id,String keyword) {
+		int bj_num = m_sevice.getInfo(id).getM_num();
+		c_service.insert(new CategoryVO(0, keyword, 0 ,bj_num));
+		int category_num = c_service.getCategory_num(new CategoryVO(0, keyword, 0, bj_num));
+		return category_num;
 	}
 }
