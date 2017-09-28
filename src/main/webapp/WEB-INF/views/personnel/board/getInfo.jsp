@@ -40,6 +40,45 @@
 		
 			
 		});
+			/* $("#report").click(function(){
+				$.ajax({
+					url:"<c:url value='/report/insert'/>",
+					dataType:"json",
+					success:function(data){
+						
+					}				
+				});
+			}); */
+		 $("#report").click(function() {
+			var b_report = confirm("신고 하시겠습니까?");
+			if(b_report == true){
+				$.ajax({
+					url:"<c:url value='/report/insert?b_num=${b_num}&m_num=${sessionScope.id}'/>",
+					dataType:"json",
+					success:function(data){
+						if(data.result=="true"){
+							alert("이미 신고하셨습니다.");
+						}
+						else{
+							alert("신고 되었습니다.");
+						}
+					}		
+				});
+			}
+		});
+		$("#thumbs_up").click(function() {
+			$.ajax({
+				url:"<c:url value='/boardup/insert?b_num=${b_num}&m_num=${sessionScope.id}'/>",
+				dataType:"json",
+				success:function(data) {
+					if(data.result=="true") {
+						alert("이미 추천 하셨습니다.");
+					} else {
+						alert("추천 하였습니다.");
+					}
+				}
+			});
+		});
 	});
 </script>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
@@ -82,14 +121,15 @@
 				작성자 : ${vo.id }&nbsp;&nbsp;${vo.b_regdate }
 			</div>
 			<div id="etc">
-				${vo.b_hit }&nbsp;&nbsp;<a href=""><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</a>
+				${vo.b_hit }&nbsp;&nbsp;<a id="report"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</a>
 			</div>
 			<div id="b_content">
 				${vo.b_content}
 			</div>
 			<c:if test="${requestScope.id eq vo.id }">
 				<div id="edit">
-					<a href='<c:url value="/${sessionScope.id }/board/delete?b_num=${vo.b_num }&category_num=${category_num }"/>'>삭제</a>&nbsp;&nbsp;<a href=''>추천</a>
+					<a href='<c:url value="/${sessionScope.id }/board/delete?b_num=${vo.b_num }&category_num=${category_num }"/>'>
+					<i class="fa fa-times" aria-hidden="true"></i>삭제</a>&nbsp;&nbsp;<a id="thumbs_up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>추천 </a>
 				</div>
 			</c:if>
 			<!-- 댓글 영역 -->
@@ -102,7 +142,7 @@
 				<input type="reset" value="취소" id="br_reg">
 			</form>
 			<div id="replylist">
-				<h6>댓글 : ${pu.totalRowCount } 개</h6>
+				<h6>댓글 : ${pu.totalRowCount } </h6>
 				<c:forEach var="vo" items="${brlist }">
 					<p class="reply">${vo.id }&nbsp;&nbsp;${vo.br_content}&nbsp;&nbsp;${vo.br_regdate }&nbsp;&nbsp;
 					<c:choose>

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +14,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.util.page.PageUtil;
 import com.yourcast.app.service.BoardReplyService;
+import com.yourcast.app.service.BoardReportService;
 import com.yourcast.app.service.BoardService;
+import com.yourcast.app.service.BoardUpService;
 import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.vo.BoardReplyVO;
+import com.yourcast.app.vo.BoardReportVO;
+import com.yourcast.app.vo.BoardUpVO;
 import com.yourcast.app.vo.BoardVO;
 import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.MemberProfileVO;
@@ -28,13 +34,13 @@ import com.yourcast.app.vo.MemberVO;
 
 @Controller
 public class BoardController {
-	@Autowired
-	private BoardService b_service;
-	@Autowired
-	private CategoryService c_service;
+	@Autowired private BoardService b_service;
+	@Autowired private CategoryService c_service;
+	@Autowired private BoardReportService r_service;
 	@Autowired private MemberService m_service;
 	@Autowired private MemberProfileService mp_service;
 	@Autowired private BoardReplyService br_service;
+	@Autowired private BoardUpService bu_service;
 
 	@RequestMapping(value = "/{id}/board/insert", method = RequestMethod.GET)
 	public String insertForm(@PathVariable(value="id") String id, Model model) {
@@ -53,12 +59,12 @@ public class BoardController {
 		MemberVO vo1=m_service.getInfo(sid);
 		int m_num=vo1.getM_num();
 		MemberVO mvo=m_service.getInfo(id);
-		int bj_num=mvo.getM_num();//bjí˜ì´ì§€ ë²ˆí˜¸
+		int bj_num=mvo.getM_num();//bjÆäÀÌÁö ¹øÈ£
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
 		String notice=request.getParameter("notice");
 		String category=request.getParameter("cate_list");
-		//ê³µì§€ì‚¬í•­ ì—¬ë¶€
+		//°øÁö»çÇ× ¿©ºÎ
 		int category_num=Integer.parseInt(category);
 		int a=0;
 		if(notice==null) {
@@ -66,23 +72,23 @@ public class BoardController {
 		}else {
 			a=1;
 		}
-		//ì¶”ê°€ ì‘ì—…
+		//Ãß°¡ ÀÛ¾÷
 		BoardVO bvo=new BoardVO(0,title,content,null, 0, a, 0, m_num, bj_num, category_num);
 		b_service.insert(bvo);
 	
-		//ì¹´í…Œê³ ë¦¬ ë¦¬ìŠ¤íŠ¸ ì§€ì •
+		//Ä«Å×°í¸® ¸®½ºÆ® ÁöÁ¤
 		CategoryVO vo = c_service.getInfo(category_num);
 		HashMap<String, Integer> map=new HashMap<String, Integer>();
 		map.put("m_num", vo.getM_num());
 		map.put("category_num",category_num);
 		
-		//í˜ì´ì§• ì²˜ë¦¬
+		//ÆäÀÌÂ¡ Ã³¸®
 		int totalRowCount=b_service.getCount(map);
 		PageUtil pu=new PageUtil(pageNum,15,5,totalRowCount);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		
-		//getListì²˜ë¦¬
+		//getListÃ³¸®
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
 		
@@ -102,18 +108,18 @@ public class BoardController {
 		b_service.delete(b_num);
 		CategoryVO vo = c_service.getInfo(category_num);
 		
-		//ì¹´í…Œê³ ë¦¬ ë¦¬ìŠ¤íŠ¸ ì§€ì •
+		//Ä«Å×°í¸® ¸®½ºÆ® ÁöÁ¤
 		HashMap<String, Integer> map=new HashMap<String, Integer>();
 		map.put("m_num", vo.getM_num());
 		map.put("category_num",category_num);
 				
-		//í˜ì´ì§• ì²˜ë¦¬
+		//ÆäÀÌÂ¡ Ã³¸®
 		int totalRowCount=b_service.getCount(map);
 		PageUtil pu=new PageUtil(pageNum,15,5,totalRowCount);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 				
-		//getListì²˜ë¦¬
+		//getListÃ³¸®
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
 				
@@ -155,7 +161,7 @@ public class BoardController {
 		MemberVO vo1=m_service.getInfo(sid);
 		int m_num=vo1.getM_num();
 		MemberVO mvo=m_service.getInfo(id);
-		int bj_num=mvo.getM_num();//bjí˜ì´ì§€ ë²ˆí˜¸
+		int bj_num=mvo.getM_num();//bjÆäÀÌÁö ¹øÈ£
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
 		String notice=request.getParameter("notice");
@@ -164,7 +170,7 @@ public class BoardController {
 		System.out.println(title);
 		System.out.println(content);
 		
-		//ê³µì§€ì‚¬í•­ ì—¬ë¶€
+		//°øÁö»çÇ× ¿©ºÎ
 		int category_num=Integer.parseInt(category);
 		int a=0;
 		if(notice==null) {
@@ -172,24 +178,24 @@ public class BoardController {
 		}else {
 			a=1;
 		}
-		//ìˆ˜ì • ì‘ì—…
+		//¼öÁ¤ ÀÛ¾÷
 		BoardVO bvo=new BoardVO(bnum,title,content,null, 0, a, 0, m_num, bj_num, category_num);
 		b_service.update(bvo);
 		
 		
-		//ì¹´í…Œê³ ë¦¬ ë¦¬ìŠ¤íŠ¸ ì§€ì •
+		//Ä«Å×°í¸® ¸®½ºÆ® ÁöÁ¤
 		CategoryVO vo = c_service.getInfo(category_num);
 		HashMap<String, Integer> map=new HashMap<String, Integer>();
 		map.put("m_num", vo.getM_num());
 		map.put("category_num",category_num);
 				
-		//í˜ì´ì§• ì²˜ë¦¬
+		//ÆäÀÌÂ¡ Ã³¸®
 		int totalRowCount=b_service.getCount(map);
 		PageUtil pu=new PageUtil(pageNum,15,5,totalRowCount);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 				
-		//getListì²˜ë¦¬
+		//getListÃ³¸®
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
 		model.addAttribute("id", id);
@@ -208,16 +214,16 @@ public class BoardController {
 	public String getInfo(@RequestParam(value="pageNum",defaultValue="1") int pageNum,@PathVariable(value="id") String id,int b_num,int category_num, Model model) {
 		BoardVO bvo=b_service.getInfo(b_num);
 		CategoryVO cvo = c_service.getInfo(category_num);
-		List<CategoryVO> clist = c_service.getList(cvo.getM_num());//ì¹´í…Œê³ ë¦¬ ëª©ë¡
+		List<CategoryVO> clist = c_service.getList(cvo.getM_num());//Ä«Å×°í¸® ¸ñ·Ï
 		
-		////////////ëŒ“ê¸€ 5ê°œë§Œ ë¶ˆëŸ¬ì˜¤ê¸° ì‘ì—…/////////////
+		////////////´ñ±Û 5°³¸¸ ºÒ·¯¿À±â ÀÛ¾÷/////////////
 		HashMap<String, Integer> map=new HashMap<String, Integer>();
 		map.put("b_num", b_num);
 		int totalRowCount=br_service.getCount(b_num);
 		PageUtil pu=new PageUtil(pageNum, 5, 1, totalRowCount);
 		map.put("startRow", 1);
 		map.put("endRow", 5);
-		List<BoardReplyVO> brlist=br_service.getList(map);//ì²˜ìŒ ëŒ“ê¸€ ë‹¤ì„¯ê°œë§Œ ë¶ˆëŸ¬ì˜¤ê¸°
+		List<BoardReplyVO> brlist=br_service.getList(map);//Ã³À½ ´ñ±Û ´Ù¼¸°³¸¸ ºÒ·¯¿À±â
 		///////////////////////////////////////////
 		
 		model.addAttribute("id", id);
@@ -243,7 +249,7 @@ public class BoardController {
 		System.out.println("m_num:" +vo.getM_num());
 		System.out.println("cate:" +category_num);
 		
-		//í˜ì´ì§• ì²˜ë¦¬
+		//ÆäÀÌÂ¡ Ã³¸®
 		int totalRowCount=b_service.getCount(map);
 		
 		System.out.println("totalRowCount:" +totalRowCount);
@@ -252,7 +258,7 @@ public class BoardController {
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		
-		//getListì²˜ë¦¬
+		//getListÃ³¸®
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
 		model.addAttribute("id", id);
@@ -265,5 +271,46 @@ public class BoardController {
 		model.addAttribute("voMP", voMP);
 		
 		return ".personnel.board.list";
+	}
+	//½Å°í
+	@RequestMapping(value="/report/insert",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String insert(int b_num,String m_num) {
+		MemberVO mvo= m_service.getInfo(m_num);
+		//int mnum=Integer.parseInt(m_num);
+		BoardReportVO vo=new BoardReportVO(b_num,mvo.getM_num());
+		BoardReportVO br1= r_service.isCheck(vo);
+		
+		JSONObject json = new JSONObject();
+			
+		if(br1!=null) { // ½Å°í¸¦ ÇÑ °æ¿ì 
+			//json.put("insert",true); 
+			json.put("result", "true");
+		}else { // ½Å°í¸¦ ¾ÈÇÑ °æ¿ì
+			//json.put("insert", false);
+			r_service.insert(vo);
+			json.put("result", "false");
+		}
+		return json.toString();
+	}
+	@RequestMapping(value="/boardup/insert",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String up_insert(String m_num,int b_num) {
+		MemberVO mvo= m_service.getInfo(m_num);
+		BoardUpVO vo = new BoardUpVO(mvo.getM_num(),b_num);
+		BoardUpVO br1 =  bu_service.isCheck(vo);
+		int bucount= bu_service.getCount(b_num);
+		
+		JSONObject json = new JSONObject();
+		
+		if(br1!=null) { // ÃßÃµÀ» ÇÑ °æ¿ì 
+			json.put("result", "true");
+			//json.put("bucount", bucount);
+		}else { // ÃßÃµÀ» ¾ÈÇÑ °æ¿ì
+			bu_service.insert(vo);
+			json.put("result", "false");
+			//json.put("bucount", bucount);
+		}
+		return json.toString();
 	}
 }
