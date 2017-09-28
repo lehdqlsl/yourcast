@@ -5,7 +5,34 @@
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script>
 	$(document).ready(function(){
+		//글 삭제 하기
+		$("#b_delete").click(function(){
+			var flag=confirm("정말 삭제하시겠습니까?");
+			if(flag){
+				location.href='<c:url value="/${sessionScope.id }/board/delete?b_num=${vo.b_num }&category_num=${category_num }"/>';
+			}
+		});
+		//글 수정 하기
+		$("#b_update").click(function(){
+			var flag=confirm("수정 페이지로 이동합니다.");
+			if(flag){
+				location.href='<c:url value="/${sessionScope.id }/board/update?b_num=${vo.b_num }&category_num=${category_num }"/>';
+			}
+		});
 		
+
+		//댓글 삭제 하기
+		$(".br_delete").on('click',function(event){
+			var br_num=$(this).next().text();
+			var b_num=$(this).next().next().text();
+			var category_num=$(this).next().next().next().text();
+			var flag=confirm("정말 삭제하시겠습니까?");
+			if(flag){
+				alert("삭제되었습니다.");
+				location.href='<c:url value="/${sessionScope.id }/boardreply/delete?br_num='+br_num+'&b_num='+b_num+'&category_num='+category_num+'"/>';
+			}
+		});
+		//댓글 목록 불러오기
 		$("#more").click(function(){
 			var replycount=$(".reply").length;
 			var rc=replycount/5+1;
@@ -121,17 +148,26 @@
 				작성자 : ${vo.id }&nbsp;&nbsp;${vo.b_regdate }
 			</div>
 			<div id="etc">
-				${vo.b_hit }&nbsp;&nbsp;<a id="report"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</a>
+				${vo.b_hit }&nbsp;&nbsp;
 			</div>
 			<div id="b_content">
 				${vo.b_content}
 			</div>
-			<c:if test="${requestScope.id eq vo.id }">
-				<div id="edit">
-					<a href='<c:url value="/${sessionScope.id }/board/delete?b_num=${vo.b_num }&category_num=${category_num }"/>'>
-					<i class="fa fa-times" aria-hidden="true"></i>삭제</a>&nbsp;&nbsp;<a id="thumbs_up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>추천 </a>
-				</div>
-			</c:if>
+
+			<div id="edit">
+				<c:choose>
+					<c:when test="${sessionScope.id eq vo.id }">
+						<button class="w3-button w3-black w3-round-large" id="b_delete">삭제</button>
+						<button class="w3-button w3-black w3-round-large" id="b_update">수정</button>
+					</c:when>
+					<c:otherwise>
+						<a id="report"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</a>
+						<a id="thumbs_up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>추천</a>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<br>
+
 			<!-- 댓글 영역 -->
 			<form method="post" action='<c:url value="/${sessionScope.id }/boardreply/insert"/>'>
 				<input type="hidden" value="${vo.b_num }" name="b_num">
@@ -147,7 +183,10 @@
 					<p class="reply">${vo.id }&nbsp;&nbsp;${vo.br_content}&nbsp;&nbsp;${vo.br_regdate }&nbsp;&nbsp;
 					<c:choose>
 						<c:when test="${sessionScope.id eq vo.id }">
-							<a href='<c:url value="/${sessionScope.id }/boardreply/delete?br_num=${vo.br_num }&b_num=${vo.b_num }&category_num=${category_num }"/>'>삭제</a>&nbsp;&nbsp;<a href="">추천</a>
+							<button class="w3-button w3-black w3-round-large br_delete"><i class="fa fa-trash-o" aria-hidden="true"></i>삭제</button>
+							<span style="visibility: hidden">${vo.br_num }</span>
+							<span style="visibility: hidden">${vo.b_num }</span>
+							<span style="visibility: hidden">${category_num }</span>
 						</c:when>
 						<c:otherwise>
 							<a href="">신고</a>&nbsp;&nbsp;<a href="">추천</a>
@@ -156,8 +195,6 @@
 					</p>
 				</c:forEach>
 			</div>
-			
-			
 			<input type="button" value="더보기" id="more">
 			
 		</div>
@@ -218,8 +255,5 @@
 			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
 				title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a>
 		</div>
-
-
-
 	</div>
 </body>

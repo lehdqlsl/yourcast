@@ -24,7 +24,7 @@ public class BoardService {
 	public BoardVO getInfo(int num) {
 		return dao.getInfo(num);
 	}
-	public List<BoardVO> getList(HashMap<String, Integer> map){
+	public List<BoardVO> getList(HashMap<String, Object> map){
 		return dao.getList(map);
 	}
 	public int delete(int num) {
@@ -33,7 +33,7 @@ public class BoardService {
 	public int hitUpdate(int b_num) {
 		return dao.hitUpdate(b_num);
 	}
-	public int getCount(HashMap<String, Integer> map) {
+	public int getCount(HashMap<String, Object> map) {
 		return dao.getCount(map);
 	}
 }

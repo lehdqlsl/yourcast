@@ -1,5 +1,6 @@
 package com.yourcast.app;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,6 +35,7 @@ import com.yourcast.app.vo.MemberVO;
 
 @Controller
 public class BoardController {
+
 	@Autowired private BoardService b_service;
 	@Autowired private CategoryService c_service;
 	@Autowired private BoardReportService r_service;
@@ -43,159 +45,164 @@ public class BoardController {
 	@Autowired private BoardUpService bu_service;
 
 	@RequestMapping(value = "/{id}/board/insert", method = RequestMethod.GET)
-	public String insertForm(@PathVariable(value="id") String id, Model model) {
-		MemberVO vo=m_service.getInfo(id);
-		List<CategoryVO> clist=c_service.getList(vo.getM_num());
+	public String insertForm(@PathVariable(value = "id") String id, Model model) {
+		MemberVO vo = m_service.getInfo(id);
+		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		model.addAttribute("clist", clist);
-		model.addAttribute("id",id);
+		model.addAttribute("id", id);
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
-		model.addAttribute("voMP", voMP);		
+		model.addAttribute("voMP", voMP);
 		return ".personnel.board.insert";
 	}
-	//insert : post
-	@RequestMapping(value="/{id}/board/insert",method=RequestMethod.POST)
-	public String insert(@RequestParam(value="pageNum",defaultValue="1") int pageNum,@PathVariable(value="id") String id,HttpServletRequest request, HttpSession session,Model model) {
-		String sid=request.getParameter("sid");
-		MemberVO vo1=m_service.getInfo(sid);
-		int m_num=vo1.getM_num();
-		MemberVO mvo=m_service.getInfo(id);
-		int bj_num=mvo.getM_num();//bjÆäÀÌÁö ¹øÈ£
-		String title=request.getParameter("title");
-		String content=request.getParameter("content");
-		String notice=request.getParameter("notice");
-		String category=request.getParameter("cate_list");
-		//°øÁö»çÇ× ¿©ºÎ
-		int category_num=Integer.parseInt(category);
-		int a=0;
-		if(notice==null) {
-			a=0;
-		}else {
-			a=1;
+	// insert : post
+	@RequestMapping(value = "/{id}/board/insert", method = RequestMethod.POST)
+	public String insert(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			@PathVariable(value = "id") String id, HttpServletRequest request, HttpSession session, Model model) {
+		String sid = request.getParameter("sid");
+		MemberVO vo1 = m_service.getInfo(sid);
+		int m_num = vo1.getM_num();
+		MemberVO mvo = m_service.getInfo(id);
+		int bj_num = mvo.getM_num();// bjí˜ì´ì§€ ë²ˆí˜¸
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String notice = request.getParameter("notice");
+		String category = request.getParameter("cate_list");
+		// ê³µì§€ì‚¬í•­ ì—¬ë¶€
+		int category_num = Integer.parseInt(category);
+		int a = 0;
+		if (notice == null) {
+			a = 0;
+		} else {
+			a = 1;
 		}
-		//Ãß°¡ ÀÛ¾÷
-		BoardVO bvo=new BoardVO(0,title,content,null, 0, a, 0, m_num, bj_num, category_num);
+		// ì¶”ê°€ ì‘ì—…
+		BoardVO bvo = new BoardVO(0, title, content, null, 0, a, 0, m_num, bj_num, category_num);
 		b_service.insert(bvo);
-	
-		//Ä«Å×°í¸® ¸®½ºÆ® ÁöÁ¤
+
+		// ì¹´í…Œê³ ë¦¬ ë¦¬ìŠ¤íŠ¸ ì§€ì •
 		CategoryVO vo = c_service.getInfo(category_num);
-		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("m_num", vo.getM_num());
-		map.put("category_num",category_num);
-		
-		//ÆäÀÌÂ¡ Ã³¸®
-		int totalRowCount=b_service.getCount(map);
-		PageUtil pu=new PageUtil(pageNum,15,5,totalRowCount);
+		map.put("category_num", category_num);
+
+		// í˜ì´ì§• ì²˜ë¦¬
+		int totalRowCount = b_service.getCount(map);
+		PageUtil pu = new PageUtil(pageNum, 15, 5, totalRowCount);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-		
-		//getListÃ³¸®
+
+		// getListì²˜ë¦¬
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
-		
+
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
 		model.addAttribute("voMP", voMP);
-		
+
 		model.addAttribute("id", id);
 		model.addAttribute("pu", pu);
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("clist", clist);
 		model.addAttribute("blist", blist);
-		
+
 		return ".personnel.board.list";
 	}
-	@RequestMapping(value="/{id}/board/delete")
-	public String delete(@RequestParam(value="pageNum",defaultValue="1") int pageNum,@PathVariable(value="id") String id,int b_num,int category_num,Model model) {
+
+	@RequestMapping(value = "/{id}/board/delete")
+	public String delete(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			@PathVariable(value = "id") String id, int b_num, int category_num, Model model) {
 		b_service.delete(b_num);
 		CategoryVO vo = c_service.getInfo(category_num);
-		
-		//Ä«Å×°í¸® ¸®½ºÆ® ÁöÁ¤
-		HashMap<String, Integer> map=new HashMap<String, Integer>();
+
+		// ì¹´í…Œê³ ë¦¬ ë¦¬ìŠ¤íŠ¸ ì§€ì •
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("m_num", vo.getM_num());
-		map.put("category_num",category_num);
-				
-		//ÆäÀÌÂ¡ Ã³¸®
-		int totalRowCount=b_service.getCount(map);
-		PageUtil pu=new PageUtil(pageNum,15,5,totalRowCount);
+		map.put("category_num", category_num);
+
+		// í˜ì´ì§• ì²˜ë¦¬
+		int totalRowCount = b_service.getCount(map);
+		PageUtil pu = new PageUtil(pageNum, 15, 5, totalRowCount);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-				
-		//getListÃ³¸®
+
+		// getListì²˜ë¦¬
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
-				
+
 		model.addAttribute("id", id);
 		model.addAttribute("pu", pu);
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("clist", clist);
 		model.addAttribute("blist", blist);
-		
+
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
 		model.addAttribute("voMP", voMP);
-		
+
 		return ".personnel.board.list";
 	}
-	//update
-	@RequestMapping(value="/{id}/board/update",method=RequestMethod.GET)
-	public String updateForm(@PathVariable(value="id") String id, int b_num, int category_num,Model model) {
-		BoardVO bvo=b_service.getInfo(b_num);
+
+	// update
+	@RequestMapping(value = "/{id}/board/update", method = RequestMethod.GET)
+	public String updateForm(@PathVariable(value = "id") String id, int b_num, int category_num, Model model) {
+		BoardVO bvo = b_service.getInfo(b_num);
 
 		CategoryVO cvo = c_service.getInfo(category_num);
 		List<CategoryVO> clist = c_service.getList(cvo.getM_num());
-		
+
 		model.addAttribute("id", id);
 		model.addAttribute("clist", clist);
-		model.addAttribute("vo",bvo);
-		
+		model.addAttribute("vo", bvo);
+
 		MemberProfileVO voMP = mp_service.getInfo(cvo.getM_num());
 		model.addAttribute("voMP", voMP);
-		
+
 		return ".personnel.board.update";
 	}
-	
-	//updateOk
-	@RequestMapping(value="/{id}/board/update",method=RequestMethod.POST)
-	public String update(@RequestParam(value="pageNum",defaultValue="1") int pageNum,@PathVariable(value="id") String id,HttpServletRequest request, HttpSession session,Model model) {
-		String b_num=request.getParameter("b_num");
-		int bnum=Integer.parseInt(b_num);
-		String sid=request.getParameter("sid");
-		MemberVO vo1=m_service.getInfo(sid);
-		int m_num=vo1.getM_num();
-		MemberVO mvo=m_service.getInfo(id);
-		int bj_num=mvo.getM_num();//bjÆäÀÌÁö ¹øÈ£
-		String title=request.getParameter("title");
-		String content=request.getParameter("content");
-		String notice=request.getParameter("notice");
-		String category=request.getParameter("cate_list");
-		
+
+	// updateOk
+	@RequestMapping(value = "/{id}/board/update", method = RequestMethod.POST)
+	public String update(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			@PathVariable(value = "id") String id, HttpServletRequest request, HttpSession session, Model model) {
+		String b_num = request.getParameter("b_num");
+		int bnum = Integer.parseInt(b_num);
+		String sid = request.getParameter("sid");
+		MemberVO vo1 = m_service.getInfo(sid);
+		int m_num = vo1.getM_num();
+		MemberVO mvo = m_service.getInfo(id);
+		int bj_num = mvo.getM_num();// bjí˜ì´ì§€ ë²ˆí˜¸
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String notice = request.getParameter("notice");
+		String category = request.getParameter("cate_list");
+
 		System.out.println(title);
 		System.out.println(content);
-		
-		//°øÁö»çÇ× ¿©ºÎ
-		int category_num=Integer.parseInt(category);
-		int a=0;
-		if(notice==null) {
-			a=0;
-		}else {
-			a=1;
+
+		// ê³µì§€ì‚¬í•­ ì—¬ë¶€
+		int category_num = Integer.parseInt(category);
+		int a = 0;
+		if (notice == null) {
+			a = 0;
+		} else {
+			a = 1;
 		}
-		//¼öÁ¤ ÀÛ¾÷
-		BoardVO bvo=new BoardVO(bnum,title,content,null, 0, a, 0, m_num, bj_num, category_num);
+		// ìˆ˜ì • ì‘ì—…
+		BoardVO bvo = new BoardVO(bnum, title, content, null, 0, a, 0, m_num, bj_num, category_num);
 		b_service.update(bvo);
-		
-		
-		//Ä«Å×°í¸® ¸®½ºÆ® ÁöÁ¤
+
+		// ì¹´í…Œê³ ë¦¬ ë¦¬ìŠ¤íŠ¸ ì§€ì •
+
 		CategoryVO vo = c_service.getInfo(category_num);
-		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("m_num", vo.getM_num());
-		map.put("category_num",category_num);
-				
-		//ÆäÀÌÂ¡ Ã³¸®
-		int totalRowCount=b_service.getCount(map);
-		PageUtil pu=new PageUtil(pageNum,15,5,totalRowCount);
+		map.put("category_num", category_num);
+
+		// í˜ì´ì§• ì²˜ë¦¬
+		int totalRowCount = b_service.getCount(map);
+		PageUtil pu = new PageUtil(pageNum, 15, 5, totalRowCount);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-				
-		//getListÃ³¸®
+
+		// getListì²˜ë¦¬
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
 		model.addAttribute("id", id);
@@ -203,53 +210,60 @@ public class BoardController {
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("clist", clist);
 		model.addAttribute("blist", blist);
-		
+
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
 		model.addAttribute("voMP", voMP);
-		
+
 		return ".personnel.board.list";
 	}
-	//getInfo
-	@RequestMapping(value="/{id}/board/getInfo",method=RequestMethod.GET)
-	public String getInfo(@RequestParam(value="pageNum",defaultValue="1") int pageNum,@PathVariable(value="id") String id,int b_num,int category_num, Model model) {
-		BoardVO bvo=b_service.getInfo(b_num);
+
+	// getInfo
+	@RequestMapping(value = "/{id}/board/getInfo", method = RequestMethod.GET)
+	public String getInfo(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			@PathVariable(value = "id") String id, int b_num, int category_num, Model model) {
+		BoardVO bvo = b_service.getInfo(b_num);
 		CategoryVO cvo = c_service.getInfo(category_num);
-		List<CategoryVO> clist = c_service.getList(cvo.getM_num());//Ä«Å×°í¸® ¸ñ·Ï
-		
-		////////////´ñ±Û 5°³¸¸ ºÒ·¯¿À±â ÀÛ¾÷/////////////
-		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		List<CategoryVO> clist = c_service.getList(cvo.getM_num());// ì¹´í…Œê³ ë¦¬ ëª©ë¡
+
+		//////////// ëŒ“ê¸€ 5ê°œë§Œ ë¶ˆëŸ¬ì˜¤ê¸° ì‘ì—…/////////////
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("b_num", b_num);
-		int totalRowCount=br_service.getCount(b_num);
-		PageUtil pu=new PageUtil(pageNum, 5, 1, totalRowCount);
+		int totalRowCount = br_service.getCount(b_num);
+		PageUtil pu = new PageUtil(pageNum, 5, 1, totalRowCount);
 		map.put("startRow", 1);
 		map.put("endRow", 5);
-		List<BoardReplyVO> brlist=br_service.getList(map);//Ã³À½ ´ñ±Û ´Ù¼¸°³¸¸ ºÒ·¯¿À±â
+
+		List<BoardReplyVO> brlist = br_service.getList(map);// ì²˜ìŒ ëŒ“ê¸€ ë‹¤ì„¯ê°œë§Œ ë¶ˆëŸ¬ì˜¤ê¸°
+
 		///////////////////////////////////////////
-		
+
 		model.addAttribute("id", id);
-		model.addAttribute("pu",pu);
-		model.addAttribute("b_num",b_num);
-		model.addAttribute("category_num",category_num);
+		model.addAttribute("pu", pu);
+		model.addAttribute("b_num", b_num);
+		model.addAttribute("category_num", category_num);
 		model.addAttribute("clist", clist);
 		model.addAttribute("brlist", brlist);
-		model.addAttribute("vo",bvo);
-		
+		model.addAttribute("vo", bvo);
+
 		MemberProfileVO voMP = mp_service.getInfo(cvo.getM_num());
 		model.addAttribute("voMP", voMP);
-		
+
 		return ".personnel.board.getInfo";
 	}
-	//getList
+
+	// getList
 	@RequestMapping(value = "/{id}/board/list", method = RequestMethod.GET)
-	public String list(@RequestParam(value="pageNum",defaultValue="1") int pageNum,@PathVariable(value="id") String id,int category_num, Model model) {
-		CategoryVO vo = c_service.getInfo(category_num);
-		HashMap<String, Integer> map=new HashMap<String, Integer>();
-		map.put("m_num", vo.getM_num());
-		map.put("category_num",category_num);
-		System.out.println("m_num:" +vo.getM_num());
-		System.out.println("cate:" +category_num);
+	public String list(@RequestParam(value="pageNum",defaultValue="1") int pageNum,@PathVariable(value="id") String id, Model model,HttpServletRequest request) {
+		MemberVO mvo = m_service.getInfo(id);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("bj_num", mvo.getM_num());
+		String category_num = request.getParameter("category_num");
+		if(category_num != null) {
+			map.put("category_num",Integer.parseInt(category_num));	
+		}else {
+			category_num = null;
+		}
 		
-		//ÆäÀÌÂ¡ Ã³¸®
 		int totalRowCount=b_service.getCount(map);
 		
 		System.out.println("totalRowCount:" +totalRowCount);
@@ -257,22 +271,35 @@ public class BoardController {
 		PageUtil pu=new PageUtil(pageNum,15,5,totalRowCount);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-		
-		//getListÃ³¸®
-		List<CategoryVO> clist = c_service.getList(vo.getM_num());
+
+		//getListì²˜ë¦¬
+		List<CategoryVO> clist = c_service.getList(mvo.getM_num());
 		List<BoardVO> blist = b_service.getList(map);
+		//List<BoardReplyVO> brcountlist=new ArrayList<BoardReplyVO>();
+		
+		///ê¸€ì— í•´ë‹¹í•˜ëŠ” ëŒ“ê¸€ ê°œìˆ˜ ê°€ì ¸ì˜¤ê¸°///
+		
+		int brcnt=0;
+		for(BoardVO bvo:blist) {
+			System.out.println("ê¸€ë²ˆí˜¸ : "+bvo.getB_num());
+			System.out.println("ëŒ“ê¸€ ê°œìˆ˜ : "+br_service.getCount(bvo.getB_num()));
+			brcnt=br_service.getCount(bvo.getB_num());
+			bvo.setBrcnt(brcnt);
+		}
+		
+		/////////////////////////////
 		model.addAttribute("id", id);
 		model.addAttribute("pu", pu);
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("clist", clist);
 		model.addAttribute("blist", blist);
 		
-		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
+		MemberProfileVO voMP = mp_service.getInfo(mvo.getM_num());
 		model.addAttribute("voMP", voMP);
 		
 		return ".personnel.board.list";
 	}
-	//½Å°í
+	//ï¿½Å°ï¿½
 	@RequestMapping(value="/report/insert",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String insert(int b_num,String m_num) {
@@ -283,10 +310,10 @@ public class BoardController {
 		
 		JSONObject json = new JSONObject();
 			
-		if(br1!=null) { // ½Å°í¸¦ ÇÑ °æ¿ì 
+		if(br1!=null) { // ï¿½Å°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 			//json.put("insert",true); 
 			json.put("result", "true");
-		}else { // ½Å°í¸¦ ¾ÈÇÑ °æ¿ì
+		}else { // ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			//json.put("insert", false);
 			r_service.insert(vo);
 			json.put("result", "false");
@@ -303,10 +330,10 @@ public class BoardController {
 		
 		JSONObject json = new JSONObject();
 		
-		if(br1!=null) { // ÃßÃµÀ» ÇÑ °æ¿ì 
+		if(br1!=null) { // ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 			json.put("result", "true");
 			//json.put("bucount", bucount);
-		}else { // ÃßÃµÀ» ¾ÈÇÑ °æ¿ì
+		}else { // ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			bu_service.insert(vo);
 			json.put("result", "false");
 			//json.put("bucount", bucount);

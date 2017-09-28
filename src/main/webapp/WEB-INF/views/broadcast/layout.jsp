@@ -12,7 +12,7 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/jwplayer/jwplayer.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/jwplayer/jwplayer.js?ver=1.1'/>"></script>
 </head>
 <!-- 메인페이지 레이아웃 -->
 <body id="body">
@@ -23,10 +23,6 @@
 
 		<div id="main">
 			<tiles:insertAttribute name="content" />
-		</div>
-
-		<div id="footer">
-			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>
 </body>
