@@ -2,16 +2,16 @@ package com.yourcast.app.vo;
 
 public class ProfitVO {
 	private int profit_num;
-	private int profit_ea;
+	private int profit_money;
 	private String profit_regString;
 	private int m_num;
 	
 	public ProfitVO() {}
 	
-	public ProfitVO(int profit_num, int profit_ea, String profit_regString, int m_num) {
+	public ProfitVO(int profit_num, int profit_money, String profit_regString, int m_num) {
 		super();
 		this.profit_num = profit_num;
-		this.profit_ea = profit_ea;
+		this.profit_money = profit_money;
 		this.profit_regString = profit_regString;
 		this.m_num = m_num;
 	}
@@ -21,11 +21,11 @@ public class ProfitVO {
 	public void setProfit_num(int profit_num) {
 		this.profit_num = profit_num;
 	}
-	public int getProfit_ea() {
-		return profit_ea;
+	public int getProfit_money() {
+		return profit_money;
 	}
-	public void setProfit_ea(int profit_ea) {
-		this.profit_ea = profit_ea;
+	public void setProfit_money(int profit_money) {
+		this.profit_money = profit_money;
 	}
 	public String getProfit_regString() {
 		return profit_regString;

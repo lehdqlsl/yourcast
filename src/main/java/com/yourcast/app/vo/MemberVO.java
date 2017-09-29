@@ -28,6 +28,17 @@ public class MemberVO {
 		this.gender_num = gender_num;
 		this.grade_num = grade_num;
 	}
+	
+	
+
+	public MemberVO(int m_num, int money, int star_candy) {
+		super();
+		this.m_num = m_num;
+		this.money = money;
+		this.star_candy = star_candy;
+	}
+
+
 
 	public MemberVO() {
 		// TODO Auto-generated constructor stub

@@ -213,7 +213,7 @@
 					});
 					$("#next a").on('click',function(){
 						var pageNum = parseInt($(".base").filter(':last').text()) + 1;
-						if(pageNum%5!=0){
+						if((pageNum-1)%5!=0){
 							return false;
 						}
 						$("tbody").empty();

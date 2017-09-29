@@ -128,7 +128,7 @@
 		<!-- 페이징 -->
 		<div>
 		<c:choose>
-			<c:when test="${pu.startPageNum>1 }">
+			<c:when test="${pu.pageNum>1 }">
 				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${1 }'/>">[처음으로]</a>
 			</c:when>
 			<c:otherwise>

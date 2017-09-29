@@ -2,7 +2,7 @@ package com.yourcast.app.vo;
 
 public class BuyVO {
 	private int buy_num;
-	private String buy_regString;
+	private String buy_regdate;
 	private int buy_ea;
 	private int m_num;
 	
@@ -10,10 +10,10 @@ public class BuyVO {
 		
 	}
 
-	public BuyVO(int buy_num, String buy_regString, int buy_ea, int m_num) {
+	public BuyVO(int buy_num, String buy_regdate, int buy_ea, int m_num) {
 		super();
 		this.buy_num = buy_num;
-		this.buy_regString = buy_regString;
+		this.buy_regdate = buy_regdate;
 		this.buy_ea = buy_ea;
 		this.m_num = m_num;
 	}
@@ -26,12 +26,12 @@ public class BuyVO {
 		this.buy_num = buy_num;
 	}
 
-	public String getBuy_regString() {
-		return buy_regString;
+	public String getBuy_regdate() {
+		return buy_regdate;
 	}
 
-	public void setBuy_regString(String buy_regString) {
-		this.buy_regString = buy_regString;
+	public void setBuy_regdate(String buy_regdate) {
+		this.buy_regdate = buy_regdate;
 	}
 
 	public int getBuy_ea() {

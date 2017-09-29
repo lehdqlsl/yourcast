@@ -1,5 +1,6 @@
 package com.yourcast.app.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ public class StarUseService {
 		return dao.insert(vo);
 	}
 	
-	public List<StarUseVO> getSendList(int m_num){
-		return dao.getSendList(m_num);
+	public List<StarUseVO> getSendList(HashMap<String, Object> map){
+		return dao.getSendList(map);
 	}
 	
-	public List<StarUseVO> getRecvList(int bj_num){
-		return dao.getRecvList(bj_num);
+	public List<StarUseVO> getRecvList(HashMap<String, Object> map){
+		return dao.getRecvList(map);
 	}
 	
 	public int getSendCount(int m_num) {
@@ -34,5 +35,13 @@ public class StarUseService {
 	
 	public int getRecvCount(int bj_num) {
 		return dao.getRecvCount(bj_num);
+	}
+	
+	public int getSendEa(int m_num) {
+		return dao.getSendEa(m_num);
+	}
+	
+	public int getRecvEa(int bj_num) {
+		return dao.getRecvEa(bj_num);
 	}
 }
