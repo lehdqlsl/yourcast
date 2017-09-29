@@ -9,7 +9,7 @@ public class BoardReplyVO {
 	private int b_num;
 	private int m_num;
 	private String id;
-	
+	private int brucnt;
 	public BoardReplyVO() {
 		
 	}
@@ -32,6 +32,25 @@ public class BoardReplyVO {
 		this.b_num = b_num;
 		this.m_num = m_num;
 		this.id=id;
+	}
+	public BoardReplyVO(int br_num, String br_content, String br_regdate, int br_delete, int b_num, int m_num,String id,int brucnt) {
+		//super();
+		this.br_num = br_num;
+		this.br_content = br_content;
+		this.br_regdate = br_regdate;
+		this.br_delete = br_delete;
+		this.b_num = b_num;
+		this.m_num = m_num;
+		this.id=id;
+		this.brucnt=brucnt;
+	}
+
+	public int getBrucnt() {
+		return brucnt;
+	}
+
+	public void setBrucnt(int brucnt) {
+		this.brucnt = brucnt;
 	}
 
 	public int getBr_num() {

@@ -21,4 +21,10 @@ public class BoardReplyUpService {
 	public int getCount(int br_num) {
 		return dao.getCount(br_num);
 	}
+	public BoardReplyUpVO isCheck(BoardReplyUpVO vo) {
+		return dao.isCheck(vo);
+	}
+	public int checkUp(int br_num) {
+		return dao.checkUp(br_num);
+	}
 }

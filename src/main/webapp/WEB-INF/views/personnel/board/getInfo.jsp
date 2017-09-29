@@ -47,35 +47,64 @@
 				dataType:"xml",
 				success:function(data){
 					//alert(data);
-					$(data).find("list").each(function(){
+						$(data).find("list").each(function(){
 						var id=$(this).find("id").text();
 						//alert(id);
 						var br_regdate=$(this).find("br_regdate").text();
 						var br_content=$(this).find("br_content").text();
+						var br_num=$(this).find("br_num").text();
+						var brucnt=$(this).find("brucnt").text();
 						//console.log(id);
 						var p="";
 						if(id=="${sessionScope.id}"){
 							//alert(${sessionScope.id});
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<a href=''>삭제</a>&nbsp;&nbsp;<a href=''>추천</a></p>";
+						
+							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<a href=''>삭제</a>&nbsp;&nbsp;<a href='#' id='"+br_num+"' class='replyup'>추천["+brucnt+"]</a></p>";
 						}else{
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<a href=''>신고</a>&nbsp;&nbsp;<a href=''>추천</a></p>";
+							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<button id='"+br_num+"' class='b_reply_report'>신고</button>&nbsp;&nbsp;<button id='"+br_num+"' class='replyup'>추천["+brucnt+"]</button></p>";
 						}
 						$("#replylist").append(p);
 					})
 				}
 			});
-		
-			
 		});
-			/* $("#report").click(function(){
+		//댓글추천
+		$("#replylist").on('click','.replyup',function(){
+			var br_num=$(this).attr("id");
+			$.ajax({
+				url:"<c:url value='/replyup/insert?br_num=" + br_num + "&m_num=${sessionScope.id}'/>",
+				dataType:"json",
+				success:function(data) {
+					if(data.result=="true") {
+						alert("이미 추천 하셨습니다.하핫");
+					} else {
+					  	$("#id").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>" + data.replygetCount);
+						//window.location.reload(true);
+					}
+				}
+			});
+		});  
+			//댓글신고
+		  $("#replylist").on('click','.b_reply_report',function(){
+			var br_num=$(this).attr("id");
+			var br_report = confirm("신고 하시겠습니까?");
+			if(br_report==true){
 				$.ajax({
-					url:"<c:url value='/report/insert'/>",
+					url:"<c:url value='/replyreport/insert?br_num=" + br_num +"&m_num=${sessionScope.id}'/>",
 					dataType:"json",
 					success:function(data){
-						
-					}				
-				});
-			}); */
+						if(data.result=="true"){
+							alert("이미 신고하셨습니다.");
+						}
+						else{
+							alert("신고 되었습니다.");
+						}
+					}		
+				});  
+			}
+		});
+		
+		//게시물 신고
 		 $("#report").click(function() {
 			var b_report = confirm("신고 하시겠습니까?");
 			if(b_report == true){
@@ -93,6 +122,7 @@
 				});
 			}
 		});
+		 //게시물 좋아요
 		$("#thumbs_up").click(function() {
 			$.ajax({
 				url:"<c:url value='/boardup/insert?b_num=${b_num}&m_num=${sessionScope.id}'/>",
@@ -101,12 +131,30 @@
 					if(data.result=="true") {
 						alert("이미 추천 하셨습니다.");
 					} else {
-						alert("추천 하였습니다.");
+						$("#thumbs_up").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>" + data.getCount);
 					}
 				}
 			});
 		});
-	});
+	
+		 //게시물 댓글 좋아요
+	/*  $(".b_reply_thumbsUp").click(function() {
+			 var br_num=$(this).next().text();
+				$.ajax({
+					url:"<c:url value='/replyup/insert?br_num=" + br_num + "&m_num=${sessionScope.id}'/>",
+					dataType:"json",
+					success:function(data) {
+						if(data.result=="true") {
+							alert("이미 추천 하셨습니다.");
+						} else {
+							alert("추천 하셨습니다.");
+							data.replygetCount
+						  	$(".b_reply_thumbsUp").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>" + data.replygetCount);
+						}
+					}
+				});
+			});  */
+});
 </script>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
@@ -157,12 +205,14 @@
 			<div id="edit">
 				<c:choose>
 					<c:when test="${sessionScope.id eq vo.id }">
-						<button class="w3-button w3-black w3-round-large" id="b_delete">삭제</button>
-						<button class="w3-button w3-black w3-round-large" id="b_update">수정</button>
+						<br><br>
+						<button id="b_delete">삭제</button>
+						<button id="b_update">수정</button>
 					</c:when>
 					<c:otherwise>
-						<a id="report"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</a>
-						<a id="thumbs_up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>추천</a>
+						<br><br>
+						<button id="report"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+						<button id="thumbs_up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>${getCountInfo}</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -180,16 +230,19 @@
 			<div id="replylist">
 				<h6>댓글 : ${pu.totalRowCount } </h6>
 				<c:forEach var="vo" items="${brlist }">
-					<p class="reply">${vo.id }&nbsp;&nbsp;${vo.br_content}&nbsp;&nbsp;${vo.br_regdate }&nbsp;&nbsp;
+					<p class="reply" style="border-bottom: 1px solid #A2A2A2;padding-bottom: 40px;"><i class="fa fa-user-circle-o" aria-hidden="true">&nbsp;${vo.id }</i>
+					&nbsp;&nbsp;${vo.br_regdate }<br>${vo.br_content}
 					<c:choose>
 						<c:when test="${sessionScope.id eq vo.id }">
-							<button class="w3-button w3-black w3-round-large br_delete"><i class="fa fa-trash-o" aria-hidden="true"></i>삭제</button>
+							<button class="w3-button w3-black w3-round-large br_delete" style="float: right;"><i class="fa fa-trash-o" aria-hidden="true"></i>삭제</button>
 							<span style="visibility: hidden">${vo.br_num }</span>
 							<span style="visibility: hidden">${vo.b_num }</span>
 							<span style="visibility: hidden">${category_num }</span>
 						</c:when>
 						<c:otherwise>
-							<a href="">신고</a>&nbsp;&nbsp;<a href="">추천</a>
+							<button  class="b_reply_report"  id="${vo.br_num }" style="float: right;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</button>&nbsp;&nbsp;
+							<button  class="replyup" id="${vo.br_num }" style="float: right;"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>추천 ${vo.brucnt}</button>
+							<span style="visibility: hidden">${vo.br_num }</span>
 						</c:otherwise>
 					</c:choose>
 					</p>

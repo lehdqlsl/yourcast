@@ -5,24 +5,26 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.util.page.BoardReplyList;
 import com.util.page.PageUtil;
+import com.yourcast.app.service.BoardReplyReportService;
 import com.yourcast.app.service.BoardReplyService;
+import com.yourcast.app.service.BoardReplyUpService;
 import com.yourcast.app.service.BoardService;
 import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.vo.BoardReplyReportVO;
+import com.yourcast.app.vo.BoardReplyUpVO;
 import com.yourcast.app.vo.BoardReplyVO;
 import com.yourcast.app.vo.BoardVO;
 import com.yourcast.app.vo.CategoryVO;
@@ -35,6 +37,9 @@ public class BoardReplyController {
 	@Autowired private BoardService b_service;
 	@Autowired private BoardReplyService br_service;
 	@Autowired private MemberService m_serivce;
+	@Autowired private BoardReplyUpService bru_service;
+	@Autowired private BoardReplyReportService brr_service;
+	
 	//¥Ò±€ ¿€º∫
 	@RequestMapping(value="/{id}/boardreply/insert",method=RequestMethod.POST)
 	public String insert(@PathVariable(value="id") String id,HttpServletRequest request, Model model) {
@@ -53,11 +58,12 @@ public class BoardReplyController {
 	//¥Ò±€ √‚∑¬
 	@RequestMapping(value="/{id}/boardreply/list")
 	@ResponseBody
-	public BoardReplyList moreList(@RequestParam(value="pageNum",defaultValue="1") int pageNum,@PathVariable(value="id") String id,int b_num,int category_num,Model model) {
+	public BoardReplyList moreList(@RequestParam(value="pageNum",defaultValue="1") @PathVariable(value="id")String id, int pageNum, int b_num,int category_num) {
 		CategoryVO vo = c_service.getInfo(category_num);
 		HashMap<String, Integer> map=new HashMap<String, Integer>();
 		map.put("m_num", vo.getM_num());
 		map.put("category_num",category_num);
+		
 		
 		//∆‰¿Ã¬° √≥∏Æ
 		int totalRowCount=br_service.getCount(b_num);
@@ -76,5 +82,43 @@ public class BoardReplyController {
 	public String delete(int br_num,int b_num,int category_num){
 		br_service.delete(br_num);
 		return "redirect:/personnel/board/getInfo?b_num="+b_num+"&category_num="+category_num;
+	}
+	//¥Ò±€Ω≈∞Ì
+	@RequestMapping(value="/replyreport/insert",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String insert(int br_num, String m_num) {
+		MemberVO mvo = m_serivce.getInfo(m_num);
+		BoardReplyReportVO vo = new BoardReplyReportVO(br_num,mvo.getM_num());
+		BoardReplyReportVO brr1= brr_service.isCheck(vo);
+		
+		JSONObject json = new JSONObject();
+		
+		if(brr1!=null) { 
+			json.put("result", "true");
+		}else { 
+			brr_service.insert(vo);
+			json.put("result", "false");
+		}
+		return json.toString();
+	}
+	//¥Ò±€√ﬂ√µ
+	@RequestMapping(value="/replyup/insert",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String up_insert(String m_num,int br_num) {
+		MemberVO mvo = m_serivce.getInfo(m_num);
+		BoardReplyUpVO vo = new BoardReplyUpVO(mvo.getM_num(),br_num);
+		BoardReplyUpVO bru1 = bru_service.isCheck(vo);
+		int brucount = bru_service.getCount(br_num);
+		JSONObject json = new JSONObject();
+		//System.out.println("¥Ò±€√ﬂ√µ∞πºˆ:" + bru_service.getCount(br_num));
+		//model.addAttribute("getCount",bru_service.getCount(br_num));
+		if(bru1!=null) { 
+			json.put("result", "true");
+		}else { 
+			bru_service.insert(vo);
+			json.put("result", "false");
+			json.put("replygetCount", bru_service.getCount(br_num));
+		}
+		return json.toString();
 	}
 }
