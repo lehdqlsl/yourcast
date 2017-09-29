@@ -12,4 +12,9 @@
 		select NVL(count(m_num),0) cnt from board_reply_up where br_num=#{br_num}
 	</select>
 	
+	<select id="isCheck" parameterType="boardreplyup" resultType="boardreplyup">
+		select * from board_reply_up where m_num=#{m_num} and br_num=#{br_num} 
+	</select>
+	
+	
 </mapper>

@@ -10,4 +10,8 @@
 	<select id="getcount" parameterType="int" resultType="int">
 		select NVL(count(*),0) from board_reply_report where br_num = #{br_num}
 	</select>
+	
+	<select id="isCheck" parameterType="boardreplyreport" resultType="boardreplyreport">
+		select * from board_reply_report where br_num=#{br_num} and m_num=#{m_num}  
+	</select>
 </mapper>

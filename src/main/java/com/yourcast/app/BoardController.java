@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.util.page.PageUtil;
 import com.yourcast.app.service.BoardReplyService;
+import com.yourcast.app.service.BoardReplyUpService;
 import com.yourcast.app.service.BoardReportService;
 import com.yourcast.app.service.BoardService;
 import com.yourcast.app.service.BoardUpService;
@@ -231,15 +232,14 @@ public class BoardController {
 		PageUtil pu = new PageUtil(pageNum, 5, 1, totalRowCount);
 		map.put("startRow", 1);
 		map.put("endRow", 5);
-
+		
 		List<BoardReplyVO> brlist = br_service.getList(map);// 처음 댓글 다섯개만 불러오기
-
-		///////////////////////////////////////////
 
 		model.addAttribute("id", id);
 		model.addAttribute("pu", pu);
 		model.addAttribute("b_num", b_num);
 		model.addAttribute("category_num", category_num);
+		model.addAttribute("getCountInfo",bu_service.getCount(b_num));
 		model.addAttribute("clist", clist);
 		model.addAttribute("brlist", brlist);
 		model.addAttribute("vo", bvo);
@@ -309,10 +309,10 @@ public class BoardController {
 		
 		JSONObject json = new JSONObject();
 			
-		if(br1!=null) { // �Ű� �� ��� 
+		if(br1!=null) { 
 			//json.put("insert",true); 
 			json.put("result", "true");
-		}else { // �Ű� ���� ���
+		}else { 
 			//json.put("insert", false);
 			r_service.insert(vo);
 			json.put("result", "false");
@@ -326,17 +326,15 @@ public class BoardController {
 		BoardUpVO vo = new BoardUpVO(mvo.getM_num(),b_num);
 		BoardUpVO br1 =  bu_service.isCheck(vo);
 		int bucount= bu_service.getCount(b_num);
-		
 		JSONObject json = new JSONObject();
-		
-		if(br1!=null) { // ��õ� �� ��� 
+		if(br1!=null) { 
 			json.put("result", "true");
-			//json.put("bucount", bucount);
-		}else { // ��õ� ���� ���
+		}else { 
 			bu_service.insert(vo);
 			json.put("result", "false");
-			//json.put("bucount", bucount);
+			json.put("getCount", bu_service.getCount(b_num));
 		}
 		return json.toString();
 	}
 }
+	    

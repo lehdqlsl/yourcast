@@ -16,9 +16,19 @@
 		select * from board_reply where br_num=#{br_num}
 	</select>
 	<select id="getList" parameterType="hashmap" resultType="boardreply">
-		select * from(select aa.*,rownum rnum from(select br.*,m.id from board_reply br, member m where br.m_num=m.m_num and br_delete=0 and b_num=#{b_num} order by br_num desc) aa) <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	<!--  	select * from(select aa.*,rownum rnum from(
+	select br.*,m.id from board_reply br, member m 
+	where br.m_num=m.m_num and br_delete=0 and b_num=#{b_num} order by br_num desc) aa) <![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>-->
+	select * from(
+	select br.*,m.id,cc.brucnt,rownum rnum from board_reply br,member m,
+	(select br.br_num ,count(bru.br_num) brucnt 
+	from BOARD_REPLY br,board_reply_up bru
+	where br.br_num=bru.br_num(+) group by br.br_num)cc
+	where br.br_num=cc.br_num and br.m_num=m.m_num and br.br_delete=0 and br.b_num=#{b_num})
+	<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	<select id="getCount" parameterType="int" resultType="int">
 		select NVL(count(br_num),0) cnt from board_reply where b_num=#{b_num} and br_delete=0
 	</select>
+	
 </mapper>

@@ -23,4 +23,7 @@ public class BoardReplyReportService {
 	public int getCount(int br_num) {
 		return dao.getCount(br_num);
 	}
+	public BoardReplyReportVO isCheck(BoardReplyReportVO vo) {
+		return dao.isCheck(vo);
+	}
 }

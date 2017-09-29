@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript" src="/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
@@ -60,7 +61,7 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea rows="5" cols="50" name="content"></textarea></td>
+					<td><textarea name="content" id="content" rows="22" style="width:645px;"></textarea></td>
 				</tr>
 			</table>
 			<input type="submit" value="등록">

@@ -24,4 +24,7 @@ public class BoardReplyReportDAO {
 	public int getCount(int br_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getcount", br_num);
 	}
+	public BoardReplyReportVO isCheck(BoardReplyReportVO vo) {
+		return sqlSession.selectOne(NAMESPACE + ".isCheck", vo);
+	}
 }

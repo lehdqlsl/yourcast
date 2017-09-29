@@ -24,4 +24,10 @@ public class BoardReplyUpDAO {
 	public int getCount(int br_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getcount", br_num);
 	}
+	public BoardReplyUpVO isCheck(BoardReplyUpVO vo) {
+		return sqlSession.selectOne(NAMESPACE + ".isCheck", vo);
+	}
+	public int checkUp(int br_num) {
+		return sqlSession.selectOne(NAMESPACE + ".checkUp", br_num);
+	}
 }

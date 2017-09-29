@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.util.page.BoardReplyList;
 import com.util.page.PageUtil;
+import com.yourcast.app.service.BoardReplyReportService;
 import com.yourcast.app.service.BoardReplyService;
+import com.yourcast.app.service.BoardReplyUpService;
 import com.yourcast.app.service.BoardService;
 import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.vo.BoardReplyReportVO;
+import com.yourcast.app.vo.BoardReplyUpVO;
 import com.yourcast.app.vo.BoardReplyVO;
 import com.yourcast.app.vo.BoardVO;
 import com.yourcast.app.vo.CategoryVO;
@@ -30,23 +35,22 @@ import com.yourcast.app.vo.MemberVO;
 public class BoardReplyController {
 	@Autowired
 	private CategoryService c_service;
-	@Autowired
-	private BoardService b_service;
-	@Autowired
-	private BoardReplyService br_service;
-	@Autowired
-	private MemberService m_serivce;
 
-	// ¥Ò±€ ¿€º∫
-	@RequestMapping(value = "/{id}/boardreply/insert", method = RequestMethod.POST)
-	public String insert(@PathVariable(value = "id") String id, HttpServletRequest request, Model model) {
-		String sid = request.getParameter("sid");
-		String br_content = request.getParameter("br_content");
-		String bnum = request.getParameter("b_num");
-
-		MemberVO mvo = m_serivce.getInfo(sid);
-		int b_num = Integer.parseInt(bnum);
-		BoardReplyVO brvo = new BoardReplyVO(0, br_content, null, 0, b_num, mvo.getM_num());
+	@Autowired private BoardService b_service;
+	@Autowired private BoardReplyService br_service;
+	@Autowired private MemberService m_serivce;
+	@Autowired private BoardReplyUpService bru_service;
+	@Autowired private BoardReplyReportService brr_service;
+	
+	//ÎåìÍ∏Ä ÏûëÏÑ±
+	@RequestMapping(value="/{id}/boardreply/insert",method=RequestMethod.POST)
+	public String insert(@PathVariable(value="id") String id,HttpServletRequest request, Model model) {
+		MemberVO mvo=m_serivce.getInfo(id);
+		String br_content=request.getParameter("br_content");
+		String bnum=request.getParameter("b_num");
+		//System.out.println(br_content);
+		int b_num=Integer.parseInt(bnum);
+		BoardReplyVO brvo=new BoardReplyVO(0, br_content, null, 0, b_num, mvo.getM_num());
 		br_service.insert(brvo);
 
 		BoardVO bvo = b_service.getInfo(b_num);
@@ -57,19 +61,19 @@ public class BoardReplyController {
 		return "redirect:/" + id + "/board/getInfo?b_num=" + b_num + "&category_num=" + category_num;
 	}
 
-	// ¥Ò±€ √‚∑¬
+	// ÎåìÍ∏Ä Ï∂úÎ†•
 	@RequestMapping(value = "/{id}/boardreply/list")
 	@ResponseBody
-	public BoardReplyList moreList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-			@PathVariable(value = "id") String id, int b_num, int category_num, Model model) {
+	public BoardReplyList moreList(@RequestParam(value="pageNum",defaultValue="1") @PathVariable(value="id")String id, int pageNum, int b_num,int category_num) {
 		CategoryVO vo = c_service.getInfo(category_num);
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("m_num", vo.getM_num());
-		map.put("category_num", category_num);
 
-		// ∆‰¿Ã¬° √≥∏Æ
-		int totalRowCount = br_service.getCount(b_num);
-		PageUtil pu = new PageUtil(pageNum, 5, 1, totalRowCount);
+		map.put("category_num",category_num);
+		//ÌéòÏù¥Ïßï Ï≤òÎ¶¨
+		int totalRowCount=br_service.getCount(b_num);
+		PageUtil pu=new PageUtil(pageNum,5,1,totalRowCount);
+
 		map.put("b_num", b_num);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
@@ -80,10 +84,48 @@ public class BoardReplyController {
 		return list;
 	}
 
-	// ¥Ò±€ ªË¡¶
+	// ÎåìÍ∏Ä ÏÇ≠Ï†ú
 	@RequestMapping(value = "/{id}/boardreply/delete")
 	public String delete(@PathVariable(value = "id") String id,int br_num, int b_num, int category_num) {
 		br_service.delete(br_num);
 		return "redirect:/"+id+"/board/getInfo?b_num=" + b_num + "&category_num=" + category_num;
+	}
+	//ÎåìÍ∏ÄÏã†Í≥†
+	@RequestMapping(value="/replyreport/insert",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String insert(int br_num, String m_num) {
+		MemberVO mvo = m_serivce.getInfo(m_num);
+		BoardReplyReportVO vo = new BoardReplyReportVO(br_num,mvo.getM_num());
+		BoardReplyReportVO brr1= brr_service.isCheck(vo);
+		
+		JSONObject json = new JSONObject();
+		
+		if(brr1!=null) { 
+			json.put("result", "true");
+		}else { 
+			brr_service.insert(vo);
+			json.put("result", "false");
+		}
+		return json.toString();
+	}
+	//ÎåìÍ∏ÄÏ∂îÏ≤ú
+	@RequestMapping(value="/replyup/insert",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String up_insert(String m_num,int br_num) {
+		MemberVO mvo = m_serivce.getInfo(m_num);
+		BoardReplyUpVO vo = new BoardReplyUpVO(mvo.getM_num(),br_num);
+		BoardReplyUpVO bru1 = bru_service.isCheck(vo);
+		int brucount = bru_service.getCount(br_num);
+		JSONObject json = new JSONObject();
+		//System.out.println("ÎåìÍ∏ÄÏ∂îÏ≤úÍ∞ØÏàò:" + bru_service.getCount(br_num));
+		//model.addAttribute("getCount",bru_service.getCount(br_num));
+		if(bru1!=null) { 
+			json.put("result", "true");
+		}else { 
+			bru_service.insert(vo);
+			json.put("result", "false");
+			json.put("replygetCount", bru_service.getCount(br_num));
+		}
+		return json.toString();
 	}
 }
