@@ -13,11 +13,9 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.vo.MemberVO;
@@ -62,6 +60,8 @@ public class MemberController {
 			// 로그인 성공
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
+			
+			//로그인 후 이전페이지로 가지게
 			return ".main";
 		} else {
 			request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");

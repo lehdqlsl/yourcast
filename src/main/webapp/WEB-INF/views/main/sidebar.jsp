@@ -8,7 +8,6 @@
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-  
     <h4><b>사이드바</b></h4>
     <p class="w3-text-grey">꾸며주세요</p>
   </div>

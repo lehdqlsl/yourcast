@@ -26,6 +26,8 @@ public class exchangeTest {
 	public void insert() {
 		int count = 362;
 		double e_ea = count*100*0.6;
+		double e_ea = count*100*0.7;
+		double e_ea = count*100*0.8;
 		int n = dao.insert(new ExchangeVO(0, count, e_ea, null, 1));
 		boolean b = false;
 		if (n > 0) {
