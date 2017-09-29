@@ -53,7 +53,7 @@ public class VideoDAO {
 		return sqlSession.selectList(NAMESPACE + ".getMemberList",map);
 	}
 	
-	public List<VideoVO> getGenreList(int genre_num){
-		return sqlSession.selectList(NAMESPACE + ".getGenreList",genre_num);
+	public List<VideoVO> getGenreList(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".getGenreList",map);
 	}
 }

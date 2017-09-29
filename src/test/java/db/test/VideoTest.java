@@ -73,14 +73,14 @@ public class VideoTest {
 	}
 	@Test
 	public void getCount() {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("m_num", 1);
 		int n = dao.getCount(map);
 		System.out.println(n);
 	}
 	@Test
 	public void getCount1() {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("m_num", 1);
 		map.put("category_num", 2);
 		int n = dao.getCount(map);
@@ -95,7 +95,11 @@ public class VideoTest {
 	
 	@Test
 	public void getGenreList() {
-		List<VideoVO> list = dao.getGenreList(1);
+		HashMap<String, Object> map= new HashMap<String, Object>();
+		map.put("genre_num", 1);
+		map.put("startRow",1);
+		map.put("endRow", 5);
+		List<VideoVO> list = dao.getGenreList(map);
 		Assert.assertNotNull(list);
 	}
 }
