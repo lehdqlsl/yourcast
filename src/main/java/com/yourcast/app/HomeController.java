@@ -52,11 +52,15 @@ public class HomeController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String personnel(@PathVariable(value = "id") String id, Model model) {
 		MemberVO vo = m_sevice.getInfo(id);
-		List<CategoryVO> clist = service.getList(vo.getM_num());
-		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
-		model.addAttribute("clist", clist);
-		model.addAttribute("id", id);
-		model.addAttribute("voMP", voMP);
-		return ".personnel";
+		if(vo!=null) {
+			List<CategoryVO> clist = service.getList(vo.getM_num());
+			MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
+			model.addAttribute("clist", clist);
+			model.addAttribute("id", id);
+			model.addAttribute("voMP", voMP);
+			return ".personnel";
+		}else {
+			return ".personnel.board.nomember"; 
+		}
 	}
 }
