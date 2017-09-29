@@ -1,5 +1,6 @@
 package com.yourcast.app.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class BuyService {
 	public int insert(BuyVO vo) {
 		return dao.insert(vo);
 	}
-	public List<BuyVO> getList(int m_num){
-		return dao.getList(m_num);
+	public List<BuyVO> getList(HashMap<String, Object> map){
+		return dao.getList(map);
 	}
 	public int getCount(int m_num) {
 		return dao.getCount(m_num);

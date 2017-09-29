@@ -8,12 +8,20 @@
 		insert into use values(seq_use_num.nextval,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),#{use_ea},#{m_num},#{bj_num})
 	</insert>
 	
-	<select id="getsendlist" resultType="staruse" parameterType="int">
-		select * from use where m_num=#{m_num}
+	<select id="getsendlist" resultType="staruse" parameterType="staruse">
+		select * from
+		(select a.*,m.id from
+		(select u.*,rownum rnum from use u
+		where u.m_num=#{m_num})a, member m where a.bj_num=m.m_num)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	
-	<select id="getrecvlist" resultType="staruse" parameterType="int">
-		select * from use where bj_num=#{bj_num}
+	<select id="getrecvlist" resultType="staruse" parameterType="staruse">
+		select * from
+		(select a.*,m.id from
+		(select u.*,rownum rnum from use u
+		where u.bj_num=#{bj_num})a, member m where a.m_num=m.m_num)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	
 	<select id="getsendcount" resultType="int">
@@ -23,5 +31,15 @@
 	<select id="getrecvcount" resultType="int">
 		select NVL(count(m_num),0) cnt from use where bj_num=#{bj_num}
 	</select>
+	
+	<select id="getSendEa" resultType="int">
+		select sum(use_ea) total_use_ea from use where m_num=#{m_num}
+	</select>
+	
+	<select id="getRecvEa" resultType="int">
+		select sum(use_ea) total_recv_ea from use where bj_num=#{bj_num}
+	</select>
+	
+	
 	
 </mapper>

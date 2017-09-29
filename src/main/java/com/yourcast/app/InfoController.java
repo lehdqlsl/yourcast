@@ -28,7 +28,7 @@ import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.vo.BlacklistVO;
 import com.yourcast.app.vo.CategoryVO;
-import com.yourcast.app.vo.FanPagingVO;
+import com.yourcast.app.vo.PagingVO;
 import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
@@ -72,7 +72,7 @@ public class InfoController {
 	
 	@RequestMapping(value = "/{id}/setting/page", method = RequestMethod.GET)
 	@ResponseBody
-	public FanPagingVO fanPaging(@PathVariable(value = "id") String id, Model model,
+	public PagingVO fanPaging(@PathVariable(value = "id") String id, Model model,
 									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
 		MemberVO voM = m_sevice.getInfo(id);
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -85,7 +85,7 @@ public class InfoController {
 		map.put("endRow",pu.getEndRow());
 
 		List<FanVO> listF = f_service.getList(map);
-		FanPagingVO list1 = new FanPagingVO();
+		PagingVO list1 = new PagingVO();
 		list1.setList(listF);
 
 		return list1;

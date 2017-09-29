@@ -1,5 +1,6 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,12 +24,12 @@ public class StarUseDAO {
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public List<StarUseVO> getSendList(int m_num) {
-		return sqlSession.selectList(NAMESPACE + ".getsendlist",m_num);
+	public List<StarUseVO> getSendList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".getsendlist",map);
 	}
 	
-	public List<StarUseVO> getRecvList(int bj_num) {
-		return sqlSession.selectList(NAMESPACE + ".getrecvlist",bj_num);
+	public List<StarUseVO> getRecvList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".getrecvlist",map);
 	}
 
 	public int getSendCount(int m_num) {
@@ -37,5 +38,13 @@ public class StarUseDAO {
 	
 	public int getRecvCount(int bj_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getrecvcount",bj_num);
+	}
+	
+	public int getSendEa(int m_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getSendEa",m_num);
+	}
+	
+	public int getRecvEa(int bj_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getRecvEa",bj_num);
 	}
 }

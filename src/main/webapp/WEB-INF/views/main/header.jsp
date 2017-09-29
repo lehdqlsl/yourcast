@@ -17,6 +17,8 @@
 				</c:when>
 				<c:otherwise>
 					<a href="<c:url value='/${sessionScope.id }'/>" class="w3-bar-item w3-button">${sessionScope.id }</a>
+					<a href="<c:url value='/main/history/pay'/>"
+						class="w3-bar-item w3-button">내역 및 환전</a>
 					<a href="<c:url value='/member/logout'/>"
 						class="w3-bar-item w3-button">로그아웃</a>
 				</c:otherwise>

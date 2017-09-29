@@ -1,5 +1,6 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -22,8 +23,8 @@ public class BuyDAO {
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public List<BuyVO> getList(int m_num) {
-		return sqlSession.selectList(NAMESPACE + ".getList",m_num);
+	public List<BuyVO> getList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".getList",map);
 	}
 
 	public int getCount(int m_num) {

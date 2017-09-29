@@ -4,19 +4,29 @@ public class PayVO {
 
 	private int pay_num;
 	private int pay_money;
-	private String pay_regString;
+	private String pay_regdate;
 	private int m_num;
 	private int p_num;
+	private String p_name;
 	
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
 	public PayVO() {}
 
-	public PayVO(int pay_num, int pay_money, String pay_regString, int m_num, int p_num) {
+	public PayVO(int pay_num, int pay_money, String pay_regdate, int m_num, int p_num,String p_name) {
 		super();
 		this.pay_num = pay_num;
 		this.pay_money = pay_money;
-		this.pay_regString = pay_regString;
+		this.pay_regdate = pay_regdate;
 		this.m_num = m_num;
 		this.p_num = p_num;
+		this.p_name = p_name;
 	}
 
 	public int getPay_num() {
@@ -35,12 +45,12 @@ public class PayVO {
 		this.pay_money = pay_money;
 	}
 
-	public String getPay_regString() {
-		return pay_regString;
+	public String getPay_regdate() {
+		return pay_regdate;
 	}
 
-	public void setPay_regString(String pay_regString) {
-		this.pay_regString = pay_regString;
+	public void setPay_regdate(String pay_regdate) {
+		this.pay_regdate = pay_regdate;
 	}
 
 	public int getM_num() {

@@ -1,5 +1,6 @@
 package com.yourcast.app.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class ExchangeService {
 		this.dao = dao;
 	}
 
-	public List<ExchangeVO> getList(int m_num) {
-		return dao.getList(m_num);
+	public List<ExchangeVO> getList(HashMap<String, Object> map) {
+		return dao.getList(map);
 	}
 
 	public int getCount(int m_num) {
@@ -27,5 +28,13 @@ public class ExchangeService {
 
 	public int insert(ExchangeVO vo) {
 		return dao.insert(vo);
+	}
+	
+	public int getexEa(int m_num) {
+		return dao.getexEa(m_num);
+	}
+	
+	public int getexMoney(int m_num) {
+		return dao.getexMoney(m_num);
 	}
 }
