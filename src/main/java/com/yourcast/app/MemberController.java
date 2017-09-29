@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,19 +14,22 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.util.page.PageUtil;
+import com.yourcast.app.service.BuyService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.vo.BuyVO;
 import com.yourcast.app.vo.MemberVO;
+import com.yourcast.app.vo.PayVO;
 
 @Controller
 public class MemberController {
-	@Autowired
-	private MemberService mservice;
+	@Autowired private MemberService mservice;
+	@Autowired private BuyService b_service; 
 
 	public void setMservice(MemberService mservice) {
 		this.mservice = mservice;
@@ -110,5 +114,41 @@ public class MemberController {
 			json.put("using", false);
 		}
 		return json.toString();
+	}
+	
+	@RequestMapping(value = "/member/charge/star", method = RequestMethod.GET)
+	public String star() {		
+		return ".member.charge.star";
+	}
+	
+	@RequestMapping(value = "/member/charge/buyStar", method = RequestMethod.POST)
+	public String buyStar(int buy_ea1,int buy_ea2,HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		MemberVO mvo = mservice.getInfo(id);
+		
+		int m_num = mvo.getM_num();
+		int buy_ea = buy_ea1*buy_ea2;
+		int star_candy = mvo.getStar_candy() + buy_ea;
+		int money = mvo.getMoney() - (buy_ea*110);
+		
+		mservice.moneyUpdate(new MemberVO(m_num, money, 0));
+		mservice.starcandyUpdate(new MemberVO(m_num, 0, star_candy));
+		
+		b_service.insert(new BuyVO(0, null, buy_ea, m_num));
+		
+		model.addAttribute("mvo",mvo);
+		
+		return ".member.charge.star";
+	}
+	
+	@RequestMapping(value = "/member/charge/money", method = RequestMethod.POST)
+	public String money(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		MemberVO mvo = mservice.getInfo(id);
+		int m_num = mvo.getM_num();
+		
+		model.addAttribute("mvo",mvo);
+		
+		return ".member.charge.money";
 	}
 }

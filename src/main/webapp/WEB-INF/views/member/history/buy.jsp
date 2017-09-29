@@ -8,32 +8,33 @@
 	</div>
 	
 	<div>
-		<button><a href="<c:url value='/main/history/pay'/>" style="text-decoration: none;">결제내역</a></button>
-		<button><a href="<c:url value='/main/history/buy'/>" style="text-decoration: none;">구매내역</a></button>
-		<button><a href="<c:url value='/main/history/useStar'/>" style="text-decoration: none;">선물한 별풍선내역</a></button>
-		<button><a href="<c:url value='/main/history/recvStar'/>" style="text-decoration: none;">선물받은 별풍선내역</a></button>
-		<button style="background-color: red;"><a href="<c:url value='/main/history/ex'/>" style="text-decoration: none;">환전내역</a></button>
+		<button><a href="<c:url value='/member/history/pay'/>" style="text-decoration: none;">결제내역</a></button>
+		<button  style="background-color: red;"><a href="<c:url value='/member/history/buy'/>" style="text-decoration: none;">구매내역</a></button>
+		<button><a href="<c:url value='/member/history/useStar'/>" style="text-decoration: none;">선물한 별사탕내역</a></button>
+		<button><a href="<c:url value='/member/history/recvStar'/>" style="text-decoration: none;">선물받은 별사탕내역</a></button>
 	</div>
 	
 	<table border="1">
 		<tr>
-			<th>환전수량</th><th>환전수수료</th><th>환전금액</th><th>환전날짜</th>
+			<th>구매한 별사탕</th><th>가격</th><th>구매일</th>
 		</tr>
-		<c:forEach var="exvo" items="${exlist }">
+		<c:forEach var="bvo" items="${buylist }">
 			<tr>
-				<th>${exvo.e_ea }</th>
-				<th>${exvo.e_fee }</th>
-				<th>${exvo.e_ea*exvo.e_fee }</th>
-				<th>${exvo.e_regdate }</th>
+				<th>${bvo.buy_ea }</th>
+				<th>${bvo.buy_ea*100 }</th>
+				<th>${bvo.buy_regdate }</th>
 			</tr>
 		</c:forEach>
 	</table>
+
+	<div>보유중인 별사탕 : ${mvo.star_candy }</div>
+	<div>${mvo.id }님의 보유중인 금액은 ${mvo.money }원 입니다.</div>
 	
 	<!-- 페이징 -->
 		<div>
 		<c:choose>
 			<c:when test="${pu.pageNum>1 }">
-				<a href="<c:url value='/main/history/ex?pageNum=${1 }'/>">[처음으로]</a>
+				<a href="<c:url value='/main/history/buy?pageNum=${1 }'/>">[처음으로]</a>
 			</c:when>
 			<c:otherwise>
 				[처음으로]
@@ -41,7 +42,7 @@
 		</c:choose>
 		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
-				<a href="<c:url value='/main/history/ex?pageNum=${pu.startPageNum-1 }'/>">[이전]</a>
+				<a href="<c:url value='/main/history/buy?pageNum=${pu.startPageNum-1 }'/>">[이전]</a>
 			</c:when>
 			<c:otherwise>
 				[이전]
@@ -53,13 +54,13 @@
 						<span style="color:blue">[${i }]</span>
 					</c:when>
 					<c:otherwise>
-						<a href="<c:url value='/main/history/ex?pageNum=${i }'/>"><span style="color:#555">[${i }]</span></a>
+						<a href="<c:url value='/main/history/buy?pageNum=${i }'/>"><span style="color:#555">[${i }]</span></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 		<c:choose>
 			<c:when test="${pu.endPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/main/history/ex?pageNum=${pu.endPageNum+1 }'/>">[다음]</a>
+				<a href="<c:url value='/main/history/buy?pageNum=${pu.endPageNum+1 }'/>">[다음]</a>
 			</c:when>
 			<c:otherwise>
 				[다음]
@@ -67,7 +68,7 @@
 		</c:choose>
 		<c:choose>
 			<c:when test="${pu.startPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/main/history/ex?pageNum=${pu.totalPageCount }'/>">[끝으로]</a>
+				<a href="<c:url value='/main/history/buy?pageNum=${pu.totalPageCount }'/>">[끝으로]</a>
 			</c:when>
 			<c:otherwise>
 				[끝으로]

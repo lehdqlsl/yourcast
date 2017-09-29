@@ -35,7 +35,7 @@ public class HistoryController {
 	@Autowired private StarUseService use_service;
 	@Autowired private ExchangeService ex_service;
 
-	@RequestMapping(value = "/main/history/pay", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/pay", method = RequestMethod.GET)
 	public String pay(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 								HttpSession session, Model model) {
 		String id = (String)session.getAttribute("id");
@@ -55,10 +55,10 @@ public class HistoryController {
 		model.addAttribute("pu",pu);
 		model.addAttribute("mvo",mvo);
 		
-		return ".main.history.pay";
+		return ".member.history.pay";
 	}
 	
-	@RequestMapping(value = "/main/history/buy", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/buy", method = RequestMethod.GET)
 	public String buy(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 								HttpSession session, Model model) {
 		String id = (String)session.getAttribute("id");
@@ -78,10 +78,10 @@ public class HistoryController {
 		model.addAttribute("pu",pu);
 		model.addAttribute("mvo",mvo);
 				
-		return ".main.history.buy";
+		return ".member.history.buy";
 	}
 	
-	@RequestMapping(value = "/main/history/useStar", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/useStar", method = RequestMethod.GET)
 	public String useStar(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 								HttpSession session, Model model) {
 		String id = (String)session.getAttribute("id");
@@ -104,10 +104,10 @@ public class HistoryController {
 		int total_send_ea = use_service.getSendEa(m_num);
 		model.addAttribute("total_send_ea",total_send_ea);
 		
-		return ".main.history.useStar";
+		return ".member.history.useStar";
 	}
 	
-	@RequestMapping(value = "/main/history/recvStar", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/recvStar", method = RequestMethod.GET)
 	public String recvStar(HttpSession session, Model model) {
 		int pageNum = 1;
 		String id = (String)session.getAttribute("id");
@@ -145,10 +145,10 @@ public class HistoryController {
 		model.addAttribute("total_ex_ea",ex_service.getexEa(bj_num));
 		model.addAttribute("total_ex_money",ex_service.getexMoney(bj_num));
 		
-		return ".main.history.recvStar";
+		return ".member.history.recvStar";
 	}
 	
-	@RequestMapping(value = "/main/history/ex", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/ex", method = RequestMethod.GET)
 	public String exchange(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 								HttpSession session, Model model) {
 		String id = (String)session.getAttribute("id");
@@ -166,10 +166,10 @@ public class HistoryController {
 		model.addAttribute("exlist",exlist);
 		model.addAttribute("pu",pu);
 		
-		return ".main.history.exchange";
+		return ".member.history.exchange";
 	}
 	
-	@RequestMapping(value = "/main/history/recvStarPaging", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/recvStarPaging", method = RequestMethod.GET)
 	@ResponseBody
 	public PagingVO recvStarPaging(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 											HttpSession session) {
@@ -190,7 +190,7 @@ public class HistoryController {
 		return listp;
 	}
 	
-	@RequestMapping(value = "/main/history/recvStarPagingPre", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/recvStarPagingPre", method = RequestMethod.GET)
 	@ResponseBody
 	public int recvStarPagingPre(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 											HttpSession session) {
@@ -207,7 +207,7 @@ public class HistoryController {
 		return endPageNum;
 	}
 	
-	@RequestMapping(value = "/main/history/recvStarPagingNext", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/recvStarPagingNext", method = RequestMethod.GET)
 	@ResponseBody
 	public int recvStarPagingNext(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 											HttpSession session) {
@@ -224,7 +224,7 @@ public class HistoryController {
 		return endPageNum;
 	}
 	
-	@RequestMapping(value = "/main/history/exStarPagingNext", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/exStarPagingNext", method = RequestMethod.GET)
 	@ResponseBody
 	public int exStarPagingNext(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 											HttpSession session) {
@@ -241,7 +241,7 @@ public class HistoryController {
 		return endPageNum;
 	}
 	
-	@RequestMapping(value = "/main/history/exStarPagingPre", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/exStarPagingPre", method = RequestMethod.GET)
 	@ResponseBody
 	public int exStarPagingPre(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 											HttpSession session) {
@@ -258,7 +258,7 @@ public class HistoryController {
 		return endPageNum;
 	}
 	
-	@RequestMapping(value = "/main/history/exStarPaging", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/history/exStarPaging", method = RequestMethod.GET)
 	@ResponseBody
 	public PagingVO exStarPaging(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 											HttpSession session) {

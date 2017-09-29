@@ -5,21 +5,21 @@
 <body>
 <div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
 	<div class="w3-container w3-padding-32" id="projects">
-		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">선물받은 별풍선내역</h3>
+		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">선물받은 별사탕내역</h3>
 	</div>
 	
 	<div>
-		<button><a href="<c:url value='/main/history/pay'/>" style="text-decoration: none;">결제내역</a></button>
-		<button><a href="<c:url value='/main/history/buy'/>" style="text-decoration: none;">구매내역</a></button>
-		<button><a href="<c:url value='/main/history/useStar'/>" style="text-decoration: none;">선물한 별풍선내역</a></button>
-		<button style="background-color: red;"><a href="<c:url value='/main/history/recvStar'/>" style="text-decoration: none;">선물받은 별풍선내역</a></button>
+		<button><a href="<c:url value='/member/history/pay'/>" style="text-decoration: none;">결제내역</a></button>
+		<button><a href="<c:url value='/member/history/buy'/>" style="text-decoration: none;">구매내역</a></button>
+		<button><a href="<c:url value='/member/history/useStar'/>" style="text-decoration: none;">선물한 별사탕내역</a></button>
+		<button style="background-color: red;"><a href="<c:url value='/member/history/recvStar'/>" style="text-decoration: none;">선물받은 별사탕내역</a></button>
 	</div>
 	
 	<!-- 선물받은 별풍선내역 -->
 	<table border="1" id="recvlistT">
 		<thead>
 		<tr>
-			<th>선물받은 별풍선</th><th>회원아이디</th><th>받은 날짜</th>
+			<th>선물받은 별사탕</th><th>회원아이디</th><th>받은 날짜</th>
 		</tr>
 		</thead>
 		<tbody id="recvlistB">
@@ -33,10 +33,10 @@
 		</tbody>
 	</table>
 	
-	<div>보유중인 별풍선 : ${mvo.star_candy }</div>
-	<div>선물받은 별풍선 : ${total_recv_ea }</div>
+	<div>보유중인 별사탕 : ${mvo.star_candy }</div>
+	<div>선물받은 별사탕 : ${total_recv_ea }</div>
 	
-	<!-- 선물받은 별풍선 페이징 -->
+	<!-- 선물받은 별사탕 페이징 -->
 	<div>
 		<span id="preRecv"><a href="#">[이전]</a></span>
 		
