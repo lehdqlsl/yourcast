@@ -89,7 +89,7 @@
 		<form method="post" action="<c:url value='/${requestScope.id}/video/delete'/>" onsubmit="return deleteV()">
 		<table border="1">
 			<tr>
-				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>관람등급</th><th>장르</th><th>제목</th><th>내용</th><th>등록일</th>
+				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>장르</th><th>관람등급</th><th>제목</th><th>내용</th><th>등록일</th>
 				<th>썸네일</th><th>조회수</th>
 			</tr>
 			

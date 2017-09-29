@@ -3,7 +3,7 @@ package com.yourcast.app.vo;
 public class VideoReplyVO {
 	private int vr_num;
 	private String vr_content;
-	private String vr_regString;
+	private String vr_regdate;
 	private int vr_delete;
 	private int v_num;
 	private int m_num;
@@ -12,11 +12,11 @@ public class VideoReplyVO {
 		
 	}
 
-	public VideoReplyVO(int vr_num, String vr_content, String vr_regString, int vr_delete, int v_num, int m_num) {
+	public VideoReplyVO(int vr_num, String vr_content, String vr_regdate, int vr_delete, int v_num, int m_num) {
 		super();
 		this.vr_num = vr_num;
 		this.vr_content = vr_content;
-		this.vr_regString = vr_regString;
+		this.vr_regdate = vr_regdate;
 		this.vr_delete = vr_delete;
 		this.v_num = v_num;
 		this.m_num = m_num;
@@ -38,12 +38,12 @@ public class VideoReplyVO {
 		this.vr_content = vr_content;
 	}
 
-	public String getVr_regString() {
-		return vr_regString;
+	public String getVr_regdate() {
+		return vr_regdate;
 	}
 
-	public void setVr_regString(String vr_regString) {
-		this.vr_regString = vr_regString;
+	public void setVr_regdate(String vr_regdate) {
+		this.vr_regdate = vr_regdate;
 	}
 
 	public int getVr_delete() {
@@ -69,6 +69,7 @@ public class VideoReplyVO {
 	public void setM_num(int m_num) {
 		this.m_num = m_num;
 	}
+	
 
 	
 }

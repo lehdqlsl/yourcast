@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.util.page.PageUtil;
 import com.yourcast.app.service.BuyService;
 import com.yourcast.app.service.MemberService;
@@ -35,24 +36,24 @@ public class MemberController {
 		this.mservice = mservice;
 	}
 
-	// È¸¿ø°¡ÀÔ ÆäÀÌÁö ÀÌµ¿
+	// íšŒì›ê°€ì… í˜ì´ì§€ ì´ë™
 	@RequestMapping(value = "/member/join", method = RequestMethod.GET)
 	public String joinForm(Locale locale, Model model) {
 		return ".member";
 	}
 
-	// ·Î±×ÀÎ ÆäÀÌÁö ÀÌµ¿
+	// ë¡œê·¸ì¸ í˜ì´ì§€ ì´ë™
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public String loginForm(Locale locale, Model model) {
 		return ".member.join.login";
 	}
-	// ¾à°ü
+	// ì•½ê´€
 		@RequestMapping(value = "/member/service", method = RequestMethod.GET)
 		public String service(Locale locale, Model model) {
 			return ".member.join.service";
 		}
 	
-	// ·Î±×ÀÎ
+	// ë¡œê·¸ì¸
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
 	public String login(Model model, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -63,17 +64,19 @@ public class MemberController {
 		map.put("pwd", pwd);
 		boolean r = mservice.isMembers(map);
 		if (r) {
-			// ·Î±×ÀÎ ¼º°ø
+			// ë¡œê·¸ì¸ ì„±ê³µ
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
+			
+			//ë¡œê·¸ì¸ í›„ ì´ì „í˜ì´ì§€ë¡œ ê°€ì§€ê²Œ
 			return ".main";
 		} else {
-			request.setAttribute("errMsg", "¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			request.setAttribute("errMsg", "ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return ".member.join.login";
 		}
 	}
 
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
 	public String join(Model model, HttpServletRequest request) {
 		String email = request.getParameter("id");
@@ -95,14 +98,14 @@ public class MemberController {
 		return ".main";
 	}
 	
-	//·Î±×¾Æ¿ô
+	//ë¡œê·¸ì•„ì›ƒ
 	@RequestMapping("/member/logout")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
 		return ".main";
 	}
 	
-	//¾ÆÀÌµğ Áßº¹
+	//ì•„ì´ë”” ì¤‘ë³µ
 	@RequestMapping(value="/usingid/json",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String usingId(String id) {

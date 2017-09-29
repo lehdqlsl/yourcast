@@ -5,6 +5,18 @@
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script>
 	$(document).ready(function(){
+		//댓글 유효성 검사
+		//1. 로그인 여부 검사
+		$("#br_content").click(function(){
+			if("${sessionScope.id}"){//로그인 한 경우
+				//alert("${sessionScope.id}");
+			}else{//로그인 안 한 경우
+				var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
+				location.href="<c:url value='/member/login'/>";
+				//alert("아이디 없음");
+			}
+		});
+		////////////////////////////////////////////////////////////////////////////////		
 		//글 삭제 하기
 		$("#b_delete").click(function(){
 			var flag=confirm("정말 삭제하시겠습니까?");
@@ -29,7 +41,7 @@
 			var flag=confirm("정말 삭제하시겠습니까?");
 			if(flag){
 				alert("삭제되었습니다.");
-				location.href='<c:url value="/${sessionScope.id }/boardreply/delete?br_num='+br_num+'&b_num='+b_num+'&category_num='+category_num+'"/>';
+				location.href='<c:url value="/${requestScope.id }/boardreply/delete?br_num='+br_num+'&b_num='+b_num+'&category_num='+category_num+'&sid=${sessionScope.id}"/>';
 			}
 		});
 		//댓글 목록 불러오기
@@ -46,7 +58,7 @@
 				url:'<c:url value="/${sessionScope.id}/boardreply/list?pageNum='+rc+'&b_num=${b_num}&category_num=${category_num}"/>',
 				dataType:"xml",
 				success:function(data){
-					//alert(data);
+					alert(data);
 					$(data).find("list").each(function(){
 						var id=$(this).find("id").text();
 						//alert(id);
@@ -61,11 +73,9 @@
 							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<a href=''>신고</a>&nbsp;&nbsp;<a href=''>추천</a></p>";
 						}
 						$("#replylist").append(p);
-					})
+					});
 				}
-			});
-		
-			
+			});	
 		});
 			/* $("#report").click(function(){
 				$.ajax({
@@ -169,10 +179,11 @@
 			<br>
 
 			<!-- 댓글 영역 -->
-			<form method="post" action='<c:url value="/${sessionScope.id }/boardreply/insert"/>'>
+			<form method="post" action='<c:url value="/${requestScope.id }/boardreply/insert"/>'>
 				<input type="hidden" value="${vo.b_num }" name="b_num">
+				<input type="hidden" value="${sessionScope.id}" name="sid">
 				<div id="replyinsert">
-					<textarea rows="4" cols="70" id="br_content" name="br_content" placeholder="다른 사람의 권리를 침해하는 내용은 제재 받을 수 있습니다"></textarea>
+					<textarea rows="4" cols="70" id="br_content" name="br_content" placeholder="다른 사람의 권리를 침해하는 내용은 제재 받을 수 있습니다" style="padding: 12px 20px;box-sizing: border-box;border: 2px solid #ccc;border-radius: 4px;background-color: #f8f8f8;resize: none;"></textarea>
 				</div>
 				<input type="submit" value="등록" id="br_reg">
 				<input type="reset" value="취소" id="br_reg">

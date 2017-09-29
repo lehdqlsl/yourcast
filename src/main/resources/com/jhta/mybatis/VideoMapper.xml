@@ -15,7 +15,8 @@
 		where v_num=#{v_num}
 	</update>
 	<select id="getInfo" parameterType="int" resultType="video">
-		select * from video where v_num = #{v_num}
+		<!-- select * from video where v_num = #{v_num}-->
+		select v.*,m.id,mp.PROFILE_SAVEFILENAME from video v, member_profile mp, member m where v.m_num=mp.m_num and mp.m_num=m.m_num and v.v_num=#{v_num}
 	</select>
 	<select id="getList" resultType="video">
 		select * from video where v_delete=0
@@ -28,8 +29,12 @@
 		where g.genre_num=b.genre_num and a.age_grade_num=b.age_grade_num)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>	
 	</select>
-	<select id="getGenreList" resultType="video" parameterType="int">
-		select * from video where genre_num=#{genre_num}
+	<select id="getGenreList" resultType="video" parameterType="hashmap">
+		<!--  select * from video where genre_num=#{genre_num} and v_delete=0-->
+		select * from
+		(select aa.*,rownum rnum from
+		(select * from video where genre_num=#{genre_num} and v_delete=0 order by v_num desc) aa)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>	
 	
 	<update id="delete" parameterType="int">

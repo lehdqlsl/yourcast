@@ -6,9 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yourcast.app.dao.CategoryDAO;
 import com.yourcast.app.dao.MemberDAO;
-import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.MemberVO;
 
 @Service

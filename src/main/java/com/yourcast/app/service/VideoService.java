@@ -40,7 +40,7 @@ public class VideoService {
 	public List<VideoVO> getMemberList(HashMap<String, Object> map){
 		return dao.getMemberList(map);
 	}
-	public List<VideoVO> getGenreList(int genre_num){
-		return dao.getGenreList(genre_num);
+	public List<VideoVO> getGenreList(HashMap<String, Object> map){
+		return dao.getGenreList(map);
 	}
 }

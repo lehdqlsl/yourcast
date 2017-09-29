@@ -1,5 +1,7 @@
 package com.yourcast.app;
 
+
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +21,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.util.page.PageUtil;
+import com.util.page.VideoMainList;
 import com.yourcast.app.service.CategoryService;
+import com.yourcast.app.service.GenreService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.VideoService;
 import com.yourcast.app.vo.CategoryVO;
+import com.yourcast.app.vo.GenreVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.VideoVO;
@@ -39,6 +46,75 @@ public class VideoController {
 	@Autowired private MemberService m_service;
 	@Autowired private CategoryService c_service;
 	@Autowired private MemberProfileService mp_service;
+	@Autowired private GenreService g_service; 
+	
+	////////////////////////////////video 메인 페이지 관련 내용(민지)//////////////////////////////////
+	//클릭 시 비디오 메인 페이지로 이동
+	@RequestMapping(value="/videomain",method=RequestMethod.GET)
+	public String videoHome(Model model) {
+		List<GenreVO> glist=g_service.getList();
+		model.addAttribute("glist", glist);
+		return ".videomain";
+	}
+	
+	//클릭 시 해당 카테고리(장르)에 맞는 동영상 리스트 출력(ajax없음)
+	@RequestMapping(value="/videomain/list",method=RequestMethod.GET)
+	//@ResponseBody
+	public String videoMainList(@RequestParam(value="pageNum",defaultValue="1") int pageNum,int genre_num,Model model) {
+		List<GenreVO> glist=g_service.getList();//카테고리 리스트 출력
+		
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("genre_num", genre_num);
+		
+		//페이징 처리
+		int totalRowCount=v_service.getCount(map);
+		PageUtil pu=new PageUtil(pageNum, 20, 1, totalRowCount);
+		map.put("startRow", 1);
+		map.put("endRow",20);
+		
+		List<VideoVO> vlist=v_service.getGenreList(map);
+		
+		GenreVO gvo=g_service.getInfo(genre_num);
+		System.out.println(genre_num);
+		
+		model.addAttribute("pu",pu);
+		model.addAttribute("glist",glist);
+		model.addAttribute("vlist",vlist);
+		model.addAttribute("genre_num",genre_num);
+		model.addAttribute("genre_name", gvo.getGenre_name());
+		return ".videomain.content.list";
+	}
+	
+	//클릭 시 해당 카테고리(장르)에 맞는 동영상 리스트 출력(ajax있음)
+	@RequestMapping(value="/videomain/list/list2")
+	@ResponseBody
+	public VideoMainList moreList(@RequestParam(value="pageNum",defaultValue="1") int pageNum,int genre_num) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("genre_num", genre_num);
+		
+		//페이징 처리
+		int totalRowCount=v_service.getCount(map);
+		PageUtil pu=new PageUtil(pageNum, 20, 1, totalRowCount);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow",pu.getEndRow());
+		
+		List<VideoVO> vlist=v_service.getGenreList(map);
+		
+		VideoMainList list=new VideoMainList();
+		list.setList(vlist);
+		return list;
+	}
+	//동영상 조회
+	@RequestMapping(value="/videomain/getInfo")
+	public String videoMainGetInfo(HttpServletRequest request, Model model) {
+		String vnum=request.getParameter("v_num");
+		int v_num=Integer.parseInt(vnum);
+		VideoVO vvo= v_service.getInfo(v_num);
+		model.addAttribute("vvo",vvo);
+		return ".broadcast.getInfo";
+	}
+	///////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	@RequestMapping(value = "/{id}/video/detail", method = RequestMethod.GET)
 	public String videoDetail(@PathVariable(value = "id") String id, Model model, int v_num) {

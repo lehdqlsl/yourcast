@@ -36,6 +36,7 @@
 			alias="boardreplyreport" />
 		<typeAlias type="com.yourcast.app.vo.ExchangeVO" alias="exchange" />
 		<typeAlias type="com.yourcast.app.vo.BroadcastVO" alias="broadcast" />
+		<typeAlias type="com.yourcast.app.vo.GenreVO" alias="genre"/>
 	</typeAliases>
 
 
@@ -68,6 +69,7 @@
 		<mapper resource="com/jhta/mybatis/BoardReplyReportMapper.xml" />
 		<mapper resource="com/jhta/mybatis/ExchangeMapper.xml" />
 		<mapper resource="com/jhta/mybatis/BroadcastMapper.xml" />
+		<mapper resource="com/jhta/mybatis/GenreMapper.xml" />
 	</mappers>
 
 </configuration>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/list.css'/>?ver=2">
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
@@ -35,101 +35,9 @@
 			
 		</header>
 		<!-- 여기작성 -->
-		<c:forEach var="vo" items="${blist }">
-		<ul>
-			<li class="notice" id="list_item_26185726">
-				<div class="wrap_view">
-					<div class="img_profile">
-						<img src=""
-							onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';">
-					</div>
-					<div class="v_article">
-						<div class="name">
-							<div class="bj_name"> ${vo.id } &nbsp;&nbsp; ${vo.b_regdate } <span
-								class="u_id"></span>
-							</div><span class="time"></span>
-						</div>
-						<div class="v_title">
-						<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>'>${vo.b_title }</a>
-							<span class="noti"></span>
-						</div>
-						<div class="view">${vo.b_content }</div>
-					</div>
-					<div class="watch_area">
-						<span class="btn_up " id="likeT_26185493"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i></span>
-						<span class="btn_comment"><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i>[${vo.brcnt }]</span>
-					</div>			
-				</div>
-			</li>
-		</ul>
-		</c:forEach>
-		<!-- 페이징 -->
-		<div>
-			<!-- 이전 -->
-			<c:choose>
-				<c:when test="${pu.startPageNum>5 }">
-					<c:choose>
-						<c:when test="${not empty category_num}">
-							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.startPageNum-1 }&category_num=${category_num }"/>'>[이전]</a>
-						</c:when>
-						<c:otherwise>
-							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.startPageNum-1 }"/>'>[이전]</a>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-					[이전]
-				</c:otherwise>
-			</c:choose>
-			<!-- 숫자부분 -->
-			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-				<c:choose>
-					<c:when test="${i==pu.pageNum }"><!-- 현재페이지인 경우(색상다르게 표시) -->
-					
-						<c:choose>
-							<c:when test="${not empty category_num}">
-								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:blue">[${i }]</span></a>
-							</c:when>
-							<c:otherwise>
-								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}"/>'><span style="color:blue">[${i }]</span></a>
-							</c:otherwise>
-						</c:choose>
-					</c:when>
-					
-					<c:otherwise>
-						<c:choose>
-							<c:when test="${not empty category_num}">
-								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:#555">[${i }]</span></a>
-							</c:when>
-							<c:otherwise>
-								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}"/>'><span style="color:#555">[${i }]</span></a>
-							</c:otherwise>
-						</c:choose>
-						
-					</c:otherwise>
-					
-				</c:choose>
-			</c:forEach>
-			<!-- 다음 -->
-			<c:choose>
-				<c:when test="${pu.endPageNum<pu.totalPageCount }">
-					<c:choose>
-						<c:when test="${not empty category_num}">
-							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.endPageNum+1 }&category_num=${category_num }"/>'>[다음]</a>
-						</c:when>
-						<c:otherwise>
-							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.endPageNum+1 }"/>'>[다음]</a>
-						</c:otherwise>
-					</c:choose>
-				
-					
-				</c:when>
-				<c:otherwise>
-					[다음]
-				</c:otherwise>
-			</c:choose>
-		</div>
-		<div>
+		<div class="w3-container w3-padding-large" style="margin-bottom:32px">
+   			<h4><b>존재하지 않는 회원입니다..</b></h4>
+   		</div>
 		<!-- 작성END -->
 
 			<footer class="w3-container w3-padding-32 w3-dark-grey">
@@ -188,6 +96,4 @@
 			</div>
 
 		</div>
-
-	</div>
 </body>

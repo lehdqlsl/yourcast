@@ -5,44 +5,9 @@
 
 <!-- 기본 페이지 레이아웃 아래 div영역으로 쓰세용.-->
 <div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
-	<!-- 내용 -->
-	<div class="w3-container w3-padding-32" id="projects">
-		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">전체</h3>
-	</div>
-
-	<c:set var="doneLoop" value="false" />
-	<c:set var="vo" value="${requestScope.blist }" />
-	
-	<c:if test="${requestScope.cnt>0}">
-		<c:forEach varStatus="status1" begin="0" end="${requestScope.cnt }"
-			step="1">
-			<div class="w3-row-padding">
-				<c:forEach var="vo" varStatus="status2" begin="${status1.index*4}"
-					end="${status1.index*4+3}" step="1">
-					<c:if test="${not doneLoop}">
-						<div class="w3-col l3 m6 w3-margin-bottom">
-							<div class="w3-display-container">
-								<div class="w3-display-topleft w3-black w3-padding">${blist[status2.index].broadcast_title}</div>
-								<a
-									href="http://192.168.0.4:8082/app/bs/${blist[status2.index].m_num}">
-									<img
-									src="http://192.168.0.31:3030/${blist[status2.index].stream_key }.png"
-									alt="House" style="width: 100%">
-								</a>
-							</div>
-						</div>
-						<c:if test="${status2.index == requestScope.end}">
-							<c:set var="doneLoop" value="true" />
-						</c:if>
-					</c:if>
-				</c:forEach>
-			</div>
-		</c:forEach>
-	</c:if>
-
 	<!-- About Section -->
 	<div class="w3-container w3-padding-32" id="about">
-		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">About</h3>
+		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">비디오 메인 페이지</h3>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 			eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
 			ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
