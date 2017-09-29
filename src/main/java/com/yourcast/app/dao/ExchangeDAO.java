@@ -1,5 +1,6 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,8 +19,8 @@ public class ExchangeDAO {
 		this.sqlSession = sqlSession;
 	}
 
-	public List<ExchangeVO> getList(int m_num) {
-		return sqlSession.selectList(NAMESPACE + ".getlist", m_num);
+	public List<ExchangeVO> getList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".getlist", map);
 	}
 
 	public int getCount(int m_num) {
@@ -28,5 +29,13 @@ public class ExchangeDAO {
 
 	public int insert(ExchangeVO vo) {
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
+	}
+	
+	public int getexEa(int m_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getexEa", m_num);
+	}
+	
+	public int getexMoney(int m_num) {
+		return sqlSession.selectOne(NAMESPACE + ".getexMoney", m_num);
 	}
 }

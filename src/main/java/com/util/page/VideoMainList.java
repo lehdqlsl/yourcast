@@ -1,4 +1,4 @@
-package com.yourcast.app.vo;
+package com.util.page;
 
 import java.util.List;
 
@@ -7,15 +7,20 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="fanList")
+import com.yourcast.app.vo.VideoVO;
+
+@XmlRootElement(name="videoMainList")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class FanPagingVO {
+public class VideoMainList {
 	@XmlElement(name="list")
-	public List<FanVO> list;
-	public void setList(List<FanVO> list) {
-		this.list = list;
-	}
-	public List<FanVO> getList() {
+	public List<VideoVO> list;
+
+	public List<VideoVO> getList() {
 		return list;
 	}
+
+	public void setList(List<VideoVO> list) {
+		this.list = list;
+	}
+	
 }

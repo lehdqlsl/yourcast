@@ -2,18 +2,37 @@ package com.yourcast.app.vo;
 
 public class ExchangeVO {
 	private int e_num;
-	private int e_count;
-	private double e_ea;
-	private String e_regString;
+	private int e_ea;
+	private double e_fee;
+	private String e_regdate;
 	private int m_num;
+	private int e_money;
 
-	public ExchangeVO(int e_num, int e_count, double e_ea, String e_regString, int m_num) {
+	public ExchangeVO(int e_num, int e_ea, double e_fee, String e_regdate, int m_num) {
 		super();
 		this.e_num = e_num;
-		this.e_count = e_count;
 		this.e_ea = e_ea;
-		this.e_regString = e_regString;
+		this.e_fee = e_fee;
+		this.e_regdate = e_regdate;
 		this.m_num = m_num;
+	}
+
+	public int getE_money() {
+		return e_money;
+	}
+
+	public void setE_money(int e_money) {
+		this.e_money = e_money;
+	}
+
+	public ExchangeVO(int e_num, int e_ea, double e_fee, String e_regdate, int m_num, int e_money) {
+		super();
+		this.e_num = e_num;
+		this.e_ea = e_ea;
+		this.e_fee = e_fee;
+		this.e_regdate = e_regdate;
+		this.m_num = m_num;
+		this.e_money = e_money;
 	}
 
 	public ExchangeVO() {
@@ -28,15 +47,7 @@ public class ExchangeVO {
 		this.e_num = e_num;
 	}
 
-	public int getE_count() {
-		return e_count;
-	}
-
-	public void setE_count(int e_count) {
-		this.e_count = e_count;
-	}
-
-	public double getE_ea() {
+	public int getE_ea() {
 		return e_ea;
 	}
 
@@ -44,12 +55,20 @@ public class ExchangeVO {
 		this.e_ea = e_ea;
 	}
 
-	public String getE_regString() {
-		return e_regString;
+	public double getE_fee() {
+		return e_fee;
 	}
 
-	public void setE_regString(String e_regString) {
-		this.e_regString = e_regString;
+	public void setE_fee(double e_fee) {
+		this.e_fee = e_fee;
+	}
+
+	public String getE_regdate() {
+		return e_regdate;
+	}
+
+	public void setE_regdate(String e_regdate) {
+		this.e_regdate = e_regdate;
 	}
 
 	public int getM_num() {

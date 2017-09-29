@@ -6,10 +6,13 @@
 	<insert id="insert" parameterType="buy">
 		insert into buy values(seq_buy_num.nextval,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),#{buy_ea},#{m_num})
 	</insert>
-	<select id="getList" parameterType="int" resultType="buy">
-		select * from buy where m_num=#{m_num}
+	<select id="getList" parameterType="hashmap" resultType="buy">
+		select * from 
+		(select b.*,rownum rnum from  
+		(select * from buy where m_num=#{m_num})b)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
-	<select id="getCount" parameterType="int" resultType="int">
+	<select id="getCount" resultType="int">
 		select NVL(count(buy_num),0) cnt from buy where m_num=#{m_num}
 	</select>
 </mapper>

@@ -32,6 +32,7 @@
 					</button>
 				</div>
 			</div>
+			
 		</header>
 		<!-- 여기작성 -->
 		<c:forEach var="vo" items="${blist }">

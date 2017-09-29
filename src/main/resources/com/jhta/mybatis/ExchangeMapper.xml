@@ -4,14 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.ExchangeMapper">
 	<insert id="insert" parameterType="exchange">
-		insert into exchange values (seq_e_num.nextval,#{e_count},#{e_ea},TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),#{m_num})
+		insert into exchange values (seq_e_num.nextval,#{e_money},#{e_ea},TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'),#{m_num})
 	</insert>
 	
 	<select id="getcount" parameterType="int" resultType="int">
 		select NVL(count(*),0) from exchange where m_num = #{m_num}
 	</select>
 	
-	<select id="getlist" resultType="exchange" parameterType="int">
-		select * from exchange where m_num = #{m_num}
+	<select id="getlist" resultType="exchange" parameterType="hashmap">
+		select * from
+		(select e.*,e.e_ea*e_fee e_money,rownum rnum from (select * from exchange where m_num=#{m_num})e)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
+	
+	<select id="getexEa" parameterType="int" resultType="int">
+		select sum(e_ea) e_ea from exchange where m_num = #{m_num}
+	</select>
+	
+	<select id="getexMoney" parameterType="int" resultType="int">
+		select sum(e_ea*e_fee) e_money from exchange where m_num = #{m_num}
+	</select>
+	
 </mapper>

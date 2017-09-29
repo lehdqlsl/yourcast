@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,42 +14,46 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+import com.util.page.PageUtil;
+import com.yourcast.app.service.BuyService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.vo.BuyVO;
 import com.yourcast.app.vo.MemberVO;
+import com.yourcast.app.vo.PayVO;
 
 @Controller
 public class MemberController {
-	@Autowired
-	private MemberService mservice;
+	@Autowired private MemberService mservice;
+	@Autowired private BuyService b_service; 
 
 	public void setMservice(MemberService mservice) {
 		this.mservice = mservice;
 	}
 
-	// È¸¿ø°¡ÀÔ ÆäÀÌÁö ÀÌµ¿
+	// íšŒì›ê°€ì… í˜ì´ì§€ ì´ë™
 	@RequestMapping(value = "/member/join", method = RequestMethod.GET)
 	public String joinForm(Locale locale, Model model) {
 		return ".member";
 	}
 
-	// ·Î±×ÀÎ ÆäÀÌÁö ÀÌµ¿
+	// ë¡œê·¸ì¸ í˜ì´ì§€ ì´ë™
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public String loginForm(Locale locale, Model model) {
 		return ".member.join.login";
 	}
-	// ¾à°ü
+	// ì•½ê´€
 		@RequestMapping(value = "/member/service", method = RequestMethod.GET)
 		public String service(Locale locale, Model model) {
 			return ".member.join.service";
 		}
 	
-	// ·Î±×ÀÎ
+	// ë¡œê·¸ì¸
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
 	public String login(Model model, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -59,17 +64,19 @@ public class MemberController {
 		map.put("pwd", pwd);
 		boolean r = mservice.isMembers(map);
 		if (r) {
-			// ·Î±×ÀÎ ¼º°ø
+			// ë¡œê·¸ì¸ ì„±ê³µ
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
+			
+			//ë¡œê·¸ì¸ í›„ ì´ì „í˜ì´ì§€ë¡œ ê°€ì§€ê²Œ
 			return ".main";
 		} else {
-			request.setAttribute("errMsg", "¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			request.setAttribute("errMsg", "ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return ".member.join.login";
 		}
 	}
 
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
 	public String join(Model model, HttpServletRequest request) {
 		String email = request.getParameter("id");
@@ -91,14 +98,14 @@ public class MemberController {
 		return ".main";
 	}
 	
-	//·Î±×¾Æ¿ô
+	//ë¡œê·¸ì•„ì›ƒ
 	@RequestMapping("/member/logout")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
 		return ".main";
 	}
 	
-	//¾ÆÀÌµğ Áßº¹
+	//ì•„ì´ë”” ì¤‘ë³µ
 	@RequestMapping(value="/usingid/json",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String usingId(String id) {
@@ -110,5 +117,41 @@ public class MemberController {
 			json.put("using", false);
 		}
 		return json.toString();
+	}
+	
+	@RequestMapping(value = "/member/charge/star", method = RequestMethod.GET)
+	public String star() {		
+		return ".member.charge.star";
+	}
+	
+	@RequestMapping(value = "/member/charge/buyStar", method = RequestMethod.POST)
+	public String buyStar(int buy_ea1,int buy_ea2,HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		MemberVO mvo = mservice.getInfo(id);
+		
+		int m_num = mvo.getM_num();
+		int buy_ea = buy_ea1*buy_ea2;
+		int star_candy = mvo.getStar_candy() + buy_ea;
+		int money = mvo.getMoney() - (buy_ea*110);
+		
+		mservice.moneyUpdate(new MemberVO(m_num, money, 0));
+		mservice.starcandyUpdate(new MemberVO(m_num, 0, star_candy));
+		
+		b_service.insert(new BuyVO(0, null, buy_ea, m_num));
+		
+		model.addAttribute("mvo",mvo);
+		
+		return ".member.charge.star";
+	}
+	
+	@RequestMapping(value = "/member/charge/money", method = RequestMethod.POST)
+	public String money(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		MemberVO mvo = mservice.getInfo(id);
+		int m_num = mvo.getM_num();
+		
+		model.addAttribute("mvo",mvo);
+		
+		return ".member.charge.money";
 	}
 }

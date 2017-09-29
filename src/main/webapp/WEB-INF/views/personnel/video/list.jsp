@@ -89,7 +89,7 @@
 		<form method="post" action="<c:url value='/${requestScope.id}/video/delete'/>" onsubmit="return deleteV()">
 		<table border="1">
 			<tr>
-				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>관람등급</th><th>장르</th><th>제목</th><th>내용</th><th>등록일</th>
+				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>장르</th><th>관람등급</th><th>제목</th><th>내용</th><th>등록일</th>
 				<th>썸네일</th><th>조회수</th>
 			</tr>
 			
@@ -128,7 +128,7 @@
 		<!-- 페이징 -->
 		<div>
 		<c:choose>
-			<c:when test="${pu.startPageNum>1 }">
+			<c:when test="${pu.pageNum>1 }">
 				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${1 }'/>">[처음으로]</a>
 			</c:when>
 			<c:otherwise>

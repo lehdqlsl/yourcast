@@ -3,6 +3,7 @@ package com.yourcast.app;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
@@ -34,13 +35,14 @@ import com.yourcast.app.vo.MemberVO;
 public class BoardReplyController {
 	@Autowired
 	private CategoryService c_service;
+
 	@Autowired private BoardService b_service;
 	@Autowired private BoardReplyService br_service;
 	@Autowired private MemberService m_serivce;
 	@Autowired private BoardReplyUpService bru_service;
 	@Autowired private BoardReplyReportService brr_service;
 	
-	//´ñ±Û ÀÛ¼º
+	//ëŒ“ê¸€ ì‘ì„±
 	@RequestMapping(value="/{id}/boardreply/insert",method=RequestMethod.POST)
 	public String insert(@PathVariable(value="id") String id,HttpServletRequest request, Model model) {
 		MemberVO mvo=m_serivce.getInfo(id);
@@ -50,40 +52,45 @@ public class BoardReplyController {
 		int b_num=Integer.parseInt(bnum);
 		BoardReplyVO brvo=new BoardReplyVO(0, br_content, null, 0, b_num, mvo.getM_num());
 		br_service.insert(brvo);
-		
-		BoardVO bvo= b_service.getInfo(b_num);
-		int category_num=bvo.getCategory_num();
-		return "redirect:/personnel/board/getInfo?b_num="+b_num+"&category_num="+category_num;
+
+		BoardVO bvo = b_service.getInfo(b_num);
+		int category_num = bvo.getCategory_num();
+
+		BoardVO vo = b_service.getInfo(bvo.getBj_num());
+
+		return "redirect:/" + id + "/board/getInfo?b_num=" + b_num + "&category_num=" + category_num;
 	}
-	//´ñ±Û Ãâ·Â
-	@RequestMapping(value="/{id}/boardreply/list")
+
+	// ëŒ“ê¸€ ì¶œë ¥
+	@RequestMapping(value = "/{id}/boardreply/list")
 	@ResponseBody
 	public BoardReplyList moreList(@RequestParam(value="pageNum",defaultValue="1") @PathVariable(value="id")String id, int pageNum, int b_num,int category_num) {
 		CategoryVO vo = c_service.getInfo(category_num);
-		HashMap<String, Integer> map=new HashMap<String, Integer>();
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("m_num", vo.getM_num());
+
 		map.put("category_num",category_num);
-		
-		
-		//ÆäÀÌÂ¡ Ã³¸®
+		//í˜ì´ì§• ì²˜ë¦¬
 		int totalRowCount=br_service.getCount(b_num);
 		PageUtil pu=new PageUtil(pageNum,5,1,totalRowCount);
+
 		map.put("b_num", b_num);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-		List<BoardReplyVO> brlist= br_service.getList(map);
-		
-		BoardReplyList list= new BoardReplyList();
+		List<BoardReplyVO> brlist = br_service.getList(map);
+
+		BoardReplyList list = new BoardReplyList();
 		list.setList(brlist);
 		return list;
 	}
-	//´ñ±Û »èÁ¦
-	@RequestMapping(value="/{id}/boardreply/delete")
-	public String delete(int br_num,int b_num,int category_num){
+
+	// ëŒ“ê¸€ ì‚­ì œ
+	@RequestMapping(value = "/{id}/boardreply/delete")
+	public String delete(@PathVariable(value = "id") String id,int br_num, int b_num, int category_num) {
 		br_service.delete(br_num);
-		return "redirect:/personnel/board/getInfo?b_num="+b_num+"&category_num="+category_num;
+		return "redirect:/"+id+"/board/getInfo?b_num=" + b_num + "&category_num=" + category_num;
 	}
-	//´ñ±Û½Å°í
+	//ëŒ“ê¸€ì‹ ê³ 
 	@RequestMapping(value="/replyreport/insert",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String insert(int br_num, String m_num) {
@@ -101,7 +108,7 @@ public class BoardReplyController {
 		}
 		return json.toString();
 	}
-	//´ñ±ÛÃßÃµ
+	//ëŒ“ê¸€ì¶”ì²œ
 	@RequestMapping(value="/replyup/insert",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String up_insert(String m_num,int br_num) {
@@ -110,7 +117,7 @@ public class BoardReplyController {
 		BoardReplyUpVO bru1 = bru_service.isCheck(vo);
 		int brucount = bru_service.getCount(br_num);
 		JSONObject json = new JSONObject();
-		//System.out.println("´ñ±ÛÃßÃµ°¹¼ö:" + bru_service.getCount(br_num));
+		//System.out.println("ëŒ“ê¸€ì¶”ì²œê°¯ìˆ˜:" + bru_service.getCount(br_num));
 		//model.addAttribute("getCount",bru_service.getCount(br_num));
 		if(bru1!=null) { 
 			json.put("result", "true");
