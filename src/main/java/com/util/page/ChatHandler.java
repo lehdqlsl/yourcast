@@ -44,8 +44,8 @@ public class ChatHandler extends TextWebSocketHandler {
 				bj_num = (Long) jsonObj.get("bj_num");
 				msg = (String) jsonObj.get("msg");
 				JSONObject obj = new JSONObject();
-				for(User user : list) {
-					if(session == user.getSession()) {
+				for (User user : list) {
+					if (session == user.getSession()) {
 						obj.put("id", user.getId());
 						obj.put("name", user.getName());
 						obj.put("gender", user.getGender());
@@ -64,8 +64,12 @@ public class ChatHandler extends TextWebSocketHandler {
 				e.printStackTrace();
 			}
 			break;
-		case 2:
-
+		case 2: // 비로그인 채팅추가
+			bj_num = (Long) jsonObj.get("bj_num");
+			User user = new User();
+			user.setBj_num(bj_num);
+			user.setSession(session);
+			list.add(user);
 			break;
 		default:
 			break;
@@ -77,8 +81,8 @@ public class ChatHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println(session.getLocalAddress() + " 퇴장");
-		for(User user : list) {
-			if(session == user.getSession()) {
+		for (User user : list) {
+			if (session == user.getSession()) {
 				System.out.println("리스트삭제");
 				list.remove(user);
 				break;

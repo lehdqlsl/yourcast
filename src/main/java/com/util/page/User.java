@@ -29,6 +29,9 @@ public class User {
 		this.session = session;
 		this.bj_num = bj_num;
 	}
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public long getGrdae() {
 		return grade;

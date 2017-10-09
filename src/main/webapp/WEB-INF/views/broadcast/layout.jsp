@@ -46,8 +46,9 @@
 			file : '${requestScope.url}'
 		} ],
 		autostart : true,
-		width : 1300,
-		height : 735,
+		width: "100%",
+		height: "100%",
+		aspectratio: "16:9",
 		primary : "flash"
 	});
 	var wsocket;
@@ -65,28 +66,40 @@
 
 	$(window).on("load", function(e) {
 		var vo = '${requestScope.vo}';
-		if(vo == ''){
-			alert("로그인하세요.");
-		}else{
-			//등급처리
-			//블랙리스트처리
-			wsocket = new SockJS("/app/echo.sockjs");
-			wsocket.onmessage = onMessage;
-			wsocket.onclose = onClose;
-			wsocket.onerror = onError;
-			wsocket.onopen = function(){
-				var join = {};
-				join.packet = 0;
-				join.bj_num = ${requestScope.bj_num};
+		//등급처리
+		//블랙리스트처리
+		wsocket = new SockJS("/app/echo.sockjs");
+		wsocket.onmessage = onMessage;
+		wsocket.onclose = onClose;
+		wsocket.onerror = onError;
+		wsocket.onopen = function(){
+			var join = {};
+			join.packet = 0;
+			join.bj_num = ${requestScope.bj_num};
+			if(vo != ''){
 				join.id = '${requestScope.vo.id}';
 				join.name = '${requestScope.vo.name}';
 				join.gender = '${requestScope.vo.gender_num}';
 				join.grade = 0;
-				wsocket.send( JSON.stringify(join));
+			}else{
+				join.packet=2;
 			}
+			wsocket.send( JSON.stringify(join));
 		}
 	});
 
+	$("#actionbox").click(function(){
+		var vo = '${requestScope.vo}';
+		if(vo == ''){
+			var result = confirm('채팅에 참여하시려면 로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?'); 
+			if(result) { 
+				location.replace('http://localhost:8081/app/member/login'); 
+			} else {
+				
+			}				
+		}
+	});
+	
 	 $("#write_area").keydown(function (event) {
          if (event.which === 13) {  
         	var msg = $("#write_area").html();
@@ -134,6 +147,10 @@
 	function onError(evt){
 		console.log('에러호출');
 	}
+	
+	$("#btn_emo").click(function(){
+
+	});
 </script>
 
 </html>
