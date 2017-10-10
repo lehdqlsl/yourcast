@@ -28,4 +28,8 @@ public class PayService {
 	public int getCount(int m_num) {
 		return dao.getCount(m_num);
 	}
+	
+	public List<PayVO> getInfo(){
+		return dao.getInfo();
+	}
 }

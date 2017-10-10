@@ -8,6 +8,7 @@
 
 <div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
 
+<!-- 
 	 <script type="text/javascript">
 		 $(document).ready(function(){
 			function buyStar(){
@@ -47,14 +48,27 @@
 			});
 		 });
 	 </script>
+ -->
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$( ".star" ).on( "click", function() {
+				var ea = $(this).attr("data-value");
+				window.open("<c:url value='/member/charge/starCharge?ea=" + ea + "'/>","_blank","width=500,height=500");
+			});
+			$( "#money" ).on( "click", function() {
+				window.open("<c:url value='/member/charge/money'/>","_blank","width=500,height=500");
+			});
+		});
+	</script>
 
 	<div class="w3-container w3-padding-32" id="projects">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">
 			<a href="#" style="text-decoration: none;color:red;">
-				별풍선구매
+				별사탕구매
 			</a>
 			&nbsp;&nbsp;&nbsp;
-			<a href="<c:url value='/member/charge/money'/>" style="text-decoration: none;">
+			<a href="#" style="text-decoration: none;" id="money">
 				Money충전
 			</a>
 		</h3>
@@ -62,28 +76,29 @@
 		
 	<table style="width:700px;height:100px;">
 		<tr>
-			<th>별사탕 10개=1,100원<input type="button" class="star" value="구매하기"><input type="hidden" value="10"></th>
+			<th>별사탕 10개=1,100원<input type="button" class="star" data-value="10" value="구매하기"></th>
 			<th></th>
-			<th>별사탕 30개=3,300원<input type="button" class="star" value="구매하기"><input type="hidden" value="30"></th>
+			<th>별사탕 30개=3,300원<input type="button" class="star" data-value="30" value="구매하기"></th>
 		</tr>
 		<tr>
 			<th></th><th></th><th></th>
 		</tr>
 		<tr>
-			<th>별사탕 50개=5,500원<input type="button" class="star" value="구매하기"><input type="hidden" value="50"></th>
+			<th>별사탕 50개=5,500원<input type="button" class="star" data-value="50" value="구매하기"></th>
 			<th></th>
-			<th>별사탕 100개=11,000원<input type="button" class="star" value="구매하기"><input type="hidden" value="100"></th>
+			<th>별사탕 100개=11,000원<input type="button" class="star" data-value="100" value="구매하기"></th>
 		</tr>
 		<tr>
 			<th></th><th></th><th></th>
 		</tr>
 		<tr>
-			<th>별사탕 300개=33,000원<input type="button" class="star" value="구매하기"><input type="hidden" value="300"></th>
+			<th>별사탕 300개=33,000원<input type="button" class="star" data-value="300" value="구매하기"></th>
 			<th></th>
-			<th>별사탕 500개=55,000원<input type="button" class="star" value="구매하기"><input type="hidden" value="500"></th>
+			<th>별사탕 500개=55,000원<input type="button" class="star" data-value="500" value="구매하기"></th>
 		</tr>
 	</table>
 	
+<!-- 
 	<div id="stardiv" style="display: none;">
 		<form method="post" action="<c:url value='/member/charge/buyStar'/>">
 			<input type="hidden" name="buy_ea1" id="buy_ea1">
@@ -91,6 +106,7 @@
 			합계금액 : <span id="result"></span>
 		</form>
 	</div>
+-->
 
 </div>
 
