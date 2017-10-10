@@ -1,5 +1,6 @@
 package com.yourcast.app.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,11 @@ public class VideoReplyService {
 	public VideoReplyVO getInfo(int vr_num) {
 		return dao.getInfo(vr_num);
 	}
-	public List<VideoReplyVO> getList(int v_num){
-		return dao.getList(v_num);
+	public List<VideoReplyVO> getList(HashMap<String, Object> map){
+		return dao.getList(map);
+	}
+	public int getCount(int v_num) {
+		return dao.getCount(v_num);
 	}
 	
 }

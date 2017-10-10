@@ -30,6 +30,10 @@ public class MemberService {
 		return dao.getInfo(id);
 	}
 
+	public MemberVO getInfo(int m_num) {
+		return dao.getInfo(m_num);
+	}
+
 	public List<MemberVO> getList() {
 		return dao.getList();
 	}

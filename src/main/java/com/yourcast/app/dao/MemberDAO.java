@@ -50,7 +50,7 @@ public class MemberDAO {
 		return sqlSession.selectOne(NAMESPACE + ".getInfo", id);
 	}
 	public MemberVO getInfo(int m_num) {
-		return sqlSession.selectOne(NAMESPACE + ".getInfo", m_num);
+		return sqlSession.selectOne(NAMESPACE + ".getInfo2", m_num);
 	}
 	public MemberVO isMember(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE + ".isMember", map);

@@ -42,7 +42,7 @@ public class BoardReplyController {
 	@Autowired private BoardReplyUpService bru_service;
 	@Autowired private BoardReplyReportService brr_service;
 	
-	//댓글 작성
+	//�뙎湲� �옉�꽦
 	@RequestMapping(value="/{id}/boardreply/insert",method=RequestMethod.POST)
 	public String insert(@PathVariable(value="id") String id,HttpServletRequest request, Model model) {
 		MemberVO mvo=m_serivce.getInfo(id);
@@ -61,7 +61,7 @@ public class BoardReplyController {
 		return "redirect:/" + id + "/board/getInfo?b_num=" + b_num + "&category_num=" + category_num;
 	}
 
-	// 댓글 출력
+	// �뙎湲� 異쒕젰
 	@RequestMapping(value = "/{id}/boardreply/list")
 	@ResponseBody
 	public BoardReplyList moreList(@RequestParam(value="pageNum",defaultValue="1") @PathVariable(value="id")String id, int pageNum, int b_num,int category_num) {
@@ -70,7 +70,7 @@ public class BoardReplyController {
 		map.put("m_num", vo.getM_num());
 
 		map.put("category_num",category_num);
-		//페이징 처리
+		//�럹�씠吏� 泥섎━
 		int totalRowCount=br_service.getCount(b_num);
 		PageUtil pu=new PageUtil(pageNum,5,1,totalRowCount);
 
@@ -84,13 +84,14 @@ public class BoardReplyController {
 		return list;
 	}
 
-	// 댓글 삭제
+	// �뙎湲� �궘�젣
 	@RequestMapping(value = "/{id}/boardreply/delete")
 	public String delete(@PathVariable(value = "id") String id,int br_num, int b_num, int category_num) {
 		br_service.delete(br_num);
 		return "redirect:/"+id+"/board/getInfo?b_num=" + b_num + "&category_num=" + category_num;
 	}
-	//댓글신고
+	
+	//�뙎湲��떊怨�
 	@RequestMapping(value="/replyreport/insert",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String insert(int br_num, String m_num) {
@@ -108,7 +109,7 @@ public class BoardReplyController {
 		}
 		return json.toString();
 	}
-	//댓글추천
+	//�뙎湲�異붿쿇
 	@RequestMapping(value="/replyup/insert",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String up_insert(String m_num,int br_num) {
@@ -117,7 +118,7 @@ public class BoardReplyController {
 		BoardReplyUpVO bru1 = bru_service.isCheck(vo);
 		int brucount = bru_service.getCount(br_num);
 		JSONObject json = new JSONObject();
-		//System.out.println("댓글추천갯수:" + bru_service.getCount(br_num));
+		//System.out.println("�뙎湲�異붿쿇媛��닔:" + bru_service.getCount(br_num));
 		//model.addAttribute("getCount",bru_service.getCount(br_num));
 		if(bru1!=null) { 
 			json.put("result", "true");

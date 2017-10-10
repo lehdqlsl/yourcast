@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yourcast.app.service.BroadcastService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.vo.BroadcastVO;
 import com.yourcast.app.vo.MemberVO;
 
 @Controller
@@ -24,20 +25,26 @@ public class BroadcastController {
 
 	@RequestMapping(value = "/bs/{id}", method = RequestMethod.GET)
 	public String home(@PathVariable(value = "id") String id, Model model, HttpServletRequest request) {
-		String stream_key = bservice.getInfo(Integer.parseInt(id)).getStream_key();
+		MemberVO bjvo = mservice.getInfo(id);
+		BroadcastVO bvo = bservice.getInfo(bjvo.getM_num());
+		String stream_key = bservice.getInfo(bjvo.getM_num()).getStream_key();
 		String url = "rtmp://192.168.0.31:3535/myapp/" + stream_key;
 
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("id");
+
 		MemberVO vo = null;
+
+
 		if (uid != null) {
 			vo = mservice.getInfo(uid);
 			model.addAttribute("vo", vo);
 		}
 
 		model.addAttribute("url", url);
-		model.addAttribute("bj_num", id);
-
+		model.addAttribute("bj_num", bjvo.getM_num());
+		model.addAttribute("bjvo", bjvo);
+		model.addAttribute("bvo", bvo);
 		return ".broadcast";
 	}
 }

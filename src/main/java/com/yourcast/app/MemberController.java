@@ -19,20 +19,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import com.util.page.PageUtil;
+import com.yourcast.app.service.BroadcastService;
 import com.yourcast.app.service.BuyService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.PayService;
+import com.yourcast.app.vo.BroadcastVO;
 import com.yourcast.app.vo.BuyVO;
 import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.PayVO;
 
 @Controller
 public class MemberController {
-	@Autowired private MemberService mservice;
-	@Autowired private BuyService b_service; 
-	@Autowired private PayService p_service;
+	@Autowired
+	private MemberService mservice;
+	@Autowired
+	private BuyService b_service;
+	@Autowired
+	private BroadcastService bro_service;
 
 	public void setMservice(MemberService mservice) {
 		this.mservice = mservice;
@@ -49,13 +53,19 @@ public class MemberController {
 	public String loginForm(Locale locale, Model model) {
 		return ".member.join.login";
 	}
-	// �빟愿�
+
 		@RequestMapping(value = "/member/service", method = RequestMethod.GET)
 		public String service(Locale locale, Model model) {
 			return ".member.join.service";
 		}
-	
-	// 濡쒓렇�씤
+
+	// 약관
+	@RequestMapping(value = "/member/service", method = RequestMethod.GET)
+	public String service(Locale locale, Model model) {
+		return ".member.join.service";
+	}
+
+	// 로그인
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
 	public String login(Model model, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -69,8 +79,8 @@ public class MemberController {
 			// 濡쒓렇�씤 �꽦怨�
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
-			
-			//濡쒓렇�씤 �썑 �씠�쟾�럹�씠吏�濡� 媛�吏�寃�
+
+			// 로그인 후 이전페이지로 가지게
 			return ".main";
 		} else {
 			request.setAttribute("errMsg", "�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎.");
@@ -99,40 +109,41 @@ public class MemberController {
 		}
 		return ".main";
 	}
-	
-	//濡쒓렇�븘�썐
+
+
+	// 로그아웃
 	@RequestMapping("/member/logout")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
 		return ".main";
 	}
-	
-	//�븘�씠�뵒 以묐났
-	@RequestMapping(value="/usingid/json",produces="application/json;charset=utf-8")
+
+	// 아이디 중복
+	@RequestMapping(value = "/usingid/json", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String usingId(String id) {
-		MemberVO vo=mservice.getInfo(id);
-		JSONObject json=new JSONObject();
-		if(vo!=null) {
-			json.put("using",true);
-		}else {
+		MemberVO vo = mservice.getInfo(id);
+		JSONObject json = new JSONObject();
+		if (vo != null) {
+			json.put("using", true);
+		} else {
 			json.put("using", false);
 		}
 		return json.toString();
 	}
-	
+
 	@RequestMapping(value = "/member/charge/star", method = RequestMethod.GET)
-	public String star() {		
+	public String star() {
 		return ".member.charge.star";
 	}
-	
+
 	@RequestMapping(value = "/member/charge/buyStar", method = RequestMethod.POST)
-	public String buyStar(int buy_ea1,int buy_ea2,HttpSession session, Model model) {
-		String id = (String)session.getAttribute("id");
+	public String buyStar(int buy_ea1, int buy_ea2, HttpSession session, Model model) {
+		String id = (String) session.getAttribute("id");
 		MemberVO mvo = mservice.getInfo(id);
-		
+
 		int m_num = mvo.getM_num();
-		int buy_ea = buy_ea1*buy_ea2;
+		int buy_ea = buy_ea1 * buy_ea2;
 		int star_candy = mvo.getStar_candy() + buy_ea;
 		int money = mvo.getMoney() - (buy_ea*110);
 		
@@ -181,5 +192,52 @@ public class MemberController {
 		model.addAttribute("exit","exit");
 		
 		return "/member/charge/money";
+	}
+
+
+	@RequestMapping(value = "/member/broadcast", method = RequestMethod.GET)
+	public String broadcast(HttpSession session, Model model) {
+		String id = (String) session.getAttribute("id");
+		MemberVO mvo = mservice.getInfo(id);
+		int m_num = mvo.getM_num();
+		BroadcastVO bvo = bro_service.getInfo(m_num);
+
+		model.addAttribute("bvo", bvo);
+
+		return ".member.broadcast.broadcast";
+	}
+
+	@RequestMapping(value = "/member/broadcast/update", method = RequestMethod.POST)
+	public String broadcastUpdate(HttpSession session, Model model, HttpServletRequest request) {
+		String id = (String) session.getAttribute("id");
+		MemberVO mvo = mservice.getInfo(id);
+		int m_num = mvo.getM_num();
+
+		String broadcast_title = request.getParameter("broadcast_title");
+		String genre_num = request.getParameter("genre_num");
+		String frmAdult = request.getParameter("frmAdult");
+		String frmAccess = request.getParameter("frmAccess");
+		String frmAccessCode = null;
+
+		BroadcastVO bvo = new BroadcastVO();
+		bvo.setBroadcast_title(broadcast_title);
+		bvo.setGenre_num(Integer.parseInt(genre_num));
+		bvo.setM_num(m_num);
+		if (frmAdult == null) {
+			bvo.setAge_grade_num(1);
+		} else {
+			bvo.setAge_grade_num(2);
+		}
+
+		if (frmAccess == null) {
+			bvo.setBroadcast_pwd(null);
+		} else {
+			frmAccessCode = request.getParameter("frmAccessCode");
+			bvo.setBroadcast_pwd(frmAccessCode);
+		}
+
+		bro_service.update(bvo);
+
+		return "redirect:/member/broadcast";
 	}
 }
