@@ -193,9 +193,7 @@
 
 /* 150907 채팅 이모티콘 위치 */
 #emoticonArea {display:none; position:absolute;  z-index:9999; text-align:left; padding:0 0 12px;}
-.contbox #emoticonArea { left:-248px; bottom:0; }
-.videowrap #emoticonArea { left: 0; bottom: auto; }
-.videowrap .commentList #emoticonArea { left: 60px; }
+#emoticonArea { left:-248px; bottom:0; }
 /* 스크린모드 smode 전용 2015-11-11 추가 */
 .smode .chat_area .layer_context a {color:#686e7c !important;}
 .smode .chat_area .vote_txt {background:#313237; color:#888;}

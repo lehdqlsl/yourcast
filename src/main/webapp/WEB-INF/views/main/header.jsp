@@ -16,11 +16,14 @@
 						class="w3-bar-item w3-button">로그인</a>
 				</c:when>
 				<c:otherwise>
-					<a href="<c:url value='/${sessionScope.id }'/>" class="w3-bar-item w3-button">${sessionScope.id }</a>
+					<a href="<c:url value='/${sessionScope.id }'/>"
+						class="w3-bar-item w3-button">${sessionScope.id }</a>
 					<a href="<c:url value='/member/charge/star'/>"
 						class="w3-bar-item w3-button">별풍선 구매</a>
 					<a href="<c:url value='/member/history/pay'/>"
 						class="w3-bar-item w3-button">내역 및 환전</a>
+					<a href="<c:url value='/member/broadcast'/>"
+						class="w3-bar-item w3-button">방송 설정</a>
 					<a href="<c:url value='/member/logout'/>"
 						class="w3-bar-item w3-button">로그아웃</a>
 				</c:otherwise>

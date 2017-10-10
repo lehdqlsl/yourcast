@@ -6,13 +6,62 @@
 <style type="text/css">
 .videobox {
 	position: absolute;
-	left: 0px;
-	right: 20%;
 	top: 57px;
+	left: 0px;
 	bottom: 0;
-	height: 100%;
 	overflow-x: hidden;
 	overflow-y: scroll;
+	max-width: 1600px;
+	right: 320px;
+}
+
+.info {
+	position: relative;
+	z-index: 11;
+	padding: 15px 0 40px 100px;
+	min-height: 80px;
+	display: block;
+}
+
+.player {
+	bottom: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	max-width: 1600px;
+	max-height: 760px;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	display: block;
+}
+
+.player_list {
+	position: relative;
+	min-width: 460px;
+	z-index: 52;
+	height: 30px;
+	padding: 15px 20px 40px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.bjlogo {
+	position: absolute;
+	left: 10px;
+	top: 0;
+	padding: 16px 0 0 1px;
+}
+
+.player_list ul {
+	position: relative;
+	float: right;
+	padding: 0;
+	margin: 0;
+}
+
+.player_list ul li {
+	display: inline;
+	margin-left: 10px;
+	line-height: 1.6;
 }
 
 .chat_area * {
@@ -41,27 +90,125 @@ em {
 	line-height: 0;
 	text-indent: -9999px;
 }
+
+dd.name {
+	margin: 0;
+	font-size: 14px;
+	color: #328fde;
+	font-weight: bold;
+	padding: 0 0 8px;
+}
+
+.bj dt {
+	width: 100%;
+	font-size: 18px;
+	line-height: 1.3em;
+	font-weight: bold;
+	color: #555;
+	padding: 0 0 13px;
+	margin: 0 0 0 -2px;
+	word-wrap: break-word;
+}
+
+.broadcast_viewer_cnt button span {
+	position: relative;
+	padding-left: 28px;
+	font-size: 15px;
+	background: url(http://res.afreecatv.com/images/flashplayer/broadcast_viewer.png) no-repeat left
+		50%;
+}
+
+.broadcast_viewer_cnt button {
+	position: relative;
+	z-index: 2;
+	overflow: visible;
+	height: 19px;
+	cursor: pointer;
+	outline: none;
+	border: none;
+	color: #555;
+	font-size: 15px;
+	background-color: #fff;
+	padding-top: 15px;
+}
+
+.broadcast_viewer_cnt button span em {
+	font-size: 16px;
+}
+
+.broadcast_viewer_cnt {
+	position: absolute;
+	top: -2px;
+	right: 10px;
+	z-index: 12;
+}
 </style>
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/chat_wrap.css'/>?ver=13">
+	href="<c:url value='/resources/css/chat_wrap.css'/>?ver=16">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/chat_layer.css'/>?ver=1">
 </head>
 </html>
 <div class="w3-main" style="margin-top: 54px;">
-	<div class="videobox"
-		style="max-width: 1300px; max-height: 735px; width: 100%; height: 100%;">
-		<div id="container">Loading the player ...</div>
+	<div class="videobox">
+		<div class="player">
+			<div id="container">Loading the player ...</div>
+		</div>
+		<div class="player_list">
+			<ul>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+			</ul>
+		</div>
+
+
+		<div class="info">
+			<div class="broadcast_viewer_cnt">
+				<button type="text">
+					<span><em id="nAllViewer">3,048</em>명 시청</span>
+				</button>
+			</div>
+			<div class="bjlogo">
+				<img src="http://stimg.afreecatv.com/LOGO/gt/gtv7/gtv7.jpg"
+					onerror="this.src='http://www.afreecatv.com/mybs/img/default_small_re.gif'"
+					alt="BJ 로고" class="thum"> <a
+					href="http://www.afreecatv.com/gtv7" target="_blank" title="방송국 가기"
+					class="btn"></a>
+			</div>
+			<dl class="bj">
+				<dd class="name">${bjvo.name }</dd>
+				<dt>${bvo.broadcast_title }</dt>
+			</dl>
+		</div>
 	</div>
+
+
 	<div class="chatbox" id="chatbox">
 		<div class="chat_area" id="chat_area"></div>
 		<div id="actionbox" class="actionbox">
 			<!-- 버튼들 -->
 			<ul id="ul1" class="ul1">
-				<li id="btn_emo" class="emo first"><a href="javascript:;">이모티콘</a><em class="ttip" style="display: none;">이모티콘<span></span></em><span
+				<li id="btn_emo" class="emo first"><a href="javascript:;">이모티콘</a><em
+					class="ttip" style="display: none;">이모티콘<span></span></em><span
 					class="emo_tiplayer" id="emoLayer" style="display: none;"><em
 						class="txt">이모티콘은 한번에 3개까지만 사용가능합니다.</em><span class="icon"></span>
-					<button type="button" class="close">닫기</button></span></li>
+						<button type="button" class="close">닫기</button></span></li>
 				<!-- 활성화  class="on" 추가 -->
 				<li id="btn_police" class="police"><a href="javascript:;">신고</a><em
 					class="ttip">신고<span></span></em></li>
