@@ -12,7 +12,7 @@
 		select * from
 		(select a.*,m.id from
 		(select u.*,rownum rnum from use u
-		where u.m_num=#{m_num})a, member m where a.bj_num=m.m_num)
+		where u.m_num=#{m_num} order by use_num desc)a, member m where a.bj_num=m.m_num)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	
@@ -20,7 +20,7 @@
 		select * from
 		(select a.*,m.id from
 		(select u.*,rownum rnum from use u
-		where u.bj_num=#{bj_num})a, member m where a.m_num=m.m_num)
+		where u.bj_num=#{bj_num} order by use_num desc)a, member m where a.m_num=m.m_num)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	

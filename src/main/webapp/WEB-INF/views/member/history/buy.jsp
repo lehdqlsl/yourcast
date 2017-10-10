@@ -34,7 +34,7 @@
 		<div>
 		<c:choose>
 			<c:when test="${pu.pageNum>1 }">
-				<a href="<c:url value='/main/history/buy?pageNum=${1 }'/>">[처음으로]</a>
+				<a href="<c:url value='/member/history/buy?pageNum=${1 }'/>">[처음으로]</a>
 			</c:when>
 			<c:otherwise>
 				[처음으로]
@@ -42,7 +42,7 @@
 		</c:choose>
 		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
-				<a href="<c:url value='/main/history/buy?pageNum=${pu.startPageNum-1 }'/>">[이전]</a>
+				<a href="<c:url value='/member/history/buy?pageNum=${pu.startPageNum-1 }'/>">[이전]</a>
 			</c:when>
 			<c:otherwise>
 				[이전]
@@ -54,13 +54,13 @@
 						<span style="color:blue">[${i }]</span>
 					</c:when>
 					<c:otherwise>
-						<a href="<c:url value='/main/history/buy?pageNum=${i }'/>"><span style="color:#555">[${i }]</span></a>
+						<a href="<c:url value='/member/history/buy?pageNum=${i }'/>"><span style="color:#555">[${i }]</span></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 		<c:choose>
 			<c:when test="${pu.endPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/main/history/buy?pageNum=${pu.endPageNum+1 }'/>">[다음]</a>
+				<a href="<c:url value='/member/history/buy?pageNum=${pu.endPageNum+1 }'/>">[다음]</a>
 			</c:when>
 			<c:otherwise>
 				[다음]
@@ -68,7 +68,7 @@
 		</c:choose>
 		<c:choose>
 			<c:when test="${pu.startPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/main/history/buy?pageNum=${pu.totalPageCount }'/>">[끝으로]</a>
+				<a href="<c:url value='/member/history/buy?pageNum=${pu.totalPageCount }'/>">[끝으로]</a>
 			</c:when>
 			<c:otherwise>
 				[끝으로]

@@ -29,6 +29,12 @@ public class PayVO {
 		this.p_name = p_name;
 	}
 
+	public PayVO(int p_num, String p_name) {
+		super();
+		this.p_num = p_num;
+		this.p_name = p_name;
+	}
+
 	public int getPay_num() {
 		return pay_num;
 	}

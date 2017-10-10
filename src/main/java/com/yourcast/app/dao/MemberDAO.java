@@ -55,4 +55,8 @@ public class MemberDAO {
 	public MemberVO isMember(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE + ".isMember", map);
   }
+	
+	public int moneyUpdateAdmin(int a_money) {
+		return sqlSession.update(NAMESPACE + ".moneyUpdateAdmin",a_money);
+	}
 }

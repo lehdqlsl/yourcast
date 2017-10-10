@@ -13,7 +13,7 @@
 	
 	<select id="getlist" resultType="exchange" parameterType="hashmap">
 		select * from
-		(select e.*,e.e_ea*e_fee e_money,rownum rnum from (select * from exchange where m_num=#{m_num})e)
+		(select e.*,e.e_ea*e_fee e_money,rownum rnum from (select * from exchange where m_num=#{m_num} order by e_num desc)e)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	

@@ -31,4 +31,8 @@ public class PayDAO {
 	public int getCount(int m_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getcount",m_num);
 	}
+	
+	public List<PayVO> getInfo() {
+		return sqlSession.selectList(NAMESPACE + ".getInfo");
+	}
 }

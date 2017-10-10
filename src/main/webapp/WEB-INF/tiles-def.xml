@@ -49,6 +49,13 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
 	</definition>
 	
+	<!-- 관리자 페이지 -->
+	<definition name=".admin" template="/WEB-INF/views/admin/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/admin/header.jsp"/>
+		<put-attribute name="sidebar" value="/WEB-INF/views/admin/sidebar.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/admin/main.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/admin/footer.jsp"/>
+	</definition>	
 
 	<!-- 개인홈페이지 -->
 	<definition name=".personnel.*.*" extends=".personnel">
@@ -100,6 +107,14 @@
 	</definition>
 	<definition name=".videomain.*" extends=".videomain">
 		<put-attribute name="content" value="/WEB-INF/views/videomain/{1}.jsp"/>
+	</definition>
+	
+	<!-- 관리자 -->
+	<definition name=".admin.*.*" extends=".admin">
+		<put-attribute name="content" value="/WEB-INF/views/admin/{1}/{2}.jsp"/>
+	</definition>
+	<definition name=".admin.*" extends=".admin">
+		<put-attribute name="content" value="/WEB-INF/views/admin/{1}.jsp"/>
 	</definition>
 	
 	

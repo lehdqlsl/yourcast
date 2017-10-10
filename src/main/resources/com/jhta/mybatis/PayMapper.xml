@@ -9,14 +9,18 @@
 	</insert>
 
 	<select id="getlist" resultType="pay" parameterType="hashmap">
-		select * from
-		(select c.*,p.p_name,rownum rnum from charge c,pay p 
-		where m_num=#{m_num} and c.p_num=p.p_num)
-		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+		select a.*,p.p_name from
+		(select c.*,rownum rnum from charge c
+		where m_num=62 order by pay_num desc)a,pay p 
+		<![CDATA[ where a.p_num=p.p_num and rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	
 	<select id="getcount" resultType="int">
 		select NVL(count(pay_num),0) cnt from charge where m_num=#{m_num}
+	</select>
+	
+		<select id="getInfo" resultType="pay">
+		select * from pay
 	</select>
 	
 </mapper>

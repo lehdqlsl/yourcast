@@ -5,14 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yourcast.app.dao.MemberDAO;
 import com.yourcast.app.vo.MemberVO;
 
 @Service
 public class MemberService {
-	@Autowired
-	private MemberDAO dao;
+	@Autowired private MemberDAO dao;
 
 	public void setDao(MemberDAO dao) {
 		this.dao = dao;
@@ -61,6 +61,22 @@ public class MemberService {
 		} else {
 			return false;
 		}
+	}
+	
+	@Transactional
+	public int buyStar(MemberVO voM, MemberVO voS) {
+		dao.moneyUpdate(voM);
+		dao.starcandyUpdate(voS);
+		
+		return 1;
+	}
+	
+	@Transactional
+	public int chargeMoney(int a_money, MemberVO voM) {
+		dao.moneyUpdateAdmin(a_money);
+		dao.moneyUpdate(voM);
+		
+		return 1;
 	}
 
 }

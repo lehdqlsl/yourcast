@@ -19,7 +19,7 @@
 					<a href="<c:url value='/${sessionScope.id }'/>"
 						class="w3-bar-item w3-button">${sessionScope.id }</a>
 					<a href="<c:url value='/member/charge/star'/>"
-						class="w3-bar-item w3-button">별풍선 구매</a>
+						class="w3-bar-item w3-button">별사탕 구매</a>
 					<a href="<c:url value='/member/history/pay'/>"
 						class="w3-bar-item w3-button">내역 및 환전</a>
 					<a href="<c:url value='/member/broadcast'/>"

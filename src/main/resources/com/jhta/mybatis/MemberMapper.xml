@@ -45,4 +45,8 @@
 		select
 		* from member where id=#{id} and pwd=#{pwd}
 	</select>
+	
+	<update id="moneyUpdateAdmin" parameterType="int">
+		update admin set a_money=a_money+#{a_money} where a_num=1
+	</update>
 </mapper>

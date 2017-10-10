@@ -9,7 +9,7 @@
 	<select id="getList" parameterType="hashmap" resultType="buy">
 		select * from 
 		(select b.*,rownum rnum from  
-		(select * from buy where m_num=#{m_num})b)
+		(select * from buy where m_num=#{m_num} order by buy_num desc)b)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	<select id="getCount" resultType="int">
