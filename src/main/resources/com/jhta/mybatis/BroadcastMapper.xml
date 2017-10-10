@@ -9,13 +9,20 @@
 	</insert>
 
 	<update id="update" parameterType="broadcast">
-		update broadcast set
-		broadcast_title=#{broadcast_title}, genre_num=#{genre_num},
-		age_grade_num = #{age_grade_num} where m_num = #{m_num}
+		update broadcast
+		<set>
+			<if test="broadcast_title != null">broadcast_title=#{broadcast_title},</if>
+			<if test="genre_num != null">genre_num=#{genre_num},</if>
+			<if test="age_grade_num != null">age_grade_num = #{age_grade_num},</if>
+			
+			<if test="broadcast_pwd == null">broadcast_pwd=null</if>
+			<if test="broadcast_pwd != null">broadcast_pwd=#{broadcast_pwd}</if>
+		</set>
+		where m_num = #{m_num}
 	</update>
 
 	<select id="getlist" resultType="broadcast">
-		select * from broadcast where
+		select b.*, m.name, m.id from broadcast b join member m on b.m_num = m.m_num where
 		onair = 1
 	</select>
 

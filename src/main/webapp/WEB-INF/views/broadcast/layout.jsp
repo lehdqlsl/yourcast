@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
-<html style="overflow-y: hidden;">
+<html>
 <head>
 <title>Insert title here</title>
 <meta charset="UTF-8">
@@ -22,7 +22,7 @@
 	src="<c:url value='/resources/jwplayer/jwplayer.js?ver=1.1'/>"></script>
 </head>
 <!-- 메인페이지 레이아웃 -->
-<body id="body">
+<body>
 	<div id="wrap">
 		<div id="header">
 			<tiles:insertAttribute name="header" />
@@ -93,7 +93,7 @@
 		if(vo == ''){
 			var result = confirm('채팅에 참여하시려면 로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?'); 
 			if(result) { 
-				location.replace('http://localhost:8081/app/member/login'); 
+				location.replace('http://localhost:8082/app/member/login'); 
 			} else {
 				
 			}				
@@ -149,8 +149,17 @@
 	}
 	
 	$("#btn_emo").click(function(){
-
+		$("#emoticonArea").toggle();
 	});
-</script>
+	
+	$(".btn_close").click(function(){
+		$("#emoticonArea").toggle();
+	});
+	
+	$("#emoticonArea img").click(function(){
+		$("#write_area").append($(this).clone());
+	});
+	
+</script> 
 
 </html>
