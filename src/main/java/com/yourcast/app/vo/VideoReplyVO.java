@@ -7,12 +7,23 @@ public class VideoReplyVO {
 	private int vr_delete;
 	private int v_num;
 	private int m_num;
+	private String id;
+	private int vrucnt;
 	
 	public VideoReplyVO() {
 		
 	}
 
 	public VideoReplyVO(int vr_num, String vr_content, String vr_regdate, int vr_delete, int v_num, int m_num) {
+		//super();
+		this.vr_num = vr_num;
+		this.vr_content = vr_content;
+		this.vr_regdate = vr_regdate;
+		this.vr_delete = vr_delete;
+		this.v_num = v_num;
+		this.m_num = m_num;
+	}
+	public VideoReplyVO(int vr_num, String vr_content, String vr_regdate, int vr_delete, int v_num, int m_num,String id,int vrucnt) {
 		super();
 		this.vr_num = vr_num;
 		this.vr_content = vr_content;
@@ -20,6 +31,25 @@ public class VideoReplyVO {
 		this.vr_delete = vr_delete;
 		this.v_num = v_num;
 		this.m_num = m_num;
+		this.id=id;
+		this.vrucnt=vrucnt;
+	}
+
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public int getVrucnt() {
+		return vrucnt;
+	}
+
+	public void setVrucnt(int vrucnt) {
+		this.vrucnt = vrucnt;
 	}
 
 	public int getVr_num() {

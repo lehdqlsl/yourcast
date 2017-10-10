@@ -34,7 +34,14 @@
 			value="/WEB-INF/views/broadcast/main.jsp"></put-attribute>
 	</definition>
 	
-	<!-- 동영상 관련 타일즈 (민지)-->
+	<!-- 동영상 조회 타일즈(민지) -->
+	<definition name=".video" template="/WEB-INF/views/video/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="content"
+			value="/WEB-INF/views/video/getInfo.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 동영상 관련 타일즈 (민지) 리스트-->
 	<definition name=".videomain" template="/WEB-INF/views/videomain/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="sidebar" value="/WEB-INF/views/videomain/sidebar.jsp"/>
@@ -80,6 +87,11 @@
 
 	<definition name=".broadcast.*" extends=".broadcast">
 		<put-attribute name="content" value="/WEB-INF/views/broadcast/{1}.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 비디오 조회(민지) -->
+	<definition name=".video.*" extends=".video">
+		<put-attribute name="content" value="/WEB-INF/views/video/{1}.jsp"></put-attribute>
 	</definition>
 	
 	<!-- 동영상(민지) -->

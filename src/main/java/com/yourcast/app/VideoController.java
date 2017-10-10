@@ -30,6 +30,7 @@ import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.GenreService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.service.VideoReplyService;
 import com.yourcast.app.service.VideoService;
 import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.GenreVO;
@@ -47,6 +48,7 @@ public class VideoController {
 	@Autowired private CategoryService c_service;
 	@Autowired private MemberProfileService mp_service;
 	@Autowired private GenreService g_service; 
+	@Autowired private VideoReplyService vr_service;
 	
 	////////////////////////////////video 메인 페이지 관련 내용(민지)//////////////////////////////////
 	//클릭 시 비디오 메인 페이지로 이동
@@ -110,8 +112,13 @@ public class VideoController {
 		String vnum=request.getParameter("v_num");
 		int v_num=Integer.parseInt(vnum);
 		VideoVO vvo= v_service.getInfo(v_num);
+		int vrcount=vr_service.getCount(v_num);
+		
+		
 		model.addAttribute("vvo",vvo);
-		return ".broadcast.getInfo";
+		model.addAttribute("vrcount", vrcount);
+		//return ".broadcast.getInfo";
+		return ".video.getInfo";
 	}
 	///////////////////////////////////////////////////////////////////////////////////////
 	

@@ -20,14 +20,13 @@
 					success:function(data){
 						//alert(data);
 						$(data).find("list").each(function(){
-							//alert("111");
 							var img=$(this).find("v_savethumbnail").text();
 							var v_title=$(this).find("v_title").text();
-					
+							var v_num=parseInt($(this).find("v_num").text());
+							//alert(v_num);
 							var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
 							'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;">'+
-							'<h3>'+v_title+'</h3></div>';
-							
+							'<h3><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'+v_title+'</a></h3></div>';
 							
 							$("#videolist").append(div);
 						});
