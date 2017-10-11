@@ -9,8 +9,11 @@ public class BroadcastVO {
 	private int age_grade_num;
 	private String broadcast_pwd;
 	private String name;
+	private String cnt;
 	private String id;
-
+	
+	
+	
 	public BroadcastVO(String broadcast_title, String stream_key, int onair, int genre_num, int m_num,
 			int age_grade_num, String broadcast_pwd) {
 		super();
@@ -24,7 +27,7 @@ public class BroadcastVO {
 	}
 
 	public BroadcastVO(String broadcast_title, String stream_key, int onair, int genre_num, int m_num,
-			int age_grade_num, String broadcast_pwd, String name, String id) {
+			int age_grade_num, String broadcast_pwd, String name, String id, String cnt) {
 		super();
 		this.broadcast_title = broadcast_title;
 		this.stream_key = stream_key;
@@ -35,6 +38,17 @@ public class BroadcastVO {
 		this.broadcast_pwd = broadcast_pwd;
 		this.name = name;
 		this.id = id;
+		this.cnt = cnt;
+	}
+	
+	
+
+	public String getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
 	}
 
 	public String getId() {

@@ -147,6 +147,10 @@ dd.name {
 	href="<c:url value='/resources/css/chat_wrap.css'/>?ver=16">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/chat_layer.css'/>?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/pop_layer.css'/>?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/chat.css'/>?ver=1">
 </head>
 </html>
 <div class="w3-main" style="margin-top: 54px;">
@@ -181,7 +185,7 @@ dd.name {
 		<div class="info">
 			<div class="broadcast_viewer_cnt">
 				<button type="text">
-					<span><em id="nAllViewer">3,048</em>명 시청</span>
+					<span><em id="nAllViewer">0</em>명 시청</span>
 				</button>
 			</div>
 			<div class="bjlogo">
@@ -200,7 +204,8 @@ dd.name {
 
 
 	<div class="chatbox" id="chatbox">
-		<div class="chat_area" id="chat_area"></div>
+		<div class="chat_area" id="chat_area">
+		</div>
 		<div id="actionbox" class="actionbox">
 			<!-- 버튼들 -->
 			<ul id="ul1" class="ul1">
@@ -493,5 +498,103 @@ dd.name {
 			</div>
 		</div>
 	</div>
+	<div class="layer_l" id="layerStarGift" style="margin-top: -189.5px; margin-left: -190px; display: none;"><div class="layer_in">
+		<strong class="title">별풍선 선물하기</strong>
+		<div class="layer_al">
+			<strong class="color_blk">별풍선이란?</strong> &nbsp; <a href="http://www.afreecatv.com/balloon.htm" target="_blank" class="color_bl fts11">별풍선 헤택이 궁금하다면 클릭!</a><br>
+			<ul class="sub_list2">
+				<li>시청자가 BJ에게 선물할 수 있는 유료 아이템입니다. <br><span class="fts11 color_gray">(BJ는 별풍선을 환전하여 실제수익으로 돌려받게 됩니다.)</span></li>
+				<li>별풍선을 선물하시면 자동으로 BJ 팬클럽에 가입이 됩니다. <br><span class="fts11 color_gray">(팬클럽 이모티콘 표시 / 팬클럽 전용 채팅컬러 제공)</span></li>
+			</ul>
+			<ul class="table_list">
+				<li><span><em>별풍선을 선물할 BJ</em> : </span><strong class="color_bl">${bjvo.name } (${bjvo.id })</strong></li>
+				<li><span>내가 보유한 별풍선 : </span><div id="star" style="float: left">${vo.star_candy }</div><label>개</label> <a href="javascript:;" class="btn_st3">별풍선 구매</a></li>
+				<li>
+					<span><em>선물할 별풍선</em> : </span>
+					<fieldset class="select_area" style="border: none;">
+						<input type="radio" name="optStarBalloon" label="no5" class="input_radio" value="5" checked=""> <label for="no5">5개</label> &nbsp;
+						<input type="radio" name="optStarBalloon" label="no10" class="input_radio" value="10"> <label for="no5">10개</label> &nbsp;
+						<input type="radio" name="optStarBalloon" label="no50" class="input_radio" value="50"> <label for="no5">50개</label> &nbsp;
+						<input type="radio" name="optStarBalloon" label="no100" class="input_radio" value="100"> <label for="no5">100개</label><br>
+						<em><input type="radio" label="write" name="optStarBalloon" value="-1" class="input_radio"> 직접입력 <input type="text" id="nStarBalloon" class="input_text" style="width:60px" maxlength="5" disabled="" value="5"> 개</em>
+					</fieldset>
+				</li>
+			</ul>
+		</div>
+		<div class="btn_wrap"><a href="javascript:;" class="btn_st1">선물하기</a> <a href="javascript:;" class="btn_st2">취소</a></div>
+		<a href="javascript:;" class="btn_close2">닫기&lt;</a>
+	</div></div>
 </div>
 
+<script type="text/javascript">
+	$("#btn_star").click(function(){
+		$("#layerStarGift").toggle();
+	});
+	
+	$(".btn_st1").click(function(){
+		var cnt = $("#nStarBalloon").val();
+		var user = $("#star").html();
+		var bjid = '${bjvo.id }';
+		var uid = '${sessionScope.id }';
+			
+		if(parseInt(cnt) > parseInt(user)){
+			alert("보유한 별풍선 개수까지만 선물할 수 있습니다. 별풍선을 더 구매하시겠습니까?");
+		}else if(bjid == uid){
+			alert("자기 자신에게는 선물할 수 없습니다.");
+		}else{
+			$.ajax({
+				url:"<c:url value='/broadcast/starcandy?cnt="+cnt+"&bjid="+bjid+"&uid="+uid+"'/>",
+				dataType:"json",
+				success:function(data){
+					$("#star").html(data.result);
+					$("#layerStarGift").toggle();
+					
+					var bj_num = ${requestScope.bj_num};
+					var sendmsg = {};
+					sendmsg.packet = 4;
+					sendmsg.cnt = cnt;
+					sendmsg.bj_num = bj_num;
+					wsocket.send( JSON.stringify(sendmsg));
+				}
+			});
+		}
+	});
+	
+	$(".btn_st2").click(function(){
+		$("#layerStarGift").toggle();
+	});
+	
+	
+	$("input[label=no5]").click(function(){
+		$("#nStarBalloon").attr("disabled",true);
+		$("#nStarBalloon").val("5");
+	});
+	
+	$("input[label=no10]").click(function(){
+		$("#nStarBalloon").attr("disabled",true);
+		$("#nStarBalloon").val("10");
+	});
+	
+	$("input[label=no50]").click(function(){
+		$("#nStarBalloon").attr("disabled",true);
+		$("#nStarBalloon").val("50");
+	});
+	
+	$("input[label=no100]").click(function(){
+		$("#nStarBalloon").attr("disabled",true);
+		$("#nStarBalloon").val("100");
+	});
+	
+	$("input[label=write]").click(function(){
+		$("#nStarBalloon").attr("disabled",false);
+	});
+	
+	$("#nStarBalloon").keyup(function( event ) {
+		var val = parseInt(event.key);
+		
+		if(!(val>=0 && val<=9 || event.key == 'Backspace')){
+			alert("숫자만 입력해주세요.");
+			$("#nStarBalloon").val("");
+		}
+	});
+</script>

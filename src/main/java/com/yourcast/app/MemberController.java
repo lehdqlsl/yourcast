@@ -39,7 +39,7 @@ public class MemberController {
 	private BroadcastService bro_service;
 	@Autowired
 	private PayService p_service;
-	
+
 	public void setMservice(MemberService mservice) {
 		this.mservice = mservice;
 	}
