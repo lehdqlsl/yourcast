@@ -1,10 +1,14 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yourcast.app.vo.BoardReportVO;
+import com.yourcast.app.vo.BoardVO;
 
 @Repository
 public class BoardReportDAO {
@@ -25,5 +29,13 @@ public class BoardReportDAO {
 	}
 	public BoardReportVO isCheck(BoardReportVO vo) {
 		return sqlSession.selectOne(NAMESPACE + ".isCheck",vo);
+	}
+	
+	public List<BoardVO> getListAdmin(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".getListAdmin",map);
+	}
+	
+	public int getCountAdmin() {
+		return sqlSession.selectOne(NAMESPACE + ".getCountAdmin");
 	}
 }

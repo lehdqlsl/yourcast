@@ -10,9 +10,24 @@ public class BoardReplyVO {
 	private int m_num;
 	private String id;
 	private int brucnt;
-	public BoardReplyVO() {
-		
+	
+	private int brrcnt;
+	private int category_num;
+	private String bj_id;
+
+	public BoardReplyVO() {}
+	
+	public BoardReplyVO(int br_num, String br_content, int brrcnt, String id, int b_num, int category_num, String bj_id) {
+		super();
+		this.br_num = br_num;
+		this.br_content = br_content;
+		this.id = id;
+		this.brrcnt = brrcnt;
+		this.b_num = b_num;
+		this.category_num = category_num;
+		this.bj_id = bj_id;
 	}
+
 
 	public BoardReplyVO(int br_num, String br_content, String br_regdate, int br_delete, int b_num, int m_num) {
 		//super();
@@ -43,6 +58,30 @@ public class BoardReplyVO {
 		this.m_num = m_num;
 		this.id=id;
 		this.brucnt=brucnt;
+	}
+	
+	public String getBj_id() {
+		return bj_id;
+	}
+
+	public void setBj_id(String bj_id) {
+		this.bj_id = bj_id;
+	}
+
+	public int getCategory_num() {
+		return category_num;
+	}
+
+	public void setCategory_num(int category_num) {
+		this.category_num = category_num;
+	}
+
+	public int getBrrcnt() {
+		return brrcnt;
+	}
+
+	public void setBrrcnt(int brrcnt) {
+		this.brrcnt = brrcnt;
 	}
 
 	public int getBrucnt() {

@@ -13,8 +13,22 @@ public class BoardVO {
 	private int category_num;
 	private String id;
 	private String category_name;
+	
+	private int b_report;
+	private String bj_id;
+
 	private int brcnt;//´ñ±Û °³¼ö
-	public BoardVO() {
+	
+	public BoardVO() {}
+	
+	public BoardVO(int b_num, String b_title, String id, int b_report, String bj_id, int category_num) {
+		super();
+		this.b_num = b_num;
+		this.b_title = b_title;
+		this.id = id;
+		this.bj_id = bj_id;
+		this.b_report = b_report;
+		this.category_num = category_num;
 	}
 
 	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
@@ -61,6 +75,22 @@ public class BoardVO {
 		this.bj_num = bj_num;
 		this.category_num = category_num;
 		this.brcnt=brcnt;
+	}
+	
+	public String getBj_id() {
+		return bj_id;
+	}
+
+	public void setBj_id(String bj_id) {
+		this.bj_id = bj_id;
+	}
+
+	public int getB_report() {
+		return b_report;
+	}
+
+	public void setB_report(int b_report) {
+		this.b_report = b_report;
 	}
 
 	public int getB_num() {

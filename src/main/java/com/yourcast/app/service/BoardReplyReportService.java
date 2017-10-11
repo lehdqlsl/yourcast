@@ -1,10 +1,14 @@
 package com.yourcast.app.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yourcast.app.dao.BoardReplyReportDAO;
 import com.yourcast.app.vo.BoardReplyReportVO;
+import com.yourcast.app.vo.BoardReplyVO;
 
 @Service
 public class BoardReplyReportService {
@@ -25,5 +29,13 @@ public class BoardReplyReportService {
 	}
 	public BoardReplyReportVO isCheck(BoardReplyReportVO vo) {
 		return dao.isCheck(vo);
+	}
+	
+	public List<BoardReplyVO> getListAdmin(HashMap<String, Object> map){
+		return dao.getListAdmin(map);
+	}
+	
+	public int getCountAdmin() {
+		return dao.getCountAdmin();
 	}
 }

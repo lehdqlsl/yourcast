@@ -9,27 +9,27 @@
                 <div class="card">
                     <div class="header">
                     
-                    	<a href="#">글신고</a>
-                    	<a href="<c:url value='/admin/report/reply'/>" style="color: inherit;">덧글신고</a>
+                    	<a href="<c:url value='/admin/report/board'/>" style="color: inherit;">글신고</a>
+                    	<a href="#">덧글신고</a>
                     	
-                        <h4 class="title">글 신고 목록</h4>
-                        <p class="category">Board Report List</p>
+                        <h4 class="title">덧글 신고 목록</h4>
+                        <p class="category">BoardReply Report List</p>
                     </div>
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped">
                             <thead>
-                                <th>글 번호</th>
-                                <th>작성자아이디</th>
-                            	<th>글 제목</th>
+                                <th>덧글 번호</th>
+                            	<th>작성자아이디</th>
+                            	<th>덧글 내용</th>
                             	<th>신고 수</th>
                             </thead>
                             <tbody>
-                            <c:forEach var="bvo" items="${blist }">
+                            <c:forEach var="brrvo" items="${brrlist }">
                                 <tr>
-                                	<td>${bvo.b_num }</td>
-                                	<td>${bvo.id}</td>
-                                	<td><a href="<c:url value='/${bvo.bj_id }/board/getInfo?b_num=${bvo.b_num }&category_num=${bvo.category_num }'/>">${bvo.b_title}</a></td>
-                                	<td style="color:red;">${bvo.b_report}</td>
+                                	<td>${brrvo.br_num }</td>
+                                	<td>${brrvo.id}</td>
+                                	<td><a href="#">${brrvo.br_content}</a></td>
+                                	<td style="color:red;">${brrvo.brrcnt}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -39,7 +39,7 @@
 						<div style="text-align: center;">
 						<c:choose>
 							<c:when test="${pu.pageNum>1 }">
-								<a href="<c:url value='/admin/report/board?pageNum=${1 }'/>">[처음으로]</a>
+								<a href="<c:url value='/admin/report/reply?pageNum=${1 }'/>">[처음으로]</a>
 							</c:when>
 							<c:otherwise>
 								[처음으로]
@@ -47,7 +47,7 @@
 						</c:choose>
 						<c:choose>
 							<c:when test="${pu.startPageNum>5 }">
-								<a href="<c:url value='/admin/report/board?pageNum=${pu.startPageNum-1 }'/>">[이전]</a>
+								<a href="<c:url value='/admin/report/reply?pageNum=${pu.startPageNum-1 }'/>">[이전]</a>
 							</c:when>
 							<c:otherwise>
 								[이전]
@@ -59,13 +59,13 @@
 										<span style="color:blue">[${i }]</span>
 									</c:when>
 									<c:otherwise>
-										<a href="<c:url value='/admin/report/board?pageNum=${i }'/>"><span style="color:#555">[${i }]</span></a>
+										<a href="<c:url value='/admin/report/reply?pageNum=${i }'/>"><span style="color:#555">[${i }]</span></a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 						<c:choose>
 							<c:when test="${pu.endPageNum<pu.totalPageCount }">
-								<a href="<c:url value='/admin/report/board?pageNum=${pu.endPageNum+1 }'/>">[다음]</a>
+								<a href="<c:url value='/admin/report/reply?pageNum=${pu.endPageNum+1 }'/>">[다음]</a>
 							</c:when>
 							<c:otherwise>
 								[다음]
@@ -73,13 +73,14 @@
 						</c:choose>
 						<c:choose>
 							<c:when test="${pu.startPageNum<pu.totalPageCount }">
-								<a href="<c:url value='/admin/report/board?pageNum=${pu.totalPageCount }'/>">[끝으로]</a>
+								<a href="<c:url value='/admin/report/reply?pageNum=${pu.totalPageCount }'/>">[끝으로]</a>
 							</c:when>
 							<c:otherwise>
 								[끝으로]
 							</c:otherwise>
 						</c:choose>
 						</div>
+						
                     </div>
                 </div>
             </div>

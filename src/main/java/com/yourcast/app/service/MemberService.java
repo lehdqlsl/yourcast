@@ -30,8 +30,12 @@ public class MemberService {
 		return dao.getInfo(id);
 	}
 
-	public List<MemberVO> getList() {
-		return dao.getList();
+	public List<MemberVO> getList(HashMap<String, Object> map) {
+		return dao.getList(map);
+	}
+	
+	public int getCount(HashMap<String, Object> map) {
+		return dao.getCount(map);
 	}
 
 	public int moneyUpdate(MemberVO vo) {

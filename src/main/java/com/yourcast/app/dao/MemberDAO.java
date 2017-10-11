@@ -27,8 +27,12 @@ public class MemberDAO {
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
-	public List<MemberVO> getList() {
-		return sqlSession.selectList(NAMESPACE + ".getList");
+	public List<MemberVO> getList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".getList",map);
+	}
+	
+	public int getCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + ".getCount",map);
 	}
 
 	public int moneyUpdate(MemberVO vo) {
