@@ -5,20 +5,33 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.yourcast.app.dao.MemberDAO;
 import com.yourcast.app.dao.StarUseDAO;
+import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.StarUseVO;
 
 @Service
 public class StarUseService {
 
 	@Autowired private StarUseDAO dao;
+	@Autowired private MemberDAO m_dao;
+	
 	public void setDao(StarUseDAO dao) {
 		this.dao = dao;
 	}
 	
-	public int insert(StarUseVO vo) {
-		return dao.insert(vo);
+	@Transactional
+	public int insert(StarUseVO vo,MemberVO bjvo, MemberVO uvo) {
+		dao.insert(vo);
+		int bjstar = bjvo.getStar_candy();
+		int userstar = uvo.getStar_candy();
+		bjvo.setStar_candy((bjstar+vo.getUse_ea()));
+		uvo.setStar_candy((userstar-vo.getUse_ea()));
+		m_dao.starcandyUpdate(bjvo);
+		m_dao.starcandyUpdate(uvo);
+		return 1;
 	}
 	
 	public List<StarUseVO> getSendList(HashMap<String, Object> map){

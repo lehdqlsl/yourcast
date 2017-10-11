@@ -46,6 +46,7 @@ public class ChatHandler extends TextWebSocketHandler {
 				JSONObject obj = new JSONObject();
 				for (User user : list) {
 					if (session == user.getSession()) {
+						obj.put("packet", "1");
 						obj.put("id", user.getId());
 						obj.put("name", user.getName());
 						obj.put("gender", user.getGender());
@@ -70,6 +71,50 @@ public class ChatHandler extends TextWebSocketHandler {
 			user.setBj_num(bj_num);
 			user.setSession(session);
 			list.add(user);
+			break;
+
+		case 3: // 시청자 수 갱신
+			bj_num = (Long) jsonObj.get("bj_num");
+			int cnt = 0;
+			JSONObject obj = new JSONObject();
+			for (User user1 : list) {
+				// 같은 방 시청자 찾기
+				if (bj_num == user1.getBj_num()) {
+					cnt++;
+				}
+			}
+			for (User user1 : list) {
+				if (bj_num == user1.getBj_num() && session == user1.getSession()) {
+					obj.put("packet", "3");
+					obj.put("cnt", cnt);
+					user1.getSession().sendMessage(new TextMessage(obj.toJSONString()));
+				}
+			}
+			break;
+
+		case 4:
+			try {
+				bj_num = (Long) jsonObj.get("bj_num");
+				String cnt1 = (String) jsonObj.get("cnt");
+				JSONObject obj1 = new JSONObject();
+				for (User user2 : list) {
+					if (session == user2.getSession()) {
+						obj1.put("packet", "4");
+						obj1.put("id", user2.getId());
+						obj1.put("name", user2.getName());
+						obj1.put("cnt", cnt1);
+						break;
+					}
+				}
+				for (User user2 : list) {
+					// 같은 방 찾기
+					if (bj_num == user2.getBj_num()) {
+						user2.getSession().sendMessage(new TextMessage(obj1.toJSONString()));
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			break;
 		default:
 			break;

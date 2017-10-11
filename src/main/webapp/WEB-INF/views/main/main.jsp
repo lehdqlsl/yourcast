@@ -21,6 +21,12 @@ h3 {
 	-webkit-margin-end: 0px;
 	font-weight: bold;
 }
+
+p {
+	font-size: 1.2rem;
+	line-height: 2rem;
+}
+}
 </style>
 <div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
 	<!-- 내용 -->
@@ -39,12 +45,8 @@ h3 {
 					end="${status1.index*4+3}" step="1">
 					<c:if test="${not doneLoop}">
 						<div class="w3-col l3 m6 w3-margin-bottom">
-							<div class="w3-display-container">
-								<div class="w3-display-bottommiddle w3-white" style="width: 100%;">
-									<p>${blist[status2.index].broadcast_title}</p>
-									<p>${blist[status2.index].name}시청자수100</p>
-								</div>
 
+							<div class="w3-display-container w3-hover-opacity">
 								<a
 									href="http://192.168.0.4:8082/app/bs/${blist[status2.index].id}">
 									<img
@@ -53,6 +55,15 @@ h3 {
 									style="width: 100%; text-decoration: none !important;">
 
 								</a>
+								<div class="w3-row">
+									<div style="width: 100%; display: block; height: 20px; padding-left: 0px; margin-top: 5px;">
+										<p style="margin: 0px 0px 0px 0px;	font-size: 1.4em;">${blist[status2.index].broadcast_title}</p>
+									</div>
+									<div style="width: 100%; display: block; height: 20px; padding-left: 0px;">
+										<p style="margin: 5px 0px 0px 0px;	font-size: 1.0em; color: #6e6779;">${blist[status2.index].name}
+											시청자수 ${blist[status2.index].cnt}</p>
+									</div>
+								</div>
 							</div>
 						</div>
 						<c:if test="${status2.index == requestScope.end}">

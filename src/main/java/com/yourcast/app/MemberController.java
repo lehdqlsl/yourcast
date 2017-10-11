@@ -37,6 +37,8 @@ public class MemberController {
 	private BuyService b_service;
 	@Autowired
 	private BroadcastService bro_service;
+	@Autowired
+	private PayService p_service;
 
 	public void setMservice(MemberService mservice) {
 		this.mservice = mservice;
@@ -53,11 +55,6 @@ public class MemberController {
 	public String loginForm(Locale locale, Model model) {
 		return ".member.join.login";
 	}
-
-		@RequestMapping(value = "/member/service", method = RequestMethod.GET)
-		public String service(Locale locale, Model model) {
-			return ".member.join.service";
-		}
 
 	// 약관
 	@RequestMapping(value = "/member/service", method = RequestMethod.GET)

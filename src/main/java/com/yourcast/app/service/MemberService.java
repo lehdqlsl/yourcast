@@ -67,7 +67,6 @@ public class MemberService {
 	public int buyStar(MemberVO voM, MemberVO voS) {
 		dao.moneyUpdate(voM);
 		dao.starcandyUpdate(voS);
-		
 		return 1;
 	}
 	
@@ -75,7 +74,6 @@ public class MemberService {
 	public int chargeMoney(int a_money, MemberVO voM) {
 		dao.moneyUpdateAdmin(a_money);
 		dao.moneyUpdate(voM);
-		
 		return 1;
 	}
 
