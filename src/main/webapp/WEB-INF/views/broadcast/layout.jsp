@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
-<html style="overflow-y: hidden;">
+<html>
 <head>
 <title>Insert title here</title>
 <meta charset="UTF-8">
@@ -22,7 +22,7 @@
 	src="<c:url value='/resources/jwplayer/jwplayer.js?ver=1.1'/>"></script>
 </head>
 <!-- 메인페이지 레이아웃 -->
-<body id="body">
+<body>
 	<div id="wrap">
 		<div id="header">
 			<tiles:insertAttribute name="header" />
@@ -88,12 +88,13 @@
 		}
 	});
 
+
 	$("#actionbox").click(function(){
 		var vo = '${requestScope.vo}';
 		if(vo == ''){
 			var result = confirm('채팅에 참여하시려면 로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?'); 
 			if(result) { 
-				location.replace('http://localhost:8081/app/member/login'); 
+				location.replace('http://192.168.0.4:8082/app/member/login'); 
 			} else {
 				
 			}				
@@ -130,15 +131,27 @@
 	});
 	
 	function onMessage(evt){
+		
 		var list = $.parseJSON(evt.data);
-		var msg = list.msg;
-		var gender = list.gender;
-		var grade = list.grade;
-		var name = list.name;
-		var id = list.id;
-		$("#chat_area").append('<dl class=""><dt class="fan_m"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
-		var objDiv = document.getElementById("chat_area");
-		objDiv.scrollTop = objDiv.scrollHeight;
+		var packet = list.packet;
+		if(packet == '1'){
+			var msg = list.msg;
+			var gender = list.gender;
+			var grade = list.grade;
+			var name = list.name;
+			var id = list.id;
+			$("#chat_area").append('<dl class=""><dt class="fan_m"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
+			var objDiv = document.getElementById("chat_area");
+			objDiv.scrollTop = objDiv.scrollHeight;
+		}else if(packet == '3'){
+			var cnt = list.cnt;
+			$("#nAllViewer").html(cnt);
+		}else if(packet == '4'){
+			var name = list.name;
+			var id = list.id;
+			var cnt = list.cnt;
+			$("#chat_area").append('<div class="balloon_area"><p class="ea" style="color:#ED1C24">'+cnt+'</p><p class="img_balloon"><img src="http://www.afreecatv.com/new_player/items/ba_step3.png" alt="별풍선"></p><div class="text"><strong><a href="javascript:;" user_id="esime" user_nick="">'+name+'('+id+')'+'</a></strong><br><span class="bal_txt">별풍선 <span class="num">'+cnt+'</span>개 선물!</span></div></div>');
+		}
 	}
 	
 	function onClose(evt){
@@ -149,8 +162,24 @@
 	}
 	
 	$("#btn_emo").click(function(){
-
+		$("#emoticonArea").toggle();
 	});
-</script>
+	
+	$(".btn_close").click(function(){
+		$("#emoticonArea").toggle();
+	});
+	
+	$("#emoticonArea img").click(function(){
+		$("#write_area").append($(this).clone());
+	});
+	
+	setInterval(function(){ 
+		var sendmsg = {};
+		sendmsg.packet = 3;
+		sendmsg.bj_num = ${requestScope.bj_num};
+		wsocket.send( JSON.stringify(sendmsg));
+	}, 3000);
+	
+</script> 
 
 </html>

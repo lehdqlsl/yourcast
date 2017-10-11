@@ -30,7 +30,9 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
+
+<!-- 선물받은 별풍선 페이징 -->
+	<script type="text/javascript">
 	$("#datepicker").datepicker({
 		showMonthAfterYear: true,
 		dateFormat:"yy/mm/dd", //날짜포맷형식
@@ -40,5 +42,4 @@
 		showAnim:"slide"
 	});
 </script>
-
 </html>

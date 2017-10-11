@@ -11,5 +11,7 @@
 	<select id="getcount" parameterType="int" resultType="int">
 		select NVL(count(m_num),0) cnt from video_reply_up where vr_num=#{vr_num}
 	</select>
-	
+	<select id="check" parameterType="videoreplyup" resultType="videoreplyup">
+		select * from video_reply_up where m_num=#{m_num} and vr_num=#{vr_num}
+	</select>
 </mapper>

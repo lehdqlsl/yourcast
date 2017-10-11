@@ -4,10 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.MemberMapper">
 	<insert id="insert" parameterType="member">
-		insert into member values(seq_m_num.nextval,#{id},#{pwd},#{name},sysdate,#{money},sysdate,#{star_candy},#{gender_num},#{grade_num})
+		insert into member
+		values(seq_m_num.nextval,#{id},#{pwd},#{name},sysdate,#{money},sysdate,#{star_candy},#{gender_num},#{grade_num})
 	</insert>
 	<update id="update" parameterType="member">
-		update member set id=#{id},pwd=#{pwd},name=#{name} where m_num=#{m_num}
+		update member set
+		id=#{id},pwd=#{pwd},name=#{name} where m_num=#{m_num}
 	</update>
 	<select id="getInfo" parameterType="string" resultType="member">
 		select * from member where id=#{id}
@@ -30,7 +32,11 @@
 		</where>
 		)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+  </select>
+	<select id="getInfo2" parameterType="int" resultType="member">
+		select * from member where m_num=#{m_num}
 	</select>
+	
 	<select id="getCount" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) from member
 		<where>
@@ -46,23 +52,29 @@
 		</where>
 	</select>	
 	<update id="moneyUpdate" parameterType="member">
-		update member set money=#{money} where m_num=#{m_num}
+		update member set
+		money=#{money} where m_num=#{m_num}
 	</update>
 	<update id="gradeUpdate" parameterType="member">
-		update member set grade_num=#{grade_num} where m_num=#{m_num}
+		update member set
+		grade_num=#{grade_num} where m_num=#{m_num}
 	</update>
 	<update id="limitUpdate" parameterType="member">
-		update member set limit_date=sysdate+10 where m_num=#{m_num} 
+		update member set
+		limit_date=sysdate+10 where m_num=#{m_num}
 	</update>
 	<update id="starcandyUpdate" parameterType="member">
-		update member set star_candy=#{star_candy} where m_num=#{m_num}
+		update member set
+		star_candy=#{star_candy} where m_num=#{m_num}
 	</update>
 	<select id="idcheck" resultType="member" parameterType="string">
-		select * from member
-		where id=#{id} 
+		select *
+		from member
+		where id=#{id}
 	</select>
 	<select id="isMember" parameterType="hashmap" resultType="member">
-		select * from member where id=#{id} and pwd=#{pwd}
+		select
+		* from member where id=#{id} and pwd=#{pwd}
 	</select>
 	
 	<update id="moneyUpdateAdmin" parameterType="int">

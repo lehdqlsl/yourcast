@@ -6,13 +6,62 @@
 <style type="text/css">
 .videobox {
 	position: absolute;
-	left: 0px;
-	right: 20%;
 	top: 57px;
+	left: 0px;
 	bottom: 0;
-	height: 100%;
 	overflow-x: hidden;
 	overflow-y: scroll;
+	max-width: 1600px;
+	right: 320px;
+}
+
+.info {
+	position: relative;
+	z-index: 11;
+	padding: 15px 0 40px 100px;
+	min-height: 80px;
+	display: block;
+}
+
+.player {
+	bottom: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	max-width: 1600px;
+	max-height: 760px;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	display: block;
+}
+
+.player_list {
+	position: relative;
+	min-width: 460px;
+	z-index: 52;
+	height: 30px;
+	padding: 15px 20px 40px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.bjlogo {
+	position: absolute;
+	left: 10px;
+	top: 0;
+	padding: 16px 0 0 1px;
+}
+
+.player_list ul {
+	position: relative;
+	float: right;
+	padding: 0;
+	margin: 0;
+}
+
+.player_list ul li {
+	display: inline;
+	margin-left: 10px;
+	line-height: 1.6;
 }
 
 .chat_area * {
@@ -41,27 +90,130 @@ em {
 	line-height: 0;
 	text-indent: -9999px;
 }
+
+dd.name {
+	margin: 0;
+	font-size: 14px;
+	color: #328fde;
+	font-weight: bold;
+	padding: 0 0 8px;
+}
+
+.bj dt {
+	width: 100%;
+	font-size: 18px;
+	line-height: 1.3em;
+	font-weight: bold;
+	color: #555;
+	padding: 0 0 13px;
+	margin: 0 0 0 -2px;
+	word-wrap: break-word;
+}
+
+.broadcast_viewer_cnt button span {
+	position: relative;
+	padding-left: 28px;
+	font-size: 15px;
+	background: url(http://res.afreecatv.com/images/flashplayer/broadcast_viewer.png) no-repeat left
+		50%;
+}
+
+.broadcast_viewer_cnt button {
+	position: relative;
+	z-index: 2;
+	overflow: visible;
+	height: 19px;
+	cursor: pointer;
+	outline: none;
+	border: none;
+	color: #555;
+	font-size: 15px;
+	background-color: #fff;
+	padding-top: 15px;
+}
+
+.broadcast_viewer_cnt button span em {
+	font-size: 16px;
+}
+
+.broadcast_viewer_cnt {
+	position: absolute;
+	top: -2px;
+	right: 10px;
+	z-index: 12;
+}
 </style>
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/chat_wrap.css'/>?ver=13">
+	href="<c:url value='/resources/css/chat_wrap.css'/>?ver=16">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/chat_layer.css'/>?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/pop_layer.css'/>?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/chat.css'/>?ver=1">
 </head>
 </html>
 <div class="w3-main" style="margin-top: 54px;">
-	<div class="videobox"
-		style="max-width: 1300px; max-height: 735px; width: 100%; height: 100%;">
-		<div id="container">Loading the player ...</div>
+	<div class="videobox">
+		<div class="player">
+			<div id="container">Loading the player ...</div>
+		</div>
+		<div class="player_list">
+			<ul>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+				<li class="chocolate"><button type="button" title="초콜릿">
+						<em></em><span>초콜릿</span>
+					</button></li>
+			</ul>
+		</div>
+
+
+		<div class="info">
+			<div class="broadcast_viewer_cnt">
+				<button type="text">
+					<span><em id="nAllViewer">0</em>명 시청</span>
+				</button>
+			</div>
+			<div class="bjlogo">
+				<img src="http://stimg.afreecatv.com/LOGO/gt/gtv7/gtv7.jpg"
+					onerror="this.src='http://www.afreecatv.com/mybs/img/default_small_re.gif'"
+					alt="BJ 로고" class="thum"> <a
+					href="http://www.afreecatv.com/gtv7" target="_blank" title="방송국 가기"
+					class="btn"></a>
+			</div>
+			<dl class="bj">
+				<dd class="name">${bjvo.name }</dd>
+				<dt>${bvo.broadcast_title }</dt>
+			</dl>
+		</div>
 	</div>
+
+
 	<div class="chatbox" id="chatbox">
-		<div class="chat_area" id="chat_area"></div>
+		<div class="chat_area" id="chat_area">
+		</div>
 		<div id="actionbox" class="actionbox">
 			<!-- 버튼들 -->
 			<ul id="ul1" class="ul1">
-				<li id="btn_emo" class="emo first"><a href="javascript:;">이모티콘</a><em class="ttip" style="display: none;">이모티콘<span></span></em><span
+				<li id="btn_emo" class="emo first"><a href="javascript:;">이모티콘</a><em
+					class="ttip" style="display: none;">이모티콘<span></span></em><span
 					class="emo_tiplayer" id="emoLayer" style="display: none;"><em
 						class="txt">이모티콘은 한번에 3개까지만 사용가능합니다.</em><span class="icon"></span>
-					<button type="button" class="close">닫기</button></span></li>
+						<button type="button" class="close">닫기</button></span></li>
 				<!-- 활성화  class="on" 추가 -->
 				<li id="btn_police" class="police"><a href="javascript:;">신고</a><em
 					class="ttip">신고<span></span></em></li>
@@ -346,5 +498,103 @@ em {
 			</div>
 		</div>
 	</div>
+	<div class="layer_l" id="layerStarGift" style="margin-top: -189.5px; margin-left: -190px; display: none;"><div class="layer_in">
+		<strong class="title">별풍선 선물하기</strong>
+		<div class="layer_al">
+			<strong class="color_blk">별풍선이란?</strong> &nbsp; <a href="http://www.afreecatv.com/balloon.htm" target="_blank" class="color_bl fts11">별풍선 헤택이 궁금하다면 클릭!</a><br>
+			<ul class="sub_list2">
+				<li>시청자가 BJ에게 선물할 수 있는 유료 아이템입니다. <br><span class="fts11 color_gray">(BJ는 별풍선을 환전하여 실제수익으로 돌려받게 됩니다.)</span></li>
+				<li>별풍선을 선물하시면 자동으로 BJ 팬클럽에 가입이 됩니다. <br><span class="fts11 color_gray">(팬클럽 이모티콘 표시 / 팬클럽 전용 채팅컬러 제공)</span></li>
+			</ul>
+			<ul class="table_list">
+				<li><span><em>별풍선을 선물할 BJ</em> : </span><strong class="color_bl">${bjvo.name } (${bjvo.id })</strong></li>
+				<li><span>내가 보유한 별풍선 : </span><div id="star" style="float: left">${vo.star_candy }</div><label>개</label> <a href="javascript:;" class="btn_st3">별풍선 구매</a></li>
+				<li>
+					<span><em>선물할 별풍선</em> : </span>
+					<fieldset class="select_area" style="border: none;">
+						<input type="radio" name="optStarBalloon" label="no5" class="input_radio" value="5" checked=""> <label for="no5">5개</label> &nbsp;
+						<input type="radio" name="optStarBalloon" label="no10" class="input_radio" value="10"> <label for="no5">10개</label> &nbsp;
+						<input type="radio" name="optStarBalloon" label="no50" class="input_radio" value="50"> <label for="no5">50개</label> &nbsp;
+						<input type="radio" name="optStarBalloon" label="no100" class="input_radio" value="100"> <label for="no5">100개</label><br>
+						<em><input type="radio" label="write" name="optStarBalloon" value="-1" class="input_radio"> 직접입력 <input type="text" id="nStarBalloon" class="input_text" style="width:60px" maxlength="5" disabled="" value="5"> 개</em>
+					</fieldset>
+				</li>
+			</ul>
+		</div>
+		<div class="btn_wrap"><a href="javascript:;" class="btn_st1">선물하기</a> <a href="javascript:;" class="btn_st2">취소</a></div>
+		<a href="javascript:;" class="btn_close2">닫기&lt;</a>
+	</div></div>
 </div>
 
+<script type="text/javascript">
+	$("#btn_star").click(function(){
+		$("#layerStarGift").toggle();
+	});
+	
+	$(".btn_st1").click(function(){
+		var cnt = $("#nStarBalloon").val();
+		var user = $("#star").html();
+		var bjid = '${bjvo.id }';
+		var uid = '${sessionScope.id }';
+			
+		if(parseInt(cnt) > parseInt(user)){
+			alert("보유한 별풍선 개수까지만 선물할 수 있습니다. 별풍선을 더 구매하시겠습니까?");
+		}else if(bjid == uid){
+			alert("자기 자신에게는 선물할 수 없습니다.");
+		}else{
+			$.ajax({
+				url:"<c:url value='/broadcast/starcandy?cnt="+cnt+"&bjid="+bjid+"&uid="+uid+"'/>",
+				dataType:"json",
+				success:function(data){
+					$("#star").html(data.result);
+					$("#layerStarGift").toggle();
+					
+					var bj_num = ${requestScope.bj_num};
+					var sendmsg = {};
+					sendmsg.packet = 4;
+					sendmsg.cnt = cnt;
+					sendmsg.bj_num = bj_num;
+					wsocket.send( JSON.stringify(sendmsg));
+				}
+			});
+		}
+	});
+	
+	$(".btn_st2").click(function(){
+		$("#layerStarGift").toggle();
+	});
+	
+	
+	$("input[label=no5]").click(function(){
+		$("#nStarBalloon").attr("disabled",true);
+		$("#nStarBalloon").val("5");
+	});
+	
+	$("input[label=no10]").click(function(){
+		$("#nStarBalloon").attr("disabled",true);
+		$("#nStarBalloon").val("10");
+	});
+	
+	$("input[label=no50]").click(function(){
+		$("#nStarBalloon").attr("disabled",true);
+		$("#nStarBalloon").val("50");
+	});
+	
+	$("input[label=no100]").click(function(){
+		$("#nStarBalloon").attr("disabled",true);
+		$("#nStarBalloon").val("100");
+	});
+	
+	$("input[label=write]").click(function(){
+		$("#nStarBalloon").attr("disabled",false);
+	});
+	
+	$("#nStarBalloon").keyup(function( event ) {
+		var val = parseInt(event.key);
+		
+		if(!(val>=0 && val<=9 || event.key == 'Backspace')){
+			alert("숫자만 입력해주세요.");
+			$("#nStarBalloon").val("");
+		}
+	});
+</script>

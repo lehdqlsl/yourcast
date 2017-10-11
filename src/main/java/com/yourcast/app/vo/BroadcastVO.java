@@ -7,9 +7,15 @@ public class BroadcastVO {
 	private int genre_num;
 	private int m_num;
 	private int age_grade_num;
-
+	private String broadcast_pwd;
+	private String name;
+	private String cnt;
+	private String id;
+	
+	
+	
 	public BroadcastVO(String broadcast_title, String stream_key, int onair, int genre_num, int m_num,
-			int age_grade_num) {
+			int age_grade_num, String broadcast_pwd) {
 		super();
 		this.broadcast_title = broadcast_title;
 		this.stream_key = stream_key;
@@ -17,10 +23,60 @@ public class BroadcastVO {
 		this.genre_num = genre_num;
 		this.m_num = m_num;
 		this.age_grade_num = age_grade_num;
+		this.broadcast_pwd = broadcast_pwd;
+	}
+
+	public BroadcastVO(String broadcast_title, String stream_key, int onair, int genre_num, int m_num,
+			int age_grade_num, String broadcast_pwd, String name, String id, String cnt) {
+		super();
+		this.broadcast_title = broadcast_title;
+		this.stream_key = stream_key;
+		this.onair = onair;
+		this.genre_num = genre_num;
+		this.m_num = m_num;
+		this.age_grade_num = age_grade_num;
+		this.broadcast_pwd = broadcast_pwd;
+		this.name = name;
+		this.id = id;
+		this.cnt = cnt;
+	}
+	
+	
+
+	public String getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public BroadcastVO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getBroadcast_pwd() {
+		return broadcast_pwd;
+	}
+
+	public void setBroadcast_pwd(String broadcast_pwd) {
+		this.broadcast_pwd = broadcast_pwd;
 	}
 
 	public String getBroadcast_title() {

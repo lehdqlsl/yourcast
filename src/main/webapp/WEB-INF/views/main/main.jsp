@@ -4,6 +4,30 @@
 <!-- 메인페이지 -->
 
 <!-- 기본 페이지 레이아웃 아래 div영역으로 쓰세용.-->
+<style>
+.title {
+	color: #19171c;
+	margin-top: .5rem;
+	font-size: 1.4rem;
+	line-height: 2rem;
+}
+
+h3 {
+	display: block;
+	font-size: 1.17em;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	font-weight: bold;
+}
+
+p {
+	font-size: 1.2rem;
+	line-height: 2rem;
+}
+}
+</style>
 <div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
 	<!-- 내용 -->
 	<div class="w3-container w3-padding-32" id="projects">
@@ -12,7 +36,7 @@
 
 	<c:set var="doneLoop" value="false" />
 	<c:set var="vo" value="${requestScope.blist }" />
-	
+
 	<c:if test="${requestScope.cnt>0}">
 		<c:forEach varStatus="status1" begin="0" end="${requestScope.cnt }"
 			step="1">
@@ -21,14 +45,25 @@
 					end="${status1.index*4+3}" step="1">
 					<c:if test="${not doneLoop}">
 						<div class="w3-col l3 m6 w3-margin-bottom">
-							<div class="w3-display-container">
-								<div class="w3-display-topleft w3-black w3-padding">${blist[status2.index].broadcast_title}</div>
+
+							<div class="w3-display-container w3-hover-opacity">
 								<a
-									href="http://192.168.0.4:8082/app/bs/${blist[status2.index].m_num}">
+									href="http://192.168.0.4:8082/app/bs/${blist[status2.index].id}">
 									<img
 									src="http://192.168.0.31:3030/${blist[status2.index].stream_key }.png"
-									alt="House" style="width: 100%">
+									alt="House"
+									style="width: 100%; text-decoration: none !important;">
+
 								</a>
+								<div class="w3-row">
+									<div style="width: 100%; display: block; height: 20px; padding-left: 0px; margin-top: 5px;">
+										<p style="margin: 0px 0px 0px 0px;	font-size: 1.4em;">${blist[status2.index].broadcast_title}</p>
+									</div>
+									<div style="width: 100%; display: block; height: 20px; padding-left: 0px;">
+										<p style="margin: 5px 0px 0px 0px;	font-size: 1.0em; color: #6e6779;">${blist[status2.index].name}
+											시청자수 ${blist[status2.index].cnt}</p>
+									</div>
+								</div>
 							</div>
 						</div>
 						<c:if test="${status2.index == requestScope.end}">

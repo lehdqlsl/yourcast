@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/boardgetInfo.css'/>?ver=1">
+
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script>
 	$(document).ready(function(){
@@ -12,8 +15,9 @@
 				//alert("${sessionScope.id}");
 			}else{//로그인 안 한 경우
 				var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
-				location.href="<c:url value='/member/login'/>";
-				//alert("아이디 없음");
+				if(flag){
+					location.href="<c:url value='/member/login'/>";
+				}
 			}
 		});
 		////////////////////////////////////////////////////////////////////////////////		
@@ -58,7 +62,6 @@
 				url:'<c:url value="/${sessionScope.id}/boardreply/list?pageNum='+rc+'&b_num=${b_num}&category_num=${category_num}"/>',
 				dataType:"xml",
 				success:function(data){
-
 						$(data).find("list").each(function(){
 						var id=$(this).find("id").text();
 						//alert(id);
@@ -70,7 +73,6 @@
 						var p="";
 						if(id=="${sessionScope.id}"){
 							//alert(${sessionScope.id});
-						
 							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<a href=''>삭제</a>&nbsp;&nbsp;<a href='#' id='"+br_num+"' class='replyup'>추천["+brucnt+"]</a></p>";
 						}else{
 							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<button id='"+br_num+"' class='b_reply_report'>신고</button>&nbsp;&nbsp;<button id='"+br_num+"' class='replyup'>추천["+brucnt+"]</button></p>";
@@ -261,8 +263,7 @@
 					</p>
 				</c:forEach>
 			</div>
-			<input type="button" value="더보기" id="more">
-			
+			<button class="w3-button w3-block w3-black" id="more">더보기</button>
 		</div>
 
 		<!-- 작성END -->

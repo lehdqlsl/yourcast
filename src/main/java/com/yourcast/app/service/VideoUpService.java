@@ -22,4 +22,7 @@ public class VideoUpService {
 	public int getCount(int v_num) {
 		return dao.getCount(v_num);
 	}
+	public VideoUpVO check(VideoUpVO vo) {
+		return dao.check(vo);
+	}
 }

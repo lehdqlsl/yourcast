@@ -15,7 +15,15 @@
 	<select id="getInfo" parameterType="int" resultType="videoreply">
 		select * from video_reply where vr_num=#{vr_num}
 	</select>
-	<select id="getList" parameterType="int" resultType="videoreply">
-		select * from video_reply where v_num=#{vr_num} and vr_delete=0
+	<select id="getList" parameterType="hashmap" resultType="videoreply">
+		select * from(
+		select vr.*,m.id,aa.vrucnt,rownum rnum from video_reply vr,member m,
+		(select vr.vr_num, count(vru.vr_num) vrucnt from video_reply vr, video_reply_up vru 
+		where vr.vr_num=vru.vr_num(+) group by vr.vr_num order by vr.vr_num desc) aa
+		where vr.vr_num=aa.vr_num and vr.m_num=m.m_num and vr.vr_delete=0 and vr.v_num=#{v_num})
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	<select id="getCount" parameterType="int" resultType="int">
+		select count(*) from video_reply where v_num=#{v_num} and vr_delete=0
 	</select>
 </mapper>
