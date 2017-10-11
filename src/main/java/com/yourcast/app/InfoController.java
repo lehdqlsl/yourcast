@@ -58,7 +58,7 @@ public class InfoController {
 		
 		List<FanVO> listF = f_service.getList(map);
 		List<BlacklistVO> listB = b_service.getList(voM.getM_num());
-		List<MemberVO> listM = m_sevice.getList();
+//		List<MemberVO> listM = m_sevice.getList();
 		
 		model.addAttribute("clist", clist);
 		model.addAttribute("id", id);
@@ -66,7 +66,7 @@ public class InfoController {
 		model.addAttribute("listF", listF);
 		model.addAttribute("pu", pu);
 		model.addAttribute("listB", listB);		
-		model.addAttribute("listM", listM);
+//		model.addAttribute("listM", listM);
 		return ".personnel.setting.info";
 	}
 	

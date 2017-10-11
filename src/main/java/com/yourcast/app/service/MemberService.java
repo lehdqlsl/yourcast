@@ -29,13 +29,17 @@ public class MemberService {
 	public MemberVO getInfo(String id) {
 		return dao.getInfo(id);
 	}
-
-	public MemberVO getInfo(int m_num) {
+  public MemberVO getInfo(int m_num) {
 		return dao.getInfo(m_num);
 	}
 
-	public List<MemberVO> getList() {
-		return dao.getList();
+
+	public List<MemberVO> getList(HashMap<String, Object> map) {
+		return dao.getList(map);
+	}
+	
+	public int getCount(HashMap<String, Object> map) {
+		return dao.getCount(map);
 	}
 
 	public int moneyUpdate(MemberVO vo) {

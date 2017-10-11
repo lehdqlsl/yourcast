@@ -12,4 +12,17 @@
 	<select id="isCheck" parameterType="boardreport" resultType="boardreport">
 		select * from board_report where m_num=#{m_num} and b_num=#{b_num} 
 	</select>
+	
+	<select id="getListAdmin" resultType="board" parameterType="hashmap">
+		select * from
+		(select aa.b_num,m.id,b.b_title,aa.b_report,m1.id bj_id,b.category_num,rownum rnum from 
+		(select b_num,count(b_num) b_report from board_report group by b_num order by b_report desc)aa, board b, member m, member m1
+		where aa.b_num=b.b_num and b_delete=0 and m.m_num=b.m_num and m1.m_num=b.bj_num)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	
+	<select id="getCountAdmin" resultType="int">
+		select NVL(count(b_num),0) cnt from
+		(select b_num,count(b_num) b_report from board_report group by b_num)
+	</select>
 </mapper>

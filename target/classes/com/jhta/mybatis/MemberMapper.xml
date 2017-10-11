@@ -14,12 +14,46 @@
 	<select id="getInfo" parameterType="string" resultType="member">
 		select * from member where id=#{id}
 	</select>
+
+	<select id="getList" resultType="member" parameterType="hashmap">
+		select * from
+		(select a.*,rownum rnum from
+		(select m.*,g.grade_name from member m,grade g 
+		where m.grade_num=g.grade_num order by m_num desc)a
+		<where>
+			<if test="name!=null">
+				name like '%' || #{keyword} || '%'
+			</if>
+			<if test="id!=null">
+				or id like '%' || #{keyword} || '%'
+			</if>
+			<if test="sum!=null">
+				or name like '%' || #{keyword} || '%' and id like '%' || #{keyword} || '%'
+			</if>
+		</where>
+		)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+  </select>
+
 	<select id="getInfo2" parameterType="int" resultType="member">
 		select * from member where m_num=#{m_num}
 	</select>
-	<select id="getList" resultType="member">
-		select * from member
-	</select>
+
+
+	<select id="getCount" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) from member
+		<where>
+			<if test="name!=null">
+				name like '%' || #{keyword} || '%'
+			</if>
+			<if test="id!=null">
+				or id like '%' || #{keyword} || '%'
+			</if>
+			<if test="sum!=null">
+				or name like '%' || #{keyword} || '%' and id like '%' || #{keyword} || '%'
+			</if>
+		</where>
+	</select>	
 	<update id="moneyUpdate" parameterType="member">
 		update member set
 		money=#{money} where m_num=#{m_num}

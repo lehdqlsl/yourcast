@@ -26,12 +26,20 @@
                     </a>
                 </li>
                 
-                <li class="active">
+                <li class="active">                
                     <a href="<c:url value='/admin/report/board'/>">
                         <i class="pe-7s-graph"></i>
                         <p>신고관리</p>
                     </a>
                 </li>
+                
+                <li class="active">                
+                    <a href="<c:url value='#'/>">
+                        <i class="pe-7s-graph"></i>
+                        <p>매출현황</p>
+                    </a>
+                </li>
+
 
             </ul>
     	</div>

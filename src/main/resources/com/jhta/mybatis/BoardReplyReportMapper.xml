@@ -14,4 +14,19 @@
 	<select id="isCheck" parameterType="boardreplyreport" resultType="boardreplyreport">
 		select * from board_reply_report where br_num=#{br_num} and m_num=#{m_num}  
 	</select>
+	
+	<select id="getListAdmin" resultType="boardreply" parameterType="hashmap">
+		select * from 
+		(select aa.br_num,m.id,br.br_content,aa.brrcnt,b.b_num,b.category_num,m1.id bj_id,rownum rnum from
+		(select br_num,count(m_num) brrcnt from board_reply_report 
+		group by br_num order by brrcnt desc)aa,board_reply br,member m,member m1,board b
+		where aa.br_num=br.br_num and br_delete=0 and m.m_num=br.m_num and b.b_num=br.b_num and m1.m_num=b.bj_num)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	
+	<select id="getCountAdmin" resultType="int">
+		select NVL(count(br_num),0) from
+		(select br_num,count(m_num) brrcnt from board_reply_report 
+		group by br_num)
+	</select>
 </mapper>
