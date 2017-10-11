@@ -24,4 +24,7 @@ public class VideoReplyReportDAO {
 	public int getCount(int vr_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getcount", vr_num);
 	}
+	public VideoReplyReportVO check(VideoReplyReportVO vo) {
+		return sqlSession.selectOne(NAMESPACE+".check",vo);
+	}
 }

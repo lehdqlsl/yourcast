@@ -24,5 +24,7 @@ public class VideoReplyUpDAO {
 	public int getCount(int vr_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getcount", vr_num);
 	}
-
+	public VideoReplyUpVO check(VideoReplyUpVO vo) {
+		return sqlSession.selectOne(NAMESPACE+".check",vo);
+	}
 }

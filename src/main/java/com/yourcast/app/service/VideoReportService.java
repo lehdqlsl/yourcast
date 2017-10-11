@@ -20,4 +20,7 @@ public class VideoReportService {
 	public int getCount(int v_num) {
 		return dao.getCount(v_num);
 	}
+	public VideoReportVO check(VideoReportVO vo) {
+		return dao.check(vo);
+	}
 }

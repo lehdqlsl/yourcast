@@ -27,19 +27,6 @@ public class VideoReplyController {
 	//동영상 댓글 추가
 	@RequestMapping(value="/{id}/videoreply/insert")
 	@ResponseBody
-	/*public int insert(@PathVariable(value="id") String id,String sid,String vr_content,String v_num) {
-		//데이터 받아오기
-		MemberVO mvo=m_service.getInfo(sid);
-		System.out.println("video : "+sid);//로그인한 아이디
-		System.out.println("video : "+vr_content);
-		System.out.println("video : "+v_num);
-		System.out.println("video : "+mvo.getM_num());//로그인한 회원번호
-		
-		//댓글 추가
-		VideoReplyVO vrvo=new VideoReplyVO(0, vr_content, null, 0, Integer.parseInt(v_num), mvo.getM_num());
-		int n=vr_service.insert(vrvo);
-		return n;
-	}*/
 	public VideoReplyList insert(@PathVariable(value="id") String id,String sid,String vr_content,String v_num) {
 		//데이터 받아오기
 		MemberVO mvo=m_service.getInfo(sid);
@@ -48,7 +35,6 @@ public class VideoReplyController {
 		VideoReplyVO vrvo=new VideoReplyVO(0, vr_content, null, 0, vnum, mvo.getM_num());
 		vr_service.insert(vrvo);
 		
-		
 		//페이징 처리
 		int totalRowCount=vr_service.getCount(vnum);
 		PageUtil pu=new PageUtil(1, 5, 1, totalRowCount);
@@ -56,6 +42,28 @@ public class VideoReplyController {
 		//해시맵 만들기
 		HashMap<String, Object> map =new HashMap<String, Object>();
 		map.put("v_num", vnum);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		
+		//리스트에 담기
+		List<VideoReplyVO> vrlist=vr_service.getList(map);
+		VideoReplyList list=new VideoReplyList();
+		list.setList(vrlist);
+		return list;
+	}
+	//동영상 댓글 삭제
+	@RequestMapping(value="/videoreply/delete")
+	@ResponseBody
+	public VideoReplyList delete(int vr_num, int v_num) {
+		//댓글 삭제
+		vr_service.delete(vr_num);
+		//페이징 처리
+		int totalRowCount=vr_service.getCount(v_num);
+		PageUtil pu=new PageUtil(1, 5, 1, totalRowCount);
+						
+		//해시맵 만들기
+		HashMap<String, Object> map =new HashMap<String, Object>();
+		map.put("v_num", v_num);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		
@@ -86,12 +94,7 @@ public class VideoReplyController {
 		list.setList(vrlist);
 		return list;
 	}
-	//동영상 댓글 삭제
-	@RequestMapping(value="/videoreply/delete")
-	public String delete(int vr_num, int v_num) {
-		vr_service.delete(vr_num);
-		return "redirect:/videomain/getInfo?v_num="+v_num;
-	}
+	
 	//동영상 댓글 수 받아오기
 	@RequestMapping(value="/videoreply/vrcount")
 	@ResponseBody
