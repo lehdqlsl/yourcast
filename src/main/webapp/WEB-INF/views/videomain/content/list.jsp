@@ -46,8 +46,8 @@
 	<div class="w3-row-padding" id="videolist">
 		<c:forEach var="vo" items="${vlist }">
 			<div class="w3-col l3 m6 w3-margin-bottom videolist">
-				<img src='<c:url value="/resources/upload/${vo.v_savethumbnail }"/>' style="width: 100%;height: 250px;">
-				<h3><a href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>'>${vo.v_title }</a></h3>	
+				<a href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>'><img src='<c:url value="/resources/upload/${vo.v_savethumbnail }"/>' style="width: 100%;height: 250px;"></a>
+				<h3>${vo.v_title }</h3>	
 			</div>
 		</c:forEach>
 	</div>

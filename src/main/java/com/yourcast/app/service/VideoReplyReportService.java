@@ -21,4 +21,7 @@ public class VideoReplyReportService {
 	public int getCount(int vr_num) {
 		return dao.getCount(vr_num);
 	}
+	public VideoReplyReportVO check(VideoReplyReportVO vo) {
+		return dao.check(vo);
+	}
 }

@@ -102,7 +102,7 @@
 					<td>${vo.v_title }</td>
 					<td>${vo.v_content }</td>
 					<td>${vo.v_regdate }</td>				
-					<td><a href="<c:url value="/${id}/video/detail?v_num=${vo.v_num }"/>">
+					<td><a href="<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>">
 							<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="width:50px;height:50px;">
 							</a></td>
 					<td>${vo.v_hit }</td>

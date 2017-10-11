@@ -12,4 +12,7 @@
 		select
 		NVL(count(*),0) from video_up where v_num = #{v_num}
 	</select>
+	<select id="check" parameterType="videoup" resultType="videoup">
+		select * from video_up where m_num=#{m_num} and v_num=#{v_num}
+	</select>
 </mapper>
