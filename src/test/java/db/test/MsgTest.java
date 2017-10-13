@@ -1,5 +1,6 @@
 package db.test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
@@ -34,13 +35,21 @@ public class MsgTest {
 	
 	@Test
 	public void getSendList() {
-		List<MsgVO> list = dao.getSendList(1);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("m_numS", 64);
+		map.put("startRow",1);
+		map.put("endRow", 10);
+		List<MsgVO> list = dao.getSendList(map);
 		Assert.assertNotNull(list);
 	}
 	
 	@Test
 	public void getRecvList() {
-		List<MsgVO> list = dao.getRecvList(1);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("m_numR", 64);
+		map.put("startRow",1);
+		map.put("endRow", 10);
+		List<MsgVO> list = dao.getRecvList(map);
 		Assert.assertNotNull(list);
 	}
 	

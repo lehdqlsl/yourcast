@@ -43,4 +43,10 @@ public class VideoService {
 	public List<VideoVO> getGenreList(HashMap<String, Object> map){
 		return dao.getGenreList(map);
 	}
+	public List<VideoVO> allList(HashMap<String, Object> map){
+		return dao.allList(map);
+	}
+	public int allCount() {
+		return dao.allCount();
+	}
 }

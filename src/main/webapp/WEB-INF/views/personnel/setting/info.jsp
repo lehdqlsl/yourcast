@@ -10,7 +10,7 @@
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
-
+	
 		<!-- Header -->
 		<header id="portfolio">
 			<a href="#"><img src="/w3images/avatar_g2.jpg"

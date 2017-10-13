@@ -31,12 +31,15 @@
 	</select>
 	<select id="getGenreList" resultType="video" parameterType="hashmap">
 		<!--  select * from video where genre_num=#{genre_num} and v_delete=0-->
-		select * from
-		(select aa.*,rownum rnum from
-		(select * from video where genre_num=#{genre_num} and v_delete=0 order by v_num desc) aa)
+		select * from(select aa.*,rownum rnum from
+		(select v.*,m.id from video v, member m where v.m_num=m.m_num and v.genre_num=#{genre_num} and v.v_delete=0 order by v.v_num desc) aa)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>	
-	
+	<select id="allList" parameterType="hashmap" resultType="video">
+		select * from(select aa.*,rownum rnum from
+		(select v.*,m.id from video v, member m where v.m_num=m.m_num and v.v_delete=0 order by v.v_num desc) aa)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
 	<update id="delete" parameterType="int">
 		update video
 		set v_delete = 1
@@ -58,5 +61,8 @@
 				</if>
 				and v_delete = 0
 			</where>
+	</select>
+	<select id="allCount" resultType="int">
+		select NVL(count(m_num),0) cnt from video where v_delete=0
 	</select>
 </mapper>
