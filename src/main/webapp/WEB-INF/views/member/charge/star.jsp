@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.theme.min.css'/>?ver=1">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script>
 
-<div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
+<div class="w3-main" style="margin: 60px auto 0 auto;width: 960px;">
 
 <!-- 
 	 <script type="text/javascript">

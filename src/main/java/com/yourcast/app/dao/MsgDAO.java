@@ -1,5 +1,6 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,12 +24,12 @@ public class MsgDAO {
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public List<MsgVO> getSendList(int m_nums) {
-		return sqlSession.selectList(NAMESPACE + ".getsendlist",m_nums);
+	public List<MsgVO> getSendList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".getsendlist",map);
 	}
 
-	public List<MsgVO> getRecvList(int m_numr) {
-		return sqlSession.selectList(NAMESPACE + ".getrecvlist",m_numr);
+	public List<MsgVO> getRecvList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".getrecvlist",map);
 	}
 	
 	public int viewDate(int msg_num) {
@@ -49,5 +50,11 @@ public class MsgDAO {
 
 	public int recvCount(int m_numr) {
 		return sqlSession.selectOne(NAMESPACE + ".recvcount",m_numr);
+	}
+	public MsgVO recvmsg(int m_numr) {
+		return sqlSession.selectOne(NAMESPACE+".recvmsg",m_numr);
+	}
+	public MsgVO sendmsg(int m_nums) {
+		return sqlSession.selectOne(NAMESPACE+".sendmsg", m_nums);
 	}
 }

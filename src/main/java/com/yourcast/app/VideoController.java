@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.util.page.PageUtil;
+import com.util.page.VideoAllList;
 import com.util.page.VideoMainList;
 import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.GenreService;
@@ -58,6 +59,26 @@ public class VideoController {
 		List<GenreVO> glist=g_service.getList();
 		model.addAttribute("glist", glist);
 		return ".videomain";
+	}
+	//동영상 전체 목록 출력(카테고리 무관)
+	@RequestMapping(value="/videomain/alllist")
+	@ResponseBody
+	public VideoAllList videoAllList(@RequestParam(value="pageNum",defaultValue="1")int pageNum) {
+		//페이징 처리
+		int totalRowCount=v_service.allCount();
+		PageUtil pu=new PageUtil(pageNum, 20, 1, totalRowCount);
+		
+		//해시맵 만들기
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		
+		//리스트에 담기
+		List<VideoVO> vlist=v_service.allList(map);
+		VideoAllList list=new VideoAllList();
+		list.setList(vlist);
+		list.setCount(totalRowCount);
+		return list;
 	}
 	
 	//클릭 시 해당 카테고리(장르)에 맞는 동영상 리스트 출력(ajax없음)
@@ -110,11 +131,15 @@ public class VideoController {
 	//동영상 조회
 	@RequestMapping(value="/videomain/getInfo")
 	public String videoMainGetInfo(HttpServletRequest request, Model model) {
+		
 		String vnum=request.getParameter("v_num");
 		int v_num=Integer.parseInt(vnum);
 		VideoVO vvo= v_service.getInfo(v_num);
 		int vrcount=vr_service.getCount(v_num);
 		int vucount=vu_service.getCount(v_num);
+		
+		//조회수
+		v_service.hitUpdate(v_num);
 		
 		model.addAttribute("vucount",vucount);
 		model.addAttribute("vvo",vvo);
