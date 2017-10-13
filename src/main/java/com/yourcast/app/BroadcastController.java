@@ -19,7 +19,6 @@ import com.yourcast.app.service.BroadcastService;
 import com.yourcast.app.service.FanService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.StarUseService;
-import com.yourcast.app.vo.BoardReplyReportVO;
 import com.yourcast.app.vo.BroadcastVO;
 import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberVO;
@@ -133,6 +132,13 @@ public class BroadcastController {
 			} else {
 				int fancount = f_service.fanCount(bjvo.getM_num());
 				json.put("grade", "fan");
+				// ¿­Ç÷ÆÒ È®ÀÎ
+				for (StarUseVO svo : list) {
+					if (svo.getM_num() == uvo.getM_num()) {
+						json.put("grade", "hot");
+						break;
+					}
+				}
 				json.put("fancnt", fancount);
 			}
 		} catch (Exception e) {

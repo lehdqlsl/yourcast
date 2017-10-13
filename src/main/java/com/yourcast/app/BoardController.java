@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.util.page.PageUtil;
 import com.yourcast.app.service.BoardReplyService;
-import com.yourcast.app.service.BoardReplyUpService;
 import com.yourcast.app.service.BoardReportService;
 import com.yourcast.app.service.BoardService;
 import com.yourcast.app.service.BoardUpService;

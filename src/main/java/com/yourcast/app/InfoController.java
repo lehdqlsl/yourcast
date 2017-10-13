@@ -34,6 +34,7 @@ import com.yourcast.app.vo.StarUseVO;
 import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
+import com.yourcast.app.vo.PagingVO;
 
 @Controller
 public class InfoController {
@@ -152,20 +153,20 @@ public class InfoController {
 			new File(path + "//" + voMP.getProfile_savefilename()).delete();
 			try {
 				FileCopyUtils.copy(profileImg.getInputStream(), new FileOutputStream(path + "\\" + profile_savefilename));
-				System.out.println(path + "\\" + profile_savefilename + "ÇÁ·ÎÇÊ»çÁø ¾÷·Îµå ¼º°ø");
+				System.out.println(path + "\\" + profile_savefilename + "í”„ë¡œí•„ì‚¬ì§„ ì—…ë¡œë“œ ì„±ê³µ");
 				
 			}catch(IOException ie) {
 				System.out.println(ie.getMessage());
-				model.addAttribute("result","¿¡·¯·Î ÀÎÇÑ ½ÇÆÐ");
+				model.addAttribute("result","ì—ëŸ¬ë¡œ ì¸í•œ ì‹¤íŒ¨");
 				return ".personnel.setting.result"; 
 			}
 		}
 		
 		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, profile_content, profile_orgfilename, profile_savefilename, vo.getM_num(),profile_title));
 		if(n>0) {
-			model.addAttribute("result","±âº»Á¤º¸ ¼öÁ¤ ¼º°ø");
+			model.addAttribute("result","ê¸°ë³¸ì •ë³´ ìˆ˜ì • ì„±ê³µ");
 		}else {
-			model.addAttribute("result","±âº»Á¤º¸ ¼öÁ¤ ½ÇÆÐ");
+			model.addAttribute("result","ê¸°ë³¸ì •ë³´ ìˆ˜ì • ì‹¤íŒ¨");
 		}
 		
 		return ".personnel.setting.result";

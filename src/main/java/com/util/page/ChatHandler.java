@@ -112,6 +112,7 @@ public class ChatHandler extends TextWebSocketHandler {
 			}
 			break;
 
+		//팬가입
 		case 4:
 			try {
 				bj_num = (Long) jsonObj.get("bj_num");
@@ -137,6 +138,21 @@ public class ChatHandler extends TextWebSocketHandler {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+			break;
+			
+		//방송설정변경
+		case 5:
+			bj_num = (Long) jsonObj.get("bj_num");
+			String title = (String) jsonObj.get("title");
+			JSONObject obj1 = new JSONObject();
+			obj1.put("packet", "5");
+			obj1.put("title", title);
+			for (User user1 : list) {
+				// 같은 방 찾기
+				if (bj_num == user1.getBj_num()) {
+					user1.getSession().sendMessage(new TextMessage(obj1.toJSONString()));
+				}
 			}
 			break;
 		default:

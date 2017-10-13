@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sun.xml.internal.ws.config.management.policy.ManagementPolicyValidator;
 import com.util.page.PageUtil;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.MsgService;
@@ -81,21 +82,57 @@ public class MessageController {
 		String r_id=request.getParameter("r_id");//받는 사람 아이디
 		String msg_title=request.getParameter("msg_title");//제목
 		String msg_content=request.getParameter("msg_content");//내용
-	
+		
 		//회원 번호 얻어오기
 		MemberVO mvo1=m_service.getInfo(s_id);
 		MemberVO mvo2=m_service.getInfo(r_id);
-		int m_numS=mvo1.getM_num();
-		int m_numR=mvo2.getM_num();
-	
+		
 		///////////존재하는 아이디인지 확인하는 작업/////////////
-		
-		////////////////////////////////////////////////
-		
-		MsgVO msgvo=new MsgVO(0, msg_title, msg_content, null, 0, 0, 0, m_numS, m_numR);
-		msg_service.insert(msgvo);
-		
-		return ".personnel.board.success";
+	
+		if(mvo2==null) {//존재하지 않는 아이디
+			return "/member/message/sendfail";
+		}else {//존재하는 아이디
+			int m_numS=mvo1.getM_num();
+			int m_numR=mvo2.getM_num();
+			MsgVO msgvo=new MsgVO(0, msg_title, msg_content, null, 0, 0, 0, m_numS, m_numR);
+			msg_service.insert(msgvo);
+			return "/member/message/sendsuccess";
+		}
+		////////////////////////////////////////////////	
 	}
 	//받은 쪽지 조회
+	@RequestMapping(value="/message/recv/getInfo",method=RequestMethod.GET)
+	public String recvMsg(HttpServletRequest request,Model model) {
+		int msg_num=Integer.parseInt(request.getParameter("msg_num"));
+		MsgVO msgvo= msg_service.recvmsg(msg_num);
+		
+		//조회수 올리기
+		msg_service.viewDate(msg_num);
+		
+		model.addAttribute("msgvo",msgvo);
+		return "/member/message/recvmsg";
+	}
+	//보낸 쪽지 조회
+	@RequestMapping(value="/message/send/getInfo")
+	public String sendMsg(HttpServletRequest request, Model model) {
+		int msg_num=Integer.parseInt(request.getParameter("msg_num"));
+		MsgVO msgvo=msg_service.sendmsg(msg_num);
+		
+		model.addAttribute("msgvo",msgvo);
+		return "/member/message/sendmsg";
+	}
+	//받은 쪽지 한 개 삭제
+	@RequestMapping(value="/message/recv/deleteOne")
+	public String recvDeleteOne(HttpServletRequest request) {
+		int msg_num=Integer.parseInt(request.getParameter("msg_num"));
+		msg_service.recvDelete(msg_num);
+		return "/member/message/deleteresult";
+	}
+	//보낸 쪽지 한 개 삭제
+	@RequestMapping(value="/message/send/deleteOne")
+	public String sendDeleteOne(HttpServletRequest request) {
+		int msg_num=Integer.parseInt(request.getParameter("msg_num"));
+		msg_service.sendDelete(msg_num);
+		return "/member/message/deleteresult";
+	}
 }

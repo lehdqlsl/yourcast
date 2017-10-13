@@ -62,11 +62,12 @@ input[type="checkbox"]:checked + label:before {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/sockjs.min.js'/>"></script>
 <div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;">
 	<div class="w3-container w3-padding-32" id="projects">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">
 			방송 설정</h3>
-		<form action="<c:url value='/member/broadcast/update'/>" method="post">
+		<form action="<c:url value='/member/broadcast/update'/>" method="post" id="target">
 			<div>
 				<dl>
 					<dt>서버 URL</dt>
@@ -136,5 +137,25 @@ $(function() {
 			}
 	 });
 });
+
+var wsocket;
+$(window).on("load", function(e) {
+	wsocket = new SockJS("/app/echo.sockjs");
+});
+
+$('#target').submit(function() { 
+
+	var title = $("input[name=broadcast_title]").val();
+	
+	var bj_num = ${bvo.m_num};
+	var sendmsg = {};
+	sendmsg.packet = 5;
+	sendmsg.bj_num = bj_num;
+	sendmsg.title = title;
+	wsocket.send( JSON.stringify(sendmsg));
+	
+	alert('방송정보 변경이 정상적으로 처리 되었습니다.');
+});
+
 </script>
 

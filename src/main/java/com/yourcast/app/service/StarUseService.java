@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yourcast.app.dao.FanDAO;
 import com.yourcast.app.dao.MemberDAO;
 import com.yourcast.app.dao.StarUseDAO;
-import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.StarUseVO;
 

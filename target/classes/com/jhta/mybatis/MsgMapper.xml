@@ -18,7 +18,7 @@
 	<select id="getrecvlist" resultType="msg" parameterType="hashmap">
 		select * from
 		(select aa.*,rownum rnum from
-		(select msg.*,m.id from message msg, member m where msg.m_numS=m.m_num and msg.m_numR=#{m_numR} and msg_send_delete=0 order by msg.msg_num desc) aa)
+		(select msg.*,m.id from message msg, member m where msg.m_numS=m.m_num and msg.m_numR=#{m_numR} and msg_receive_delete=0 order by msg.msg_num desc) aa)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	
@@ -42,10 +42,10 @@
 		select NVL(count(msg_num),0) cnt from message where m_numR=#{m_numR} and msg_receive_delete=0
 	</select>
 	<select id="recvmsg" parameterType="int" resultType="msg">
-		select msg.*,m.id,m.name  from message msg, member m where msg.m_nums=m.m_num and m.m_numr=#{m_numr}
+		select msg.*,m.id,m.name  from message msg, member m where msg.m_nums=m.m_num and msg.msg_num=#{msg_num}
 	</select>
 	<select id="sendmsg" parameterType="int" resultType="msg">
-		select msg.*,m.id,m.name  from message msg, member m where msg.m_numr=m.m_num and m.m_nums=#{m_nums}
+		select msg.*,m.id,m.name  from message msg, member m where msg.m_numr=m.m_num and msg.msg_num=#{msg_num}
 	</select>
 	
 </mapper>

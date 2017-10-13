@@ -6,7 +6,7 @@
 	<div>
 		<h4>쪽지보내기</h4>
 	</div>
-	<form method="post" action='<c:url value="/message/send"/>'>
+	<form method="post" action='<c:url value="/message/send"/>' id="form">
 		<input type="hidden" value="${sessionScope.id }" id="s_id" name="s_id">
 		<table>
 			<tr>

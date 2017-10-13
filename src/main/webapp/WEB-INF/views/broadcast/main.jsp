@@ -99,7 +99,7 @@ dd.name {
 	padding: 0 0 8px;
 }
 
-.bj dt {
+.info .bj dt {
 	width: 100%;
 	font-size: 18px;
 	line-height: 1.3em;
@@ -197,7 +197,7 @@ dd.name {
 			</div>
 			<dl class="bj">
 				<dd class="name">${bjvo.name }</dd>
-				<dt>${bvo.broadcast_title }</dt>
+				<dt id="broadcast_title">${bvo.broadcast_title }</dt>
 			</dl>
 		</div>
 	</div>

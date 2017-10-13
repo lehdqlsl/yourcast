@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonObject;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.VideoReplyReportService;
 import com.yourcast.app.service.VideoReplyUpService;
