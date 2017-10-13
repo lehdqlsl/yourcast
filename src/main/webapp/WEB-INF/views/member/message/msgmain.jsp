@@ -10,20 +10,30 @@
 		//탭 주기
 		$("#tabMenu").tabs();
 		
-		
 		//쪽지 전송 눌렀을 때 쪽지 전송 팝업창 띄우기
 		$(".btn").on("click",function(){
-			window.open("<c:url value='/message/send'/>","_blank","width=400px,height=400px")
+			window.open("<c:url value='/message/send'/>","_blank","width=450px,height=450px");
 		});
+		
 		//checkall누르면 다 체크되기
-		$("#checkall").click(function(){
-			var chk=$("#checkall").prop("checked");
-			if(chk==true){//체크 -> 비체크
-				$(".check").attr("checked",true);
-			}else{//비체크 -> 체크
-				$(".check").attr("checked",false);
+		$("#checkallR").click(function(){
+			var chk=$("#checkallR").prop("checked");
+			if(chk==true){
+				$('[name="checkR"]').prop("checked",true);
+			}else{
+				$('[name="checkR"]').prop("checked",false);
 			}
-		})
+		});
+		$("#checkallS").click(function(){
+			var chk=$("#checkallS").prop("checked");
+			if(chk==true){
+				$('[name="checkS"]').prop("checked",true);
+			}else{
+				$('[name="checkS"]').prop("checked",false);
+		
+			}
+		});
+		
 	});
 </script>
 <div class="w3-main" style="margin: 60px auto 0 auto;width: 960px;">
@@ -51,16 +61,16 @@
 		<div id="tabs-1" class="divTab">
 			<button class="w3-button w3-black w3-round-large btn"><i class="fa fa-paper-plane"></i>&nbsp;쪽지보내기</button>
 			<!-- 목록 -->
-			<div>
+			<div id="recvlist">
 				<table border="1" width="100%">
 					<tr>
-						<th><input type="checkbox" id="checkall"></th><th>보낸 사람</th><th>제목</th><th>보낸 시각</th>
+						<th><input type="checkbox" id="checkallR"></th><th>보낸 사람</th><th>제목</th><th>보낸 시각</th>
 					</tr>
 					<c:forEach var="vo" items="${rlist }">
 						<tr>
-							<td><input type="checkbox" id="${vo.msg_num }" class="check"></td>
+							<td><input type="checkbox" id="${vo.msg_num }" name="checkR" class="checkR"></td>
 							<td>${vo.id }</td>
-							<td>${vo.msg_title }</td>
+							<td><a href='#' onclick="window.open('<%=request.getContextPath()%>/message/recv/getInfo?msg_num=${vo.msg_num }','_blank','resizable=no,width=450 height=450');" class="recvmsg">${vo.msg_title }</a></td>
 							<td>${vo.msg_send_date}</td>
 						</tr>
 					</c:forEach>
@@ -101,30 +111,32 @@
 		</div>
 		<div id="tabs-2" class="divTab">
 			<button class="w3-button w3-black w3-round-large btn"><i class="fa fa-paper-plane"></i>&nbsp;쪽지보내기</button>
-			
-			<table border="1" width="100%">
-				<tr>
-					<th><input type="checkbox" id="checkall"></th><th>받는 사람</th><th>제목</th><th>보낸 시각</th><th>상태</th>
-				</tr>
-				<c:forEach var="vo" items="${slist }">
+			<!-- 목록 -->
+			<div id="sendlist">
+				<table border="1" width="100%">
 					<tr>
-						<td><input type="checkbox" id="${vo.msg_num }" class="check"></td>
-						<td>${vo.id }</td>
-						<td>${vo.msg_title }</td>
-						<td>${vo.msg_send_date }</td>
-						<td>
-							<c:choose>
-								<c:when test="${vo.msg_view_date==0 }">
-									읽지 않음
-								</c:when>
-								<c:otherwise>
-									읽음
-								</c:otherwise>
-							</c:choose>
-						</td>
+						<th><input type="checkbox" id="checkallS"></th><th>받는 사람</th><th>제목</th><th>보낸 시각</th><th>상태</th>
 					</tr>
-				</c:forEach>
-			</table>
+					<c:forEach var="vo" items="${slist }">
+						<tr>
+							<td><input type="checkbox" id="${vo.msg_num }"  name="checkS" class="checkS"></td>
+							<td>${vo.id }</td>
+							<td><a href='#' onclick="window.open('<%=request.getContextPath()%>/message/send/getInfo?msg_num=${vo.msg_num }','_blank','resizable=no,width=450 height=450');" class="recvmsg">${vo.msg_title }</a></td>
+							<td>${vo.msg_send_date }</td>
+							<td>
+								<c:choose>
+									<c:when test="${vo.msg_view_date==0 }">
+										읽지 않음
+									</c:when>
+									<c:otherwise>
+										읽음
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 			<!-- 페이징 -->
 			<div>
 			<!-- 이전 -->

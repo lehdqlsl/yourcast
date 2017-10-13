@@ -51,10 +51,10 @@ public class MsgDAO {
 	public int recvCount(int m_numr) {
 		return sqlSession.selectOne(NAMESPACE + ".recvcount",m_numr);
 	}
-	public MsgVO recvmsg(int m_numr) {
-		return sqlSession.selectOne(NAMESPACE+".recvmsg",m_numr);
+	public MsgVO recvmsg(int msg_num) {
+		return sqlSession.selectOne(NAMESPACE+".recvmsg",msg_num);
 	}
-	public MsgVO sendmsg(int m_nums) {
-		return sqlSession.selectOne(NAMESPACE+".sendmsg", m_nums);
+	public MsgVO sendmsg(int msg_num) {
+		return sqlSession.selectOne(NAMESPACE+".sendmsg", msg_num);
 	}
 }
