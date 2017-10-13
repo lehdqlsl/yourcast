@@ -38,4 +38,8 @@ public class BoardReplyReportService {
 	public int getCountAdmin() {
 		return dao.getCountAdmin();
 	}
+	
+	public List<BoardReplyReportVO> getList(int br_num){
+		return dao.getList(br_num);
+	}
 }

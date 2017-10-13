@@ -144,7 +144,7 @@
 					$(".base").filter(':first').css('color','red');
 					$("#pre a").on('click',function(){
 						var pageNum = parseInt($(".base").filter(':first').text()) - 1;
-						if(pageNum<5){
+						if(pageNum<6){
 							return false;
 						}
 						$("tbody").empty();

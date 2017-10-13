@@ -27,4 +27,8 @@
 		(select v_num,count(v_num) v_report from video_report group by v_num)a,video v
 		where a.v_num=v.v_num and v.v_delete=0
 	</select>
+	
+	<select id="getList" resultType="videoreport">
+		 select v.*,m.id from video_report v,member m where v_num=#{v_num} and v.m_num=m.m_num
+	</select>
 </mapper>

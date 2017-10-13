@@ -32,6 +32,7 @@ import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.GenreService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.service.StarUseService;
 import com.yourcast.app.service.VideoReplyService;
 import com.yourcast.app.service.VideoService;
 import com.yourcast.app.service.VideoUpService;
@@ -40,6 +41,7 @@ import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.GenreVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
+import com.yourcast.app.vo.StarUseVO;
 import com.yourcast.app.vo.VideoVO;
 
 /**
@@ -55,6 +57,7 @@ public class VideoController {
 	@Autowired private VideoReplyService vr_service;
 	@Autowired private VideoUpService vu_service;
 	@Autowired private AgeGradeService age_service;
+	@Autowired private StarUseService u_service;
 	////////////////////////////////video 메인 페이지 관련 내용(민지)//////////////////////////////////
 	//클릭 시 비디오 메인 페이지로 이동
 	@RequestMapping(value="/videomain",method=RequestMethod.GET)
@@ -165,6 +168,8 @@ public class VideoController {
 		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
 		
 		return ".personnel.video.detail";
 	}
@@ -191,6 +196,8 @@ public class VideoController {
 		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
 		
 		return ".personnel.video.list";
 	}
@@ -207,6 +214,8 @@ public class VideoController {
 		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
 		
 		new File(path + "//" + vo.getV_savefilename()).delete();
 		new File(path + "//" + vo.getV_savethumbnail()).delete();
@@ -230,6 +239,8 @@ public class VideoController {
 		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
 		
 		int n = 0;
 		for(int i=0;i<chk.length;i++) {
@@ -259,6 +270,8 @@ public class VideoController {
 		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
 		
 		return ".personnel.video.update";
 	}
@@ -277,6 +290,8 @@ public class VideoController {
 			
 			MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 			model.addAttribute("voMP", voMP);
+			List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+			model.addAttribute("flist", flist);
 			
 			String path = session.getServletContext().getRealPath("/resources/upload");
 			String orgfilename = vfile.getOriginalFilename();
@@ -347,6 +362,8 @@ public class VideoController {
 		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
 		
 		return ".personnel.video.insert";
 	}
@@ -363,6 +380,8 @@ public class VideoController {
 		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
 		
 		String path = session.getServletContext().getRealPath("/resources/upload");
 		String orgfilename = vfile.getOriginalFilename();

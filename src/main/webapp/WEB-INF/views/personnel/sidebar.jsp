@@ -28,6 +28,24 @@
 	</c:forEach>
       <a href="<c:url value="/${requestScope.id }/video/list"/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-play fa-fw w3-margin-right" aria-hidden="true"></i>Video</a>
   </div>
+  <div class="w3-row-padding">
+  	<ul class="w3-ul w3-border w3-white w3-center">
+  		<li class="w3-light-grey" style="text-align: left;">열혈팬 Top5</li>
+  		<li style="text-align: left;">
+  			<c:forEach var="fvo" items="${flist }">
+  				<c:choose>
+  					<c:when test="${fvo.rnum==1 }">
+  						<img src="resources/upload/crown.png">&nbsp;<span style="color: red;">회장</span>&nbsp;&nbsp;${fvo.id }<br>
+  					</c:when>
+  					<c:otherwise>
+	  					<img src="resources/upload/heart.png">&nbsp;<span style="color: red;">${fvo.rnum }등</span>&nbsp;&nbsp;${fvo.id }<br>
+	  				</c:otherwise>
+  				</c:choose>
+  			</c:forEach>
+  		</li>
+  	</ul>
+  </div>
+
   <div class="w3-panel w3-large">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
     <i class="fa fa-instagram w3-hover-opacity"></i>

@@ -11,12 +11,13 @@
 	
 	<select id="getList" parameterType="hashmap" resultType="fan">
 		select * from
-		(select bb.*,aa.id,aa.name,cc.cnt,rownum rnum 
-		from member aa,(select * from fan where bj_num=#{bj_num})bb,
-        (select dd.m_num,sum(ee.use_ea) cnt from
-        (select m_num from fan where bj_num=#{bj_num})dd,use ee 
-        where dd.m_num=ee.m_num group by dd.m_num)cc
-		where aa.m_num = bb.m_num and aa.m_num = cc.m_num)
+		(select a.*,rownum rnum from
+		(select bb.*,aa.id,aa.name,cc.cnt 
+		from member aa,(select * from fan where bj_num=62)bb,
+		(select dd.m_num,sum(ee.use_ea) cnt from
+		(select m_num from fan where bj_num=62)dd,use ee 
+		where dd.m_num=ee.m_num group by dd.m_num)cc
+		where aa.m_num = bb.m_num and aa.m_num = cc.m_num order by cnt desc)a)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	

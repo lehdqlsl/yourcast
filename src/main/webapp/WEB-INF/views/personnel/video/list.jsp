@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
+
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -64,25 +66,22 @@
 					return true;
 				}
 			}
-			function updateV(){
-				var chk = document.getElementsByName("chk");
-				var v_num = document.getElementsByName("v_num")[0];
-				var cnt = 0;
-				for(var i=0;i<chk.length;i++){
-					if(chk[i].checked){
-						v_num.value = chk[i].value;
-						cnt++;
+		</script>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#update").on("click",function(){
+					var cnt = $("input[name=chk]:checkbox:checked").length;
+					if(cnt>1){
+						alert("하나의 항목만 선택해주세요.");
+					}else if(cnt==0){
+						alert("항목을 선택해주세요.");
+					}else{
+						var v_num = $("input[name=chk]:checkbox:checked").val();
+						location.href="<c:url value='/${requestScope.id}/video/update?v_num=" + v_num + "'/>";
 					}
-				}
-				if(cnt>1){
-					alert("하나의 항목만 선택해주세요.");
-					return false;
-				}else if(cnt==0){
-					alert("항목을 선택해주세요.");
-				}else if(cnt==1){
-					return true;
-				}
-			}
+				});
+			});
 		</script>
 
 		<h1>Video목록</h1>
@@ -110,21 +109,12 @@
 			</c:forEach>
 		</table>
 		<c:if test="${sessionScope.id==requestScope.id }">
+			<a href="<c:url value="/${requestScope.id}/video/insert"/>">동영상업로드</a>
+			<button type="button" id="update">수정</button>
 			<input type="submit" value="삭제">
 		</c:if>
 		</form>	
-		
-		<c:if test="${sessionScope.id==requestScope.id }">
-			<form method="get" action="<c:url value='/${requestScope.id}/video/update'/>" onsubmit="return updateV()">
-				<input type="hidden" value="1" name="v_num">
-				<input type="submit" value="수정">
-			</form>	
-		</c:if>
-		
-		<c:if test="${sessionScope.id==requestScope.id }">
-			<a href="<c:url value="/${requestScope.id}/video/insert"/>">동영상업로드</a>
-		</c:if>
-		
+
 		<!-- 페이징 -->
 		<div>
 		<c:choose>

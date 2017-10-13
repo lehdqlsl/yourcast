@@ -26,8 +26,11 @@ import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.FanService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.service.StarUseService;
 import com.yourcast.app.vo.BlacklistVO;
 import com.yourcast.app.vo.CategoryVO;
+import com.yourcast.app.vo.PagingVO;
+import com.yourcast.app.vo.StarUseVO;
 import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
@@ -40,6 +43,7 @@ public class InfoController {
 	@Autowired private MemberProfileService mp_service;
 	@Autowired private FanService f_service;
 	@Autowired private BlacklistService b_service;
+	@Autowired private StarUseService u_service;
 
 	@RequestMapping(value = "/{id}/setting/info", method = RequestMethod.GET)
 	public String infoSetting(@PathVariable(value = "id") String id, Model model,
@@ -52,7 +56,7 @@ public class InfoController {
 		
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
 		
@@ -67,6 +71,8 @@ public class InfoController {
 		model.addAttribute("pu", pu);
 		model.addAttribute("listB", listB);		
 //		model.addAttribute("listM", listM);
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
 		return ".personnel.setting.info";
 	}
 	
@@ -80,7 +86,7 @@ public class InfoController {
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
 
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
 
@@ -101,7 +107,7 @@ public class InfoController {
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
 		
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
 
 		int endPageNum = pu.getEndPageNum();
 
@@ -118,7 +124,7 @@ public class InfoController {
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
 
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
 
 		int endPageNum = pu.getEndPageNum();
 
@@ -147,20 +153,20 @@ public class InfoController {
 			new File(path + "//" + voMP.getProfile_savefilename()).delete();
 			try {
 				FileCopyUtils.copy(profileImg.getInputStream(), new FileOutputStream(path + "\\" + profile_savefilename));
-				System.out.println(path + "\\" + profile_savefilename + "ÇÁ·ÎÇÊ»çÁø ¾÷·Îµå ¼º°ø");
+				System.out.println(path + "\\" + profile_savefilename + "í”„ë¡œí•„ì‚¬ì§„ ì—…ë¡œë“œ ì„±ê³µ");
 				
 			}catch(IOException ie) {
 				System.out.println(ie.getMessage());
-				model.addAttribute("result","¿¡·¯·Î ÀÎÇÑ ½ÇÆÐ");
+				model.addAttribute("result","ì—ëŸ¬ë¡œ ì¸í•œ ì‹¤íŒ¨");
 				return ".personnel.setting.result"; 
 			}
 		}
 		
 		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, profile_content, profile_orgfilename, profile_savefilename, vo.getM_num(),profile_title));
 		if(n>0) {
-			model.addAttribute("result","±âº»Á¤º¸ ¼öÁ¤ ¼º°ø");
+			model.addAttribute("result","ê¸°ë³¸ì •ë³´ ìˆ˜ì • ì„±ê³µ");
 		}else {
-			model.addAttribute("result","±âº»Á¤º¸ ¼öÁ¤ ½ÇÆÐ");
+			model.addAttribute("result","ê¸°ë³¸ì •ë³´ ìˆ˜ì • ì‹¤íŒ¨");
 		}
 		
 		return ".personnel.setting.result";

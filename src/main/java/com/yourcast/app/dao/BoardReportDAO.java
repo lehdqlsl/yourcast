@@ -40,6 +40,6 @@ public class BoardReportDAO {
 	}
 	
 	public List<BoardReportVO> getList(int b_num){
-		return sqlSession.selectList(NAMESPACE + "getList",b_num);
+		return sqlSession.selectList(NAMESPACE + ".getList",b_num);
 	}
 }

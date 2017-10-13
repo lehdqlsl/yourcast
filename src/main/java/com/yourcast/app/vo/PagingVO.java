@@ -37,13 +37,40 @@ public class PagingVO {
 		return exlist;
 	}
 	
-	@XmlElement(name="bp_list")
-	public List<BoardReportVO> bp_list;
-	public List<BoardReportVO> getBp_list() {
-		return bp_list;
+	@XmlElement(name="bplist")
+	public List<BoardReportVO> bplist;
+	public void setBplist(List<BoardReportVO> bplist) {
+		this.bplist = bplist;
 	}
-	public void setBp_list(List<BoardReportVO> bp_list) {
-		this.bp_list = bp_list;
+	public List<BoardReportVO> getBplist() {
+		return bplist;
 	}
 	
+	@XmlElement(name="brplist")
+	public List<BoardReplyReportVO> brplist;
+	public List<BoardReplyReportVO> getBrplist() {
+		return brplist;
+	}
+	public void setBrplist(List<BoardReplyReportVO> brplist) {
+		this.brplist = brplist;
+	}
+	
+	@XmlElement(name="vplist")
+	public List<VideoReportVO> vplist;
+	public List<VideoReportVO> getVplist() {
+		return vplist;
+	}
+	public void setVplist(List<VideoReportVO> vplist) {
+		this.vplist = vplist;
+	}
+	
+	@XmlElement(name="vrplist")
+	public List<VideoReplyReportVO> vrplist;
+	public List<VideoReplyReportVO> getVrplist() {
+		return vrplist;
+	}
+	public void setVrplist(List<VideoReplyReportVO> vrplist) {
+		this.vrplist = vrplist;
+	}
+		
 }

@@ -14,10 +14,12 @@ import com.yourcast.app.service.BroadcastService;
 import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.service.StarUseService;
 import com.yourcast.app.vo.BroadcastVO;
 import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
+import com.yourcast.app.vo.StarUseVO;
 
 /**
  * Handles requests for the application home page.
@@ -36,6 +38,9 @@ public class HomeController {
 
 	@Autowired
 	private BroadcastService b_service;
+	
+	@Autowired
+	private StarUseService u_service;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -55,6 +60,8 @@ public class HomeController {
 		if(vo!=null) {
 			List<CategoryVO> clist = service.getList(vo.getM_num());
 			MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
+			List<StarUseVO> flist = u_service.getHotfList(vo.getM_num());
+			model.addAttribute("flist", flist);
 			model.addAttribute("clist", clist);
 			model.addAttribute("id", id);
 			model.addAttribute("voMP", voMP);

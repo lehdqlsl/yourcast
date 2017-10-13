@@ -10,17 +10,17 @@
 	
 	<select id="getsendlist" resultType="staruse" parameterType="staruse">
 		select * from
-		(select a.*,m.id from
-		(select u.*,rownum rnum from use u
-		where u.m_num=#{m_num} order by use_num desc)a, member m where a.bj_num=m.m_num)
+		(select a.*,m.id,rownum rnum from
+		(select * from use 
+		where m_num=#{m_num} order by use_num desc)a, member m where a.bj_num=m.m_num)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	
 	<select id="getrecvlist" resultType="staruse" parameterType="staruse">
 		select * from
-		(select a.*,m.id from
-		(select u.*,rownum rnum from use u
-		where u.bj_num=#{bj_num} order by use_num desc)a, member m where a.m_num=m.m_num)
+		(select a.*,m.id,rownum rnum from
+		(select * from use
+		where bj_num=#{bj_num} order by use_num desc)a, member m where a.m_num=m.m_num)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	
@@ -41,8 +41,9 @@
 	</select>
 	
 	<select id="hotfanList" resultType="staruse" parameterType="int">
-		select * from (select m_num from use where bj_num = #{bj_num} group by m_num order by sum(use_ea) desc) 
-		<![CDATA[ where rownum <= 5  ]]>
+		select a.*,m.id,rownum rnum from (select m_num from use where bj_num = #{bj_num} 
+		group by m_num order by sum(use_ea) desc)a,member m 
+		<![CDATA[ where a.m_num=m.m_num and rownum <= 5  ]]>
 	</select>
 	
 </mapper>

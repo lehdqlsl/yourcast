@@ -30,4 +30,8 @@
 		where a.vr_num=vr.vr_num and vr.vr_delete=0
 	</select>
 	
+	<select id="getList" resultType="videoreplyreport">
+		select v.*,m.id from video_reply_report v,member m where vr_num=#{vr_num} and v.m_num=m.m_num
+	</select>
+	
 </mapper>
