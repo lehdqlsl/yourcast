@@ -7,7 +7,6 @@
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script>
 
 <div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;">
-
 <!-- 
 	 <script type="text/javascript">
 		 $(document).ready(function(){

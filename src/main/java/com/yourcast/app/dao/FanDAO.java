@@ -31,4 +31,12 @@ public class FanDAO {
 	public int getCount(int bj_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getCount",bj_num);
 	}
+	
+	public FanVO isFan(HashMap<String, Integer> map) {
+		return sqlSession.selectOne(NAMESPACE + ".isFan",map);
+	}
+	
+	public int fanCount(int bj_num) {
+		return sqlSession.selectOne(NAMESPACE + ".fanCount",bj_num);
+	}
 }

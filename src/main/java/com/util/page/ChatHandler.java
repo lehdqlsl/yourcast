@@ -35,8 +35,28 @@ public class ChatHandler extends TextWebSocketHandler {
 			String id = (String) jsonObj.get("id");
 			String name = (String) jsonObj.get("name");
 			Long gender = Long.parseLong((String) jsonObj.get("gender"));
-			Long grade = (Long) jsonObj.get("grade");
+			String grade = (String) jsonObj.get("grade");
 			list.add(new User(grade, gender, id, name, session, bj_num));
+			if(grade.equals("hot")) {
+				try {
+					bj_num = (Long) jsonObj.get("bj_num");
+					msg = (String) jsonObj.get("msg");
+					JSONObject obj = new JSONObject();
+
+					obj.put("packet", "0");
+					obj.put("id", id);
+					obj.put("name", name);
+			
+					for (User user : list) {
+						// 같은 방 찾기
+						if (bj_num == user.getBj_num()) {
+							user.getSession().sendMessage(new TextMessage(obj.toJSONString()));
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			break;
 
 		case 1: // 채팅 뿌리기
@@ -96,13 +116,16 @@ public class ChatHandler extends TextWebSocketHandler {
 			try {
 				bj_num = (Long) jsonObj.get("bj_num");
 				String cnt1 = (String) jsonObj.get("cnt");
+				Long fancnt = (Long) jsonObj.get("fancnt");
 				JSONObject obj1 = new JSONObject();
 				for (User user2 : list) {
 					if (session == user2.getSession()) {
+						user2.setGrdae((String) jsonObj.get("grade"));
 						obj1.put("packet", "4");
 						obj1.put("id", user2.getId());
 						obj1.put("name", user2.getName());
 						obj1.put("cnt", cnt1);
+						obj1.put("fancnt", fancnt);
 						break;
 					}
 				}

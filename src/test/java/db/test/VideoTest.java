@@ -102,4 +102,21 @@ public class VideoTest {
 		List<VideoVO> list = dao.getGenreList(map);
 		Assert.assertNotNull(list);
 	}
+	@Test
+	public void allList() {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("startRow", 1);
+		map.put("endRow", 5);
+		List<VideoVO> list=dao.allList(map);
+		Assert.assertNotNull(list);
+	}
+	@Test
+	public void allCount() {
+		int n=dao.allCount();
+		boolean a=false;
+		if(n>0) {
+			a=true;
+		}
+		Assert.assertTrue(a);
+	}
 }

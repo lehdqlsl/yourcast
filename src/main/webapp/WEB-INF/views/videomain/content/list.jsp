@@ -22,12 +22,21 @@
 						$(data).find("list").each(function(){
 							var img=$(this).find("v_savethumbnail").text();
 							var v_title=$(this).find("v_title").text();
+							var id=$(this).find("id").text();
+							var v_hit=$(this).find("v_hit").text();
 							var v_num=parseInt($(this).find("v_num").text());
 							//alert(v_num);
-							var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
-							'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;">'+
-							'<h3><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'+v_title+'</a></h3></div>';
 							
+							var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
+							'<a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
+							+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;"></a>'
+							+
+							'<div style="width: 100%; display: block; height: 20px; padding-left: 0px; margin-top: 5px;">'+
+							'<p style="margin: 0px 0px 0px 0px;	font-size: 1.4em;">'+v_title+'</p>'+
+							'</div>'+
+							'<div style="width: 100%; display: block; height: 20px; padding-left: 0px;">'+
+							'<p style="margin: 5px 0px 0px 0px;	font-size: 1.0em; color: #6e6779;">'+id+' 조회수 '+v_hit+'</p>'+
+							'</div></div>'
 							$("#videolist").append(div);
 						});
 						
@@ -47,7 +56,12 @@
 		<c:forEach var="vo" items="${vlist }">
 			<div class="w3-col l3 m6 w3-margin-bottom videolist">
 				<a href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>'><img src='<c:url value="/resources/upload/${vo.v_savethumbnail }"/>' style="width: 100%;height: 250px;"></a>
-				<h3>${vo.v_title }</h3>	
+				<div style="width: 100%; display: block; height: 20px; padding-left: 0px; margin-top: 5px;">
+					<p style="margin: 0px 0px 0px 0px;	font-size: 1.4em;">${vo.v_title}</p>
+				</div>
+				<div style="width: 100%; display: block; height: 20px; padding-left: 0px;">
+					<p style="margin: 5px 0px 0px 0px;	font-size: 1.0em; color: #6e6779;">${vo.id } 조회수 ${vo.v_hit }</p>
+				</div>
 			</div>
 		</c:forEach>
 	</div>

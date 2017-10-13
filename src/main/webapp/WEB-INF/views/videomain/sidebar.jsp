@@ -10,7 +10,7 @@
     </a>
   </div>
   <div class="w3-bar-block">
-  	<a href='/videomain/list' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>전체보기</a>
+  	<a href='<c:url value="/videomain"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>전체보기</a>
     <c:forEach var="vo" items="${glist }">
     	<a href='<c:url value="/videomain/list?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>${vo.genre_name }</a>
     </c:forEach>

@@ -56,4 +56,11 @@ public class VideoDAO {
 	public List<VideoVO> getGenreList(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE + ".getGenreList",map);
 	}
+	public List<VideoVO> allList(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE+".allList",map);
+	}
+	public int allCount() {
+		return sqlSession.selectOne(NAMESPACE+".allCount");
+	}
+	
 }

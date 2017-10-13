@@ -1,5 +1,6 @@
 package com.yourcast.app.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ public class MsgService {
 		return dao.insert(vo);
 	}
 	
-	public List<MsgVO> getSendList(int m_nums){
-		return dao.getSendList(m_nums);
+	public List<MsgVO> getSendList(HashMap<String, Object> map){
+		return dao.getSendList(map);
 	}
 	
-	public List<MsgVO> getRecvList(int m_numr){
-		return dao.getRecvList(m_numr);
+	public List<MsgVO> getRecvList(HashMap<String, Object> map){
+		return dao.getRecvList(map);
 	}
 	
 	public int viewDate(int msg_num) {
@@ -47,4 +48,11 @@ public class MsgService {
 	public int recvCount(int m_numr) {
 		return dao.recvCount(m_numr);
 	}
+	public MsgVO sendmsg(int m_nums) {
+		return dao.sendmsg(m_nums);
+	}
+	public MsgVO recvmsg(int m_numr) {
+		return dao.recvmsg(m_numr);
+	}
+	
 }

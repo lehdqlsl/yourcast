@@ -45,11 +45,12 @@ public class BoardReplyController {
 	//�뙎湲� �옉�꽦
 	@RequestMapping(value="/{id}/boardreply/insert",method=RequestMethod.POST)
 	public String insert(@PathVariable(value="id") String id,HttpServletRequest request, Model model) {
-		MemberVO mvo=m_serivce.getInfo(id);
+		String sid=request.getParameter("sid");
 		String br_content=request.getParameter("br_content");
 		String bnum=request.getParameter("b_num");
-		//System.out.println(br_content);
+	
 		int b_num=Integer.parseInt(bnum);
+		MemberVO mvo=m_serivce.getInfo(sid);
 		BoardReplyVO brvo=new BoardReplyVO(0, br_content, null, 0, b_num, mvo.getM_num());
 		br_service.insert(brvo);
 
