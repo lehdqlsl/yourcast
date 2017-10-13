@@ -80,7 +80,12 @@
 				join.id = '${requestScope.vo.id}';
 				join.name = '${requestScope.vo.name}';
 				join.gender = '${requestScope.vo.gender_num}';
-				join.grade = 0;
+				
+				// bj:bj
+				// 열혈팬:hot
+				// 일반팬:fan
+				// 일반:user
+				join.grade = '${requestScope.grade}';
 			}else{
 				join.packet=2;
 			}
@@ -140,7 +145,29 @@
 			var grade = list.grade;
 			var name = list.name;
 			var id = list.id;
-			$("#chat_area").append('<dl class=""><dt class="fan_m"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
+			
+			if(gender == '1'){
+				if(grade == 'bj'){
+					$("#chat_area").append('<dl class="bj"><dt class="man"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
+				}else if(grade == 'hot'){
+					$("#chat_area").append('<dl class=""><dt class="hot_m"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
+				}else if(grade == 'fan'){
+					$("#chat_area").append('<dl class=""><dt class="fan_m"><img src="http://www.afreecatv.com/images/new_app/chat/ic_fanclub.gif" alt="팬클럽" title="팬클럽"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');	
+				}else{
+					$("#chat_area").append('<dl class=""><dt class="user_m"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
+				}
+			}else{
+				if(grade == 'bj'){
+					$("#chat_area").append('<dl class="bj"><dt class="woman"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
+				}else if(grade == 'hot'){
+					$("#chat_area").append('<dl class=""><dt class="hot_w"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
+				}else if(grade == 'fan'){
+					$("#chat_area").append('<dl class=""><dt class="fan_w"><img src="http://www.afreecatv.com/images/new_app/chat/ic_fanclub.gif" alt="팬클럽" title="팬클럽"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');	
+				}else{
+					$("#chat_area").append('<dl class=""><dt class="user_w"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
+				}
+			}
+			
 			var objDiv = document.getElementById("chat_area");
 			objDiv.scrollTop = objDiv.scrollHeight;
 		}else if(packet == '3'){
@@ -150,7 +177,19 @@
 			var name = list.name;
 			var id = list.id;
 			var cnt = list.cnt;
+			var fancnt = list.fancnt;
 			$("#chat_area").append('<div class="balloon_area"><p class="ea" style="color:#ED1C24">'+cnt+'</p><p class="img_balloon"><img src="http://www.afreecatv.com/new_player/items/ba_step3.png" alt="별풍선"></p><div class="text"><strong><a href="javascript:;" user_id="esime" user_nick="">'+name+'('+id+')'+'</a></strong><br><span class="bal_txt">별풍선 <span class="num">'+cnt+'</span>개 선물!</span></div></div>');
+			if(fancnt != null){
+				$("#chat_area").append('<p class="notice fanclub"><a href="javascript:;" user_id="'+id+'" user_nick="'+name+'">'+name+'('+id+')</a> 님이 '+fancnt+'번째로 팬클럽이 되셨습니다.</p>');
+			}
+			var objDiv = document.getElementById("chat_area");
+			objDiv.scrollTop = objDiv.scrollHeight;
+		}else if(packet == '0'){
+			var name = list.name;
+			var id = list.id;
+			$("#chat_area").append('<p class="notice in hotfan"><a href="javascript:;" user_id="'+id+'" user_nick="'+name+'">열혈팬 '+name+'<em>('+id+')</em></a>님이 대화방에 참여했습니다.</p>');
+			var objDiv = document.getElementById("chat_area");
+			objDiv.scrollTop = objDiv.scrollHeight;
 		}
 	}
 	

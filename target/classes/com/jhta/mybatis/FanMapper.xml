@@ -25,4 +25,13 @@
         (select m_num from fan where bj_num=#{bj_num})dd,use ee 
         where dd.m_num=ee.m_num group by dd.m_num)
 	</select>
+	
+	<select id="isFan" parameterType="hashmap" resultType="fan">
+		select * from fan where m_num = #{m_num} and bj_num = #{bj_num}
+	</select>
+	
+	<select id="fanCount" parameterType="int" resultType="int">
+		select count(*) from (select m_num from use where bj_num = #{bj_num} group by m_num)
+	</select>
+	
 </mapper>

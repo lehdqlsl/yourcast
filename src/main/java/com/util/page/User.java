@@ -3,10 +3,7 @@ package com.util.page;
 import org.springframework.web.socket.WebSocketSession;
 
 public class User {
-	// 0 ÀÏ¹Ý
-	// 1 ÆÒ
-	// 2 ¿­Ç÷ÆÒ
-	private long grade;
+	private String grade;
 
 	// 1 ³²ÀÚ
 	// 2 ¿©ÀÚ
@@ -20,7 +17,7 @@ public class User {
 	// ¹æÀå
 	private long bj_num;
 
-	public User(long grade, long gender, String id, String name, WebSocketSession session, long bj_num) {
+	public User(String grade, long gender, String id, String name, WebSocketSession session, long bj_num) {
 		super();
 		this.grade = grade;
 		this.gender = gender;
@@ -33,11 +30,11 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public long getGrdae() {
+	public String getGrdae() {
 		return grade;
 	}
 
-	public void setGrdae(long grdae) {
+	public void setGrdae(String grdae) {
 		this.grade = grdae;
 	}
 
