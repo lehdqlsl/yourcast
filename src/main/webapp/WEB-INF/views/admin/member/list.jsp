@@ -12,15 +12,15 @@
                         <p class="category">Member List</p>
                     </div>
                     <div class="content table-responsive table-full-width">
-                        <table class="table table-hover table-striped">
+                        <table class="table table-hover table-striped" >
                             <thead>
                                 <th>회원번호</th>
                             	<th>아이디</th>
                             	<th>이름</th>
+                            	<th>성별</th>
                             	<th>보유한 금액</th>
                             	<th>보유한 별사탕</th>
                             	<th>회원등급</th>
-                            	<th>제재날짜</th>
                             </thead>
                             <tbody>
                             <c:forEach var="mvo" items="${mlist }">
@@ -28,10 +28,10 @@
                                 	<td>${mvo.m_num }</td>
                                 	<td>${mvo.id }</td>
                                 	<td>${mvo.name }</td>
+                                	<td>${mvo.gender_name }</td>
                                 	<td>${mvo.money }</td>
                                 	<td>${mvo.star_candy }</td>
                                 	<td>${mvo.grade_name }</td>
-                                	<td>${mvo.limit_date }</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -96,7 +96,7 @@
 								<c:otherwise>
 									<c:choose>
 									<c:when test="${pu.pageNum>1 }">
-										<a href="<c:url value='/admin/member/listFind?pageNum=${1 }&name=${name }&id=${id }&sum=${sum }&keyword=${keyword }'/>">[처음으로]</a>
+										<a href="<c:url value='/admin/member/listFind?pageNum=${1 }&keyword=${keyword }'/>">[처음으로]</a>
 									</c:when>
 									<c:otherwise>
 										[처음으로]
@@ -104,7 +104,7 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${pu.startPageNum>5 }">
-										<a href="<c:url value='/admin/member/listFind?pageNum=${pu.startPageNum-1 }&name=${name }&id=${id }&sum=${sum }&keyword=${keyword }'/>">[이전]</a>
+										<a href="<c:url value='/admin/member/listFind?pageNum=${pu.startPageNum-1 }&keyword=${keyword }'/>">[이전]</a>
 									</c:when>
 									<c:otherwise>
 										[이전]
@@ -116,13 +116,13 @@
 												<span style="color:blue">[${i }]</span>
 											</c:when>
 											<c:otherwise>
-												<a href="<c:url value='/admin/member/listFind?pageNum=${i }&name=${name }&id=${id }&sum=${sum }&keyword=${keyword }'/>"><span style="color:#555">[${i }]</span></a>
+												<a href="<c:url value='/admin/member/listFind?pageNum=${i }&keyword=${keyword }'/>"><span style="color:#555">[${i }]</span></a>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
 								<c:choose>
 									<c:when test="${pu.endPageNum<pu.totalPageCount }">
-										<a href="<c:url value='/admin/member/listFind?pageNum=${pu.endPageNum+1 }&name=${name }&id=${id }&sum=${sum }&keyword=${keyword }'/>">[다음]</a>
+										<a href="<c:url value='/admin/member/listFind?pageNum=${pu.endPageNum+1 }&keyword=${keyword }'/>">[다음]</a>
 									</c:when>
 									<c:otherwise>
 										[다음]
@@ -130,7 +130,7 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${pu.startPageNum<pu.totalPageCount }">
-										<a href="<c:url value='/admin/member/listFind?pageNum=${pu.totalPageCount }&name=${name }&id=${id }&sum=${sum }&keyword=${keyword }'/>">[끝으로]</a>
+										<a href="<c:url value='/admin/member/listFind?pageNum=${pu.totalPageCount }&keyword=${keyword }'/>">[끝으로]</a>
 									</c:when>
 									<c:otherwise>
 										[끝으로]

@@ -9,9 +9,27 @@ public class VideoReplyVO {
 	private int m_num;
 	private String id;
 	private int vrucnt;
+	private int v_report;
+	private String age_grade_name;
+	private String genre_name;
+	private String v_savethumbnail;
+	private String bj_id;
+	private String v_title;
 	
-	public VideoReplyVO() {
-		
+	public VideoReplyVO() {}
+
+	public VideoReplyVO(int vr_num, String vr_content, int v_num, String id, int v_report,String age_grade_name,String genre_name,String v_savethumbnail,String bj_id,String v_title) {
+		super();
+		this.vr_num = vr_num;
+		this.vr_content = vr_content;
+		this.v_num = v_num;
+		this.id = id;
+		this.v_report = v_report;
+		this.age_grade_name = age_grade_name;
+		this.genre_name = genre_name;
+		this.v_savethumbnail = v_savethumbnail;
+		this.bj_id = bj_id;
+		this.v_title = v_title;
 	}
 
 	public VideoReplyVO(int vr_num, String vr_content, String vr_regdate, int vr_delete, int v_num, int m_num) {
@@ -36,6 +54,54 @@ public class VideoReplyVO {
 	}
 
 	
+	public String getV_title() {
+		return v_title;
+	}
+
+	public void setV_title(String v_title) {
+		this.v_title = v_title;
+	}
+
+	public String getBj_id() {
+		return bj_id;
+	}
+
+	public void setBj_id(String bj_id) {
+		this.bj_id = bj_id;
+	}
+
+	public String getAge_grade_name() {
+		return age_grade_name;
+	}
+
+	public void setAge_grade_name(String age_grade_name) {
+		this.age_grade_name = age_grade_name;
+	}
+
+	public String getGenre_name() {
+		return genre_name;
+	}
+
+	public void setGenre_name(String genre_name) {
+		this.genre_name = genre_name;
+	}
+
+	public String getV_savethumbnail() {
+		return v_savethumbnail;
+	}
+
+	public void setV_savethumbnail(String v_savethumbnail) {
+		this.v_savethumbnail = v_savethumbnail;
+	}
+
+	public int getV_report() {
+		return v_report;
+	}
+
+	public void setV_report(int v_report) {
+		this.v_report = v_report;
+	}
+
 	public String getId() {
 		return id;
 	}

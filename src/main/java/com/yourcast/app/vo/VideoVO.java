@@ -18,8 +18,20 @@ public class VideoVO {
 	private int m_num;
 	private String id;
 	private String profile_savefilename;
+	private int v_report;
 	
 	public VideoVO() {}
+
+	public VideoVO(int v_num, String v_title, String id, int v_report,String genre_name,String age_grade_name,String v_savethumbnail) {
+		super();
+		this.v_num = v_num;
+		this.v_title = v_title;
+		this.id = id;
+		this.v_report = v_report;
+		this.genre_name = genre_name;
+		this.age_grade_name = age_grade_name;
+		this.v_savethumbnail = v_savethumbnail;
+	}
 
 	public VideoVO(int v_num, String v_title, String v_content, String v_regdate, int v_hit, String v_orgfilename,
 			String v_savefilename, String v_orgthumbnail, String v_savethumbnail, int v_delete, int genre_num,
@@ -83,6 +95,14 @@ public class VideoVO {
 		this.profile_savefilename=profile_savefilename;
 	}
 	
+	public int getV_report() {
+		return v_report;
+	}
+
+	public void setV_report(int v_report) {
+		this.v_report = v_report;
+	}
+
 	public String getId() {
 		return id;
 	}

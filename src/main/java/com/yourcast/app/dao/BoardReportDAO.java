@@ -38,4 +38,8 @@ public class BoardReportDAO {
 	public int getCountAdmin() {
 		return sqlSession.selectOne(NAMESPACE + ".getCountAdmin");
 	}
+	
+	public List<BoardReportVO> getList(int b_num){
+		return sqlSession.selectList(NAMESPACE + "getList",b_num);
+	}
 }

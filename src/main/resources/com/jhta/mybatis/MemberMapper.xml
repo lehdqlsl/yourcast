@@ -17,17 +17,14 @@
 	<select id="getList" resultType="member" parameterType="hashmap">
 		select * from
 		(select a.*,rownum rnum from
-		(select m.*,g.grade_name from member m,grade g 
-		where m.grade_num=g.grade_num order by m_num desc)a
+		(select m.*,g.grade_name,gg.gender_name from member m,grade g,gender gg
+		where m.grade_num=g.grade_num and m.gender_num=gg.gender_num order by m_num desc)a
 		<where>
 			<if test="name!=null">
 				name like '%' || #{keyword} || '%'
 			</if>
 			<if test="id!=null">
 				or id like '%' || #{keyword} || '%'
-			</if>
-			<if test="sum!=null">
-				or name like '%' || #{keyword} || '%' and id like '%' || #{keyword} || '%'
 			</if>
 		</where>
 		)
@@ -45,9 +42,6 @@
 			</if>
 			<if test="id!=null">
 				or id like '%' || #{keyword} || '%'
-			</if>
-			<if test="sum!=null">
-				or name like '%' || #{keyword} || '%' and id like '%' || #{keyword} || '%'
 			</if>
 		</where>
 	</select>	

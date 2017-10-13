@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
 
@@ -33,44 +32,72 @@
 				</div>
 			</div>
 		</header>
+		
+		<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#btn").on("click",function(){
+					if($("#v_title").val()==null || $("#v_title").val()==""){
+						alert("제목을 입력하세요.");
+						return false;
+					}
+					if($("#v_content").val()==null || $("#v_content").val()==""){
+						alert("내용을 입력하세요.");
+						return false;
+					}
+					if($("#vfile").val()==null || $("#vfile").val()==""){
+						alert("동영상을 선택하세요.");
+						return false;
+					}
+					if($("#imgfile").val()==null || $("#imgfile").val()==""){
+						alert("썸네일을 선택하세요");
+						return false;
+					}
+					$("#frm").submit();
+				});
+			});
+		</script>
 
 		<!-- 여기작성 -->
 
 		<h1>동영상업로드</h1>
-		<form method="post" action="<c:url value="/${requestScope.id}/video/insert"/>" enctype="multipart/form-data">
+		<form id="frm" method="post" action="<c:url value="/${requestScope.id}/video/insert"/>" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>장르</th>
-				<td><select name="genre">
-						<option value="1">english</option>
-						<option value="2">music</option>
-						<option value="3">game</option>
-						</select>
+				<td>
+					<select name="genre">
+					<c:forEach var="gvo" items="${glist }">
+						<option value="${gvo.genre_num }">${gvo.genre_name }</option>
+					</c:forEach>
+					</select>
+					
 				</td>
 			</tr>
 			<tr>
 				<th>관람등급</th>
-				<td><select name="age_grade">
-						<option value="1">19</option>
-						<option value="2">15</option>
-						<option value="3">12</option>
-						</select>
+				<td>
+					<select name="age_grade">
+					<c:forEach var="agevo" items="${agelist }">
+						<option value="${agevo.age_grade_num }">${agevo.age_grade_name }</option>
+					</c:forEach>
+					</select>
 				</td>
 			</tr>
 			<tr>
-				<th>제목</th><td><input type="text" name="v_title"><td>
+				<th>제목</th><td><input type="text" name="v_title" id="v_title"><td>
 			</tr>
 			<tr>
-				<th>내용</th><td><input type="text" name="v_content"></td>
+				<th>내용</th><td><input type="text" name="v_content" id="v_content"></td>
 			</tr>
 			<tr>
-				<th>동영상</th><td><input type="file" name="vfile"></td>
+				<th>동영상</th><td><input type="file" name="vfile" id="vfile"></td>
 			</tr>
 			<tr>
-				<th>썸네일</th><td><input type="file" name="imgfile"></td>
+				<th>썸네일</th><td><input type="file" name="imgfile" id="imgfile"></td>
 			</tr>
 			<tr>
-				<th colspan="2"><input type="submit" value="업로드"><input type="reset" value="다시입력"></th>
+				<th colspan="2"><button type="button" id="btn">업로드</button><input type="reset" value="다시입력"></th>
 			</tr>
 		</table>
 		</form>
@@ -135,4 +162,3 @@
 
 
 	</div>
-</body>

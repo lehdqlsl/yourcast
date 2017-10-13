@@ -33,11 +33,11 @@
 	</select>
 	
 	<select id="getSendEa" resultType="int">
-		select sum(use_ea) total_use_ea from use where m_num=#{m_num}
+		select NVL(sum(use_ea),0) total_use_ea from use where m_num=#{m_num}
 	</select>
 	
 	<select id="getRecvEa" resultType="int">
-		select sum(use_ea) total_recv_ea from use where bj_num=#{bj_num}
+		select NVL(sum(use_ea),0) total_recv_ea from use where bj_num=#{bj_num}
 	</select>
 	
 	

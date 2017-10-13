@@ -18,11 +18,11 @@
 	</select>
 	
 	<select id="getexEa" parameterType="int" resultType="int">
-		select sum(e_ea) e_ea from exchange where m_num = #{m_num}
+		select NVL(sum(e_ea),0) e_ea from exchange where m_num = #{m_num}
 	</select>
 	
 	<select id="getexMoney" parameterType="int" resultType="int">
-		select sum(e_ea*e_fee) e_money from exchange where m_num = #{m_num}
+		select NVL(sum(e_ea*e_fee),0) e_money from exchange where m_num = #{m_num}
 	</select>
 	
 </mapper>

@@ -17,16 +17,16 @@
 	
 	<select id="getListAdmin" resultType="boardreply" parameterType="hashmap">
 		select * from 
-		(select aa.br_num,m.id,br.br_content,aa.brrcnt,b.b_num,b.category_num,m1.id bj_id,rownum rnum from
+		(select aa.br_num,m.id,br.br_content,aa.brrcnt,b.b_num,b.category_num,m1.id bj_id,m2.id writer_id,b.b_title,c.category_name,rownum rnum from
 		(select br_num,count(m_num) brrcnt from board_reply_report 
-		group by br_num order by brrcnt desc)aa,board_reply br,member m,member m1,board b
-		where aa.br_num=br.br_num and br_delete=0 and m.m_num=br.m_num and b.b_num=br.b_num and m1.m_num=b.bj_num)
+		group by br_num order by brrcnt desc)aa,board_reply br,member m,member m1,member m2,board b,category c
+		where aa.br_num=br.br_num and br_delete=0 and m.m_num=br.m_num and b.b_num=br.b_num and b.m_num=m2.m_num and m1.m_num=b.bj_num and b.category_num=c.category_num)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	
 	<select id="getCountAdmin" resultType="int">
-		select NVL(count(br_num),0) from
-		(select br_num,count(m_num) brrcnt from board_reply_report 
-		group by br_num)
+		select NVL(count(a.br_num),0) from
+		(select br_num,count(m_num) brrcnt from board_reply_report group by br_num)a,board_reply br
+		where a.br_num=br.br_num and br.br_delete=0
 	</select>
 </mapper>

@@ -47,7 +47,6 @@
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="<c:url value='/resources/admin/js/demo.js'/>"></script>
     
-<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 </head>
 
 <!-- 메인페이지 레이아웃 -->
