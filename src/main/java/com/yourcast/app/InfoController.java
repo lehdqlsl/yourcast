@@ -28,10 +28,10 @@ import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.vo.BlacklistVO;
 import com.yourcast.app.vo.CategoryVO;
-import com.yourcast.app.vo.PagingVO;
 import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
+import com.yourcast.app.vo.PagingVO;
 
 @Controller
 public class InfoController {

@@ -190,6 +190,10 @@
 			$("#chat_area").append('<p class="notice in hotfan"><a href="javascript:;" user_id="'+id+'" user_nick="'+name+'">열혈팬 '+name+'<em>('+id+')</em></a>님이 대화방에 참여했습니다.</p>');
 			var objDiv = document.getElementById("chat_area");
 			objDiv.scrollTop = objDiv.scrollHeight;
+		}else if(packet == '5'){
+			var title = list.title;
+			console.log("타이틀:"+title);
+			$("#broadcast_title").html(title);
 		}
 	}
 	

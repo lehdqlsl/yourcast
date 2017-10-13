@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/join.css'/>?ver=1">
-		<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.min.css'/>?ver=1">
-		<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.theme.min.css'/>?ver=1">
-		<script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script>
-		<script type="text/javascript">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/join.css'/>?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/jquery-ui.min.css'/>?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/jquery-ui.theme.min.css'/>?ver=1">
+<script type="text/javascript"
+	src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script>
+<script type="text/javascript">
 		$(document).ready(function(){
 			$("#id").keyup(function(){
 				var id=$("#id").val();
@@ -57,27 +59,39 @@
 					event.preventDefault();
 				}
 			});
+
+			$("#datepicker").datepicker({
+				showMonthAfterYear: true,
+				dateFormat:"yy/mm/dd", //날짜포맷형식
+				changeMonth:true,
+				changeYear:true,
+				yearSuffix:" ",
+				showAnim:"slide"
+			});
 		});
-		</script>
-	</head>
-</html>
+
+</script>
 <div class='login'>
-  <h2>Register</h2>
-  <form action="<c:url value='/member/join'/>" method="post">
-	  <input name='id' placeholder='Id' type='text' id="id" autocomplete=off>
-	  <span id="idcheck" style="color: red; font-size: 12px"></span><br>
-	  <input id='pwd' name='pwd' placeholder='Password' type='password'>
-	  <input id='pwd1' name='pwd1' placeholder='Password Confirm' type='password'>
-	  <input name='name' placeholder='Username' type='text' id="name" autocomplete=off>
-	  <input type="text" id="datepicker" name="birth" placeholder='birth'><br><br>
-	  <!-- <input type="text"  placeholder='남1 여2' name="gender"> -->
-	  <input name="gender" value="1" type="radio" class="gender">남자 &nbsp;&nbsp;
-	  <input name="gender" value="2" type="radio" class="gender">여자
-	  <div class='agree'>
-	    <input id='agree' name='agree' type='checkbox'>
-	    <label for='agree'></label><a href="<c:url value='/member/service'/>" style="text-decoration: underline;">이용약관</a>에 동의 합니다.
-	  </div>
-	  <input class='animated' type='submit' value='Register'>
-	  <a class='forgot' href="<c:url value='/member/login'/>">Already have an account?</a>
-  </form>
+	<h2>Register</h2>
+	<form action="<c:url value='/member/join'/>" method="post">
+		<input name='id' placeholder='Id' type='text' id="id" autocomplete=off>
+		<span id="idcheck" style="color: red; font-size: 12px"></span><br>
+		<input id='pwd' name='pwd' placeholder='Password' type='password'>
+		<input id='pwd1' name='pwd1' placeholder='Password Confirm'
+			type='password'> <input name='name' placeholder='Username'
+			type='text' id="name" autocomplete=off> <input type="text"
+			id="datepicker" name="birth" placeholder='birth'><br> <br>
+		<!-- <input type="text"  placeholder='남1 여2' name="gender"> -->
+		<input name="gender" value="1" type="radio" class="gender">남자
+		&nbsp;&nbsp; <input name="gender" value="2" type="radio"
+			class="gender">여자
+		<div class='agree'>
+			<input id='agree' name='agree' type='checkbox'> <label
+				for='agree'></label><a href="<c:url value='/member/service'/>"
+				style="text-decoration: underline;">이용약관</a>에 동의 합니다.
+		</div>
+		<input class='animated' type='submit' value='Register'> <a
+			class='forgot' href="<c:url value='/member/login'/>">Already have
+			an account?</a>
+	</form>
 </div>

@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yourcast.app.dao.AgeGradeDAO;
-import com.yourcast.app.dao.GenreDAO;
 import com.yourcast.app.vo.AgeGradeVO;
-import com.yourcast.app.vo.GenreVO;
 
 @Service
 public class AgeGradeService {
