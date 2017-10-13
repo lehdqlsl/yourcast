@@ -18,7 +18,10 @@ public class BoardVO {
 	private String bj_id;
 
 	private int brcnt;//댓글 개수
+	private int bucnt;//좋아요 개수
 	
+	
+
 	public BoardVO() {}
 	
 	public BoardVO(int b_num, String b_title, String id, int b_report, String bj_id, int category_num) {
@@ -32,7 +35,7 @@ public class BoardVO {
 	}
 
 	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
-			int m_num, int bj_num, int category_num,String id,String category_name,int brcnt) {
+			int m_num, int bj_num, int category_num,String id,String category_name,int brcnt,int bucnt) {
 		super();
 		this.b_num = b_num;
 		this.b_title = b_title;
@@ -47,6 +50,7 @@ public class BoardVO {
 		this.id=id;
 		this.category_name=category_name;
 		this.brcnt=brcnt;
+		this.bucnt=bucnt;
 	}
 	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
 			int m_num, int bj_num, int category_num) {
@@ -63,7 +67,7 @@ public class BoardVO {
 	
 	}
 	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
-			int m_num, int bj_num, int category_num,int brcnt) {
+			int m_num, int bj_num, int category_num,int brcnt,int bucnt) {
 		this.b_num = b_num;
 		this.b_title = b_title;
 		this.b_content = b_content;
@@ -75,6 +79,7 @@ public class BoardVO {
 		this.bj_num = bj_num;
 		this.category_num = category_num;
 		this.brcnt=brcnt;
+		this.bucnt=bucnt;
 	}
 	
 	public String getBj_id() {
@@ -194,5 +199,12 @@ public class BoardVO {
 
 	public void setBrcnt(int brcnt) {
 		this.brcnt = brcnt;
+	}
+	public int getBucnt() {
+		return bucnt;
+	}
+
+	public void setBucnt(int bucnt) {
+		this.bucnt = bucnt;
 	}
 }
