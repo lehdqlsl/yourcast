@@ -554,7 +554,12 @@ dd.name {
 					sendmsg.packet = 4;
 					sendmsg.cnt = cnt;
 					sendmsg.bj_num = bj_num;
+					sendmsg.grade = data.grade;
+					if(data.fancnt != null){
+						sendmsg.fancnt = data.fancnt;
+					}
 					wsocket.send( JSON.stringify(sendmsg));
+					
 				}
 			});
 		}

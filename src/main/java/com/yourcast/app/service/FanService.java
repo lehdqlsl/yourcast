@@ -26,4 +26,16 @@ public class FanService {
 	public int getCount(int bj_num) {
 		return dao.getCount(bj_num);
 	}
+	
+	public boolean isFan(HashMap<String, Integer> map) {
+		if(dao.isFan(map) != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public int fanCount(int bj_num) {
+		return dao.fanCount(bj_num);
+	}
 }

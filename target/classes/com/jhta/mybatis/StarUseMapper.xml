@@ -40,6 +40,9 @@
 		select sum(use_ea) total_recv_ea from use where bj_num=#{bj_num}
 	</select>
 	
-	
+	<select id="hotfanList" resultType="staruse" parameterType="int">
+		select * from (select m_num from use where bj_num = #{bj_num} group by m_num order by sum(use_ea) desc) 
+		<![CDATA[ where rownum <= 5  ]]>
+	</select>
 	
 </mapper>

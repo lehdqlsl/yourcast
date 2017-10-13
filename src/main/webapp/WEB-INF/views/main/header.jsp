@@ -8,8 +8,8 @@
 			BroadCast...</a>
 		<!-- 오른쪽 메뉴 -->
 		<div class="w3-right w3-hide-small">
-			<a href="#projects" class="w3-bar-item w3-button"></a> <a
-				href="#about" class="w3-bar-item w3-button">About</a>
+			<a href="#projects" class="w3-bar-item w3-button"></a> 
+			<a href="#about" class="w3-bar-item w3-button">About</a>
 			<c:choose>
 				<c:when test="${empty sessionScope.id }">
 					<a href="<c:url value='/member/login'/>"

@@ -47,4 +47,8 @@ public class StarUseDAO {
 	public int getRecvEa(int bj_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getRecvEa",bj_num);
 	}
+	
+	public List<StarUseVO> getHotfList(int bj_num){
+		return sqlSession.selectList(NAMESPACE + ".hotfanList",bj_num);
+	}
 }
