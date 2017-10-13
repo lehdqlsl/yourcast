@@ -14,7 +14,6 @@
 	<select id="getInfo" parameterType="string" resultType="member">
 		select * from member where id=#{id}
 	</select>
-
 	<select id="getList" resultType="member" parameterType="hashmap">
 		select * from
 		(select a.*,rownum rnum from
@@ -34,12 +33,10 @@
 		)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
   </select>
-
 	<select id="getInfo2" parameterType="int" resultType="member">
 		select * from member where m_num=#{m_num}
 	</select>
-
-
+	
 	<select id="getCount" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) from member
 		<where>

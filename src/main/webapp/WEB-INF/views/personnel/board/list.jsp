@@ -56,7 +56,7 @@
 						<div class="view">${vo.b_content }</div>
 					</div>
 					<div class="watch_area">
-						<span class="btn_up " id="likeT_26185493"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i></span>
+						<span class="btn_up " id="likeT_26185493"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>[]</span>
 						<span class="btn_comment"><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i>[${vo.brcnt }]</span>
 					</div>			
 				</div>

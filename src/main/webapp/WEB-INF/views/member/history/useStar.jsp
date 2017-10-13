@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		
-<div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
+
+
+<div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;">
 	<div class="w3-container w3-padding-32" id="projects">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">선물한 별사탕내역</h3>
 	</div>
 	
 	<div>
-		<button><a href="<c:url value='/member/history/pay'/>" style="text-decoration: none;">결제내역</a></button>
-		<button><a href="<c:url value='/member/history/buy'/>" style="text-decoration: none;">구매내역</a></button>
-		<button style="background-color: red;"><a href="<c:url value='/member/history/useStar'/>" style="text-decoration: none;">선물한 별사탕내역</a></button>
-		<button><a href="<c:url value='/member/history/recvStar'/>" style="text-decoration: none;">선물받은 별사탕내역</a></button>
+		<a href="<c:url value='/member/history/pay'/>" class="w3-bar-item w3-button" style="text-decoration: none;">결제내역</a>
+		<a href="<c:url value='/member/history/buy'/>" class="w3-bar-item w3-button" style="text-decoration: none;" >구매내역</a>
+		<a href="<c:url value='/member/history/useStar'/>" class="w3-bar-item w3-button" style="text-decoration: none;">선물한 별사탕내역</a>
+		<a href="<c:url value='/member/history/recvStar'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">선물받은 별사탕내역</a>
 	</div>
 	
-	<table border="1">
+	<table class="w3-table w3-table-all">
 		<tr>
 			<th>선물한 별사탕</th><th>BJ아이디</th><th>사용일</th>
 		</tr>

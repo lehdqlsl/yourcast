@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/boardgetInfo.css'/>?ver=1">
-
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script>
 	$(document).ready(function(){
@@ -15,9 +12,8 @@
 				//alert("${sessionScope.id}");
 			}else{//로그인 안 한 경우
 				var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
-				if(flag){
-					location.href="<c:url value='/member/login'/>";
-				}
+				location.href="<c:url value='/member/login'/>";
+				//alert("아이디 없음");
 			}
 		});
 		////////////////////////////////////////////////////////////////////////////////		
@@ -73,9 +69,10 @@
 						var p="";
 						if(id=="${sessionScope.id}"){
 							//alert(${sessionScope.id});
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<a href=''>삭제</a>&nbsp;&nbsp;<a href='#' id='"+br_num+"' class='replyup'>추천["+brucnt+"]</a></p>";
+						
+							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<a href=''>삭제</a>&nbsp;&nbsp;<a href='#' id='"+br_num+"' class='replyup'>"+brucnt+"</a></p>";
 						}else{
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<button id='"+br_num+"' class='b_reply_report'>신고</button>&nbsp;&nbsp;<button id='"+br_num+"' class='replyup'>추천["+brucnt+"]</button></p>";
+							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_content+"&nbsp;&nbsp;"+br_regdate+"&nbsp;&nbsp;<button id='"+br_num+"' class='b_reply_report'>신고</button>&nbsp;&nbsp;<button id='u"+br_num+"' class='replyup'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+brucnt+"</button></p>";
 						}
 						$("#replylist").append(p);
 					});
@@ -85,15 +82,15 @@
 		//댓글추천
 		$("#replylist").on('click','.replyup',function(){
 			var br_num=$(this).attr("id");
+			br_num = br_num.replace(/[^0-9]/g,'');
 			$.ajax({
 				url:"<c:url value='/replyup/insert?br_num=" + br_num + "&m_num=${sessionScope.id}'/>",
 				dataType:"json",
 				success:function(data) {
 					if(data.result=="true") {
-						alert("이미 추천 하셨습니다.하핫");
+						alert("이미 추천 하셨습니다");
 					} else {
-					  	$("#id").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>" + data.replygetCount);
-						//window.location.reload(true);
+					  	$("#u"+br_num).html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>" + data.replygetCount);
 					}
 				}
 			});
@@ -146,28 +143,10 @@
 						alert("이미 추천 하셨습니다.");
 					} else {
 						$("#thumbs_up").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>" + data.getCount);
-					}
 				}
-			});
+			}
 		});
-	
-		 //게시물 댓글 좋아요
-	/*  $(".b_reply_thumbsUp").click(function() {
-			 var br_num=$(this).next().text();
-				$.ajax({
-					url:"<c:url value='/replyup/insert?br_num=" + br_num + "&m_num=${sessionScope.id}'/>",
-					dataType:"json",
-					success:function(data) {
-						if(data.result=="true") {
-							alert("이미 추천 하셨습니다.");
-						} else {
-							alert("추천 하셨습니다.");
-							data.replygetCount
-						  	$(".b_reply_thumbsUp").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>" + data.replygetCount);
-						}
-					}
-				});
-			});  */
+	});
 });
 </script>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
@@ -256,14 +235,15 @@
 						</c:when>
 						<c:otherwise>
 							<button  class="b_reply_report"  id="${vo.br_num }" style="float: right;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>신고</button>&nbsp;&nbsp;
-							<button  class="replyup" id="${vo.br_num }" style="float: right;"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>추천 ${vo.brucnt}</button>
+							<button  class="replyup" id="u${vo.br_num }" style="float: right;"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>${vo.brucnt}</button>
 							<span style="visibility: hidden">${vo.br_num }</span>
 						</c:otherwise>
 					</c:choose>
 					</p>
 				</c:forEach>
 			</div>
-			<button class="w3-button w3-block w3-black" id="more">더보기</button>
+			<input type="button" value="더보기" id="more">
+			
 		</div>
 
 		<!-- 작성END -->
