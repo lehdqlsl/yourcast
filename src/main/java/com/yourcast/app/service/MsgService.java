@@ -48,11 +48,11 @@ public class MsgService {
 	public int recvCount(int m_numr) {
 		return dao.recvCount(m_numr);
 	}
-	public MsgVO sendmsg(int m_nums) {
-		return dao.sendmsg(m_nums);
+	public MsgVO sendmsg(int msg_num) {
+		return dao.sendmsg(msg_num);
 	}
-	public MsgVO recvmsg(int m_numr) {
-		return dao.recvmsg(m_numr);
+	public MsgVO recvmsg(int msg_num) {
+		return dao.recvmsg(msg_num);
 	}
 	
 }
