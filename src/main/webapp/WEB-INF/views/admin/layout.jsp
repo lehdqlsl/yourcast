@@ -35,9 +35,6 @@
 <!--  Checkbox, Radio & Switch Plugins -->
 <script src="<c:url value='/resources/admin/js/bootstrap-checkbox-radio-switch.js'/>"></script>
 
-<!--  Charts Plugin -->
-<script src="<c:url value='/resources/admin/js/chartist.min.js'/>"></script>
-
 <!--  Notifications Plugin    -->
 <script src="<c:url value='/resources/admin/js/bootstrap-notify.js'/>"></script>
 

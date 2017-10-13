@@ -26,9 +26,11 @@ import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.FanService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.service.StarUseService;
 import com.yourcast.app.vo.BlacklistVO;
 import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.PagingVO;
+import com.yourcast.app.vo.StarUseVO;
 import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
@@ -40,6 +42,7 @@ public class InfoController {
 	@Autowired private MemberProfileService mp_service;
 	@Autowired private FanService f_service;
 	@Autowired private BlacklistService b_service;
+	@Autowired private StarUseService u_service;
 
 	@RequestMapping(value = "/{id}/setting/info", method = RequestMethod.GET)
 	public String infoSetting(@PathVariable(value = "id") String id, Model model,
@@ -52,7 +55,7 @@ public class InfoController {
 		
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
 		
@@ -67,6 +70,8 @@ public class InfoController {
 		model.addAttribute("pu", pu);
 		model.addAttribute("listB", listB);		
 //		model.addAttribute("listM", listM);
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
 		return ".personnel.setting.info";
 	}
 	
@@ -80,7 +85,7 @@ public class InfoController {
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
 
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
 
@@ -101,7 +106,7 @@ public class InfoController {
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
 		
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
 
 		int endPageNum = pu.getEndPageNum();
 
@@ -118,7 +123,7 @@ public class InfoController {
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
 
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
 
 		int endPageNum = pu.getEndPageNum();
 

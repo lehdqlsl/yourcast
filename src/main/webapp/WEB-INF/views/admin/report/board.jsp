@@ -25,16 +25,7 @@
 			});
 			location.href="<c:url value='/admin/report/boardDelete?arr=" + arr + "'/>";
 		});
-		$(".check").on("click",function(){
-			var b_num = $(this).attr("data-b");
-			$.ajax({
-				url:"<c:url value='/admin/report/boardReport'/>",
-				data:{"b_num":b_num},
-				success:function(data){
-					alert("asd");
-				}
-			}); 
-		});
+		
 	});
 </script>
 
@@ -75,19 +66,39 @@
                                 	<td>${bvo.category_name }</td>
                                 	<td><a href="#" class="move" data-bj="${bvo.bj_id }" data-b="${bvo.b_num }" data-category="${bvo.category_num }">${bvo.b_title}</a></td>
                                 	<td>${bvo.id}</td>
-                                	<td class="check" data-b="${bvo.b_num }">
-                                		<div class="dropdown">
+                                	 <!-- 
+                                	<td style="color:red;">${bvo.b_report}</td>
+                                	 -->  
+	                            	<td>
+                                		<div class="dropdown" data-b="${bvo.b_num }">
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:red;">${bvo.b_report}</a>
-											<ul class="dropdown-menu">
-												<li class="repo"><a href="#"></a></li>
-											</ul>
+											<ul class="dropdown-menu"></ul>
 										</div> 
-									</td>
+									</td> 
                                 	<td><input type="checkbox" value="${bvo.b_num }"></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
+                        
+                        <script type="text/javascript">
+                        	$(function(){
+                        		$(".dropdown").on("click",function(){
+                        			$(".dropdown-menu").empty();
+                        			var b_num = $(this).attr("data-b");
+                        			$.ajax({
+                        				url:"<c:url value='/admin/report/boardReport'/>",
+                        				data:{"b_num":b_num},
+                        				success:function(data){
+                        					$(data).find("bplist").each(function(){
+                        						var id = $(this).find("id").text();
+                        						$(".dropdown-menu").append("<li><a href='#'>" + id + "</a></li>");
+                        					});
+                        				}
+                        			});
+                        		});
+                        	});
+                        </script>
                         
                         <!-- 페이징 -->
 						<div style="text-align: center;">

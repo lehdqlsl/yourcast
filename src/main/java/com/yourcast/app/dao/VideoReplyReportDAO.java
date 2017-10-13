@@ -39,4 +39,8 @@ public class VideoReplyReportDAO {
 	public int getCountAdmin() {
 		return sqlSession.selectOne(NAMESPACE + ".getCountAdmin");
 	}
+	
+	public List<VideoReplyReportVO> getList(int vr_num){
+		return sqlSession.selectList(NAMESPACE + ".getList",vr_num);
+	}
 }

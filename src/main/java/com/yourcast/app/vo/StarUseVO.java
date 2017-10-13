@@ -12,6 +12,7 @@ public class StarUseVO {
 	private int m_num;
 	private int bj_num;
 	private String id;
+	private int rnum;
 	
 	public StarUseVO() {}
 
@@ -24,7 +25,7 @@ public class StarUseVO {
 		this.bj_num = bj_num;
 	}
 
-	public StarUseVO(int use_num, String use_regdate, int use_ea, int m_num, int bj_num, String id) {
+	public StarUseVO(int use_num, String use_regdate, int use_ea, int m_num, int bj_num, String id,int rnum) {
 		super();
 		this.use_num = use_num;
 		this.use_regdate = use_regdate;
@@ -32,6 +33,15 @@ public class StarUseVO {
 		this.m_num = m_num;
 		this.bj_num = bj_num;
 		this.id = id;
+		this.rnum=rnum;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public String getId() {

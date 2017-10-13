@@ -4,13 +4,29 @@ public class VideoReplyReportVO {
 
 	private int m_num;
 	private int vr_num;
+	private String id;
 	
 	public VideoReplyReportVO() {}
+
+	public VideoReplyReportVO(int m_num, int vr_num, String id) {
+		super();
+		this.m_num = m_num;
+		this.vr_num = vr_num;
+		this.id = id;
+	}
 
 	public VideoReplyReportVO(int m_num, int vr_num) {
 		super();
 		this.m_num = m_num;
 		this.vr_num = vr_num;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public int getM_num() {

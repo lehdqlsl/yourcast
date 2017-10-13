@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
 <div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;">
 	<div class="w3-container w3-padding-32" id="projects">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">선물받은 별사탕내역</h3>
@@ -107,7 +105,7 @@
 							var use_ea = $(this).find("use_ea").text();
 							var id = $(this).find("id").text();
 							var use_regdate = $(this).find("use_regdate").text();
-							$("#recvlistT").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
+							$("#recvlistB").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -131,7 +129,7 @@
 											var use_ea = $(this).find("use_ea").text();
 											var id = $(this).find("id").text();
 											var use_regdate = $(this).find("use_regdate").text();
-											$("#recvlistT").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
+											$("#recvlistB").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
 										});
 									}
 								});
@@ -153,8 +151,8 @@
 						$(data).find("recvlist").each(function(){
 							var use_ea = $(this).find("use_ea").text();
 							var id = $(this).find("id").text();
-							var use_regdate = $(this).find("use_regdate").text();
-							$("#recvlistT").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
+							var use_regdate = $(this).find("use_regdate").text();		
+							$("#recvlistB").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -173,7 +171,7 @@
 							var use_ea = $(this).find("use_ea").text();
 							var id = $(this).find("id").text();
 							var use_regdate = $(this).find("use_regdate").text();
-							$("#recvlistT").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
+							$("#recvlistB").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -197,7 +195,7 @@
 											var use_ea = $(this).find("use_ea").text();
 											var id = $(this).find("id").text();
 											var use_regdate = $(this).find("use_regdate").text();
-											$("#recvlistT").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
+											$("#recvlistB").append("<tr><th>" + use_ea + "</th><th>" + id + "</th><th>" + use_regdate + "</th></tr>");						
 										});
 									}
 								});

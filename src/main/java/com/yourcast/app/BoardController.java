@@ -25,6 +25,7 @@ import com.yourcast.app.service.BoardUpService;
 import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.service.StarUseService;
 import com.yourcast.app.vo.BoardReplyVO;
 import com.yourcast.app.vo.BoardReportVO;
 import com.yourcast.app.vo.BoardUpVO;
@@ -32,6 +33,7 @@ import com.yourcast.app.vo.BoardVO;
 import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
+import com.yourcast.app.vo.StarUseVO;
 
 @Controller
 public class BoardController {
@@ -43,6 +45,7 @@ public class BoardController {
 	@Autowired private MemberProfileService mp_service;
 	@Autowired private BoardReplyService br_service;
 	@Autowired private BoardUpService bu_service;
+	@Autowired private StarUseService u_service;
 
 	@RequestMapping(value = "/{id}/board/insert", method = RequestMethod.GET)
 	public String insertForm(@PathVariable(value = "id") String id, Model model) {
@@ -52,6 +55,8 @@ public class BoardController {
 		model.addAttribute("id", id);
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(vo.getM_num());
+		model.addAttribute("flist", flist);
 		return ".personnel.board.insert";
 	}
 	// insert : post
@@ -103,6 +108,8 @@ public class BoardController {
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("clist", clist);
 		model.addAttribute("blist", blist);
+		List<StarUseVO> flist = u_service.getHotfList(vo.getM_num());
+		model.addAttribute("flist", flist);
 
 		return ".personnel.board.list";
 	}
@@ -136,6 +143,8 @@ public class BoardController {
 
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(vo.getM_num());
+		model.addAttribute("flist", flist);
 
 		return ".personnel.board.list";
 	}
@@ -154,6 +163,8 @@ public class BoardController {
 
 		MemberProfileVO voMP = mp_service.getInfo(cvo.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(cvo.getM_num());
+		model.addAttribute("flist", flist);
 
 		return ".personnel.board.update";
 	}
@@ -213,6 +224,8 @@ public class BoardController {
 
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(vo.getM_num());
+		model.addAttribute("flist", flist);
 
 		return ".personnel.board.list";
 	}
@@ -246,6 +259,8 @@ public class BoardController {
 
 		MemberProfileVO voMP = mp_service.getInfo(cvo.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(cvo.getM_num());
+		model.addAttribute("flist", flist);
 
 		return ".personnel.board.getInfo";
 	}
@@ -295,6 +310,8 @@ public class BoardController {
 		
 		MemberProfileVO voMP = mp_service.getInfo(mvo.getM_num());
 		model.addAttribute("voMP", voMP);
+		List<StarUseVO> flist = u_service.getHotfList(mvo.getM_num());
+		model.addAttribute("flist", flist);
 		
 		return ".personnel.board.list";
 	}

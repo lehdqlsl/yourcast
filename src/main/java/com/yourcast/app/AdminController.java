@@ -21,12 +21,15 @@ import com.yourcast.app.service.VideoReplyReportService;
 import com.yourcast.app.service.VideoReplyService;
 import com.yourcast.app.service.VideoReportService;
 import com.yourcast.app.service.VideoService;
+import com.yourcast.app.vo.BoardReplyReportVO;
 import com.yourcast.app.vo.BoardReplyVO;
 import com.yourcast.app.vo.BoardReportVO;
 import com.yourcast.app.vo.BoardVO;
 import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.PagingVO;
+import com.yourcast.app.vo.VideoReplyReportVO;
 import com.yourcast.app.vo.VideoReplyVO;
+import com.yourcast.app.vo.VideoReportVO;
 import com.yourcast.app.vo.VideoVO;
 
 
@@ -191,11 +194,45 @@ public class AdminController {
 	public PagingVO boardReportCheck(Model model, int b_num) {
 		
 		List<BoardReportVO> list = br_service.getList(b_num);
-		PagingVO bp_list = new PagingVO();
-		bp_list.setBp_list(list);
+		PagingVO bplist = new PagingVO();
+		bplist.setBplist(list);
 		
-		return bp_list;
+		return bplist;
 	}
+	
+	@RequestMapping(value = "/admin/report/boardReplyReport", method = RequestMethod.GET)
+	@ResponseBody
+	public PagingVO boardReplyReportCheck(Model model, int br_num) {
+		
+		List<BoardReplyReportVO> list = brr_service.getList(br_num);
+		PagingVO brplist = new PagingVO();
+		brplist.setBrplist(list);
+		
+		return brplist;
+	}
+	
+	@RequestMapping(value = "/admin/report/videoReport", method = RequestMethod.GET)
+	@ResponseBody
+	public PagingVO videoReportCheck(Model model, int v_num) {
+		
+		List<VideoReportVO> list = vr_service.getList(v_num);
+		PagingVO vplist = new PagingVO();
+		vplist.setVplist(list);
+		
+		return vplist;
+	}
+	
+	@RequestMapping(value = "/admin/report/videoReplyReport", method = RequestMethod.GET)
+	@ResponseBody
+	public PagingVO videoReplyReportCheck(Model model, int vr_num) {
+		
+		List<VideoReplyReportVO> list = vrr_service.getList(vr_num);
+		PagingVO vrplist = new PagingVO();
+		vrplist.setVrplist(list);
+		
+		return vrplist;
+	}
+
 }
 
 

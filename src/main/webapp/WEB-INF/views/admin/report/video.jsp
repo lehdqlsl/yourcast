@@ -65,12 +65,39 @@
                                 	<td><a href="#" class="move" data-v="${vvo.v_num }"><img src="<c:url value='/resources/upload/${vvo.v_savethumbnail }'/>" style="width:50px;height:50px;"></a></td>
                                 	<td>${vvo.v_title }</td>
                                 	<td>${vvo.id}</td>
+                                	<!-- 
                                 	<td style="color:red;">${vvo.v_report}</td>
+                                	 -->
+                                	 <td>
+                                		<div class="dropdown" data-v="${vvo.v_num }">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:red;">${vvo.v_report}</a>
+											<ul class="dropdown-menu"></ul>
+										</div> 
+									</td> 
                                 	<td><input type="checkbox" value="${vvo.v_num }"></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
+                        
+                        <script type="text/javascript">
+                        	$(function(){
+                        		$(".dropdown").on("click",function(){
+                        			$(".dropdown-menu").empty();
+                        			var v_num = $(this).attr("data-v");
+                        			$.ajax({
+                        				url:"<c:url value='/admin/report/videoReport'/>",
+                        				data:{"v_num":v_num},
+                        				success:function(data){
+                        					$(data).find("vplist").each(function(){
+                        						var id = $(this).find("id").text();
+                        						$(".dropdown-menu").append("<li><a href='#'>" + id + "</a></li>");
+                        					});
+                        				}
+                        			});
+                        		});
+                        	});
+                        </script>
                         
                         <!-- 페이징 -->
 						<div style="text-align: center;">

@@ -9,10 +9,11 @@
 	</insert>
 
 	<select id="getlist" resultType="pay" parameterType="hashmap">
-		select a.*,p.p_name from
-		(select c.*,rownum rnum from charge c
-		where m_num=#{m_num} order by pay_num desc)a,pay p 
-		<![CDATA[ where a.p_num=p.p_num and rnum>=#{startRow} and rnum<=#{endRow} ]]>
+		select * from
+		(select a.*,p.p_name,rownum rnum from
+		(select * from charge
+		where m_num=#{m_num} order by pay_num desc)a,pay p where a.p_num=p.p_num)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	
 	<select id="getcount" resultType="int">

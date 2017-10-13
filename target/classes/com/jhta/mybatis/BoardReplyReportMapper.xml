@@ -29,4 +29,8 @@
 		(select br_num,count(m_num) brrcnt from board_reply_report group by br_num)a,board_reply br
 		where a.br_num=br.br_num and br.br_delete=0
 	</select>
+	
+	<select id="getList" resultType="boardreplyreport">
+		select b.*,m.id from board_reply_report b,member m where br_num=#{br_num} and b.m_num=m.m_num
+	</select>
 </mapper>

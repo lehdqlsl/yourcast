@@ -36,4 +36,8 @@ public class VideoReplyReportService {
 	public int getCountAdmin() {
 		return dao.getCountAdmin();
 	}
+	
+	public List<VideoReplyReportVO> getList(int vr_num){
+		return dao.getList(vr_num);
+	}
 }

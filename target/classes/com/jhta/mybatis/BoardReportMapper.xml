@@ -27,7 +27,7 @@
 		where a.b_num=b.b_num and b.b_delete=0
 	</select>
 	
-	<select id="getList">
-		select * from board_report where b_num=#{b_num}
+	<select id="getList" resultType="boardreport">
+		select b.*,m.id from board_report b,member m where b_num=#{b_num} and b.m_num=m.m_num
 	</select>
 </mapper>

@@ -67,12 +67,39 @@
                                 	<td>${brrvo.b_title }</td>
                                 	<td>${brrvo.id}</td>
                                 	<td><a href="#" class="move" data-bj="${brrvo.bj_id }" data-b="${brrvo.b_num }" data-category="${brrvo.category_num }">${brrvo.br_content}</a></td>
+                                	<!--
                                 	<td style="color:red;">${brrvo.brrcnt}</td>
+                                	-->
+                                	<td>
+                                		<div class="dropdown" data-b="${brrvo.br_num }">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:red;">${brrvo.brrcnt}</a>
+											<ul class="dropdown-menu"></ul>
+										</div> 
+									</td> 
                                 	<td><input type="checkbox" value="${brrvo.br_num }"></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
+                        
+                        <script type="text/javascript">
+                        	$(function(){
+                        		$(".dropdown").on("click",function(){
+                        			$(".dropdown-menu").empty();
+                        			var br_num = $(this).attr("data-b");
+                        			$.ajax({
+                        				url:"<c:url value='/admin/report/boardReplyReport'/>",
+                        				data:{"br_num":br_num},
+                        				success:function(data){
+                        					$(data).find("brplist").each(function(){
+                        						var id = $(this).find("id").text();
+                        						$(".dropdown-menu").append("<li><a href='#'>" + id + "</a></li>");
+                        					});
+                        				}
+                        			});
+                        		});
+                        	});
+                        </script>
                         
                         <!-- 페이징 -->
 						<div style="text-align: center;">

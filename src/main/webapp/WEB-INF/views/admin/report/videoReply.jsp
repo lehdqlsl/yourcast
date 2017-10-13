@@ -69,12 +69,39 @@
                                 	<td>${vrrvo.v_title }</td>
                                 	<td>${vrrvo.id}</td>
                                 	<td>${vrrvo.vr_content}</td>
+                                	<!-- 
                                 	<td style="color:red;">${vrrvo.v_report}</td>
+                                	 -->
+                                	 <td>
+                                		<div class="dropdown" data-v="${vrrvo.vr_num }">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:red;">${vrrvo.v_report}</a>
+											<ul class="dropdown-menu"></ul>
+										</div> 
+									</td> 
                                 	<td><input type="checkbox" value="${vrrvo.vr_num }"></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
+                        
+                        <script type="text/javascript">
+                        	$(function(){
+                        		$(".dropdown").on("click",function(){
+                        			$(".dropdown-menu").empty();
+                        			var vr_num = $(this).attr("data-v");
+                        			$.ajax({
+                        				url:"<c:url value='/admin/report/videoReplyReport'/>",
+                        				data:{"vr_num":vr_num},
+                        				success:function(data){
+                        					$(data).find("vrplist").each(function(){
+                        						var id = $(this).find("id").text();
+                        						$(".dropdown-menu").append("<li><a href='#'>" + id + "</a></li>");
+                        					});
+                        				}
+                        			});
+                        		});
+                        	});
+                        </script>
                         
                         <!-- 페이징 -->
 						<div style="text-align: center;">
