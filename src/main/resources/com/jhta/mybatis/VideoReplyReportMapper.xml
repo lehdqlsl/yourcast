@@ -15,4 +15,19 @@
 		select * from video_reply_report where m_num=#{m_num} and vr_num=#{vr_num}
 	</select>
 	
+	<select id="getListAdmin" resultType="videoreply" parameterType="hashmap">
+		select * from 
+		(select aa.vr_num,m.id,vr.vr_content,aa.v_report,v.v_num,v.v_title,m1.id bj_id,a.age_grade_name,g.genre_name,v.v_savethumbnail,rownum rnum from
+		(select vr_num,count(m_num) v_report from video_reply_report 
+		group by vr_num order by v_report desc)aa,video_reply vr,member m,member m1,video v,age_grade a,genre g
+		where aa.vr_num=vr.vr_num and vr_delete=0 and m.m_num=vr.m_num and m1.m_num=v.m_num and  v.v_num=vr.v_num and a.age_grade_num=v.age_grade_num and g.genre_num=v.genre_num)
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	
+	<select id="getCountAdmin" resultType="int">
+		select NVL(count(a.vr_num),0) from
+		(select vr_num,count(m_num) v_report from video_reply_report group by vr_num)a,video_reply vr
+		where a.vr_num=vr.vr_num and vr.vr_delete=0
+	</select>
+	
 </mapper>

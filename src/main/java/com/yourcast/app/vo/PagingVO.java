@@ -36,4 +36,14 @@ public class PagingVO {
 	public List<ExchangeVO> getExlist() {
 		return exlist;
 	}
+	
+	@XmlElement(name="bp_list")
+	public List<BoardReportVO> bp_list;
+	public List<BoardReportVO> getBp_list() {
+		return bp_list;
+	}
+	public void setBp_list(List<BoardReportVO> bp_list) {
+		this.bp_list = bp_list;
+	}
+	
 }

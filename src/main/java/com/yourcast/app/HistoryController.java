@@ -109,6 +109,7 @@ public class HistoryController {
 	
 	@RequestMapping(value = "/member/history/recvStar", method = RequestMethod.GET)
 	public String recvStar(HttpSession session, Model model) {
+
 		int pageNum = 1;
 		String id = (String)session.getAttribute("id");
 		MemberVO mvo = m_sevice.getInfo(id);
@@ -138,10 +139,8 @@ public class HistoryController {
 		model.addAttribute("exlist",exlist);
 		model.addAttribute("puEx",puEx);
 		model.addAttribute("mvo",mvo);
-		
-		int total_recv_ea = use_service.getRecvEa(bj_num);
-		model.addAttribute("total_recv_ea",total_recv_ea);
-		
+
+		model.addAttribute("total_recv_ea",use_service.getRecvEa(bj_num));
 		model.addAttribute("total_ex_ea",ex_service.getexEa(bj_num));
 		model.addAttribute("total_ex_money",ex_service.getexMoney(bj_num));
 		

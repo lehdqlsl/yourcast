@@ -11,7 +11,7 @@
 	<select id="getlist" resultType="pay" parameterType="hashmap">
 		select a.*,p.p_name from
 		(select c.*,rownum rnum from charge c
-		where m_num=62 order by pay_num desc)a,pay p 
+		where m_num=#{m_num} order by pay_num desc)a,pay p 
 		<![CDATA[ where a.p_num=p.p_num and rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	

@@ -21,7 +21,7 @@ public class BoardVO {
 	
 	public BoardVO() {}
 	
-	public BoardVO(int b_num, String b_title, String id, int b_report, String bj_id, int category_num) {
+	public BoardVO(int b_num, String b_title, String id, int b_report, String bj_id, int category_num,String category_name) {
 		super();
 		this.b_num = b_num;
 		this.b_title = b_title;
@@ -29,6 +29,7 @@ public class BoardVO {
 		this.bj_id = bj_id;
 		this.b_report = b_report;
 		this.category_num = category_num;
+		this.category_name=category_name;
 	}
 
 	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,

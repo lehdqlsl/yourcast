@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.util.page.PageUtil;
 import com.util.page.VideoAllList;
 import com.util.page.VideoMainList;
+import com.yourcast.app.service.AgeGradeService;
 import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.GenreService;
 import com.yourcast.app.service.MemberProfileService;
@@ -34,6 +35,7 @@ import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.VideoReplyService;
 import com.yourcast.app.service.VideoService;
 import com.yourcast.app.service.VideoUpService;
+import com.yourcast.app.vo.AgeGradeVO;
 import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.GenreVO;
 import com.yourcast.app.vo.MemberProfileVO;
@@ -52,6 +54,7 @@ public class VideoController {
 	@Autowired private GenreService g_service; 
 	@Autowired private VideoReplyService vr_service;
 	@Autowired private VideoUpService vu_service;
+	@Autowired private AgeGradeService age_service;
 	////////////////////////////////video 메인 페이지 관련 내용(민지)//////////////////////////////////
 	//클릭 시 비디오 메인 페이지로 이동
 	@RequestMapping(value="/videomain",method=RequestMethod.GET)
@@ -333,8 +336,13 @@ public class VideoController {
 	public String videoInsert(@PathVariable(value = "id") String id, Model model) {
 		MemberVO voM = m_service.getInfo(id);
 		
+		List<AgeGradeVO> agelist = age_service.getList();
+		List<GenreVO> glist = g_service.getList();
+		
 		List<CategoryVO> clist=c_service.getList(voM.getM_num());
 		model.addAttribute("clist", clist);
+		model.addAttribute("agelist", agelist);
+		model.addAttribute("glist",glist);
 		model.addAttribute("id",id);
 		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());

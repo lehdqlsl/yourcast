@@ -9,14 +9,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.util.page.PageUtil;
 import com.yourcast.app.service.BoardReplyReportService;
+import com.yourcast.app.service.BoardReplyService;
 import com.yourcast.app.service.BoardReportService;
+import com.yourcast.app.service.BoardService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.service.VideoReplyReportService;
+import com.yourcast.app.service.VideoReplyService;
+import com.yourcast.app.service.VideoReportService;
+import com.yourcast.app.service.VideoService;
 import com.yourcast.app.vo.BoardReplyVO;
+import com.yourcast.app.vo.BoardReportVO;
 import com.yourcast.app.vo.BoardVO;
 import com.yourcast.app.vo.MemberVO;
+import com.yourcast.app.vo.PagingVO;
+import com.yourcast.app.vo.VideoReplyVO;
 import com.yourcast.app.vo.VideoVO;
 
 
@@ -24,8 +34,14 @@ import com.yourcast.app.vo.VideoVO;
 public class AdminController {
 	
 	@Autowired private MemberService m_service;
+	@Autowired private BoardService b_service;
+	@Autowired private BoardReplyService brp_service;
 	@Autowired private BoardReportService br_service;
 	@Autowired private BoardReplyReportService brr_service;
+	@Autowired private VideoService v_service;
+	@Autowired private VideoReplyService vrp_service;
+	@Autowired private VideoReportService vr_service;
+	@Autowired private VideoReplyReportService vrr_service;
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin() {
@@ -53,19 +69,16 @@ public class AdminController {
 	public String memberListFind(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 											@RequestParam(value="name",defaultValue="")  String name,
 											@RequestParam(value="id",defaultValue="")  String id,
-											@RequestParam(value="sum",defaultValue="")  String sum,
-											@RequestParam(value="option",defaultValue="")  String option,
 											@RequestParam(value="keyword",defaultValue="")  String keyword,
 											Model model) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		map.put("id", id);
-		map.put("sum", sum);
 		map.put("keyword", keyword);
 		
 		int totalRowCount=m_service.getCount(map);	
-		PageUtil pu=new PageUtil(pageNum, 5, 5, totalRowCount);	
+		PageUtil pu=new PageUtil(pageNum, 15, 5, totalRowCount);	
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
 		
@@ -108,4 +121,95 @@ public class AdminController {
 		
 		return ".admin.report.reply";
 	}
+	
+	@RequestMapping(value = "/admin/report/video", method = RequestMethod.GET)
+	public String videoReport(Model model, @RequestParam(value="pageNum",defaultValue="1") int pageNum) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int totalRowCount = vr_service.getCountAdmin();
+		PageUtil pu = new PageUtil(pageNum, 15, 5, totalRowCount);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		
+		List<VideoVO> vlist = vr_service.getListAdmin(map);
+		model.addAttribute("vlist",vlist);
+		model.addAttribute("pu",pu);
+		
+		return ".admin.report.video";
+	}
+	
+	@RequestMapping(value = "/admin/report/videoReply", method = RequestMethod.GET)
+	public String videoReplyReport(Model model, @RequestParam(value="pageNum",defaultValue="1") int pageNum) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int totalRowCount = vrr_service.getCountAdmin();
+		PageUtil pu = new PageUtil(pageNum, 15, 5, totalRowCount);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		
+		List<VideoReplyVO> vrrlist = vrr_service.getListAdmin(map);
+		model.addAttribute("vrrlist",vrrlist);
+		model.addAttribute("pu",pu);
+		
+		return ".admin.report.videoReply";
+	}
+	
+	@RequestMapping(value = "/admin/report/boardDelete", method = RequestMethod.GET)
+	public String boardDelete(Model model, int arr[]) {
+		for(int i=0;i<arr.length;i++) {
+			b_service.delete(arr[i]);
+		}
+		return "redirect:/admin/report/board";
+	}
+	
+	@RequestMapping(value = "/admin/report/boardReplyDelete", method = RequestMethod.GET)
+	public String boardReplyDelete(Model model, int arr[]) {
+		for(int i=0;i<arr.length;i++) {
+			brp_service.delete(arr[i]);
+		}
+		return "redirect:/admin/report/reply";
+	}
+	
+	@RequestMapping(value = "/admin/report/videoDelete", method = RequestMethod.GET)
+	public String videoDelete(Model model, int arr[]) {
+		for(int i=0;i<arr.length;i++) {
+			v_service.delete(arr[i]);
+		}
+		return "redirect:/admin/report/video";
+	}
+	
+	@RequestMapping(value = "/admin/report/videoReplyDelete", method = RequestMethod.GET)
+	public String videoReplyDelete(Model model, int arr[]) {
+		for(int i=0;i<arr.length;i++) {
+			vrp_service.delete(arr[i]);
+		}
+		return "redirect:/admin/report/videoReply";
+	}
+	
+	@RequestMapping(value = "/admin/report/boardReport", method = RequestMethod.GET)
+	@ResponseBody
+	public PagingVO boardReportCheck(Model model, int b_num) {
+		
+		List<BoardReportVO> list = br_service.getList(b_num);
+		PagingVO bp_list = new PagingVO();
+		bp_list.setBp_list(list);
+		
+		return bp_list;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

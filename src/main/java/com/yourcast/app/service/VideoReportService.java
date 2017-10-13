@@ -1,10 +1,14 @@
 package com.yourcast.app.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yourcast.app.dao.VideoReportDAO;
 import com.yourcast.app.vo.VideoReportVO;
+import com.yourcast.app.vo.VideoVO;
 
 
 
@@ -22,5 +26,13 @@ public class VideoReportService {
 	}
 	public VideoReportVO check(VideoReportVO vo) {
 		return dao.check(vo);
+	}
+	
+	public List<VideoVO> getListAdmin(HashMap<String, Object> map){
+		return dao.getListAdmin(map);
+	}
+	
+	public int getCountAdmin() {
+		return dao.getCountAdmin();
 	}
 }

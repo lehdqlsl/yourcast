@@ -1,10 +1,14 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yourcast.app.vo.VideoReplyReportVO;
+import com.yourcast.app.vo.VideoReplyVO;
 
 @Repository
 public class VideoReplyReportDAO {
@@ -26,5 +30,13 @@ public class VideoReplyReportDAO {
 	}
 	public VideoReplyReportVO check(VideoReplyReportVO vo) {
 		return sqlSession.selectOne(NAMESPACE+".check",vo);
+	}
+	
+	public List<VideoReplyVO> getListAdmin(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE + ".getListAdmin",map);
+	}
+	
+	public int getCountAdmin() {
+		return sqlSession.selectOne(NAMESPACE + ".getCountAdmin");
 	}
 }

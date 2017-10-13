@@ -55,7 +55,7 @@
 			}
 			//alert(replycount);
 			$.ajax({
-				url:'<c:url value="/${sessionScope.id}/boardreply/list?pageNum='+rc+'&b_num=${b_num}&category_num=${category_num}"/>',
+				url:'<c:url value="/${id}/boardreply/list?pageNum='+rc+'&b_num=${b_num}&category_num=${category_num}"/>',
 				dataType:"xml",
 				success:function(data){
 						$(data).find("list").each(function(){

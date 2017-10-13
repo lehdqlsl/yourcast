@@ -33,4 +33,8 @@ public class BoardReportService {
 	public int getCountAdmin() {
 		return dao.getCountAdmin();
 	}
+	
+	public List<BoardReportVO> getList(int b_num){
+		return dao.getList(b_num);
+	}
 }
