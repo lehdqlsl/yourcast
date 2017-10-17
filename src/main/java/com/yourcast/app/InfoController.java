@@ -29,12 +29,10 @@ import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.StarUseService;
 import com.yourcast.app.vo.BlacklistVO;
 import com.yourcast.app.vo.CategoryVO;
-import com.yourcast.app.vo.PagingVO;
 import com.yourcast.app.vo.StarUseVO;
 import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
-import com.yourcast.app.vo.PagingVO;
 
 @Controller
 public class InfoController {
@@ -73,63 +71,156 @@ public class InfoController {
 //		model.addAttribute("listM", listM);
 		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
 		model.addAttribute("flist", flist);
+		
 		return ".personnel.setting.info";
 	}
 	
-	@RequestMapping(value = "/{id}/setting/page", method = RequestMethod.GET)
-	@ResponseBody
-	public PagingVO fanPaging(@PathVariable(value = "id") String id, Model model,
+	@RequestMapping(value = "/{id}/setting/category", method = RequestMethod.GET)
+	public String categorySetting(@PathVariable(value = "id") String id, Model model,
 									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
 		MemberVO voM = m_sevice.getInfo(id);
+		List<CategoryVO> clist = c_service.getList(voM.getM_num());
+		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
-
 		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
 		map.put("startRow",pu.getStartRow());
 		map.put("endRow",pu.getEndRow());
-
+		
 		List<FanVO> listF = f_service.getList(map);
-		PagingVO list1 = new PagingVO();
-		list1.setList(listF);
-
-		return list1;
+		List<BlacklistVO> listB = b_service.getList(voM.getM_num());
+		
+		model.addAttribute("clist", clist);
+		model.addAttribute("id", id);
+		model.addAttribute("voMP", voMP);
+		model.addAttribute("listF", listF);
+		model.addAttribute("pu", pu);
+		model.addAttribute("listB", listB);		
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
+		return ".personnel.setting.category";
 	}
 	
-	@RequestMapping(value = "/{id}/setting/pageNext", method = RequestMethod.GET)
-	@ResponseBody
-	public int fanPagingNext(@PathVariable(value = "id") String id, Model model,
+	@RequestMapping(value = "/{id}/setting/fanlist", method = RequestMethod.GET)
+	public String fanlistSetting(@PathVariable(value = "id") String id, Model model,
 									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
 		MemberVO voM = m_sevice.getInfo(id);
+		List<CategoryVO> clist = c_service.getList(voM.getM_num());
+		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
+		map.put("startRow",pu.getStartRow());
+		map.put("endRow",pu.getEndRow());
 		
-		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
-
-		int endPageNum = pu.getEndPageNum();
-
-		return endPageNum;
+		List<FanVO> listF = f_service.getList(map);
+		List<BlacklistVO> listB = b_service.getList(voM.getM_num());
+		
+		model.addAttribute("clist", clist);
+		model.addAttribute("id", id);
+		model.addAttribute("voMP", voMP);
+		model.addAttribute("listF", listF);
+		model.addAttribute("pu", pu);
+		model.addAttribute("listB", listB);		
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
+		if(listF.isEmpty()) {
+			model.addAttribute("err","팬 정보가 존재하지 않습니다.");
+		}
+		return ".personnel.setting.fanlist";
 	}
 	
-	@RequestMapping(value = "/{id}/setting/pagePre", method = RequestMethod.GET)
-	@ResponseBody
-	public int fanPagingPre(@PathVariable(value = "id") String id, Model model,
-									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {		
+	@RequestMapping(value = "/{id}/setting/blacklist", method = RequestMethod.GET)
+	public String blacklistSetting(@PathVariable(value = "id") String id, Model model,
+									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
 		MemberVO voM = m_sevice.getInfo(id);
+		List<CategoryVO> clist = c_service.getList(voM.getM_num());
+		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("bj_num", voM.getM_num());
 		int totalRowCount=f_service.getCount(voM.getM_num());
-
 		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
-
-		int endPageNum = pu.getEndPageNum();
-
-		return endPageNum;
+		map.put("startRow",pu.getStartRow());
+		map.put("endRow",pu.getEndRow());
+		
+		List<FanVO> listF = f_service.getList(map);
+		List<BlacklistVO> listB = b_service.getList(voM.getM_num());
+		
+		model.addAttribute("clist", clist);
+		model.addAttribute("id", id);
+		model.addAttribute("voMP", voMP);
+		model.addAttribute("listF", listF);
+		model.addAttribute("pu", pu);
+		model.addAttribute("listB", listB);		
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
+		return ".personnel.setting.blacklist";
 	}
+	
+	
+	
+//	@RequestMapping(value = "/{id}/setting/page", method = RequestMethod.GET)
+//	@ResponseBody
+//	public PagingVO fanPaging(@PathVariable(value = "id") String id, Model model,
+//									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
+//		MemberVO voM = m_sevice.getInfo(id);
+//		HashMap<String, Integer> map = new HashMap<String, Integer>();
+//		
+//		map.put("bj_num", voM.getM_num());
+//		int totalRowCount=f_service.getCount(voM.getM_num());
+//
+//		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
+//		map.put("startRow",pu.getStartRow());
+//		map.put("endRow",pu.getEndRow());
+//
+//		List<FanVO> listF = f_service.getList(map);
+//		PagingVO list1 = new PagingVO();
+//		list1.setList(listF);
+//
+//		return list1;
+//	}
+	
+//	@RequestMapping(value = "/{id}/setting/pageNext", method = RequestMethod.GET)
+//	@ResponseBody
+//	public int fanPagingNext(@PathVariable(value = "id") String id, Model model,
+//									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
+//		MemberVO voM = m_sevice.getInfo(id);
+//		HashMap<String, Integer> map = new HashMap<String, Integer>();
+//		
+//		map.put("bj_num", voM.getM_num());
+//		int totalRowCount=f_service.getCount(voM.getM_num());
+//		
+//		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
+//
+//		int endPageNum = pu.getEndPageNum();
+//
+//		return endPageNum;
+//	}
+	
+//	@RequestMapping(value = "/{id}/setting/pagePre", method = RequestMethod.GET)
+//	@ResponseBody
+//	public int fanPagingPre(@PathVariable(value = "id") String id, Model model,
+//									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {		
+//		MemberVO voM = m_sevice.getInfo(id);
+//		HashMap<String, Integer> map = new HashMap<String, Integer>();
+//		
+//		map.put("bj_num", voM.getM_num());
+//		int totalRowCount=f_service.getCount(voM.getM_num());
+//
+//		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
+//
+//		int endPageNum = pu.getEndPageNum();
+//
+//		return endPageNum;
+//	}
 	
 	@RequestMapping(value = "/{id}/setting/baseinfo_update", method = RequestMethod.POST)
 	public String baseInfoUpdate(@PathVariable(value = "id") String id, Model model,
@@ -153,20 +244,20 @@ public class InfoController {
 			new File(path + "//" + voMP.getProfile_savefilename()).delete();
 			try {
 				FileCopyUtils.copy(profileImg.getInputStream(), new FileOutputStream(path + "\\" + profile_savefilename));
-				System.out.println(path + "\\" + profile_savefilename + "프로필사진 업로드 성공");
+				System.out.println(path + "\\" + profile_savefilename + "�봽濡쒗븘�궗吏� �뾽濡쒕뱶 �꽦怨�");
 				
 			}catch(IOException ie) {
 				System.out.println(ie.getMessage());
-				model.addAttribute("result","에러로 인한 실패");
+				model.addAttribute("result","�뿉�윭濡� �씤�븳 �떎�뙣");
 				return ".personnel.setting.result"; 
 			}
 		}
 		
 		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, profile_content, profile_orgfilename, profile_savefilename, vo.getM_num(),profile_title));
 		if(n>0) {
-			model.addAttribute("result","기본정보 수정 성공");
+			model.addAttribute("result","湲곕낯�젙蹂� �닔�젙 �꽦怨�");
 		}else {
-			model.addAttribute("result","기본정보 수정 실패");
+			model.addAttribute("result","湲곕낯�젙蹂� �닔�젙 �떎�뙣");
 		}
 		
 		return ".personnel.setting.result";

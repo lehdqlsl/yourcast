@@ -83,7 +83,11 @@ public class MemberVO {
 		this.star_candy = star_candy;
 	}
 
-
+	public MemberVO(int m_num, int grade_num) {
+		super();
+		this.m_num = m_num;
+		this.grade_num = grade_num;
+	}
 
 	public MemberVO() {
 		// TODO Auto-generated constructor stub

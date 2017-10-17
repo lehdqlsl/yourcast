@@ -26,56 +26,75 @@
 				<th>${pvo.pay_regdate }</th>
 			</tr>
 		</c:forEach>
+		<c:if test="${err!=null }">
+			<tr>
+				<th colspan="3" style="text-align:center;vertical-align: middle;height:200px;">${err }</th>
+			</tr>
+		</c:if>
 	</table>
 	
 	<div>${mvo.id }님의 보유중인 금액은 ${mvo.money }원 입니다.</div>
 	
+	<br>
+	
+	<c:if test="${err!=null }">
+		<script type="text/javascript">
+			$(function(){
+				$("#page").css("margin-left","350px");
+			});
+		</script>
+	</c:if>
+	
 	<!-- 페이징 -->
-		<div>
+		<div class="w3-bar" id="page" style="margin-left:270px;">
 		<c:choose>
 			<c:when test="${pu.pageNum>1 }">
-				<a href="<c:url value='/member/history/pay?pageNum=${1 }'/>">[처음으로]</a>
+				<a href="<c:url value='/member/history/pay?pageNum=${1 }'/>" class="w3-bar-item w3-button w3-hover-black">«</a>
 			</c:when>
 			<c:otherwise>
-				[처음으로]
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
 			</c:otherwise>
 		</c:choose>
 		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
-				<a href="<c:url value='/member/history/pay?pageNum=${pu.startPageNum-1 }'/>">[이전]</a>
+				<a href="<c:url value='/member/history/pay?pageNum=${pu.startPageNum-1 }'/>" class="w3-bar-item w3-button w3-hover-black">이전</a>
 			</c:when>
 			<c:otherwise>
-				[이전]
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a>
 			</c:otherwise>
 		</c:choose>
+			<c:if test="${err!=null }">
+				<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+			</c:if>
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
 					<c:when test="${i==pu.pageNum }">
-						<span style="color:blue">[${i }]</span>
+						<a href="#" class="w3-bar-item w3-black w3-button">${i }</a>
 					</c:when>
 					<c:otherwise>
-						<a href="<c:url value='/member/history/pay?pageNum=${i }'/>"><span style="color:#555">[${i }]</span></a>
+						<a href="<c:url value='/member/history/pay?pageNum=${i }'/>" class="w3-bar-item w3-button w3-hover-black">${i }</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 		<c:choose>
 			<c:when test="${pu.endPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/member/history/pay?pageNum=${pu.endPageNum+1 }'/>">[다음]</a>
+				<a href="<c:url value='/member/history/pay?pageNum=${pu.endPageNum+1 }'/>" class="w3-bar-item w3-button w3-hover-black">다음</a>
 			</c:when>
 			<c:otherwise>
-				[다음]
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a>
 			</c:otherwise>
 		</c:choose>
 		<c:choose>
 			<c:when test="${pu.startPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/member/history/pay?pageNum=${pu.totalPageCount }'/>">[끝으로]</a>
+				<a href="<c:url value='/member/history/pay?pageNum=${pu.totalPageCount }'/>" class="w3-bar-item w3-button w3-hover-black">»</a>
 			</c:when>
 			<c:otherwise>
-				[끝으로]
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
 			</c:otherwise>
 		</c:choose>
 		</div>
 	
+		<br>
 	
 </div>
 

@@ -233,6 +233,13 @@ public class AdminController {
 		return vrplist;
 	}
 
+	@RequestMapping(value = "/admin/member/gradeUpdate", method = RequestMethod.GET)
+	public String gradeUpdate(Model model, int grade_num, int m_num) {
+		
+		m_service.gradeUpdate(new MemberVO(m_num, grade_num));
+		
+		return "redirect:/admin/member/gradeUpdate";
+	}
 }
 
 

@@ -30,28 +30,43 @@
 			</tr>
 		</c:forEach>
 		</tbody>
+		<c:if test="${err!=null }">
+			<tr>
+				<th colspan="3" style="text-align:center;vertical-align: middle;height:200px;">${err }</th>
+			</tr>
+		</c:if>
 	</table>
 	
 	<div>보유중인 별사탕 : ${mvo.star_candy }</div>
 	<div>선물받은 별사탕 : ${total_recv_ea }</div>
 	
+	<c:if test="${err!=null }">
+		<script type="text/javascript">
+			$(function(){
+				$("#pageR").css("margin-left","400px");
+			});
+		</script>
+	</c:if>
+	
 	<!-- 선물받은 별사탕 페이징 -->
-	<div>
-		<span id="preRecv"><a href="#">[이전]</a></span>
+	<div class="w3-bar" id="pageR" style="margin-left:340px;">
+		<span id="preRecv"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingRecv">
-		<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-			<a href="#" class="pagingR">${i }</a>
-		</c:forEach>
+		
+				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+					<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black">${i }</a>
+				</c:forEach>
+			
 		</span>
 		
-		<span id="nextRecv"><a href="#">[다음]</a></span>
+		<span id="nextRecv"><a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a></span>
 	</div>
 	
-	<div><input type="button" value="환전하기"></div>
+	<div><button type="button" class="w3-button w3-black w3-round-large"><i class="fa fa-krw"></i> 환전하기</button></div>
 		
 	<!-- 환전내역 리스트 -->
-	<table border="1" id="exlistT">
+	<table class="w3-table w3-table-all">
 	<thead>
 	<tr>
 		<th>환전수량</th><th>환전수수료</th><th>환전금액</th><th>환전날짜</th>
@@ -67,23 +82,40 @@
 		</tr>
 	</c:forEach>
 	</tbody>
+	<c:if test="${errr!=null }">
+		<tr>
+			<th colspan="4" style="text-align:center;vertical-align: middle;height:200px;">${errr }</th>
+		</tr>
+	</c:if>
 	</table>
 	
 	<div>환전수량 : ${total_ex_ea }</div>
 	<div>환전금액 : ${total_ex_money }</div>
 	
+	<c:if test="${err!=null }">
+		<script type="text/javascript">
+			$(function(){
+				$("#pageX").css("margin-left","400px");
+			});
+		</script>
+	</c:if>
+	
 	<!-- 환전내역 페이징 -->
-	<div>
-		<span id="preEx"><a href="#">[이전]</a></span>
+	<div class="w3-bar" id="pageX" style="margin-left:340px;">
+		<span id="preEx"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingEx">
+
 		<c:forEach var="i" begin="${puEx.startPageNum }" end="${puEx.endPageNum }">
-			<a href="#" class="pagingE">${i }</a>
+			<a href="#" class="pagingE w3-bar-item w3-button w3-hover-black">${i }</a>
 		</c:forEach>
+			
 		</span>
 		
-		<span id="nextEx"><a href="#">[다음]</a></span>
+		<span id="nextEx"><a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a></span>
 	</div>
+	
+	<br>
 		
 </div>
 
@@ -92,8 +124,8 @@
 		$(document).ready(function(){
 			$(".pagingR").filter(':first').css('color','red');
 			$("#preRecv a").on('click',function(){
-				var pageNum = parseInt($(".pagingR").filter(':first').text()) - 1;
-				if(pageNum<5){
+				var pageNum = parseInt($(".pagingR").filter(':first').text()) - 5;
+				if(pageNum<1){
 					return false;
 				}
 				$("#recvlistB").empty();
@@ -115,15 +147,15 @@
 					data:{"pageNum":pageNum},
 					success:function(data){
 						for(var i=data-4;i<=data;i++){
-							$("<a href='#' class='pagingR'>" + i + "</a>").appendTo("#pagingRecv").css('margin','4px').on('click',function(){
+							$("<a href='#' class='pagingR w3-bar-item w3-button w3-hover-black'>" + i + "</a>").appendTo("#pagingRecv").on('click',function(){
 								var pageNum1 = $(this).text();
+			
 								$("#recvlistB").empty();
 								$(".pagingR").removeAttr('style');
-								$(".pagingR").css('margin','5px')
 								$(this).css('color','red');
 								$.ajax({
 									url:"<c:url value='/member/history/recvStarPaging'/>",
-									data:{"pageNum":pageNum},
+									data:{"pageNum":pageNum1},
 									success:function(data){
 										$(data).find("recvlist").each(function(){
 											var use_ea = $(this).find("use_ea").text();
@@ -141,6 +173,7 @@
 			});
 			$(".pagingR").on('click',function move(){
 				var pageNum = $(this).text();
+		
 				$("#recvlistB").empty();
 				$(".pagingR").removeAttr('style');
 				$(this).css('color','red');
@@ -181,11 +214,11 @@
 					data:{"pageNum":pageNum},
 					success:function(data){
 						for(var i=pageNum;i<=data;i++){
-							$("<a href='#' class='pagingR'>" + i + "</a>&nbsp;").appendTo("#pagingRecv").css('margin','4px').on('click',function(){
+							$("<a href='#' class='pagingR w3-bar-item w3-button w3-hover-black'>" + i + "</a>&nbsp;").appendTo("#pagingRecv").on('click',function(){
 								var pageNum1 = $(this).text();
+					
 								$("#recvlistB").empty();
 								$(".pagingR").removeAttr('style');
-								$(".pagingR").css('margin','5px')
 								$(this).css('color','red');
 								$.ajax({
 									url:"<c:url value='/member/history/recvStarPaging'/>",
@@ -213,8 +246,8 @@
 		$(document).ready(function(){
 			$(".pagingE").filter(':first').css('color','red');
 			$("#preEx a").on('click',function(){
-				var pageNum = parseInt($(".pagingE").filter(':first').text()) - 1;
-				if(pageNum<5){
+				var pageNum = parseInt($(".pagingE").filter(':first').text()) - 5;
+				if(pageNum<1){
 					return false;
 				}
 				$("#exlistB").empty();
@@ -227,7 +260,7 @@
 							var e_fee = $(this).find("e_fee").text();
 							var sum = parseFloat(e_ea)*parseFloat(e_fee);
 							var e_regdate = $(this).find("e_regdate").text();
-							$("#exlistT").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -237,22 +270,21 @@
 					data:{"pageNum":pageNum},
 					success:function(data){
 						for(var i=data-4;i<=data;i++){
-							$("<a href='#' class='pagingE'>" + i + "</a>").appendTo("#pagingEx").css('margin','4px').on('click',function(){
+							$("<a href='#' class='pagingE w3-bar-item w3-button w3-hover-black'>" + i + "</a>").appendTo("#pagingEx").on('click',function(){
 								var pageNum1 = $(this).text();
 								$("#exlistB").empty();
 								$(".pagingE").removeAttr('style');
-								$(".pagingE").css('margin','5px')
 								$(this).css('color','red');
 								$.ajax({
 									url:"<c:url value='/member/history/exStarPaging'/>",
-									data:{"pageNum":pageNum},
+									data:{"pageNum":pageNum1},
 									success:function(data){
 										$(data).find("exlist").each(function(){
 											var e_ea = $(this).find("e_ea").text();
 											var e_fee = $(this).find("e_fee").text();
 											var sum = parseFloat(e_ea)*parseFloat(e_fee);
 											var e_regdate = $(this).find("e_regdate").text();
-											$("#exlistT").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+											$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
 										});
 									}
 								});
@@ -262,7 +294,7 @@
 					}
 				});
 			});
-			$(".pagingE").on('click',function move(){
+			$(".pagingE").on('click',function(){
 				var pageNum = $(this).text();
 				$("#exlistB").empty();
 				$(".pagingE").removeAttr('style');
@@ -276,7 +308,7 @@
 							var e_fee = $(this).find("e_fee").text();
 							var sum = parseFloat(e_ea)*parseFloat(e_fee);
 							var e_regdate = $(this).find("e_regdate").text();
-							$("#exlistT").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -296,7 +328,7 @@
 							var e_fee = $(this).find("e_fee").text();
 							var sum = parseFloat(e_ea)*parseFloat(e_fee);
 							var e_regdate = $(this).find("e_regdate").text();
-							$("#exlistT").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -306,11 +338,10 @@
 					data:{"pageNum":pageNum},
 					success:function(data){
 						for(var i=pageNum;i<=data;i++){
-							$("<a href='#' class='pagingE'>" + i + "</a>&nbsp;").appendTo("#pagingEx").css('margin','4px').on('click',function(){
+							$("<a href='#' class='pagingE w3-bar-item w3-button w3-hover-black'>" + i + "</a>&nbsp;").appendTo("#pagingEx").on('click',function(){
 								var pageNum1 = $(this).text();
 								$("#exlistB").empty();
 								$(".pagingE").removeAttr('style');
-								$(".pagingE").css('margin','5px')
 								$(this).css('color','red');
 								$.ajax({
 									url:"<c:url value='/member/history/exStarPaging'/>",
@@ -321,7 +352,7 @@
 											var e_fee = $(this).find("e_fee").text();
 											var sum = parseFloat(e_ea)*parseFloat(e_fee);
 											var e_regdate = $(this).find("e_regdate").text();
-											$("#exlistT").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+											$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
 										});
 									}
 								});
