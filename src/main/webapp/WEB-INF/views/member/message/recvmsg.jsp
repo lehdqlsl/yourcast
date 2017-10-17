@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/popup.css'/>?ver=1">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>?ver=1">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -16,29 +18,28 @@
 		});
 	});
 </script>
-<div class="w3-main">
-	<div>
-		<h4>받은 쪽지 조회</h4>
+<div class="popup" style="width:388px;">
+	<!-- title -->
+	<div class="pop_tit_bg"><div class="pop_tit_l"><div class="pop_tit_r">
+		<h3 class="pop_tit">받은 쪽지 읽기</h3>
+	</div></div>
+	
 	</div>
-	<table>
-		<tr>
-			<td>보낸 사람</td>
-			<td><input type="text" id="s_id" name="s_id" readonly="readonly" value="${msgvo.id }"></td>
-		</tr>
-		<tr>
-			<td>보낸 날짜</td>
-			<td><input type="text" id="msg_send_date" name="msg_send_date" readonly="readonly" value="${msgvo.msg_send_date }"></td>
-		</tr>
-		<tr>
-			<td>제목</td>
-			<td><input type="text" id="msg_title" name="msg_title" readonly="readonly" value="${msgvo.msg_title }"></td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td><textarea rows="15" cols="40" id="msg_content" name="msg_content" readonly="readonly">${msgvo.msg_content }</textarea></td>
-		</tr>
-	</table>
-	<input type="button" value="삭제" id="delete">
-</div>
+	<!-- title -->
 
+	<div class="memoread">
+		<dl class="memo_type1">
+		<dt>보낸 사람</dt>
+		<dd id="recv_nick">${msgvo.name }<span id="recv_id" class="old">(${msgvo.id})</span></dd>
+		</dl>
+		<dl class="memo_type2">
+		<dt>보낸 시각</dt>
+		<dd><span id="send_date" class="old">${msgvo.msg_send_date }</span></dd>
+		</dl>
+
+		<div id="content" class="memo_cnt_area">${msgvo.msg_content }</div>
+		<br>
+		<ul id="manageBtn" class="btn_buttom1"><li><a href="javascript:;" onclick="delNoteView('70528677');" id="delete"><img src="http://www.afreecatv.com/images/popup/button/btn_del.gif" alt="삭제"></a></li></ul>
+	</div>
+</div>
 

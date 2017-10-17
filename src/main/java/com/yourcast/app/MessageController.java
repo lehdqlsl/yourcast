@@ -1,5 +1,6 @@
 package com.yourcast.app;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,9 +27,9 @@ public class MessageController {
 	@Autowired private MsgService msg_service;
 	@Autowired private MemberService m_service;
 	
-	//쪽지 페이지로 이동
-	@RequestMapping(value="/message/main")
-	public String msgMain(@RequestParam(value="pageNumR",defaultValue="1") int pageNumR,@RequestParam(value="pageNumS",defaultValue="1") int pageNumS,@RequestParam(value="cate",defaultValue="1") int cate, Model model,HttpServletRequest request) {
+	//받은 쪽지함
+	@RequestMapping(value="/message/recv/list")
+	public String recvList(@RequestParam(value="pageNumR",defaultValue="1") int pageNumR,Model model,HttpServletRequest request) {
 		//로그인한 회원번호 얻어오기
 		HttpSession session =request.getSession();
 		String id = (String) session.getAttribute("id");
@@ -49,6 +50,20 @@ public class MessageController {
 		//받은 쪽지 리스트 얻어오기
 		List<MsgVO> rlist=msg_service.getRecvList(map1);
 		///////////////////////////////////////////////////////
+		
+		model.addAttribute("rlist", rlist);
+		model.addAttribute("pur",pur);
+		return ".member.message.recvmsglist";
+	}
+	//보낸 쪽지함
+	@RequestMapping(value="/message/send/list")
+	public String sendList(@RequestParam(value="pageNumS",defaultValue="1") int pageNumS, Model model,HttpServletRequest request) {
+		//로그인한 회원번호 얻어오기
+		HttpSession session =request.getSession();
+		String id = (String) session.getAttribute("id");
+		MemberVO mvo=m_service.getInfo(id);
+		int m_num=mvo.getM_num();
+		
 		////////////////////보낸 쪽지함///////////////////////////
 		//페이지 클래스
 		int totalRowCountS=msg_service.sendCount(m_num);
@@ -63,12 +78,9 @@ public class MessageController {
 		//보낸 쪽지 리스트 얻어오기
 		List<MsgVO> slist=msg_service.getSendList(map2);
 		///////////////////////////////////////////////////////
-		model.addAttribute("cate",cate);
-		model.addAttribute("rlist", rlist);
 		model.addAttribute("slist",slist);
-		model.addAttribute("pur",pur);
 		model.addAttribute("pus",pus);
-		return ".member.message.msgmain";
+		return ".member.message.sendmsglist";
 	}
 	//쪽지 전송 페이지로 이동
 	@RequestMapping(value="/message/send",method=RequestMethod.GET)
@@ -79,9 +91,9 @@ public class MessageController {
 	@RequestMapping(value="/message/send",method=RequestMethod.POST)
 	public String msgSend(HttpServletRequest request) {
 		String s_id=request.getParameter("s_id");//보낸 사람 아이디
-		String r_id=request.getParameter("r_id");//받는 사람 아이디
+		String r_id=request.getParameter("recv_id");//받는 사람 아이디
 		String msg_title=request.getParameter("msg_title");//제목
-		String msg_content=request.getParameter("msg_content");//내용
+		String msg_content=request.getParameter("content");//내용
 		
 		//회원 번호 얻어오기
 		MemberVO mvo1=m_service.getInfo(s_id);
@@ -126,13 +138,31 @@ public class MessageController {
 	public String recvDeleteOne(HttpServletRequest request) {
 		int msg_num=Integer.parseInt(request.getParameter("msg_num"));
 		msg_service.recvDelete(msg_num);
-		return "/member/message/deleteresult";
+		return "/member/message/recvdelete";
 	}
 	//보낸 쪽지 한 개 삭제
 	@RequestMapping(value="/message/send/deleteOne")
 	public String sendDeleteOne(HttpServletRequest request) {
 		int msg_num=Integer.parseInt(request.getParameter("msg_num"));
 		msg_service.sendDelete(msg_num);
-		return "/member/message/deleteresult";
+		return "/member/message/senddelete";
+	}
+	//받은 쪽지 목록 삭제
+	@RequestMapping(value="/message/recv/deleteList")
+	public String recvDeleteList(int [] arr) {
+		for(int i=0;i<arr.length;i++) {
+			//System.out.println(arr[i]);
+			msg_service.recvDelete(arr[i]);
+		}
+		return "redirect:/message/recv/list";
+	}
+	//보낸 쪽지 목록 삭제
+	@RequestMapping(value="/message/send/deleteList")
+	public String sendDeleteList(int [] arr) {
+		for(int i=0;i<arr.length;i++) {
+			//System.out.println(arr[i]);
+			msg_service.sendDelete(arr[i]);
+		}
+		return "redirect:/message/send/list";
 	}
 }
