@@ -16,7 +16,7 @@
 				<c:otherwise>
 					<a href="<c:url value='/${sessionScope.id }'/>"
 						class="w3-bar-item w3-button">${sessionScope.id }</a>
-						<a href="<c:url value='/message/main'/>"
+						<a href="<c:url value='/message/recv/list'/>"
 						class="w3-bar-item w3-button">쪽지</a>
 					<a href="<c:url value='/member/charge/star'/>"
 						class="w3-bar-item w3-button">별사탕 구매</a>

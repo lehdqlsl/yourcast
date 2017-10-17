@@ -79,7 +79,6 @@ dd.name {
 				url:'<c:url value="/'+id+'/videoreply/insert?vr_content='+vr_content+'&sid='+sid+'&v_num='+v_num+'"/>',
 				dataType:"xml",
 				success:function(data){
-					alert("댓글을 추가하였습니다!");
 					$("#vr_content").val("");
 					$("#replylist").empty();
 					$(data).find("list").each(function(){
@@ -161,7 +160,7 @@ dd.name {
 			url:'<c:url value="/videoreply/list?pageNum=1&v_num='+v_num+'"/>',
 			dataType:'xml',
 			success:function(data){
-				//alert(data);
+				console.log(data);
 				$(data).find("list").each(function(){
 					var id=$(this).find("id").text();
 					var vr_regdate=$(this).find("vr_regdate").text();
@@ -172,7 +171,6 @@ dd.name {
 					var p='';
 					if(id=="${sessionScope.id}"){
 						p="<p class='reply'>"+id+"&nbsp;&nbsp;"+vr_regdate+"<br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-black w3-round-large vr_delete'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
-						
 						"&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large vr_up' id='"+vr_num+"'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button>"+
 						"<span style='visibility:hidden;'>"+vr_num+"</span>"+
 						"</p>";
@@ -198,7 +196,7 @@ dd.name {
 				url:'<c:url value="/videoreply/list?pageNum='+rc+'&v_num='+v_num+'"/>',
 				dataType:'xml',
 				success:function(data){
-					//alert(data);
+					console.log(data);
 					$(data).find("list").each(function(){
 						var id=$(this).find("id").text();
 						var vr_regdate=$(this).find("vr_regdate").text();
@@ -364,7 +362,7 @@ dd.name {
 		</div>
 	</div>
 	<div id="vrcount">
-		댓글 : <span id="totalvrcount">${vrcount }</span>
+		<h6>댓글 : <span id="totalvrcount">${vrcount }</span></h6>
 	</div>
 	<div id="replylist">
 	

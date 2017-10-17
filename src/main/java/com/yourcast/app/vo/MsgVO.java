@@ -12,6 +12,7 @@ public class MsgVO {
 	private int m_numS;
 	private int m_numR;
 	private String id;
+	private String name;
 	
 	public MsgVO() {}
 
@@ -42,7 +43,30 @@ public class MsgVO {
 		this.m_numR = m_numR;
 		this.id=id;
 	}
+	public MsgVO(int msg_num, String msg_title, String msg_content, String msg_send_date, int msg_view_date,
+			int msg_receive_delete, int msg_send_delete, int m_numS, int m_numR,String id,String name) {
+		//super();
+		this.msg_num = msg_num;
+		this.msg_title = msg_title;
+		this.msg_content = msg_content;
+		this.msg_send_date = msg_send_date;
+		this.msg_view_date = msg_view_date;
+		this.msg_receive_delete = msg_receive_delete;
+		this.msg_send_delete = msg_send_delete;
+		this.m_numS = m_numS;
+		this.m_numR = m_numR;
+		this.id=id;
+		this.name=name;
+	}
 	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String getId() {
 		return id;
