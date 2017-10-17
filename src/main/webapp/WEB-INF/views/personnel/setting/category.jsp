@@ -3,10 +3,14 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.min.css'/>?ver=1">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.theme.min.css'/>?ver=1">
+	<script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script>
+
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
-
+	
 		<!-- Header -->
 		<header id="portfolio">
 			<a href="#"><img src="/w3images/avatar_g2.jpg"
@@ -33,101 +37,71 @@
 				</div>
 			</div>
 		</header>
-		
-		<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#upload").on("click",function(){
-					if($("#v_title").val()==null || $("#v_title").val()==""){
-						alert("제목을 입력하세요.");
-						return false;
-					}
-					if($("#v_content").val()==null || $("#v_content").val()==""){
-						alert("내용을 입력하세요.");
-						return false;
-					}
-					if($("#vfile").val()==null || $("#vfile").val()==""){
-						alert("동영상을 선택하세요.");
-						return false;
-					}
-					if($("#imgfile").val()==null || $("#imgfile").val()==""){
-						alert("썸네일을 선택하세요");
-						return false;
-					}
-					$("#frm").submit();
-				});
-				$("#cancel").on("click",function(){
-					location.href="<c:url value='/${requestScope.id}/video/list'/>";
-				});
-				$("#imgfile").change(function () {
-		            if (this.files && this.files[0]) {
-		            	$("#br").empty();
-		                var reader = new FileReader();
-		                $("#br").append("<br>");
-		                reader.onload = function (e) {
-		                    $('#imgLogo').attr('src', e.target.result);
-		                }
-		                reader.readAsDataURL(this.files[0]);
-		            }
-		        });
-			});
-		</script>
 
 		<!-- 여기작성 -->
-
-		<h2 style="margin-left:30px;">동영상 업로드</h2>
-		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">Video Upload</p>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#c_delete").click(function(){
+					var opt = document.createElement("option");
+					var optionV = $("#menulist option:selected").val();
+					if(optionV==null || optionV==""){
+						return false;
+					}
+					$("#menulist option:selected").remove();						
+					$.ajax({
+						url:"<c:url value='/${requestScope.id}/setting/category_delete'/>",
+						data:{"option":optionV},
+						success:function(data){
+							$("#c_keyword").focus().val("");
+						}
+					});
+				});
+				$("#c_insert").click(function(){
+					var opt = document.createElement("option");
+					var c_keyword = $("#c_keyword").val();
+					if(c_keyword==null || c_keyword==""){
+						return false;
+					}
+					$.ajax({
+						url:"<c:url value='/${requestScope.id}/setting/category_insert'/>",
+						data:{"keyword":c_keyword},
+						success:function(data){
+							$("#menulist").append("<option value='" + data + "'>" + c_keyword + "</option>");
+							$("#c_keyword").focus().val("");
+						}
+					});
+				});
+			});				
+		</script>
+		
+		<div>
+			<a href="<c:url value='/${requestScope.id}/setting/info'/>" class="w3-bar-item w3-button" style="text-decoration: none;">기본정보관리</a>
+			<a href="<c:url value='/${requestScope.id}/setting/category'/>" class="w3-bar-item w3-button" style="text-decoration: none;" >게시판관리</a>
+			<a href="#" class="w3-bar-item w3-button" style="text-decoration: none;">대문관리</a>
+			<a href="<c:url value='/${requestScope.id}/setting/fanlist'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">팬 목록</a>
+			<a href="<c:url value='/${requestScope.id}/setting/blacklist'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">블랙리스트</a>
+		</div>
 		
 		<br>
 		
-		<form id="frm" method="post" action="<c:url value="/${requestScope.id}/video/insert"/>" enctype="multipart/form-data">
-		<table style="width:1000px;height:100px;margin-bottom:10px;">
-			<tr>
-				<th>장르</th>
-				<td>
-					<select name="genre">
-					<c:forEach var="gvo" items="${glist }">
-						<option value="${gvo.genre_num }">${gvo.genre_name }</option>
-					</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr style="height:20px;"></tr>
-			<tr>
-				<th>관람등급</th>
-				<td>
-					<select name="age_grade">
-					<c:forEach var="agevo" items="${agelist }">
-						<option value="${agevo.age_grade_num }">${agevo.age_grade_name }</option>
-					</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr style="height:20px;"></tr>
-			<tr>
-				<th>제목</th><td><input type="text" name="v_title" id="v_title"><td>
-			</tr>
-			<tr style="height:20px;"></tr>
-			<tr>
-				<th>내용</th><td><input type="text" name="v_content" id="v_content"></td>
-			</tr>
-			<tr style="height:20px;"></tr>
-			<tr>
-				<th>동영상</th><td><input type="file" name="vfile" id="vfile"></td>
-			</tr>
-			<tr style="height:20px;"></tr>
-			<tr>
-				<th>썸네일</th><td><input type="file" name="imgfile" id="imgfile"><span id="br"></span><img src="#" height="100" id="imgLogo"></td>
-			</tr>
-			<tr style="height:20px;"></tr>
-			<tr>
-				<th colspan="2"><button type="button" id="upload" class="w3-button w3-black w3-round-large"><i class="fa fa-upload"></i>업로드</button>
-				<button type="reset" class="w3-button w3-black w3-round-large"><i class="fa fa-refresh"></i>다시입력</button>
-				<button type="button" id="cancel" style="margin-right:550px;" class="w3-button w3-black w3-round-large"><i class="fa fa-times"></i>취소</button></th>
-			</tr>
-		</table>
-		</form>
+		<h2 style="margin-left:30px;">게시판 관리</h2>
+		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">게시판의 추가 및 삭제가 가능합니다.</p>
 		
+		<br>
+		
+		<div style="margin-left:30px;">
+		<input type="text" id="c_keyword" placeholder="게시판 이름을 입력하세요." size="30">
+			<button type="button" id="c_insert" class="w3-button w3-black w3-round-large"><i class="fa fa-check"></i>추가</button>
+			<button type="button" id="c_delete" class="w3-button w3-black w3-round-large"><i class="fa fa-trash-o"></i>삭제</button>
+		</div>				
+	
+		<select id="menulist" name="menulist" size="10" style="width:350px;margin-left:30px;margin-bottom:10px;">
+			<c:forEach var="cvo" items="${clist }">
+				<option value="${cvo.category_num }">${cvo.category_name }</option>
+			</c:forEach>
+		</select>
+				
 		<!-- 작성END -->
 
 		<footer class="w3-container w3-padding-32 w3-dark-grey">
@@ -188,5 +162,4 @@
 
 
 	</div>
-	
-	</body>
+</body>

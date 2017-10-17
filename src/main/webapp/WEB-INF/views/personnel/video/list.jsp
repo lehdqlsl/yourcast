@@ -81,82 +81,101 @@
 						location.href="<c:url value='/${requestScope.id}/video/update?v_num=" + v_num + "'/>";
 					}
 				});
+				$("#insert").on("click",function(){
+					location.href="<c:url value='/${requestScope.id}/video/insert'/>"
+				});
 			});
 		</script>
 
-		<h1>Video목록</h1>
+		<h2 style="margin-left:30px;">동영상 리스트</h2>
+		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">Video List</p>
+		
+		<br>
+		
 		<form method="post" action="<c:url value='/${requestScope.id}/video/delete'/>" onsubmit="return deleteV()">
-		<table border="1">
+		<table class="w3-table w3-table-all" style="margin-bottom: 5px;">
 			<tr>
-				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>장르</th><th>관람등급</th><th>제목</th><th>내용</th><th>등록일</th>
-				<th>썸네일</th><th>조회수</th>
+				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>장르</th><th>관람등급</th><th>썸네일</th><th>제목</th><th>내용</th>
+				<th>등록일</th><th>조회수</th>
 			</tr>
-			
+			<c:if test="${empty list}">
+				<tr>
+					<th colspan="9" style="text-align:center;vertical-align: middle;height:200px;">동영상이 존재하지 않습니다.</th>
+				</tr>
+			</c:if>
 			<c:forEach var="vo" items="${list }">
 				<tr>
-					<td><input type="checkbox" value="${vo.v_num }" name="chk"></td>
-					<td>${vo.v_num }</td>
-					<td>${vo.genre_name }</td>
-					<td>${vo.age_grade_name }</td>
-					<td>${vo.v_title }</td>
-					<td>${vo.v_content }</td>
-					<td>${vo.v_regdate }</td>				
-					<td><a href="<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>">
-							<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="width:50px;height:50px;">
+					<td style="vertical-align: middle;"><input type="checkbox" value="${vo.v_num }" name="chk"></td>
+					<td style="vertical-align: middle;">${vo.v_num }</td>
+					<td style="vertical-align: middle;">${vo.genre_name }</td>
+					<td style="vertical-align: middle;">${vo.age_grade_name }</td>
+					<td style="vertical-align: middle;"><a href="<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>">
+							<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="height:100px;">
 							</a></td>
-					<td>${vo.v_hit }</td>
+					<td style="vertical-align: middle;">${vo.v_title }</td>
+					<td style="vertical-align: middle;">${vo.v_content }</td>
+					<td style="vertical-align: middle;">${vo.v_regdate }</td>				
+					<td style="vertical-align: middle;">${vo.v_hit }</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<c:if test="${sessionScope.id==requestScope.id }">
-			<a href="<c:url value="/${requestScope.id}/video/insert"/>">동영상업로드</a>
-			<button type="button" id="update">수정</button>
-			<input type="submit" value="삭제">
+			<button type="submit" class="w3-button w3-black w3-round-large" style="float: right;"><i class="fa fa-trash-o"></i>삭제</button>
+			<button type="button" class="w3-button w3-black w3-round-large" id="update" style="float: right;margin-right:5px;"><i class="fa fa-cogs"></i>수정</button>
+			<button type="button" class="w3-button w3-black w3-round-large" id="insert" style="float: right;margin-right:5px;"><i class="fa fa-upload"></i>동영상업로드</button>
 		</c:if>
 		</form>	
+		
+		<c:if test="${empty list}">
+			<script type="text/javascript">
+				$(function(){
+					$("#page").css("margin-left","550px");
+				});
+			</script>
+		</c:if>
 
 		<!-- 페이징 -->
-		<div>
+		<div class="w3-bar" id="page" style="margin-left:450px;">
 		<c:choose>
 			<c:when test="${pu.pageNum>1 }">
-				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${1 }'/>">[처음으로]</a>
+				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${1 }'/>" class="w3-bar-item w3-button w3-hover-black">«</a>
 			</c:when>
 			<c:otherwise>
-				[처음으로]
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
 			</c:otherwise>
 		</c:choose>
 		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
-				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.startPageNum-1 }'/>">[이전]</a>
+				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.startPageNum-1 }'/>" class="w3-bar-item w3-button w3-hover-black">이전</a>
 			</c:when>
 			<c:otherwise>
-				[이전]
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a>
 			</c:otherwise>
 		</c:choose>
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
 					<c:when test="${i==pu.pageNum }">
-						<span style="color:blue">[${i }]</span>
+						<a href="#" class="w3-bar-item w3-button w3-hover-black">${i }</a>
 					</c:when>
 					<c:otherwise>
-						<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${i }'/>"><span style="color:#555">[${i }]</span></a>
+						<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${i }'/>" class="w3-bar-item w3-button w3-hover-black">${i }</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 		<c:choose>
 			<c:when test="${pu.endPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.endPageNum+1 }'/>">[다음]</a>
+				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.endPageNum+1 }'/>" class="w3-bar-item w3-button w3-hover-black">다음</a>
 			</c:when>
 			<c:otherwise>
-				[다음]
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a>
 			</c:otherwise>
 		</c:choose>
 		<c:choose>
 			<c:when test="${pu.startPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.totalPageCount }'/>">[끝으로]</a>
+				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.totalPageCount }'/>" class="w3-bar-item w3-button w3-hover-black">»</a>
 			</c:when>
 			<c:otherwise>
-				[끝으로]
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
 			</c:otherwise>
 		</c:choose>
 		</div>

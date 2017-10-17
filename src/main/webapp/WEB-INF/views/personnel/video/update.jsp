@@ -37,15 +37,31 @@
 		<!-- 여기작성 -->
 		
 		<script type="text/javascript">
-			function cancel(){
-				window.location.href="<c:url value='/${requestScope.id}/video/list'/>";	
-			}
+			$(function(){
+				$("#cancel").on("click",function(){
+					location.href="<c:url value='/${requestScope.id}/video/list'/>";
+				});
+				$("#imgfile").change(function () {
+		            if (this.files && this.files[0]) {
+		            	$("#br").empty();
+		                var reader = new FileReader();
+		                $("#br").append("<br>");
+		                reader.onload = function (e) {
+		                    $('#imgLogo').attr('src', e.target.result);
+		                }
+		                reader.readAsDataURL(this.files[0]);
+		            }
+		        });
+			});
 		</script>
 
-		<h1>동영상 수정</h1>
+		<h2 style="margin-left:30px;">동영상 수정</h2>
+		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">Video Update</p>
+		
+		<br>
 		<form method="post" action="<c:url value='/${requestScope.id}/video/update'/>" enctype="multipart/form-data">
 		<input type="hidden" value="${vo.v_num }" name="v_num">
-		<table>
+		<table style="width:1000px;height:100px;margin-bottom:10px;">
 			<tr>
 				<th>장르</th>
 				<td><select name="genre">
@@ -55,6 +71,7 @@
 						</select>
 				</td>
 			</tr>
+			<tr style="height:20px;"></tr>
 			<tr>
 				<th>관람등급</th>
 				<td><select name="age_grade">
@@ -64,20 +81,27 @@
 						</select>
 				</td>
 			</tr>
+			<tr style="height:20px;"></tr>
 			<tr>
 				<th>제목</th><td><input type="text" name="v_title" value="${vo.v_title }"><td>
 			</tr>
+			<tr style="height:20px;"></tr>
 			<tr>
 				<th>내용</th><td><input type="text" name="v_content" value="${vo.v_content }"></td>
 			</tr>
+			<tr style="height:20px;"></tr>
 			<tr>
 				<th>동영상</th><td><input type="file" name="vfile"></td>
 			</tr>
+			<tr style="height:20px;"></tr>
 			<tr>
-				<th>썸네일</th><td><input type="file" name="imgfile"></td>
+				<th>썸네일</th><td><input type="file" name="imgfile" id="imgfile"><span id="br"></span><img src="#" height="100" id="imgLogo"></td>
 			</tr>
+			<tr style="height:20px;"></tr>
 			<tr>
-				<th colspan="2"><input type="submit" value="업로드"><input type="reset" value="다시입력"><input type="button" value="취소" onclick="cancel()"></th>
+				<th colspan="2"><button type="button" id="upload" class="w3-button w3-black w3-round-large"><i class="fa fa-upload"></i>업로드</button>
+				<button type="reset" class="w3-button w3-black w3-round-large"><i class="fa fa-refresh"></i>다시입력</button>
+				<button type="button" id="cancel" style="margin-right:550px;" class="w3-button w3-black w3-round-large"><i class="fa fa-times"></i>취소</button></th>
 			</tr>
 		</table>
 		</form>

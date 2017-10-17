@@ -31,7 +31,19 @@
                                 	<td>${mvo.gender_name }</td>
                                 	<td>${mvo.money }</td>
                                 	<td>${mvo.star_candy }</td>
+                                	<!--
                                 	<td>${mvo.grade_name }</td>
+                                	-->
+                                	<td>
+	                                	<div class="dropdown" data-m="${mvo.m_num }">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:red;">${mvo.grade_name }</a>
+											<ul class="dropdown-menu">
+												<li><a href='<c:url value='/admin/member/gradeUpdate?grade_num=1&m_num=${mvo.m_num }'/>'>일반</a></li>
+												<li><a href='<c:url value='/admin/member/gradeUpdate?grade_num=2&m_num=${mvo.m_num }'/>'>베스트</a></li>
+												<li><a href='<c:url value='/admin/member/gradeUpdate?grade_num=3&m_num=${mvo.m_num }'/>'>파트너</a></li>
+											</ul>
+										</div> 
+									</td>
                                 </tr>
                             </c:forEach>
                             </tbody>

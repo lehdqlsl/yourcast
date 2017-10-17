@@ -55,6 +55,10 @@ public class HistoryController {
 		model.addAttribute("pu",pu);
 		model.addAttribute("mvo",mvo);
 		
+		if(plist.isEmpty()) {
+			model.addAttribute("err","결제내역이 존재하지 않습니다.");
+		}
+		
 		return ".member.history.pay";
 	}
 	
@@ -77,6 +81,10 @@ public class HistoryController {
 		model.addAttribute("buylist",buylist);
 		model.addAttribute("pu",pu);
 		model.addAttribute("mvo",mvo);
+		
+		if(buylist.isEmpty()) {
+			model.addAttribute("err","구매내역이 존재하지 않습니다.");
+		}
 				
 		return ".member.history.buy";
 	}
@@ -103,6 +111,10 @@ public class HistoryController {
 		
 		int total_send_ea = use_service.getSendEa(m_num);
 		model.addAttribute("total_send_ea",total_send_ea);
+		
+		if(uselist.isEmpty()) {
+			model.addAttribute("err","선물한 별사탕내역이 존재하지 않습니다.");
+		}
 		
 		return ".member.history.useStar";
 	}
@@ -143,6 +155,13 @@ public class HistoryController {
 		model.addAttribute("total_recv_ea",use_service.getRecvEa(bj_num));
 		model.addAttribute("total_ex_ea",ex_service.getexEa(bj_num));
 		model.addAttribute("total_ex_money",ex_service.getexMoney(bj_num));
+		
+		if(exlist.isEmpty()) {
+			model.addAttribute("errr","환전내역이 존재하지 않습니다.");
+		}
+		if(recvlist.isEmpty()) {
+			model.addAttribute("err","선물받은 별사탕내역이 존재하지 않습니다.");
+		}
 		
 		return ".member.history.recvStar";
 	}

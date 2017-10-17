@@ -72,5 +72,4 @@ public class PagingVO {
 	public void setVrplist(List<VideoReplyReportVO> vrplist) {
 		this.vrplist = vrplist;
 	}
-		
 }
