@@ -71,15 +71,18 @@
 		});
 
 </script>
-<div class='login'>
+<div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;height: 600px;">
+<div class="w3-container w3-padding-32" id="projects">
+
+<div class="login">
 	<h2>Register</h2>
-	<form action="<c:url value='/member/join'/>" method="post">
+	<form action="<c:url value='/member/join'/>" method="post" style="margin: auto;">
 		<input name='id' placeholder='Id' type='text' id="id" autocomplete=off>
 		<span id="idcheck" style="color: red; font-size: 12px"></span><br>
-		<input id='pwd' name='pwd' placeholder='Password' type='password'>
+		<input id='pwd' name='pwd' placeholder='Password' type='password'><br>
 		<input id='pwd1' name='pwd1' placeholder='Password Confirm'
-			type='password'> <input name='name' placeholder='Username'
-			type='text' id="name" autocomplete=off> <input type="text"
+			type='password'><br> <input name='name' placeholder='Username'
+			type='text' id="name" autocomplete=off><br> <input type="text"
 			id="datepicker" name="birth" placeholder='birth'><br> <br>
 		<!-- <input type="text"  placeholder='남1 여2' name="gender"> -->
 		<input name="gender" value="1" type="radio" class="gender">남자
@@ -94,4 +97,6 @@
 			class='forgot' href="<c:url value='/member/login'/>">Already have
 			an account?</a>
 	</form>
+	</div>
+	</div>
 </div>

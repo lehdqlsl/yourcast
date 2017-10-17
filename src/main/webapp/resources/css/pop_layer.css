@@ -17,8 +17,8 @@
 새로 만든 레이어는 아래 클래스 중 맞는 사이즈로 복수클래스로 추가하면 됨
 레이어 뜨는 위치는 스크립트로 적용 중(플개팀).
 */
-.layer_s {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:280px;border:1px solid #2c84ce; background:#fff;}
-.layer_s_chat {display:none; position:absolute; left:-1px; bottom:83px; z-index:999999; width:238px;border:1px solid #2c84ce; background:#fff;}
+.layer_s {display:none; position:fixed; left:50%; top:50%; z-index:999999;height:600px;width:280px;border:1px solid #2c84ce; background:#fff;}
+.layer_s_chat {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:238px;border:1px solid #2c84ce; background:#fff;}
 .layer_m {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:330px;border:1px solid #2c84ce; background:#fff;}
 .layer_l {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:380px;border:1px solid #2c84ce; background:#fff;}
 .layer_xl {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:425px;border:1px solid #2c84ce; background:#fff;}

@@ -231,29 +231,20 @@ public class BoardController {
 
 	// getInfo
 	@RequestMapping(value = "/{id}/board/getInfo", method = RequestMethod.GET)
-	public String getInfo(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-			@PathVariable(value = "id") String id, int b_num, int category_num, Model model) {
+	public String getInfo(@PathVariable(value = "id") String id, int b_num, int category_num, Model model) {
 		BoardVO bvo = b_service.getInfo(b_num);
 		CategoryVO cvo = c_service.getInfo(category_num);
 		List<CategoryVO> clist = c_service.getList(cvo.getM_num());// 카테고리 목록
-
-		//////////// 댓글 5개만 불러오기 작업/////////////
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("b_num", b_num);
-		int totalRowCount = br_service.getCount(b_num);
-		PageUtil pu = new PageUtil(pageNum, 5, 1, totalRowCount);
-		map.put("startRow", 1);
-		map.put("endRow", 5);
 		
-		List<BoardReplyVO> brlist = br_service.getList(map);// 처음 댓글 다섯개만 불러오기
+		int brcount=br_service.getCount(b_num);
+		
 
 		model.addAttribute("id", id);
-		model.addAttribute("pu", pu);
 		model.addAttribute("b_num", b_num);
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("getCountInfo",bu_service.getCount(b_num));
+		model.addAttribute("brcount",brcount);
 		model.addAttribute("clist", clist);
-		model.addAttribute("brlist", brlist);
 		model.addAttribute("vo", bvo);
 
 		MemberProfileVO voMP = mp_service.getInfo(cvo.getM_num());

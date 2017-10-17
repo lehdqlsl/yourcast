@@ -4,11 +4,14 @@
 
 <!-- 사이드바 -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-  <div class="w3-container">
+ <div class="w3-container">
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
+    <h4><b>동영상</b></h4>
+    <p class="w3-text-grey"><a href="<c:url value="/"/>" style="text-decoration: none">실시간 방송</a></p>
   </div>
+    
   <div class="w3-bar-block">
   	<a href='<c:url value="/videomain"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>전체보기</a>
     <c:forEach var="vo" items="${glist }">

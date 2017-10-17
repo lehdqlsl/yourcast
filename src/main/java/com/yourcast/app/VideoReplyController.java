@@ -90,6 +90,9 @@ public class VideoReplyController {
 		
 		//리스트에 담기
 		List<VideoReplyVO> vrlist=vr_service.getList(map);
+		for(VideoReplyVO vo : vrlist) {
+			System.out.println(vo.getVr_content());
+		}
 		VideoReplyList list=new VideoReplyList();
 		list.setList(vrlist);
 		return list;

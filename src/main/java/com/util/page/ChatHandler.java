@@ -155,6 +155,30 @@ public class ChatHandler extends TextWebSocketHandler {
 				}
 			}
 			break;
+			
+		//강퇴
+		case 6:
+			bj_num = (Long) jsonObj.get("bj_num");
+			id = (String) jsonObj.get("id");
+			name = (String) jsonObj.get("name");
+			for (User user1 : list) {
+				// 같은 방 찾기
+				if (bj_num == user1.getBj_num()) {
+					if(id.equals(user1.getId())){
+						JSONObject obj2 = new JSONObject();
+						obj2.put("packet", "6");
+						user1.getSession().sendMessage(new TextMessage(obj2.toJSONString()));
+					}else {
+						JSONObject obj2 = new JSONObject();
+						obj2.put("packet", "7");
+						obj2.put("id", id);
+						obj2.put("name", name);
+						user1.getSession().sendMessage(new TextMessage(obj2.toJSONString()));
+					}
+					
+				}
+			}
+			break;
 		default:
 			break;
 		}
