@@ -22,7 +22,7 @@ h3 {
 	font-weight: bold;
 }
 
-p {
+.w3-row div p {
 	font-size: 1.2rem;
 	line-height: 2rem;
 }

@@ -63,10 +63,13 @@ function getCookie(cookieName) {
     return unescape(cookieValue);
 }
 </script>
-<div class='login'>
+<div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;height: 600px;">
+<div class="w3-container w3-padding-32" id="projects">
+
+<div class="login">
 <h2>LOGIN</h2>
 <form method="post" action="<c:url value='/member/login'/>">
-	<input name='id' placeholder='Id' type='text' autocomplete=off>
+	<input name='id' placeholder='Id' type='text' autocomplete=off><br>
 	<input id='pw' placeholder='Password' type='password' name='pwd'>
 	<div id="errMsg" style="font-size: small;color: red;">${requestScope.errMsg}</div>
 	<div class='agree'>
@@ -77,4 +80,5 @@ function getCookie(cookieName) {
 	<a class='forgot' href="<c:url value='/member/join'/>">회원가입</a>
 </form>
 </div>
-	
+</div>
+</div>

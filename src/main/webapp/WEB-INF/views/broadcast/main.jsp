@@ -151,6 +151,7 @@ dd.name {
 	href="<c:url value='/resources/css/pop_layer.css'/>?ver=1">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/chat.css'/>?ver=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 </html>
 <div class="w3-main" style="margin-top: 54px;">
@@ -160,24 +161,7 @@ dd.name {
 		</div>
 		<div class="player_list">
 			<ul>
-				<li class="chocolate"><button type="button" title="초콜릿">
-						<em></em><span>초콜릿</span>
-					</button></li>
-				<li class="chocolate"><button type="button" title="초콜릿">
-						<em></em><span>초콜릿</span>
-					</button></li>
-				<li class="chocolate"><button type="button" title="초콜릿">
-						<em></em><span>초콜릿</span>
-					</button></li>
-				<li class="chocolate"><button type="button" title="초콜릿">
-						<em></em><span>초콜릿</span>
-					</button></li>
-				<li class="chocolate"><button type="button" title="초콜릿">
-						<em></em><span>초콜릿</span>
-					</button></li>
-				<li class="chocolate"><button type="button" title="초콜릿">
-						<em></em><span>초콜릿</span>
-					</button></li>
+				<li><button class="w3-button w3-white"><i class="fa fa-star-o fa-lg"></i>  즐겨찾기</button></li>
 			</ul>
 		</div>
 
@@ -185,7 +169,7 @@ dd.name {
 		<div class="info">
 			<div class="broadcast_viewer_cnt">
 				<button type="text">
-					<span><em id="nAllViewer">0</em>명 시청</span>
+					<span id="viewer_cnt"><em id="nAllViewer">0</em>명 시청</span>
 				</button>
 			</div>
 			<div class="bjlogo">
@@ -201,7 +185,6 @@ dd.name {
 			</dl>
 		</div>
 	</div>
-
 
 	<div class="chatbox" id="chatbox">
 		<div class="chat_area" id="chat_area">
@@ -524,6 +507,7 @@ dd.name {
 		<div class="btn_wrap"><a href="javascript:;" class="btn_st1">선물하기</a> <a href="javascript:;" class="btn_st2">취소</a></div>
 		<a href="javascript:;" class="btn_close2">닫기&lt;</a>
 	</div></div>
+
 </div>
 
 <script type="text/javascript">
@@ -602,4 +586,222 @@ dd.name {
 			$("#nStarBalloon").val("");
 		}
 	});
+	
+	/*
+	 * 패킷 정보
+	 * 0 : 채팅 입장
+	 * 1 : 채팅 보내기
+	 * 2 : 퇴장
+	 */
+		var x=0;
+		
+		jwplayer("container").setup({
+			sources : [ {
+				file : '${requestScope.url}'
+			} ],
+			autostart : true,
+			width: "100%",
+			height: "100%",
+			aspectratio: "16:9",
+			primary : "flash"
+		});
+		var wsocket;
+		
+		$(window).on("unload", function(e) {
+		  	if(wsocket != null){
+				var sendmsg = {};
+				sendmsg.packet = 2;
+				sendmsg.bj_num =  ${requestScope.bj_num};
+				wsocket.send( JSON.stringify(sendmsg));
+		  	}else{
+		  		console.log('널');
+		  	}
+		});
+
+		$(window).on("load", function(e) {
+			var vo = '${requestScope.vo}';
+			//등급처리
+			//블랙리스트처리
+			wsocket = new SockJS("/app/echo.sockjs");
+			wsocket.onmessage = onMessage;
+			wsocket.onclose = onClose;
+			wsocket.onerror = onError;
+			wsocket.onopen = function(){
+				var join = {};
+				join.packet = 0;
+				join.bj_num = ${requestScope.bj_num};
+				if(vo != ''){
+					join.id = '${requestScope.vo.id}';
+					join.name = '${requestScope.vo.name}';
+					join.gender = '${requestScope.vo.gender_num}';
+					
+					// bj:bj
+					// 열혈팬:hot
+					// 일반팬:fan
+					// 일반:user
+					join.grade = '${requestScope.grade}';
+				}else{
+					join.packet=2;
+				}
+				wsocket.send( JSON.stringify(join));
+			}
+		});
+
+
+		$("#actionbox").click(function(){
+			var vo = '${requestScope.vo}';
+			if(vo == ''){
+				var result = confirm('채팅에 참여하시려면 로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?'); 
+				if(result) { 
+					location.replace('http://192.168.0.4:8082/app/member/login'); 
+				} else {
+					
+				}				
+			}
+		});
+		
+		 $("#write_area").keydown(function (event) {
+	         if (event.which === 13) {  
+	        	var msg = $("#write_area").html();
+	        	if(msg.length > 0){
+		        	var bj_num = ${requestScope.bj_num};
+		        	var sendmsg = {};
+		        	sendmsg.packet = 1;
+		        	sendmsg.msg = msg;
+		        	sendmsg.bj_num = bj_num;
+		        	wsocket.send( JSON.stringify(sendmsg));
+		        	$("#write_area").html("");
+	        	}
+				return false;
+	         }
+	     });
+
+		$("#btn_send").click(function(){
+			var msg = $("#write_area").html();
+			if(msg.length > 0){
+				var bj_num = ${requestScope.bj_num};
+				var sendmsg = {};
+				sendmsg.packet = 1;
+				sendmsg.msg = msg;
+				sendmsg.bj_num = bj_num;
+				wsocket.send( JSON.stringify(sendmsg));
+				$("#write_area").html("");
+			}
+		});
+
+		//아이디 클릭
+		$("#chat_area").on('click','.test',function(){
+			var s_id = '${requestScope.vo.id}';
+			var r_id = '${sessionScope.id}';
+			if(s_id == r_id){
+				var id = $(this).attr("user_id");
+				var name = $(this).attr("user_nick");
+				var result = confirm(id+'님을 강퇴하시겠습니까?'); 
+				if(result) {
+					var sendmsg = {};
+					sendmsg.packet = 6;
+					sendmsg.bj_num = ${requestScope.bj_num};
+					sendmsg.id = id;
+					sendmsg.name = name;
+					wsocket.send( JSON.stringify(sendmsg));
+				} 
+			}
+		});
+		function onMessage(evt){
+			
+			var list = $.parseJSON(evt.data);
+			var packet = list.packet;
+			if(packet == '1'){
+				var msg = list.msg;
+				var gender = list.gender;
+				var grade = list.grade;
+				var name = list.name;
+				var id = list.id;
+				
+				if(gender == '1'){
+					if(grade == 'bj'){
+						$("#chat_area").append('<dl class="bj"><dt class="man"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="#" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
+					}else if(grade == 'hot'){
+						$("#chat_area").append('<dl class=""><dt class="hot_m"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
+					}else if(grade == 'fan'){
+						$("#chat_area").append('<dl class=""><dt class="fan_m"><img src="http://www.afreecatv.com/images/new_app/chat/ic_fanclub.gif" alt="팬클럽" title="팬클럽"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'" style="color:#56a704;">'+msg+'</dd></dl>');	
+					}else{
+						$("#chat_area").append('<dl class=""><dt class="user_m"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="377">'+msg+'</dd></dl>');
+					}
+				}else{
+					if(grade == 'bj'){
+						$("#chat_area").append('<dl class="bj"><dt class="woman"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
+					}else if(grade == 'hot'){
+						$("#chat_area").append('<dl class=""><dt class="hot_w"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
+					}else if(grade == 'fan'){
+						$("#chat_area").append('<dl class=""><dt class="fan_w"><img src="http://www.afreecatv.com/images/new_app/chat/ic_fanclub.gif" alt="팬클럽" title="팬클럽"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'" style="color:#56a704;">'+msg+'</dd></dl>');	
+					}else{
+						$("#chat_area").append('<dl class=""><dt class="user_w"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
+					}
+				}
+				
+				var objDiv = document.getElementById("chat_area");
+				objDiv.scrollTop = objDiv.scrollHeight;
+			}else if(packet == '3'){
+				var cnt = list.cnt;
+				$("#nAllViewer").html(cnt);
+			}else if(packet == '4'){
+				var name = list.name;
+				var id = list.id;
+				var cnt = list.cnt;
+				var fancnt = list.fancnt;
+				$("#chat_area").append('<div class="balloon_area"><p class="ea" style="color:#ED1C24">'+cnt+'</p><p class="img_balloon"><img src="http://www.afreecatv.com/new_player/items/ba_step3.png" alt="별풍선"></p><div class="text"><strong><a href="javascript:;" user_id="esime" user_nick="">'+name+'('+id+')'+'</a></strong><br><span class="bal_txt">별풍선 <span class="num">'+cnt+'</span>개 선물!</span></div></div>');
+				if(fancnt != null){
+					$("#chat_area").append('<p class="notice fanclub"><a href="javascript:;" user_id="'+id+'" user_nick="'+name+'">'+name+'('+id+')</a> 님이 '+fancnt+'번째로 팬클럽이 되셨습니다.</p>');
+				}
+				var objDiv = document.getElementById("chat_area");
+				objDiv.scrollTop = objDiv.scrollHeight;
+			}else if(packet == '0'){
+				var name = list.name;
+				var id = list.id;
+				$("#chat_area").append('<p class="notice in hotfan"><a href="javascript:;" user_id="'+id+'" user_nick="'+name+'">열혈팬 '+name+'<em>('+id+')</em></a>님이 대화방에 참여했습니다.</p>');
+				var objDiv = document.getElementById("chat_area");
+				objDiv.scrollTop = objDiv.scrollHeight;
+			}else if(packet == '5'){
+				var title = list.title;
+				console.log("타이틀:"+title);
+				$("#broadcast_title").html(title);
+			}else if(packet == '6'){
+				location.href="http://192.168.0.4:8082/app/";
+				alert("강퇴당하였습니다.");
+			}else if(packet == '7'){
+				var name = list.name;
+				var id = list.id;
+				$("#chat_area").append('<p class="notice"><a href="javascript:;" user_id="'+id+'" user_nick="'+name+'" etcinfo="1">'+name+'<em>('+id+')</em></a> 님이 <span class="caution">강제퇴장</span> 처리되었습니다.</p>');
+				var objDiv = document.getElementById("chat_area");
+				objDiv.scrollTop = objDiv.scrollHeight;
+			}
+		}
+		
+		function onClose(evt){
+			console.log('종료호출');
+		}
+		function onError(evt){
+			console.log('에러호출');
+		}
+		
+		$("#btn_emo").click(function(){
+			$("#emoticonArea").toggle();
+		});
+		
+		$(".btn_close").click(function(){
+			$("#emoticonArea").toggle();
+		});
+		
+		$("#emoticonArea img").click(function(){
+			$("#write_area").append($(this).clone());
+		});
+		
+		setInterval(function(){ 
+			var sendmsg = {};
+			sendmsg.packet = 3;
+			sendmsg.bj_num = ${requestScope.bj_num};
+			wsocket.send( JSON.stringify(sendmsg));
+		}, 3000);
+		
 </script>
