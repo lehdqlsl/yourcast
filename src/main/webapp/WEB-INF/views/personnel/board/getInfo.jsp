@@ -183,11 +183,15 @@
 		<!-- 여기작성 -->
 	
 		<div>
-			<h2>${vo.b_title }</h2>
+			<div class="img_profile">
+				<img src=""
+					onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';">
+			</div>
 			<div id="info">
 				<!-- 이미지 -->
 				작성자 : ${vo.id }&nbsp;&nbsp;${vo.b_regdate }
 			</div>
+			<h2>${vo.b_title }</h2>
 			<div id="etc">
 				${vo.b_hit }&nbsp;&nbsp;
 			</div>

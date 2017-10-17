@@ -508,7 +508,7 @@ dd.name {
 			</ul>
 			<ul class="table_list">
 				<li><span><em>별풍선을 선물할 BJ</em> : </span><strong class="color_bl">${bjvo.name } (${bjvo.id })</strong></li>
-				<li><span>내가 보유한 별풍선 : </span><div id="star" style="float: left">${vo.star_candy }</div><label>개</label> <a href="javascript:;" class="btn_st3">별풍선 구매</a></li>
+				<li><span>내가 보유한 별풍선 : </span><div id="star" style="float: left">${vo.star_candy }</div><label>개</label></li>
 				<li>
 					<span><em>선물할 별풍선</em> : </span>
 					<fieldset class="select_area" style="border: none;">

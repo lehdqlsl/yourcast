@@ -635,7 +635,7 @@ span.tax em {font-weight:normal;font-style:normal;color:#393939;}
 												<td align="right"><a href="#" id="sm"><img
 														src="//res.afreecatv.com/img/popupbtn_ok.gif" border="0"></a></td>
 												<td width="5"></td>
-												<td align="left"><a href="#" id="cencel"><img
+												<td align="left"><a href="javascript:window.close();" id="cencel"><img
 														src="//res.afreecatv.com/img/popupbtn_cancel.gif"
 														border="0"></a></td>
 												<input type="hidden" id="hid" value="${exit }">
