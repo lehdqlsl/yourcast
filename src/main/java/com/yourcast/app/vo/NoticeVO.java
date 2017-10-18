@@ -6,14 +6,14 @@ public class NoticeVO {
 	private int n_num;
 	private String n_title;
 	private String n_content;
-	private Date n_regdate;
+	private String n_regdate;
 	private int a_num;
 	
 	public NoticeVO() {
 		
 	}
 
-	public NoticeVO(int n_num, String n_title, String n_content, Date n_regdate, int a_num) {
+	public NoticeVO(int n_num, String n_title, String n_content, String n_regdate, int a_num) {
 		super();
 		this.n_num = n_num;
 		this.n_title = n_title;
@@ -46,11 +46,11 @@ public class NoticeVO {
 		this.n_content = n_content;
 	}
 
-	public Date getN_regdate() {
+	public String getN_regdate() {
 		return n_regdate;
 	}
 
-	public void setN_regdate(Date n_regdate) {
+	public void setN_regdate(String n_regdate) {
 		this.n_regdate = n_regdate;
 	}
 
@@ -61,5 +61,7 @@ public class NoticeVO {
 	public void setA_num(int a_num) {
 		this.a_num = a_num;
 	}
+
+	
 	
 }

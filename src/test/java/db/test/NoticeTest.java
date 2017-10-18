@@ -1,5 +1,6 @@
 package db.test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
@@ -37,7 +38,10 @@ public class NoticeTest {
 	}
 	@Test
 	public void getList() {
-		List<NoticeVO> list=dao.getList();
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("startRow", 1);
+		map.put("endRow", 2);
+		List<NoticeVO> list=dao.getList(map);
 		Assert.assertNotNull(list);
 	}
 	@Test

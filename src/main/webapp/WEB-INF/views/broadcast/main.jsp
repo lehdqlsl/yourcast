@@ -173,11 +173,11 @@ dd.name {
 				</button>
 			</div>
 			<div class="bjlogo">
-				<img src="http://stimg.afreecatv.com/LOGO/gt/gtv7/gtv7.jpg"
+				<a
+					href="http://192.168.0.4:8082/app/${bjvo.id }" target="_blank" title="방송국 가기"
+					class="btn"><img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>"
 					onerror="this.src='http://www.afreecatv.com/mybs/img/default_small_re.gif'"
-					alt="BJ 로고" class="thum"> <a
-					href="http://www.afreecatv.com/gtv7" target="_blank" title="방송국 가기"
-					class="btn"></a>
+					alt="BJ 로고" class="w3-circle" style="width: 69px;height: 69px;"> </a>
 			</div>
 			<dl class="bj">
 				<dd class="name">${bjvo.name }</dd>
@@ -507,7 +507,6 @@ dd.name {
 		<div class="btn_wrap"><a href="javascript:;" class="btn_st1">선물하기</a> <a href="javascript:;" class="btn_st2">취소</a></div>
 		<a href="javascript:;" class="btn_close2">닫기&lt;</a>
 	</div></div>
-
 </div>
 
 <script type="text/javascript">
@@ -619,6 +618,53 @@ dd.name {
 		});
 
 		$(window).on("load", function(e) {
+			
+			//방송정보 가져오기
+			var bvo = '${requestScope.bvo.broadcast_pwd}';
+			var bjid = '${bjvo.id }';
+			var s_id = '${sessionScope.id}';
+			var black = '${requestScope.black}';
+			
+			//블랙리스트 처리		
+			console.log(black);
+			if(black == 'true'){
+				alert("BJ에 의해 블랙리스트로 등록되어 방송을 시청할 수 없습니다.");
+				history.back('http://192.168.0.4/app');
+			}
+			
+			if(bjid != s_id){
+				//비밀번호가 있을경우
+				if(bvo != ''){
+					var pwd = prompt("방송을 보려면 BJ가 정해놓은 비밀번호를 입력해야 합니다.", "");
+				    if (pwd != null) {
+				    	$.ajax({
+							url:"<c:url value='/broadcast/password?bjid="+bjid+"&pwd="+pwd+"'/>",
+							dataType:"json",
+							success:function(data){
+								if(!data.result){
+									history.back('http://192.168.0.4/app');
+									alert('비밀번호가 일치하지 않습니다.');	
+								}else{
+									init();
+								}
+							}
+						});
+				    }else{
+				    	//취소버튼
+				    	history.back('http://192.168.0.4/app');
+				    }
+				}else{
+					//비밀번호 없는경우
+					init();
+				}
+			}else{
+				init();
+			}
+		
+		});
+
+		function init(){
+			//유저정보 가져오기
 			var vo = '${requestScope.vo}';
 			//등급처리
 			//블랙리스트처리
@@ -645,9 +691,7 @@ dd.name {
 				}
 				wsocket.send( JSON.stringify(join));
 			}
-		});
-
-
+		}
 		$("#actionbox").click(function(){
 			var vo = '${requestScope.vo}';
 			if(vo == ''){
@@ -764,8 +808,32 @@ dd.name {
 				objDiv.scrollTop = objDiv.scrollHeight;
 			}else if(packet == '5'){
 				var title = list.title;
-				console.log("타이틀:"+title);
+				var pwd = list.pwd;
 				$("#broadcast_title").html(title);
+				if(pwd != ''){
+					var bjid = '${bjvo.id }';
+					var s_id = '${sessionScope.id}';
+			
+					if(bjid != s_id){
+						$("#container").toggle();
+						var pwd = prompt("방송을 보려면 BJ가 정해놓은 비밀번호를 입력해야 합니다.", "");
+						 if (pwd != null) {
+						    	$.ajax({
+									url:"<c:url value='/broadcast/password?bjid="+bjid+"&pwd="+pwd+"'/>",
+									dataType:"json",
+									success:function(data){
+										if(!data.result){
+											history.back('http://192.168.0.4/app');
+											alert('비밀번호가 일치하지 않습니다.');	
+										}
+									}
+								});
+							 }else{
+						    	//취소버튼
+						    	history.back('http://192.168.0.4/app');
+						    }
+					}
+				}
 			}else if(packet == '6'){
 				location.href="http://192.168.0.4:8082/app/";
 				alert("강퇴당하였습니다.");

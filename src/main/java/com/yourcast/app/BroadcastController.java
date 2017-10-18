@@ -15,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yourcast.app.dao.MemberProfileDAO;
+import com.yourcast.app.service.BlacklistService;
 import com.yourcast.app.service.BroadcastService;
 import com.yourcast.app.service.FanService;
+import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.StarUseService;
+import com.yourcast.app.vo.BlacklistVO;
 import com.yourcast.app.vo.BroadcastVO;
 import com.yourcast.app.vo.FanVO;
+import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.StarUseVO;
 
@@ -41,16 +46,23 @@ public class BroadcastController {
 	@Autowired
 	private FanService f_service;
 
+	@Autowired
+	private MemberProfileService profile_service;
+	
+	@Autowired BlacklistService black_service;
+	
 	@RequestMapping(value = "/bs/{id}", method = RequestMethod.GET)
 	public String home(@PathVariable(value = "id") String id, Model model, HttpServletRequest request) {
+		
 		MemberVO bjvo = mservice.getInfo(id);
+		MemberProfileVO provo = profile_service.getInfo(bjvo.getM_num());
 		BroadcastVO bvo = bservice.getInfo(bjvo.getM_num());
 		String stream_key = bservice.getInfo(bjvo.getM_num()).getStream_key();
 		String url = "rtmp://192.168.0.31:3535/myapp/" + stream_key;
 
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("id");
-
+		model.addAttribute("black", "false");
 		MemberVO vo = null;
 		if (uid != null) {
 			vo = mservice.getInfo(uid);
@@ -81,12 +93,21 @@ public class BroadcastController {
 			} else {
 				model.addAttribute("grade", "user");
 			}
+			
+			//블랙리스트 확인
+			boolean black = black_service.check(new BlacklistVO(0, vo.getM_num(), bjvo.getM_num()));
+			if(black) {
+				model.addAttribute("black", "true");
+			}
 		}
 
+		
 		model.addAttribute("url", url);
 		model.addAttribute("bj_num", bjvo.getM_num());
 		model.addAttribute("bjvo", bjvo);
 		model.addAttribute("bvo", bvo);
+		model.addAttribute("voMP", provo);
+		
 		return ".broadcast";
 	}
 
@@ -144,7 +165,24 @@ public class BroadcastController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		return json.toString();
+	}
+	
+	@RequestMapping(value = "/broadcast/password", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String password(String bjid,String pwd) {
+		JSONObject json = new JSONObject();
+		try {
+			MemberVO bjvo = mservice.getInfo(bjid);
+			BroadcastVO bvo = bservice.getInfo(bjvo.getM_num());
+			if(pwd.equals(bvo.getBroadcast_pwd())) {
+				json.put("result", true);	
+			}else {
+				json.put("result", false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return json.toString();
 	}
 }

@@ -2,6 +2,32 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<style>
+.stit {
+    font-size: 12px;
+    color: #777;
+    font-family: dotum, 돋움;
+    font-weight: normal;
+    margin-left: 10px;
+    background: url(//res.afreecatv.com/images/item/bar_gry.gif) 0 1px no-repeat;
+    padding-left: 7px;
+}
+.cg {
+    position: absolute;
+    top:2px;
+    right: 0;
+}
+.section1 {
+    margin-bottom: 30px;
+    position: relative;
+}
+em {
+    font-style: normal;
+    color: #f8003f;
+}
+
+
+</style>
 <div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;">
 	<div class="w3-container w3-padding-32" id="projects">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">선물받은 별사탕내역</h3>
@@ -11,10 +37,12 @@
 		<a href="<c:url value='/member/history/pay'/>" class="w3-bar-item w3-button" style="text-decoration: none;">결제내역</a>
 		<a href="<c:url value='/member/history/buy'/>" class="w3-bar-item w3-button" style="text-decoration: none;" >구매내역</a>
 		<a href="<c:url value='/member/history/useStar'/>" class="w3-bar-item w3-button" style="text-decoration: none;">선물한 별사탕내역</a>
-		<a href="<c:url value='/member/history/recvStar'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">선물받은 별사탕내역</a>
+		<a href="<c:url value='/member/history/recvStar'/>"class="w3-bar-item w3-button"  style="text-decoration: none;background-color: #cccccc;">선물받은 별사탕내역</a>
 	</div>
-	
+	<hr>
+	<div class="section1">
 	<!-- 선물받은 별풍선내역 -->
+	<h5><b>별풍선 내역</b></h5>
 	<table class="w3-table w3-table-all">
 		<thead>
 		<tr>
@@ -37,35 +65,41 @@
 		</c:if>
 	</table>
 	
-	<div>보유중인 별사탕 : ${mvo.star_candy }</div>
-	<div>선물받은 별사탕 : ${total_recv_ea }</div>
-	
-	<c:if test="${err!=null }">
-		<script type="text/javascript">
-			$(function(){
-				$("#pageR").css("margin-left","400px");
-			});
-		</script>
-	</c:if>
+
+
 	
 	<!-- 선물받은 별사탕 페이징 -->
-	<div class="w3-bar" id="pageR" style="margin-left:340px;">
+	<div class="w3-bar-all w3-center" id="pageR">
 		<span id="preRecv"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingRecv">
 		
 				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-					<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black">${i }</a>
+					<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black"><span>${i }</span></a>
 				</c:forEach>
 			
 		</span>
 		
 		<span id="nextRecv"><a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a></span>
 	</div>
+	</div>
 	
-	<div><button type="button" class="w3-button w3-black w3-round-large"><i class="fa fa-krw"></i> 환전하기</button></div>
+	<div class="section1">
+	<h5><b>별풍선 환전하기</b><span class="stit">별풍선 보유현황 확인 및 별풍선 환전 신청을 하실 수 있습니다</span></h5>
+	<div>
+	<span style="color:#0089cf">${sessionScope.id }</span>님이 보유하신 환전 가능 별풍선은 <em><b>${mvo.star_candy }</b></em>개 입니다</div>
 		
+	<div>
+	선물받은 누적 별풍선 : <b>${total_recv_ea }개</b>
+	</div>
+	<div><br><button type="button" class="w3-btn w3-white w3-border w3-border-blue w3-round-large" style="margin-left:420px;" id="exchange"><span style="color: #0072ff">환전신청하기</span></button></div>
+	</div>
 	<!-- 환전내역 리스트 -->
+	<div class="section1">
+	<div>
+	<h5><b>별풍선 환전처리 결과</b></h5>
+	<span class="cg">(누적 환전 총액 : <em>${total_ex_money }원</em>)</span>
+	</div>
 	<table class="w3-table w3-table-all">
 	<thead>
 	<tr>
@@ -76,8 +110,8 @@
 	<c:forEach var="exvo" items="${exlist }">
 		<tr>
 			<th>${exvo.e_ea }</th>
-			<th>${exvo.e_fee }</th>
-			<th>${exvo.e_money }</th>
+			<th>${exvo.e_fee }%</th>
+			<th>${exvo.e_money }원</th>
 			<th>${exvo.e_regdate }</th>
 		</tr>
 	</c:forEach>
@@ -89,19 +123,7 @@
 	</c:if>
 	</table>
 	
-	<div>환전수량 : ${total_ex_ea }</div>
-	<div>환전금액 : ${total_ex_money }</div>
-	
-	<c:if test="${err!=null }">
-		<script type="text/javascript">
-			$(function(){
-				$("#pageX").css("margin-left","400px");
-			});
-		</script>
-	</c:if>
-	
-	<!-- 환전내역 페이징 -->
-	<div class="w3-bar" id="pageX" style="margin-left:340px;">
+	<div class="w3-bar-all w3-center" id="pageX">
 		<span id="preEx"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingEx">
@@ -114,7 +136,16 @@
 		
 		<span id="nextEx"><a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a></span>
 	</div>
+	</div>
 	
+	<c:if test="${err!=null }">
+		<script type="text/javascript">
+			$(function(){
+				$("#pageX").css("margin-left","400px");
+			});
+		</script>
+	</c:if>
+
 	<br>
 		
 </div>
@@ -122,6 +153,20 @@
 <!-- 선물받은 별풍선 페이징 -->
 	<script type="text/javascript">
 		$(document).ready(function(){
+			$("#exchange").click(function(){
+				var cnt = '${mvo.star_candy }';
+				
+				if(parseInt(cnt) < 500){
+					alert("별풍선 500개 이상이어야 별풍선 환전 신청이 가능합니다.")
+				}else{
+					var ch = confirm('별풍선 ' +parseInt(cnt)+'개를 환전 신청하시겠습니까?');
+					if(ch){
+						location.href="<c:url value='/member/history/exchange'/>"
+						alert("환전 신청이 정상적으로 이루어졌습니다.");
+					}
+				}
+			});
+			
 			$(".pagingR").filter(':first').css('color','red');
 			$("#preRecv a").on('click',function(){
 				var pageNum = parseInt($(".pagingR").filter(':first').text()) - 5;
@@ -260,7 +305,7 @@
 							var e_fee = $(this).find("e_fee").text();
 							var sum = parseFloat(e_ea)*parseFloat(e_fee);
 							var e_regdate = $(this).find("e_regdate").text();
-							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "%</th><th>" + parseInt(sum) + "원</th><th>" + e_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -284,7 +329,7 @@
 											var e_fee = $(this).find("e_fee").text();
 											var sum = parseFloat(e_ea)*parseFloat(e_fee);
 											var e_regdate = $(this).find("e_regdate").text();
-											$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+											$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "%</th><th>" + parseInt(sum) + "원</th><th>" + e_regdate + "</th></tr>");						
 										});
 									}
 								});
@@ -308,7 +353,7 @@
 							var e_fee = $(this).find("e_fee").text();
 							var sum = parseFloat(e_ea)*parseFloat(e_fee);
 							var e_regdate = $(this).find("e_regdate").text();
-							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "%</th><th>" + parseInt(sum) + "원</th><th>" + e_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -328,7 +373,7 @@
 							var e_fee = $(this).find("e_fee").text();
 							var sum = parseFloat(e_ea)*parseFloat(e_fee);
 							var e_regdate = $(this).find("e_regdate").text();
-							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "%</th><th>" + parseInt(sum) + "원</th><th>" + e_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -352,7 +397,7 @@
 											var e_fee = $(this).find("e_fee").text();
 											var sum = parseFloat(e_ea)*parseFloat(e_fee);
 											var e_regdate = $(this).find("e_regdate").text();
-											$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "</th><th>" + parseInt(sum) + "</th><th>" + e_regdate + "</th></tr>");						
+											$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "%</th><th>" + parseInt(sum) + "원</th><th>" + e_regdate + "</th></tr>");						
 										});
 									}
 								});

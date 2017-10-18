@@ -1,5 +1,6 @@
 package com.yourcast.app.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class NoticeService {
 	public NoticeVO getInfo(int n_num) {
 		return dao.getInfo(n_num);
 	}
-	public List<NoticeVO> getList(){
-		return dao.getList();
+	public List<NoticeVO> getList(HashMap<String, Object> map){
+		return dao.getList(map);
 	}
 	public int getCount() {
 		return dao.getCount();

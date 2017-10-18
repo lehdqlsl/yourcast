@@ -14,7 +14,7 @@
 		<button><a href="<c:url value='/member/history/recvStar'/>" style="text-decoration: none;">선물받은 별사탕내역</a></button>
 		<button style="background-color: red;"><a href="<c:url value='/member/history/ex'/>" style="text-decoration: none;">환전내역</a></button>
 	</div>
-	
+		<hr>
 	<table border="1">
 		<tr>
 			<th>환전수량</th><th>환전수수료</th><th>환전금액</th><th>환전날짜</th>

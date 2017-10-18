@@ -3,6 +3,8 @@ package com.yourcast.app;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import com.yourcast.app.service.BoardReportService;
 import com.yourcast.app.service.BoardService;
 import com.yourcast.app.service.GradeService;
 import com.yourcast.app.service.MemberService;
+import com.yourcast.app.service.NoticeService;
 import com.yourcast.app.service.VideoReplyReportService;
 import com.yourcast.app.service.VideoReplyService;
 import com.yourcast.app.service.VideoReportService;
@@ -28,6 +31,7 @@ import com.yourcast.app.vo.BoardReportVO;
 import com.yourcast.app.vo.BoardVO;
 import com.yourcast.app.vo.GradeVO;
 import com.yourcast.app.vo.MemberVO;
+import com.yourcast.app.vo.NoticeVO;
 import com.yourcast.app.vo.PagingVO;
 import com.yourcast.app.vo.VideoReplyReportVO;
 import com.yourcast.app.vo.VideoReplyVO;
@@ -48,7 +52,8 @@ public class AdminController {
 	@Autowired private VideoReportService vr_service;
 	@Autowired private VideoReplyReportService vrr_service;
 	@Autowired private GradeService g_service;
-
+	@Autowired private NoticeService n_service;
+  
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin() {
 		
@@ -254,19 +259,4 @@ public class AdminController {
 		return "redirect:/admin/member/list";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

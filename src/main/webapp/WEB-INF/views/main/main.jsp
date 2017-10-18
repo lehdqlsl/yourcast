@@ -46,24 +46,21 @@ h3 {
 					<c:if test="${not doneLoop}">
 						<div class="w3-col l3 m6 w3-margin-bottom">
 
-							<div class="w3-display-container w3-hover-opacity">
+							<div class="w3-display-container">
 								<a
-									href="http://192.168.0.4:8082/app/bs/${blist[status2.index].id}">
+									href="http://192.168.0.4:8082/app/bs/${blist[status2.index].id}" style=" text-decoration: none !important;">
 									<img
 									src="http://192.168.0.31:3030/${blist[status2.index].stream_key }.png"
-									alt="House"
-									style="width: 100%; text-decoration: none !important;">
+									class = "w3-round-large w3-border w3-hover-opacity"
+									style="width: 100%;">
 
-								</a>
-								<div class="w3-row">
-									<div style="width: 100%; display: block; height: 20px; padding-left: 0px; margin-top: 5px;">
-										<p style="margin: 0px 0px 0px 0px;	font-size: 1.4em;">${blist[status2.index].broadcast_title}</p>
-									</div>
-									<div style="width: 100%; display: block; height: 20px; padding-left: 0px;">
-										<p style="margin: 5px 0px 0px 0px;	font-size: 1.0em; color: #6e6779;">${blist[status2.index].name}
+																
+								  <div class="w3-container">
+								      <h5><b>${blist[status2.index].broadcast_title}</b></h5></a>
+								      <p><a href="http://192.168.0.4:8082/app/${blist[status2.index].id}" class="w3-hover-opacity" style="color: #328fde;text-decoration: none;">${blist[status2.index].name}</a>
 											시청자수 ${blist[status2.index].cnt}</p>
-									</div>
-								</div>
+								    </div>
+
 							</div>
 						</div>
 						<c:if test="${status2.index == requestScope.end}">

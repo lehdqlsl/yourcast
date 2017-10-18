@@ -101,10 +101,20 @@ input[type="checkbox"]:checked + label:before {
 						&nbsp;&nbsp;&nbsp;&nbsp;
 
 						<div class="input_wrap off checkbox btn">
-							<input type="checkbox" name="frmAccess" id="check3" value="1">
-							<label for="check3"><span></span>패스워드 설정</label> 
-							<input type="password" id="content" class="w3-input w3-section" name="frmAccessCode" value="" disabled="disabled" style="width: 600px;">
-							<span class="text_count" id="text_count"><em>0</em>/11</span>
+							<c:choose>
+								<c:when test="${empty bvo.broadcast_pwd }">
+									<input type="checkbox" name="frmAccess" id="check3" value="1">
+									<label for="check3"><span></span>패스워드 설정</label> 
+									<input type="password" id="content" class="w3-input w3-section" name="frmAccessCode" value="" disabled="disabled" style="width: 600px;">
+									<span class="text_count" id="text_count"><em>0</em>/11</span>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" name="frmAccess" id="check3" value="1" checked="checked">
+									<label for="check3"><span></span>패스워드 설정</label> 
+									<input type="password" id="content" class="w3-input w3-section" name="frmAccessCode" value="${bvo.broadcast_pwd }" style="width: 600px;">
+									<span class="text_count" id="text_count"><em>0</em>/11</span>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</dd>
 				</dl>
@@ -146,12 +156,14 @@ $(window).on("load", function(e) {
 $('#target').submit(function() { 
 
 	var title = $("input[name=broadcast_title]").val();
+	var pwd = $("input[name=frmAccessCode]").val();
 	
 	var bj_num = ${bvo.m_num};
 	var sendmsg = {};
 	sendmsg.packet = 5;
 	sendmsg.bj_num = bj_num;
 	sendmsg.title = title;
+	sendmsg.pwd = pwd;
 	wsocket.send( JSON.stringify(sendmsg));
 	
 	alert('방송정보 변경이 정상적으로 처리 되었습니다.');

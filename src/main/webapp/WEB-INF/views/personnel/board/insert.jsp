@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript"
-	src="<c:url value='/resources/se2/js/HuskyEZCreator.js'/>"></script>
-
+<script type="text/javascript" src="<c:url value='/resources/se2/js/HuskyEZCreator.js'/>"></script>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -38,9 +36,7 @@
 
 		<!-- 여기작성 -->
 
-		<form method="post"
-			action='<c:url value="/${requestScope.id}/board/insert"/>'
-			id="target">
+		<form method="post"action='<c:url value="/${requestScope.id}/board/insert"/>'id="target">
 			<input type="hidden" value="${sessionScope.id }" name="sid">
 			<table class="w3-table w3-bordered">
 				<tr>
@@ -55,7 +51,7 @@
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td><input type="text" name="title"></td>
+					<td><input type="text" name="title" id="title"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
@@ -63,8 +59,13 @@
 							style="width: 766px; height: 412px; display: none;"></textarea></td>
 				</tr>
 			</table>
-			<input type="submit" value="등록">
+			<br>
+			<!-- <input type="submit" value="등록" id="reg"> -->
+			<div class="w3-bar-all w3-center">
+				<button type="submit" form="target" value="Submit" class="w3-button w3-black w3-round-large">등록</button>
+			</div>
 		</form>
+		<br>
 
 		<!-- 작성END -->
 
@@ -159,21 +160,40 @@
 		var sHTML = oEditors.getById["ir1"].getIR();
 		alert(sHTML);
 	}
+	
+	//글자 바이트
+	String.prototype.byteLength = function() {
+			var l = 0;
+			for (var idx = 0; idx < this.length; idx++) {
+				var c = escape(this.charAt(idx));
+				if (c.length == 1)
+					l++;
+				else if (c.indexOf("%u") != -1)
+					l += 3;
+				else if (c.indexOf("%") != -1)
+					l += c.length / 3;
+			}
+			return l;
+		};
 
-	$('#target').submit(function() {
+	$('#target').submit(function(event) {
+		
 		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
 
 		// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
 		var content = document.getElementById("ir1").value;
-		var title = document.getElementById("title_name").value;
+		var title = document.getElementById("title").value;
 		console.log("내용 : " + content);
 		if (content == null || content == "<p>&nbsp;</p>") {
 			alert("내용을 입력하세요!");
-			return;
+			event.preventDefault();
 		} else if (title == null || title == "") {
 			alert("제목을 입력하세요!");
-			return;
-		} else {
+			event.preventDefault();
+		} else if(title.byteLength()>100){
+			alert("제목이 너무 깁니다!");
+			event.preventDefault();
+		}else {
 			try {
 				elClickedObj.form.submit();
 			} catch (e) {
