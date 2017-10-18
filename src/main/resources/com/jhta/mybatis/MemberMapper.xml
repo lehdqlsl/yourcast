@@ -47,7 +47,7 @@
 	</select>	
 	<update id="moneyUpdate" parameterType="member">
 		update member set
-		money=#{money} where m_num=#{m_num}
+		money=money+#{money} where m_num=#{m_num}
 	</update>
 	<update id="gradeUpdate" parameterType="member">
 		update member set

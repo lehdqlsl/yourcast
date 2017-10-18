@@ -296,4 +296,24 @@ public class HistoryController {
 
 		return listp;
 	}
+	
+	@RequestMapping(value = "/member/history/exchange", method = RequestMethod.GET)
+	public String exStarPaging(HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		MemberVO mvo = m_sevice.getInfo(id);
+		int m_num = mvo.getM_num();
+		
+		int grade = mvo.getGrade_num();
+		if(grade == 1) {
+			ex_service.insert(40,mvo);
+		}else if(grade == 2) {
+			ex_service.insert(30,mvo);
+		}else if(grade ==3) {
+			ex_service.insert(20,mvo);
+		}
+			
+
+
+		return "redirect:/member/history/recvStar";
+	}
 }
