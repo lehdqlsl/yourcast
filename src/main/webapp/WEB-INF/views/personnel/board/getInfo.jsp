@@ -2,8 +2,12 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/boardgetInfo.css'/>?ver=1">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/getinfo.css'/>?ver=3">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style>
+</style>
 <script>
 	$(document).ready(function(){
 		//댓글 유효성 검사
@@ -257,7 +261,7 @@
 						if(data.result=="true") {
 							alert("이미 추천 하셨습니다.");
 						} else {
-							$("#thumbs_up").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>" + data.getCount);
+							$("#thumbs_up").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i><b>" + data.getCount + "</b>");
 						}
 					}
 				});
@@ -272,13 +276,12 @@
 </script>
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
-	<div class="w3-main" style="margin-left: 300px">
+	<div class="w3-main" style="margin-left: 300px;width: 980px;">
 
 		<!-- Header -->
 		<header id="portfolio">
-			<a href="#"><img src="/w3images/avatar_g2.jpg"
-				style="width: 65px;"
-				class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+			<a href="#"><img src="/w3images/avatar_g2.jpg" style="width: 65px;"
+			 class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
 			<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
@@ -303,18 +306,16 @@
 
 		<!-- 여기작성 -->
 	
-		<div>
+		<div class="wrap_view">
 			<div class="img_profile">
-				<img src=""
-					onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';">
+				<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>"
+					onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';" style="width: 50px;height: 50px;border-radius: 25px;">
 			</div>
+			<div class="hit">조회수&nbsp;&nbsp;<b>${vo.b_hit }</b>&nbsp;&nbsp; | &nbsp;&nbsp;
+			<a href="#" id="report" class="w3-hover-opacity" style="text-decoration: none">신고</a></div>
 			<div id="info">
-				<!-- 이미지 -->
-				작성자 : ${vo.id }&nbsp;&nbsp;${vo.b_regdate }
-			</div>
-			<h2>${vo.b_title }</h2>
-			<div id="etc">
-				${vo.b_hit }&nbsp;&nbsp;
+				작성자 : <span style="color: #1559ff;font-weight: bold;">${vo.id }</span>&nbsp;&nbsp;${vo.b_regdate }<br><h4>${vo.b_title }</h4>
+				
 			</div>
 			<div id="b_content">
 				${vo.b_content}
@@ -324,13 +325,13 @@
 				<c:choose>
 					<c:when test="${sessionScope.id eq vo.id }">
 						<br><br>
-						<button id="b_delete">삭제</button>
-						<button id="b_update">수정</button>
+						<a href="#" id="b_update" class="w3-hover-opacity" style="text-decoration: none; color: grey;">수정</a>
+						&nbsp;<a href="#" id="b_delete" class="w3-hover-opacity" style="text-decoration: none; color: grey;">삭제</a> 
 					</c:when>
 					<c:otherwise>
 						<br><br>
-						<button id="report"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
-						<button id="thumbs_up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>${getCountInfo}</button>
+						<button id="thumbs_up" class="w3-button w3-light-grey w3-border w3-round-large" style="margin-left: 490px;">
+						<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${getCountInfo}</b></button>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -342,70 +343,21 @@
 				<div id="replyinsert">
 					<textarea rows="4" cols="70" id="br_content" name="br_content" placeholder="다른 사람의 권리를 침해하는 내용은 제재 받을 수 있습니다" style="padding: 12px 20px;box-sizing: border-box;border: 2px solid #ccc;border-radius: 4px;background-color: #f8f8f8;resize: none;"></textarea>
 				</div>
-				<button class="w3-button w3-black w3-round-large" id="br_reg">등록</button>
+				<button class="w3-button w3-border w3-round-large" id="br_reg" style="background-color: #337AB7"><span style="color: white; font-weight: bold;">등록</span></button>
 			</div>
-			<h6>댓글 : <span id="totalbrcount">${brcount }</span> </h6>
+			<h6 style="font-weight: bold;">댓글 : <span id="totalbrcount" style="color: #1559ff">${brcount }</span> </h6>
 			<div id="replylist">
 				
 			</div>
-			<button class="w3-button w3-black" id="more" style="width: 1300px">더보기</button>
+			<button class="w3-button w3-light-grey" id="more" style="width: 980px"><b style="color: #003399;">댓글 더보기 ∨</b></button>
+			
+			<div class="w3-light-grey w3-center w3-padding-24" style="width: 980px; font-size: 10px;">
+				All Contents Copyright ©Your Cast...Co.,Ltd. All Rights Reserved.</a>
+			</div>
 		</div>
 
 		<!-- 작성END -->
 
-		<footer class="w3-container w3-padding-32 w3-dark-grey">
-			<div class="w3-row-padding">
-				<div class="w3-third">
-					<h3>FOOTER</h3>
-					<p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
-						condimentum, porta lectus vitae, ultricies congue gravida diam non
-						fringilla.</p>
-					<p>
-						Powered by <a href="https://www.w3schools.com/w3css/default.asp"
-							target="_blank">w3.css</a>
-					</p>
-				</div>
 
-				<div class="w3-third">
-					<h3>BLOG POSTS</h3>
-					<ul class="w3-ul w3-hoverable">
-						<li class="w3-padding-16"><img src="/w3images/workshop.jpg"
-							class="w3-left w3-margin-right" style="width: 50px"> <span
-							class="w3-large">Lorem</span><br> <span>Sed mattis
-								nunc</span></li>
-						<li class="w3-padding-16"><img src="/w3images/gondol.jpg"
-							class="w3-left w3-margin-right" style="width: 50px"> <span
-							class="w3-large">Ipsum</span><br> <span>Praes tinci
-								sed</span></li>
-					</ul>
-				</div>
-
-				<div class="w3-third">
-					<h3>POPULAR TAGS</h3>
-					<p>
-						<span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span
-							class="w3-tag w3-grey w3-small w3-margin-bottom">New York</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">London</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">IKEA</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">NORWAY</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">DIY</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Ideas</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Baby</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Family</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">News</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Clothing</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Shopping</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
-					</p>
-				</div>
-
-			</div>
-		</footer>
-
-		<div class="w3-black w3-center w3-padding-24">
-			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a>
-		</div>
 	</div>
 </body>

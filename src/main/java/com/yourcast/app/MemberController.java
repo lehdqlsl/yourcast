@@ -78,7 +78,7 @@ public class MemberController {
 			// 로그인 후 이전페이지로 가지게
 			return ".main";
 		} else {
-			request.setAttribute("errMsg", "�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎.");
+			request.setAttribute("errMsg", "아이디 혹은 비밀번호가 맞지않습니다");
 			return ".member.join.login";
 		}
 	}

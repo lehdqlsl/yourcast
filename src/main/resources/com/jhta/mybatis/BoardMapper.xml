@@ -19,7 +19,7 @@
 	</select>
 	<select id="getList" resultType="board" parameterType="hashmap">
 		<!--  select b.*,m.id from board b, member m where b.bj_num=m.m_num and b.category_num=#{category_num} and b.b_delete=0 order by b.b_num desc-->
-		select * from(select aa.*, rownum rnum from(select b.*,m.id,c.category_name from board b, member m, category c 
+		select * from(select aa.*, rownum rnum from(select b.*,m.id,m.name,c.category_name from board b, member m, category c 
 		<where>
 			b.m_num=m.m_num and b.category_num=c.category_num
 			<if test="category_num == null">

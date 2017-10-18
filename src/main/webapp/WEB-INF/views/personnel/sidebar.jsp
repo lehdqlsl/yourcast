@@ -8,7 +8,6 @@
       <i class="fa fa-remove"></i>
     </a>
     <img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width:45%;" class="w3-round"><br><br>
-    <h4><b>PORTFOLIO</b></h4>
     <p class="w3-text-grey">${voMP.profile_msg }</p>
     
     <span class="w3-text-grey" id="id">${requestScope.id}</span>
