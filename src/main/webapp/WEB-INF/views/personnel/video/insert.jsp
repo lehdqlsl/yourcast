@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script type="text/javascript"
+	src="<c:url value='/resources/se2/js/HuskyEZCreator.js'/>"></script>
+
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -37,25 +40,6 @@
 		<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$("#upload").on("click",function(){
-					if($("#v_title").val()==null || $("#v_title").val()==""){
-						alert("제목을 입력하세요.");
-						return false;
-					}
-					if($("#v_content").val()==null || $("#v_content").val()==""){
-						alert("내용을 입력하세요.");
-						return false;
-					}
-					if($("#vfile").val()==null || $("#vfile").val()==""){
-						alert("동영상을 선택하세요.");
-						return false;
-					}
-					if($("#imgfile").val()==null || $("#imgfile").val()==""){
-						alert("썸네일을 선택하세요");
-						return false;
-					}
-					$("#frm").submit();
-				});
 				$("#cancel").on("click",function(){
 					location.href="<c:url value='/${requestScope.id}/video/list'/>";
 				});
@@ -81,49 +65,53 @@
 		<br>
 		
 		<form id="frm" method="post" action="<c:url value="/${requestScope.id}/video/insert"/>" enctype="multipart/form-data">
-		<table style="width:1000px;height:100px;margin-bottom:10px;">
+		<table class="w3-table w3-bordered">
 			<tr>
 				<th>장르</th>
 				<td>
+				<!-- 
 					<select name="genre">
 					<c:forEach var="gvo" items="${glist }">
 						<option value="${gvo.genre_num }">${gvo.genre_name }</option>
 					</c:forEach>
 					</select>
+				-->
+				<c:forEach var="gvo" items="${glist }">
+					<c:choose>
+						<c:when test="${gvo.genre_num==1}">
+							<input type="radio"  name="genre_num" checked="checked" value="${gvo.genre_num }">${gvo.genre_name }
+						</c:when>
+						<c:otherwise>
+							<input type="radio"  name="genre_num" value="${gvo.genre_num }">${gvo.genre_name }
+							<c:if test="${gvo.genre_num%10==0}">		
+								<br>
+							</c:if>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 				</td>
 			</tr>
-			<tr style="height:20px;"></tr>
 			<tr>
 				<th>관람등급</th>
-				<td>
-					<select name="age_grade">
-					<c:forEach var="agevo" items="${agelist }">
-						<option value="${agevo.age_grade_num }">${agevo.age_grade_name }</option>
-					</c:forEach>
-					</select>
-				</td>
+				<td><input type="checkbox" name="age_grade_num" value="2">&nbsp;&nbsp;성인</td>
 			</tr>
-			<tr style="height:20px;"></tr>
 			<tr>
 				<th>제목</th><td><input type="text" name="v_title" id="v_title"><td>
 			</tr>
-			<tr style="height:20px;"></tr>
 			<tr>
-				<th>내용</th><td><input type="text" name="v_content" id="v_content"></td>
+				<th>내용</th><td><textarea name="v_content" id="ir1" rows="10" cols="100"
+							style="width: 766px; height: 412px; display: none;"></textarea></td>
 			</tr>
-			<tr style="height:20px;"></tr>
 			<tr>
 				<th>동영상</th><td><input type="file" name="vfile" id="vfile"></td>
 			</tr>
-			<tr style="height:20px;"></tr>
 			<tr>
 				<th>썸네일</th><td><input type="file" name="imgfile" id="imgfile"><span id="br"></span><img src="#" height="100" id="imgLogo"></td>
 			</tr>
-			<tr style="height:20px;"></tr>
 			<tr>
-				<th colspan="2"><button type="button" id="upload" class="w3-button w3-black w3-round-large"><i class="fa fa-upload"></i>업로드</button>
+				<th colspan="2" style="text-align:center;"><button type="submit" class="w3-button w3-black w3-round-large"><i class="fa fa-upload"></i>업로드</button>
 				<button type="reset" class="w3-button w3-black w3-round-large"><i class="fa fa-refresh"></i>다시입력</button>
-				<button type="button" id="cancel" style="margin-right:550px;" class="w3-button w3-black w3-round-large"><i class="fa fa-times"></i>취소</button></th>
+				<button type="button" id="cancel" class="w3-button w3-black w3-round-large"><i class="fa fa-times"></i>취소</button></th>
 			</tr>
 		</table>
 		</form>
@@ -189,4 +177,70 @@
 
 	</div>
 	
-	</body>
+</body>
+<script type="text/javascript">
+	var oEditors = [];
+
+	// 추가 글꼴 목록
+	//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : oEditors,
+		elPlaceHolder : "ir1",
+		sSkinURI : "/app/resources/se2/SmartEditor2Skin.html",
+		htParams : {
+			bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+			bUseVerticalResizer : true, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+			bUseModeChanger : true, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+			//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+			fOnBeforeUnload : function() {
+				//alert("완료!");
+			}
+		}, //boolean
+		fOnAppLoad : function() {
+			//예제 코드
+			//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+		},
+		fCreator : "createSEditor2"
+	});
+
+	function pasteHTML() {
+		var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+		oEditors.getById["ir1"].exec("PASTE_HTML", [ sHTML ]);
+	}
+
+	function showHTML() {
+		var sHTML = oEditors.getById["ir1"].getIR();
+		alert(sHTML);
+	}
+
+	$('#frm').submit(function() {
+		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
+
+		// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+		if($("#v_title").val()==null || $("#v_title").val()==""){
+			alert("제목을 입력하세요.");
+			return false;
+		}else if(document.getElementById("ir1").value==null || document.getElementById("ir1").value==""){
+			alert("내용을 입력하세요.");
+			return false;
+		}else if($("#vfile").val()==null || $("#vfile").val()==""){
+			alert("동영상을 선택하세요.");
+			return false;
+		}else if($("#imgfile").val()==null || $("#imgfile").val()==""){
+			alert("썸네일을 선택하세요");
+			return false;
+		} else {
+			try {
+				elClickedObj.form.submit();
+			} catch (e) {
+			}
+		}
+	});
+
+	function setDefaultFont() {
+		var sDefaultFont = '궁서';
+		var nFontSize = 24;
+		oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+	}
+</script>

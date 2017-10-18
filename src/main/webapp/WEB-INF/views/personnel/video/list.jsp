@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/vlist.css'/>">
+
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
@@ -93,6 +95,7 @@
 		<br>
 		
 		<form method="post" action="<c:url value='/${requestScope.id}/video/delete'/>" onsubmit="return deleteV()">
+		<!-- 
 		<table class="w3-table w3-table-all" style="margin-bottom: 5px;">
 			<tr>
 				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>장르</th><th>관람등급</th><th>썸네일</th><th>제목</th><th>내용</th>
@@ -119,11 +122,53 @@
 				</tr>
 			</c:forEach>
 		</table>
+		 -->
+		 <c:if test="${err==null || err eq null}">	 
+			 <div style="float: left;margin-left:50px;"><input type="checkbox" id="chkAll" onclick="All()"></div>
+			 <br>
+		 </c:if>
+		 <c:forEach var="vo" items="${list }">	
+
+		<div class="wrap_view">
+			<c:choose>
+				<c:when test="${err==null || err eq null}">
+					<div class="img_profile">
+						<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width:50px;" class="w3-round">
+					</div>
+					<div class="img_thumbnail">
+						<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
+							<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="height:180px;" class="w3-round">
+						</a>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="img_profile">
+						<img src="<c:url value='/resources/upload/default.jpg'/>" style="width:50px;" class="w3-round">
+					</div>
+					<div class="v_title">
+						${err }
+					</div>
+				</c:otherwise>			
+			</c:choose>
+			
+			<div class="v_article">
+				<div> ${id } &nbsp;&nbsp; ${vo.v_regdate }</div>
+				<div class="v_title">
+					<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
+				</div>
+				<div class="view">${vo.v_content }</div>
+			</div>	
+			<span class="chk"><input type="checkbox" value="${vo.v_num }" name="chk"></span>	
+		</div>
+
+		</c:forEach>
+		<div style="padding-top:10px;">
 		<c:if test="${sessionScope.id==requestScope.id }">
-			<button type="submit" class="w3-button w3-black w3-round-large" style="float: right;"><i class="fa fa-trash-o"></i>삭제</button>
+			<button type="submit" class="w3-button w3-black w3-round-large" style="float: right;margin-right:100px;"><i class="fa fa-trash-o"></i>삭제</button>
 			<button type="button" class="w3-button w3-black w3-round-large" id="update" style="float: right;margin-right:5px;"><i class="fa fa-cogs"></i>수정</button>
 			<button type="button" class="w3-button w3-black w3-round-large" id="insert" style="float: right;margin-right:5px;"><i class="fa fa-upload"></i>동영상업로드</button>
 		</c:if>
+		</div>
 		</form>	
 		
 		<c:if test="${empty list}">

@@ -94,7 +94,7 @@
 		<br>
 		
 		<h2 style="margin-left:30px;">블랙리스트 관리</h2>
-		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">내가 진행하는 방송의 시청이 불가능하며 방송국에 글쓰기가 차단됩니다.</p>
+		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">블랙리스트에 등록된 유저는 자신이 진행하는 방송의 시청이 불가능합니다.</p>
 		
 		<br>
 					
