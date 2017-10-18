@@ -72,4 +72,14 @@ public class PagingVO {
 	public void setVrplist(List<VideoReplyReportVO> vrplist) {
 		this.vrplist = vrplist;
 	}
+	
+	@XmlElement(name="gradelist")
+	public List<GradeVO> gradelist;
+	public List<GradeVO> getGradelist() {
+		return gradelist;
+	}
+	public void setGradelist(List<GradeVO> gradelist) {
+		this.gradelist = gradelist;
+	}
+		
 }

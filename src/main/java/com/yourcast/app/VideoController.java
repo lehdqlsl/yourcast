@@ -199,6 +199,10 @@ public class VideoController {
 		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
 		model.addAttribute("flist", flist);
 		
+		if(list.isEmpty()) {
+			model.addAttribute("err","동영상이 존재하지 않습니다.");
+		}
+		
 		return ".personnel.video.list";
 	}
 	
@@ -268,6 +272,9 @@ public class VideoController {
 		model.addAttribute("id",id);
 		model.addAttribute("vo", vo);
 		
+		List<GenreVO> glist = g_service.getList();
+		model.addAttribute("glist",glist);
+		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		model.addAttribute("voMP", voMP);
 		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
@@ -278,7 +285,8 @@ public class VideoController {
 	
 	@RequestMapping(value = "/{id}/video/update", method = RequestMethod.POST)
 	public String videoUpdateOk(@PathVariable(value = "id") String id, Model model,int v_num,
-										String genre,String v_title,String v_content, String age_grade,
+										int genre_num,String v_title,String v_content,
+										@RequestParam(value="age_grade_num",defaultValue="1")  int age_grade_num,
 										MultipartFile vfile,MultipartFile imgfile,HttpSession session) {
 		try {
 			MemberVO voM = m_service.getInfo(id);
@@ -331,8 +339,6 @@ public class VideoController {
 				}
 			}
 			// DB작업
-			int genre_num = Integer.parseInt(genre);
-			int age_grade_num = Integer.parseInt(age_grade);
 			int n = v_service.update(new VideoVO(v_num, v_title, v_content, null, 0, orgfilename, savefilename, orgthumbnail, savethumbnail, 0, genre_num, age_grade_num, vo.getM_num()));
 			if(n>0) {
 				return "redirect:/{id}/video/list";
@@ -351,12 +357,12 @@ public class VideoController {
 	public String videoInsert(@PathVariable(value = "id") String id, Model model) {
 		MemberVO voM = m_service.getInfo(id);
 		
-		List<AgeGradeVO> agelist = age_service.getList();
+//		List<AgeGradeVO> agelist = age_service.getList();
 		List<GenreVO> glist = g_service.getList();
 		
 		List<CategoryVO> clist=c_service.getList(voM.getM_num());
 		model.addAttribute("clist", clist);
-		model.addAttribute("agelist", agelist);
+//		model.addAttribute("agelist", agelist);
 		model.addAttribute("glist",glist);
 		model.addAttribute("id",id);
 		
@@ -370,8 +376,8 @@ public class VideoController {
 	
 	@RequestMapping(value = "/{id}/video/insert", method = RequestMethod.POST)
 	public String videoInsertOk(@PathVariable(value = "id") String id,  Model model,
-										String genre,String v_title,String v_content,
-										String age_grade,
+										int genre_num,String v_title,String v_content,
+										@RequestParam(value="age_grade_num",defaultValue="1")  int age_grade_num,
 										MultipartFile vfile,MultipartFile imgfile,HttpSession session) {
 		MemberVO voM = m_service.getInfo(id);
 		List<CategoryVO> clist=c_service.getList(voM.getM_num());
@@ -407,8 +413,6 @@ public class VideoController {
 			System.out.println(path + "\\" + savethumbnail + "[업로드 성공]");
 			
 			// DB작업
-			int genre_num = Integer.parseInt(genre);
-			int age_grade_num = Integer.parseInt(age_grade);
 			int n = v_service.insert(new VideoVO(0, v_title, v_content, null, 0, orgfilename, savefilename, orgthumbnail, savethumbnail, 0, genre_num, age_grade_num,null,null,voM.getM_num()));
 			if(n>0) {
 				return "redirect:/{id}/video/list";

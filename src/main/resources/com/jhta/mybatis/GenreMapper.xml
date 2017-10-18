@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.GenreMapper">
 	<select id="getInfo" parameterType="int" resultType="genre">
-		select * from genre where genre_num=#{genre_num}
+		select * from genre where genre_num=#{genre_num} order by genre_num asc
 	</select>
 	<select id="getList" resultType="genre">
-		select * from genre
+		select * from genre order by genre_num asc
 	</select>
 </mapper>

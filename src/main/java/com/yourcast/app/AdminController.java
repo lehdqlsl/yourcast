@@ -16,6 +16,7 @@ import com.yourcast.app.service.BoardReplyReportService;
 import com.yourcast.app.service.BoardReplyService;
 import com.yourcast.app.service.BoardReportService;
 import com.yourcast.app.service.BoardService;
+import com.yourcast.app.service.GradeService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.VideoReplyReportService;
 import com.yourcast.app.service.VideoReplyService;
@@ -25,6 +26,7 @@ import com.yourcast.app.vo.BoardReplyReportVO;
 import com.yourcast.app.vo.BoardReplyVO;
 import com.yourcast.app.vo.BoardReportVO;
 import com.yourcast.app.vo.BoardVO;
+import com.yourcast.app.vo.GradeVO;
 import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.PagingVO;
 import com.yourcast.app.vo.VideoReplyReportVO;
@@ -45,6 +47,7 @@ public class AdminController {
 	@Autowired private VideoReplyService vrp_service;
 	@Autowired private VideoReportService vr_service;
 	@Autowired private VideoReplyReportService vrr_service;
+	@Autowired private GradeService g_service;
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin() {
@@ -233,12 +236,22 @@ public class AdminController {
 		return vrplist;
 	}
 
-	@RequestMapping(value = "/admin/member/gradeUpdate", method = RequestMethod.GET)
-	public String gradeUpdate(Model model, int grade_num, int m_num) {
+	@RequestMapping(value = "/admin/member/gradeList", method = RequestMethod.GET)
+	@ResponseBody
+	public PagingVO gradeList(Model model) {
 		
+		List<GradeVO> list = g_service.getList();
+		PagingVO gradelist = new PagingVO();
+		gradelist.setGradelist(list);
+		
+		return gradelist;
+	}
+	
+	@RequestMapping(value = "/admin/member/gradeUpdate", method = RequestMethod.GET)
+	public String gradeUpdate(Model model,int m_num,int grade_num) {
 		m_service.gradeUpdate(new MemberVO(m_num, grade_num));
 		
-		return "redirect:/admin/member/gradeUpdate";
+		return "redirect:/admin/member/list";
 	}
 }
 

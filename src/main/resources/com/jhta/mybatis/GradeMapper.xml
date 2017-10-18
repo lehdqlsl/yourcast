@@ -4,9 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jhta.mybatis.GradeMapper">
 	<select id="getInfo" parameterType="int" resultType="grade">
-		select * from grade where grade_num=#{grade_num}
+		select * from grade where grade_num=#{grade_num} order by grade_num asc
 	</select>
+	<select id="getInfo1" parameterType="string" resultType="grade">
+		select * from grade where grade_name=#{grade_name} order by grade_num asc
+	</select> 
 	<select id="getList" resultType="grade">
-		select * from grade
+		select * from grade order by grade_num asc
 	</select>
 </mapper>

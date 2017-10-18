@@ -38,6 +38,7 @@
 		<typeAlias type="com.yourcast.app.vo.BroadcastVO" alias="broadcast" />
 		<typeAlias type="com.yourcast.app.vo.GenreVO" alias="genre"/>
 		<typeAlias type="com.yourcast.app.vo.AgeGradeVO" alias="agegrade"/>
+		<typeAlias type="com.yourcast.app.vo.GradeVO" alias="grade"/>
 	</typeAliases>
 
 
@@ -72,6 +73,7 @@
 		<mapper resource="com/jhta/mybatis/BroadcastMapper.xml" />
 		<mapper resource="com/jhta/mybatis/GenreMapper.xml" />
 		<mapper resource="com/jhta/mybatis/AgeGradeMapper.xml" />
+		<mapper resource="com/jhta/mybatis/GradeMapper.xml" />
 	</mappers>
 
 </configuration>

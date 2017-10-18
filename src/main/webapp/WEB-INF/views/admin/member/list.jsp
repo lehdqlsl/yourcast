@@ -36,11 +36,13 @@
                                 	-->
                                 	<td>
 	                                	<div class="dropdown" data-m="${mvo.m_num }">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:red;">${mvo.grade_name }</a>
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">${mvo.grade_name }</a>
 											<ul class="dropdown-menu">
+											<!-- 
 												<li><a href='<c:url value='/admin/member/gradeUpdate?grade_num=1&m_num=${mvo.m_num }'/>'>일반</a></li>
 												<li><a href='<c:url value='/admin/member/gradeUpdate?grade_num=2&m_num=${mvo.m_num }'/>'>베스트</a></li>
 												<li><a href='<c:url value='/admin/member/gradeUpdate?grade_num=3&m_num=${mvo.m_num }'/>'>파트너</a></li>
+											-->
 											</ul>
 										</div> 
 									</td>
@@ -48,6 +50,27 @@
                             </c:forEach>
                             </tbody>
                         </table>
+                        
+                        <script type="text/javascript">
+                        	$(function(){
+                        		$(".dropdown").on("click",function(){
+                        			$(".dropdown-menu").empty();
+                        			var m_num = $(this).attr("data-m");
+                        			$.ajax({
+                        				url:"<c:url value='/admin/member/gradeList'/>",
+                        				success:function(data){
+                        					$(data).find("gradelist").each(function(){
+                        						var grade_name = $(this).find("grade_name").text();
+                        						var grade_num = $(this).find("grade_num").text();
+                        						$("<li><a href='#'>" + grade_name + "</a></li>").appendTo(".dropdown-menu").on('click',function(){
+                        							location.href="<c:url value='/admin/member/gradeUpdate?m_num=" + m_num + "&grade_num=" + grade_num + "'/>";
+                        						});
+                        					});
+                        				}
+                        			});
+                        		});
+                        	});
+                        </script>
 
 						<form action="<c:url value='/admin/member/listFind'/>" method="get">
 
