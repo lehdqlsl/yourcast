@@ -40,16 +40,8 @@
 	
 	<br>
 	
-	<c:if test="${err!=null }">
-		<script type="text/javascript">
-			$(function(){
-				$("#page").css("margin-left","350px");
-			});
-		</script>
-	</c:if>
-	
 	<!-- 페이징 -->
-		<div class="w3-bar" id="page" style="margin-left:270px;">
+		<div class="w3-bar-all w3-center" id="page">
 		<c:choose>
 			<c:when test="${pu.pageNum>1 }">
 				<a href="<c:url value='/member/history/buy?pageNum=${1 }'/>" class="w3-bar-item w3-button w3-hover-black">«</a>
@@ -72,10 +64,10 @@
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
 					<c:when test="${i==pu.pageNum }">
-						<a href="#" class="w3-bar-item w3-black w3-button">${i }</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color: red">${i }</span></a>
 					</c:when>
 					<c:otherwise>
-						<a href="<c:url value='/member/history/buy?pageNum=${i }'/>" class="w3-bar-item w3-button w3-hover-black">${i }</a>
+						<a href="<c:url value='/member/history/buy?pageNum=${i }'/>" class="w3-bar-item w3-button w3-hover-black"><span>${i }</span></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>

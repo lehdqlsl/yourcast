@@ -68,22 +68,14 @@ em {
 
 
 	
-	<c:if test="${err!=null }">
-		<script type="text/javascript">
-			$(function(){
-				$("#pageR").css("margin-left","400px");
-			});
-		</script>
-	</c:if>
-	
 	<!-- 선물받은 별사탕 페이징 -->
-	<div class="w3-bar" id="pageR" style="margin-left:340px;">
+	<div class="w3-bar-all w3-center" id="pageR">
 		<span id="preRecv"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingRecv">
 		
 				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-					<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black">${i }</a>
+					<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black"><span>${i }</span></a>
 				</c:forEach>
 			
 		</span>
@@ -131,8 +123,7 @@ em {
 	</c:if>
 	</table>
 	
-		<!-- 환전내역 페이징 -->
-	<div class="w3-bar" id="pageX" style="margin-left:340px;">
+	<div class="w3-bar-all w3-center" id="pageX">
 		<span id="preEx"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingEx">

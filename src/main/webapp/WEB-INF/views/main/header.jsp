@@ -12,6 +12,8 @@
 				<c:when test="${empty sessionScope.id }">
 					<a href="<c:url value='/member/login'/>"
 						class="w3-bar-item w3-button">로그인</a>
+						<a href="<c:url value='/member/notice/list'/>"
+						class="w3-bar-item w3-button">공지사항</a>
 				</c:when>
 				<c:otherwise>
 					<a href="<c:url value='/${sessionScope.id }'/>"
@@ -24,6 +26,8 @@
 						class="w3-bar-item w3-button">내역 및 환전</a>
 					<a href="<c:url value='/member/broadcast'/>"
 						class="w3-bar-item w3-button">방송 설정</a>
+					<a href="<c:url value='/member/notice/list'/>"
+						class="w3-bar-item w3-button">공지사항</a>
 					<a href="<c:url value='/member/logout'/>"
 						class="w3-bar-item w3-button">로그아웃</a>
 				</c:otherwise>

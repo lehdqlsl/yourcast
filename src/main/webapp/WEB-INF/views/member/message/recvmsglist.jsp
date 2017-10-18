@@ -48,58 +48,58 @@
 		<a href="<c:url value='/message/send/list'/>" class="w3-bar-item w3-button" style="text-decoration: none;" >보낸 쪽지함</a>
 		<a href='#' onclick="window.open('<%=request.getContextPath()%>/message/send','_blank','resizable=no,width=400 height=400');" class="w3-bar-item w3-button" style="text-decoration: none;" >쪽지보내기</a>
 	</div>
-	<div>
-		<table class="w3-table w3-table-all">
-			<tr>
-				<th><input type="checkbox" id="checkallR"></th><th>보낸 사람</th><th>제목</th><th>보낸 시각</th>
-			</tr>
-			<c:forEach var="vo" items="${rlist }">
+	
+		<div>
+			<table class="w3-table w3-table-all">
 				<tr>
-					<td><input type="checkbox" id="${vo.msg_num }" name="checkR" class="checkR"></td>
-					<td>${vo.id }</td>
-					<td><a href='#' onclick="window.open('<%=request.getContextPath()%>/message/recv/getInfo?msg_num=${vo.msg_num }','_blank','resizable=no,width=400 height=400');" class="recvmsg">${vo.msg_title }</a></td>
-					<td>${vo.msg_send_date}</td>
+					<th><input type="checkbox" id="checkallR"></th><th>보낸 사람</th><th>제목</th><th>보낸 시각</th>
 				</tr>
-			</c:forEach>
-		</table>
-	</div>
-	<br>
-	<div>
-		<button class="w3-button w3-black w3-round-large" id="v_delete"><i class='fa fa-trash-o' aria-hidden='true'></i>삭제</button>
-	</div>
-	<br>
-	<br>
-	<!-- 페이징 -->
-	<div>
-	<!-- 이전 -->
-		<c:choose>
-			<c:when test="${pur.startPageNum>5 }">
-				<a href='<c:url value="/message/recv/list?pageNumR=${pur.startPageNum-1 }"/>'>[이전]</a>
-			</c:when>
-			<c:otherwise>
-				[이전]
-			</c:otherwise>
-		</c:choose>
-		<!-- 페이지 -->
-		<c:forEach var="i" begin="${pur.startPageNum }" end="${pur.endPageNum }">
+				<c:forEach var="vo" items="${rlist }">
+					<tr>
+						<td><input type="checkbox" id="${vo.msg_num }" name="checkR" class="checkR"></td>
+						<td>${vo.id }</td>
+						<td><a href='#' onclick="window.open('<%=request.getContextPath()%>/message/recv/getInfo?msg_num=${vo.msg_num }','_blank','resizable=no,width=400 height=400');" class="recvmsg">${vo.msg_title }</a></td>
+						<td>${vo.msg_send_date}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+		<br>
+		<div>
+			<button class="w3-button w3-black w3-round-large" id="v_delete"><i class='fa fa-trash-o' aria-hidden='true'></i>삭제</button>
+		</div>
+		<br>
+		<!-- 페이징 -->
+		<div class="w3-bar-all w3-center">
+		<!-- 이전 -->
 			<c:choose>
-				<c:when test="${i==pur.pageNum }">
-					<a href='<c:url value="/message/recv/list?pageNumR=${i }"/>'><span style="color:red">[${i }]</span></a>
+				<c:when test="${pur.startPageNum>5 }">
+					<a href='<c:url value="/message/recv/list?pageNumR=${pur.startPageNum-1 }"/>'class="w3-bar-item w3-button w3-hover-black">이전</a>
 				</c:when>
 				<c:otherwise>
-					<a href='<c:url value="/message/recv/list?pageNumR=${i }"/>'><span style="color:black">[${i }]</span></a>
+					<a class="w3-bar-item w3-button w3-hover-black">이전</a>
 				</c:otherwise>
 			</c:choose>
-		</c:forEach>
-		<!-- 다음 -->
-		<c:choose>
-			<c:when test="${pur.endPageNum<pur.totalPageCount }">
-				<a href='<c:url value="/message/recv/list?pageNumR=${pur.endPageNum+1 }"/>'>[다음]</a>
-			</c:when>
-			<c:otherwise>
-				[다음]
-			</c:otherwise>
-		</c:choose>
-	</div>
+			<!-- 페이지 -->
+			<c:forEach var="i" begin="${pur.startPageNum }" end="${pur.endPageNum }">
+				<c:choose>
+					<c:when test="${i==pur.pageNum }">
+						<a href='<c:url value="/message/recv/list?pageNumR=${i }"/>' class="w3-bar-item w3-button w3-hover-black"><span style="color:red">${i }</span></a>
+					</c:when>
+					<c:otherwise>
+						<a href='<c:url value="/message/recv/list?pageNumR=${i }"/>' class="w3-bar-item w3-button w3-hover-black"><span>${i }</span></a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<!-- 다음 -->
+			<c:choose>
+				<c:when test="${pur.endPageNum<pur.totalPageCount }">
+					<a href='<c:url value="/message/recv/list?pageNumR=${pur.endPageNum+1 }"/>' class="w3-bar-item w3-button w3-hover-black">[다음]</a>
+				</c:when>
+				<c:otherwise>
+					<a class="w3-bar-item w3-button w3-hover-black">다음</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
 </div>
 
