@@ -238,6 +238,7 @@ public class BoardController {
 		
 		int brcount=br_service.getCount(b_num);
 		
+		b_service.hitUpdate(b_num);
 
 		model.addAttribute("id", id);
 		model.addAttribute("b_num", b_num);

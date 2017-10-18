@@ -2,67 +2,55 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/list.css'/>?ver=2">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/list.css'/>?ver=4">
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
 
 		<!-- Header -->
 		<header id="portfolio">
-			<a href="#"><img src="/w3images/avatar_g2.jpg"
-				style="width: 65px;"
-				class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
 			<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
 				<h1>
 					<b>${voMP.profile_title }</b>
 				</h1>
-				<div class="w3-section w3-bottombar w3-padding-16">
-					<span class="w3-margin-right">Filter:</span>
-					<button class="w3-button w3-black">ALL</button>
-					<button class="w3-button w3-white">
-						<i class="fa fa-diamond w3-margin-right"></i>Design
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-photo w3-margin-right"></i>Photos
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-map-pin w3-margin-right"></i>Art
-					</button>
+				<div class="w3-section w3-bottombar w3-padding-16"  style="width: 1000px;">
 				</div>
 			</div>
 			
 		</header>
 		<!-- 여기작성 -->
+		<div style="margin-top: 38px;">
 		<c:forEach var="vo" items="${blist }">
 		<ul>
 			<li class="notice" id="list_item_26185726">
 				<div class="wrap_view">
 					<div class="img_profile">
-						<img src=""
-							onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';">
+						<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>"
+							onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';" style="width: 50px;height: 50px;border-radius: 25px;">
 					</div>
 					<div class="v_article">
 						<div class="name">
-							<div class="bj_name"> ${vo.id } &nbsp;&nbsp; ${vo.b_regdate } <span
+							<div class="bj_name"><span style="color: #1559ff;font-weight: bold;">${vo.name}</span>&nbsp;<span style="color: #4B4B4B;">(${vo.id })&nbsp;&nbsp;&nbsp;${vo.b_regdate }</span><span
 								class="u_id"></span>
 							</div><span class="time"></span>
 						</div>
 						<div class="v_title">
-						<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>'>${vo.b_title }</a>
+						<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>' style="text-decoration: none;">${vo.b_title }</a>
 							<span class="noti"></span>
 						</div>
 						<div class="view">${vo.b_content }</div>
 					</div>
 					<div class="watch_area">
-						<span class="btn_up " id="likeT_26185493"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>[${vo.bucnt }]</span>
-						<span class="btn_comment"><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i>[${vo.brcnt }]</span>
+						<span class="w3-button w3-light-grey w3-border w3-round-large" id="likeT_26185493"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.bucnt }</b></span>
+						<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.brcnt }</b></span>
 					</div>			
 				</div>
 			</li>
 		</ul>
 		</c:forEach>
+		</div>
 		<!-- 페이징 -->
 		<div>
 			<!-- 이전 -->
