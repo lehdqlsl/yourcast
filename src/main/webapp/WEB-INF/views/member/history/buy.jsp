@@ -43,14 +43,6 @@
 	<!-- 페이징 -->
 		<div class="w3-bar-all w3-center" id="page">
 		<c:choose>
-			<c:when test="${pu.pageNum>1 }">
-				<a href="<c:url value='/member/history/buy?pageNum=${1 }'/>" class="w3-bar-item w3-button w3-hover-black">«</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-			</c:otherwise>
-		</c:choose>
-		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
 				<a href="<c:url value='/member/history/buy?pageNum=${pu.startPageNum-1 }'/>" class="w3-bar-item w3-button w3-hover-black">이전</a>
 			</c:when>
@@ -77,14 +69,6 @@
 			</c:when>
 			<c:otherwise>
 				<a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a>
-			</c:otherwise>
-		</c:choose>
-		<c:choose>
-			<c:when test="${pu.startPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/member/history/buy?pageNum=${pu.totalPageCount }'/>" class="w3-bar-item w3-button w3-hover-black">»</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
 			</c:otherwise>
 		</c:choose>
 		</div>

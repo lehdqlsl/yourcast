@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/help_fix.css'/>?ver=1">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script>
 	$(document).ready(function(){
@@ -14,23 +15,20 @@
 	<div class="w3-container w3-padding-32" id="projects">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">공지사항</h3>
 	</div>
-	<div>
-		<table class="w3-table w3-table-all w3-margin">
-			<tr>
-				<td width="30%">번호</td>
-				<td width="70%">${nvo.n_num }</td>
-			</tr>
-			<tr>
-				<td width="30%">제목</td>
-				<td width="70%">${nvo.n_title }</td>
-			</tr>
-			<tr>
-				<td width="30%">내용</td>
-				<td width="70%">${nvo.n_content }</td>
-			</tr>
-		</table>
+	<div class="w3-panel" style="border: 1px solid #A2A9AF">
+		<div class="w3-panel w3-border w3-round-large" style="background-color: #9BAEC8;color: #282C37">
+ 			<h3><i class="fa fa-search" aria-hidden="true">&nbsp;</i>${nvo.n_title }</h3>
+		</div>
+		<div class="w3-panel w3-border">
+			<div class="w3-panel w3-border-none" style="float: right">
+				<span>${nvo.n_regdate }</span>&nbsp;&nbsp;<span>조회수 : ${nvo.n_hit }</span>
+			</div>
+			<div class="w3-panel w3-border-none">
+				${nvo.n_content }
+			</div>
+		</div>
 	</div>
 	<div class="w3-bar-all w3-center w3-margin">
-		<button class="w3-button w3-black w3-round-large" id="back">목록</button>
+		<button class="w3-btn w3-white w3-border w3-border-blue w3-round-large" id="back"><span style="color: #0072ff">목록</span></button>
 	</div>
 </div>

@@ -53,7 +53,7 @@ public class NoticeController {
 		String n_title=request.getParameter("title");
 		String n_content=request.getParameter("content");
 			
-		NoticeVO nvo=new NoticeVO(0, n_title, n_content, null, 1);
+		NoticeVO nvo=new NoticeVO(0, n_title, n_content, null, 1,0);
 			
 		n_service.insert(nvo);
 		return "redirect:/admin/notice/list";
@@ -62,6 +62,10 @@ public class NoticeController {
 	@RequestMapping(value="/admin/notice/getInfo",method=RequestMethod.GET)
 	public String noticeGetInfo(int n_num,int pageNum,Model model) {
 		NoticeVO nvo= n_service.getInfo(n_num);
+		
+		//조회수
+		n_service.hit(n_num);
+		
 		model.addAttribute("nvo", nvo);
 		model.addAttribute("pageNum",pageNum);
 		return ".admin.notice.getInfo";
@@ -91,6 +95,10 @@ public class NoticeController {
 	@RequestMapping(value="/member/notice/getInfo",method=RequestMethod.GET)
 	public String memberNoticeGetInfo(int n_num,int pageNum,Model model) {
 		NoticeVO nvo= n_service.getInfo(n_num);
+		
+		//조회수
+		n_service.hit(n_num);
+		
 		model.addAttribute("nvo", nvo);
 		model.addAttribute("pageNum", pageNum);
 		return ".member.notice.getInfo";
