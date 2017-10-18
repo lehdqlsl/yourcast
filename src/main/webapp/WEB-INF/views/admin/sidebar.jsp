@@ -39,7 +39,13 @@
                         <p>매출현황</p>
                     </a>
                 </li>
-
+				
+				<li class="active">                
+                    <a href="<c:url value='/admin/notice/list'/>">
+                        <i class="pe-7s-graph"></i>
+                        <p>공지사항</p>
+                    </a>
+                </li>
 
             </ul>
     	</div>

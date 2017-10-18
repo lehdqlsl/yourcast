@@ -40,22 +40,14 @@
 	<div>보유중인 별사탕 : ${mvo.star_candy }</div>
 	<div>선물받은 별사탕 : ${total_recv_ea }</div>
 	
-	<c:if test="${err!=null }">
-		<script type="text/javascript">
-			$(function(){
-				$("#pageR").css("margin-left","400px");
-			});
-		</script>
-	</c:if>
-	
 	<!-- 선물받은 별사탕 페이징 -->
-	<div class="w3-bar" id="pageR" style="margin-left:340px;">
+	<div class="w3-bar-all w3-center" id="pageR">
 		<span id="preRecv"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingRecv">
 		
 				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-					<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black">${i }</a>
+					<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black"><span>${i }</span></a>
 				</c:forEach>
 			
 		</span>
@@ -92,16 +84,8 @@
 	<div>환전수량 : ${total_ex_ea }</div>
 	<div>환전금액 : ${total_ex_money }</div>
 	
-	<c:if test="${err!=null }">
-		<script type="text/javascript">
-			$(function(){
-				$("#pageX").css("margin-left","400px");
-			});
-		</script>
-	</c:if>
-	
 	<!-- 환전내역 페이징 -->
-	<div class="w3-bar" id="pageX" style="margin-left:340px;">
+	<div class="w3-bar-all w3-center" id="pageX">
 		<span id="preEx"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingEx">

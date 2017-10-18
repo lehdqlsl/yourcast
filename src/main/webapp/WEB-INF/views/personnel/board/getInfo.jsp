@@ -10,11 +10,10 @@
 		//1. 로그인 여부 검사(o)
 		$("#br_content").click(function(){
 			if("${sessionScope.id}"){//로그인 한 경우
-				//alert("${sessionScope.id}");
 			}else{//로그인 안 한 경우
 				var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
 				location.href="<c:url value='/member/login'/>";
-				//alert("아이디 없음");
+				
 			}
 		});
 		////////////////////////////////////////////////////////////////////////////////		
@@ -27,10 +26,7 @@
 		});
 		//글 수정 하기(o)
 		$("#b_update").click(function(){
-			var flag=confirm("수정 페이지로 이동합니다.");
-			if(flag){
-				location.href='<c:url value="/${sessionScope.id }/board/update?b_num=${vo.b_num }&category_num=${category_num }"/>';
-			}
+			location.href='<c:url value="/${sessionScope.id }/board/update?b_num=${vo.b_num }&category_num=${category_num }"/>';
 		});
 		//댓글 추가 하기(o)
 		$("#br_reg").click(function(){

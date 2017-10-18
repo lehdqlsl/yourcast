@@ -1,5 +1,6 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,8 +27,8 @@ public class NoticeDAO {
 		return sqlSession.selectOne(NAMESPACE + ".getInfo", n_num);
 	}
 
-	public List<NoticeVO> getList() {
-		return sqlSession.selectList(NAMESPACE + ".getList");
+	public List<NoticeVO> getList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE + ".getList",map);
 	}
 
 	public int getCount() {

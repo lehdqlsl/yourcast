@@ -64,50 +64,46 @@
 		</ul>
 		</c:forEach>
 		<!-- 페이징 -->
-		<div>
+		<div class="w3-bar-all w3-center">
 			<!-- 이전 -->
 			<c:choose>
 				<c:when test="${pu.startPageNum>5 }">
 					<c:choose>
 						<c:when test="${not empty category_num}">
-							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.startPageNum-1 }&category_num=${category_num }"/>'>[이전]</a>
+							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.startPageNum-1 }&category_num=${category_num }"/>'class="w3-bar-item w3-button w3-hover-black">이전</a>
 						</c:when>
 						<c:otherwise>
-							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.startPageNum-1 }"/>'>[이전]</a>
+							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.startPageNum-1 }"/>'class="w3-bar-item w3-button w3-hover-black">이전</a>
 						</c:otherwise>
 					</c:choose>
 				</c:when>
 				<c:otherwise>
-					[이전]
+					<a class="w3-bar-item w3-button w3-hover-black">이전</a>
 				</c:otherwise>
 			</c:choose>
-			<!-- 숫자부분 -->
+			<!-- 숫자 부분 -->
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
-					<c:when test="${i==pu.pageNum }"><!-- 현재페이지인 경우(색상다르게 표시) -->
-					
+					<c:when test="${not empty category_num }"><!-- 전체보기가 아닌 경우 -->
 						<c:choose>
-							<c:when test="${not empty category_num}">
-								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:blue">[${i }]</span></a>
+							<c:when test="${i==pu.pageNum }"><!-- 현재페이지인 경우 -->
+								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'class="w3-bar-item w3-button w3-hover-black"><span style="color:red">${i }</span></a>
 							</c:when>
 							<c:otherwise>
-								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}"/>'><span style="color:blue">[${i }]</span></a>
+								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'class="w3-bar-item w3-button w3-hover-black"><span>${i }</span></a>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-					
-					<c:otherwise>
+					<c:otherwise><!-- 전체보기인 경우 -->
 						<c:choose>
-							<c:when test="${not empty category_num}">
-								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}&category_num=${category_num }"/>'><span style="color:#555">[${i }]</span></a>
+							<c:when test="${i==pu.pageNum }"><!-- 현재페이지인 경우 -->
+								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}"/>'class="w3-bar-item w3-button w3-hover-black"><span style="color:red">${i }</span></a>
 							</c:when>
 							<c:otherwise>
-								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}"/>'><span style="color:#555">[${i }]</span></a>
+								<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${i}"/>'class="w3-bar-item w3-button w3-hover-black"><span>${i }</span></a>
 							</c:otherwise>
 						</c:choose>
-						
 					</c:otherwise>
-					
 				</c:choose>
 			</c:forEach>
 			<!-- 다음 -->
@@ -115,17 +111,17 @@
 				<c:when test="${pu.endPageNum<pu.totalPageCount }">
 					<c:choose>
 						<c:when test="${not empty category_num}">
-							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.endPageNum+1 }&category_num=${category_num }"/>'>[다음]</a>
+							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.endPageNum+1 }&category_num=${category_num }"/>'class="w3-bar-item w3-button w3-hover-black">다음</a>
 						</c:when>
 						<c:otherwise>
-							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.endPageNum+1 }"/>'>[다음]</a>
+							<a href='<c:url value="/${requestScope.id }/board/list?pageNum=${pu.endPageNum+1 }"/>'class="w3-bar-item w3-button w3-hover-black">다음</a>
 						</c:otherwise>
 					</c:choose>
 				
 					
 				</c:when>
 				<c:otherwise>
-					[다음]
+					<a class="w3-bar-item w3-button w3-hover-black">다음</a>
 				</c:otherwise>
 			</c:choose>
 		</div>

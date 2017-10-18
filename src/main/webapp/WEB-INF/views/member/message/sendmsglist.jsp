@@ -80,34 +80,34 @@
 	<br>
 	<br>
 	<!-- 페이징 -->
-	<div>
+	<div class="w3-bar-all w3-center">
 		<!-- 이전 -->
 		<c:choose>
 			<c:when test="${pus.startPageNum>5 }">
-				<a href='<c:url value="/message/send/list?pageNumR=${pus.startPageNum-1 }"/>'>[이전]</a>
+				<a href='<c:url value="/message/send/list?pageNumR=${pus.startPageNum-1 }"/>'class="w3-bar-item w3-button w3-hover-black">이전</a>
 			</c:when>
 			<c:otherwise>
-				[이전]
+				<a class="w3-bar-item w3-button w3-hover-black">이전</a>
 			</c:otherwise>
 		</c:choose>
 		<!-- 페이지 -->
 		<c:forEach var="i" begin="${pus.startPageNum }" end="${pus.endPageNum }">
 			<c:choose>
 				<c:when test="${i==pus.pageNum }">
-					<a href='<c:url value="/message/send/list?pageNumS=${i }"/>'><span style="color:red">[${i }]</span></a>
+					<a href='<c:url value="/message/send/list?pageNumS=${i }"/>'class="w3-bar-item w3-button w3-hover-black"><span style="color:red">${i }</span></a>
 				</c:when>
 				<c:otherwise>
-					<a href='<c:url value="/message/send/list?pageNumS=${i }"/>'><span style="color:black">[${i }]</span></a>
+					<a href='<c:url value="/message/send/list?pageNumS=${i }"/>'class="w3-bar-item w3-button w3-hover-black"><span>${i }</span></a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<!-- 다음 -->
 		<c:choose>
 			<c:when test="${pus.endPageNum<pus.totalPageCount }">
-				<a href='<c:url value="/message/send/list=${pus.endPageNum+1 }"/>'>[다음]</a>
+				<a href='<c:url value="/message/send/list?pageNumS=${pus.endPageNum+1 }"/>'class="w3-bar-item w3-button w3-hover-black">다음</a>
 			</c:when>
 			<c:otherwise>
-				[다음]
+				<a class="w3-bar-item w3-button w3-hover-black">다음</a>
 			</c:otherwise>
 		</c:choose>
 	</div>

@@ -33,8 +33,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
 <script type="text/javascript">
 	$("#btn1").click(function(){
-		var id=$("#id").val();
-		location.href = "<c:url value='/${id}/board/insert'/>";
+		if("${sessionScope.id}"){
+			var id=$("#id").val();
+			location.href = "<c:url value='/${id}/board/insert'/>";
+		}else{
+			var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
+			location.href="<c:url value='/member/login'/>";
+		}
+		
 	});
 </script>
 
