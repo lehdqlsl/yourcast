@@ -32,8 +32,13 @@ public class BlacklistService {
 		return dao.getCount(bj_num);
 	}
 	
-	public BlacklistVO check(BlacklistVO vo) {
-		return dao.check(vo);
+	public Boolean check(BlacklistVO vo) {
+		BlacklistVO bvo= dao.check(vo);
+		if(bvo != null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

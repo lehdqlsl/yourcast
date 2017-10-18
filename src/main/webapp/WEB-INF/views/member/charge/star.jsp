@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.min.css'/>?ver=1">
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.theme.min.css'/>?ver=1"> 
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script> 
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/star.css'/>?ver=1">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/star.css'/>?ver=3">
 
 <style>
 .st_area {

@@ -15,10 +15,7 @@ html{-webkit-text-size-adjust: none;} /* iphone */
 html,body{width:100%;height:100%}
 html{overflow-y:scroll}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,form,fieldset,p,button{margin:0;padding:0}
-body,h1,h2,h3,h4,input,button,th,td{font-family:ng, Dotum, "돋움", verdana, sans-serif;font-size:12px;color:#383d41}
 
-*{font-family:ng, Dotum, "돋움", verdana, sans-serif}
-body{background-color:#fff;*word-break:break-all;/*-ms-word-break:break-all*/}
 img,fieldset,iframe{border:0 none}
 li{list-style:none}
 input,select,button{vertical-align:middle}
@@ -38,7 +35,7 @@ table{border-collapse:collapse;border-spacing:0}
 input::-ms-clear{display:none}
 
 /* common */
-body{font-family:ng, Dotum, "돋움", verdana, sans-serif;font-size:12px;color:#666;background-color:#fff;min-width:960px}
+
 
 .blind,legend{display:block;overflow:hidden;position:absolute;top:-1000em;left:0}
 .ellipsis{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis}
