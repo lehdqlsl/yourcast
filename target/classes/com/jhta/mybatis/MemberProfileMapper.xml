@@ -20,7 +20,7 @@
 	</update>
 	
 	<update id="update">
-		update member_profile set profile_msg=#{profile_msg},profile_content=#{profile_content},
+		update member_profile set profile_msg=#{profile_msg},
 		profile_orgfilename=#{profile_orgfilename},profile_savefilename=#{profile_savefilename},
 		m_num=#{m_num},profile_title=#{profile_title} where profile_num=#{profile_num}
 	</update>
