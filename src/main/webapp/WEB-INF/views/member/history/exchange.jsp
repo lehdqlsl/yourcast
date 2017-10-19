@@ -10,8 +10,8 @@
 	<div>
 		<button><a href="<c:url value='/member/history/pay'/>" style="text-decoration: none;">결제내역</a></button>
 		<button><a href="<c:url value='/member/history/buy'/>" style="text-decoration: none;">구매내역</a></button>
-		<button><a href="<c:url value='/member/history/useStar'/>" style="text-decoration: none;">선물한 별사탕내역</a></button>
-		<button><a href="<c:url value='/member/history/recvStar'/>" style="text-decoration: none;">선물받은 별사탕내역</a></button>
+		<button><a href="<c:url value='/member/history/useStar'/>" style="text-decoration: none;">선물한 별풍선내역</a></button>
+		<button><a href="<c:url value='/member/history/recvStar'/>" style="text-decoration: none;">선물받은 별풍선내역</a></button>
 		<button style="background-color: red;"><a href="<c:url value='/member/history/ex'/>" style="text-decoration: none;">환전내역</a></button>
 	</div>
 		<hr>

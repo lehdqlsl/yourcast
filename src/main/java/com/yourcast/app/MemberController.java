@@ -78,6 +78,7 @@ public class MemberController {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 
+			// 로그인 후 이전페이지로 가지게
 			return "redirect:/";
 		} else {
 			request.setAttribute("errMsg", "아이디 혹은 비밀번호가 맞지않습니다");
@@ -104,14 +105,14 @@ public class MemberController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return ".main";
+		return "redirect:/";
 	}
 
 	// 로그아웃
 	@RequestMapping("/member/logout")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
-		return ".main";
+		return "redirect:/";
 	}
 
 	// 아이디 중복

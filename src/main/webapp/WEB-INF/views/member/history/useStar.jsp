@@ -5,19 +5,19 @@
 
 <div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;">
 	<div class="w3-container w3-padding-32" id="projects">
-		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">선물한 별사탕내역</h3>
+		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">선물한 별풍선내역</h3>
 	</div>
 	
 	<div>
 		<a href="<c:url value='/member/history/pay'/>" class="w3-bar-item w3-button" style="text-decoration: none;">결제내역</a>
 		<a href="<c:url value='/member/history/buy'/>" class="w3-bar-item w3-button" style="text-decoration: none;" >구매내역</a>
-		<a href="<c:url value='/member/history/useStar'/>" class="w3-bar-item w3-button" style="text-decoration: none;background-color: #cccccc;">선물한 별사탕내역</a>
-		<a href="<c:url value='/member/history/recvStar'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">선물받은 별사탕내역</a>
+		<a href="<c:url value='/member/history/useStar'/>" class="w3-bar-item w3-button" style="text-decoration: none;background-color: #cccccc;">선물한 별풍선내역</a>
+		<a href="<c:url value='/member/history/recvStar'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">선물받은 별풍선내역</a>
 	</div>
 		<hr>
 	<table class="w3-table w3-table-all">
 		<tr>
-			<th>선물한 별사탕</th><th>BJ아이디</th><th>사용일</th>
+			<th>선물한 별풍선</th><th>BJ아이디</th><th>사용일</th>
 		</tr>
 		<c:forEach var="uvo" items="${uselist }">
 			<tr>
@@ -33,8 +33,8 @@
 		</c:if>
 	</table>
 	
-	<div>이미 사용한 별사탕 : ${total_send_ea }</div>
-	<div>보유중인 별사탕 : ${mvo.star_candy }</div>
+	<div>이미 사용한 별풍선 : ${total_send_ea }</div>
+	<div>보유중인 별풍선 : ${mvo.star_candy }</div>
 	
 	<br>
 	

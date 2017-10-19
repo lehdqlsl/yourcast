@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+a.home:link{
+	text-decoration: none;	
+}
+a.home:visited{
+	text-decoration: none;	
+}
+a.home:hover{
+	text-decoration: underline;
+}
+a.home:active{
+	text-decoration: underline;
+}
