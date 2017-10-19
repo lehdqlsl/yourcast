@@ -88,15 +88,39 @@ input[type="checkbox"]:checked + label:before {
 					</dd>
 				</dl>
 				<dl>
-					<dt>방송 테마</dt>
-					<dd>
-						<input type="text" class="w3-input w3-section" name="genre_num" value="${bvo.genre_num }" style="width: 600px;">
-					</dd>
+					<dt>방송 장르</dt>
+					<br>
+					<c:forEach var="gvo" items="${glist }">
+						<c:choose>
+							<c:when test="${gvo.genre_num==bvo.genre_num}">
+								<input type="radio" name="genre_num" checked="checked"
+									value="${gvo.genre_num }">${gvo.genre_name }
+							</c:when>
+							<c:otherwise>
+								<input type="radio" name="genre_num" value="${gvo.genre_num }">${gvo.genre_name }
+								<c:if test="${gvo.genre_num%10==0}">
+									<br>
+								</c:if>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</dl>
 				<dl>
 					<dt>방송 속성</dt>
 					<dd>
-						<br><input type="checkbox" name="frmAdult" id="check1" value="19"><label
+						<br>
+						<c:choose>
+							<c:when test="${bvo.age_grade_num == 1 }">
+								<input type="checkbox" name="frmAdult" id="check1" value="19">	
+							</c:when>
+							<c:otherwise>
+								<input type="checkbox" name="frmAdult" id="check1" value="19" checked="checked">
+							</c:otherwise>
+						</c:choose>
+						
+						
+						
+						<label
 							for="check1"><span></span>성인방송 설정</label>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -154,19 +178,26 @@ $(window).on("load", function(e) {
 });
 
 $('#target').submit(function() { 
-
+	alert('방송정보 변경이 정상적으로 처리 되었습니다.');
 	var title = $("input[name=broadcast_title]").val();
-	var pwd = $("input[name=frmAccessCode]").val();
-	
+	var pwd = "";
+	var adult = $("input[name=frmAdult]").prop('checked');
 	var bj_num = ${bvo.m_num};
+	var pwdcheck = $("input[name=frmAccess]").prop('checked');
 	var sendmsg = {};
+	
+	if(pwdcheck){
+		pwd = $("input[name=frmAccessCode]").val();
+	}
+	console.log(pwd);
 	sendmsg.packet = 5;
 	sendmsg.bj_num = bj_num;
 	sendmsg.title = title;
 	sendmsg.pwd = pwd;
+	sendmsg.adult = adult;
 	wsocket.send( JSON.stringify(sendmsg));
 	
-	alert('방송정보 변경이 정상적으로 처리 되었습니다.');
+
 });
 
 </script>

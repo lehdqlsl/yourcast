@@ -146,10 +146,12 @@ public class ChatHandler extends TextWebSocketHandler {
 			bj_num = (Long) jsonObj.get("bj_num");
 			String title = (String) jsonObj.get("title");
 			String pwd = (String) jsonObj.get("pwd");
+			boolean adult = (Boolean)jsonObj.get("adult");
 			JSONObject obj1 = new JSONObject();
 			obj1.put("packet", "5");
 			obj1.put("title", title);
 			obj1.put("pwd", pwd);
+			obj1.put("adult", adult);
 			for (User user1 : list) {
 				// 같은 방 찾기
 				if (bj_num == user1.getBj_num()) {

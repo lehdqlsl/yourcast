@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+.title_list{
+	width:350px;
+	text-decoration: none;
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+</style>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script>
 	$(document).ready(function(){
@@ -21,14 +31,14 @@
 					//alert(v_num);
 					
 					var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
-					'<a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
-					+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;"></a>'
+					'<div><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
+					+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
 					+
-					'<div style="width: 100%; display: block; height: 20px; padding-left: 0px; margin-top: 5px;">'+
-					'<p style="margin: 0px 0px 0px 0px;	font-size: 1.4em;">'+v_title+'</p>'+
+					'<div>'+
+					'<h5 style="padding:0 5px 0 5px;font-size: 1.4em;font-weight: bold;"><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a></h5>'+
 					'</div>'+
-					'<div style="width: 100%; display: block; height: 20px; padding-left: 0px;">'+
-					'<p style="margin: 5px 0px 0px 0px;	font-size: 1.0em; color: #6e6779;">'+id+' 조회수 '+v_hit+'</p>'+
+					'<div style="padding:0 5px 0 5px;">'+
+					'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
 					'</div></div>'
 					$("#videolist").append(div);
 				});
@@ -57,14 +67,14 @@
 							//alert(v_num);
 							
 							var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
-							'<a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
-							+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;"></a>'
+							'<div><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
+							+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
 							+
-							'<div style="width: 100%; display: block; height: 20px; padding-left: 0px; margin-top: 5px;">'+
-							'<p style="margin: 0px 0px 0px 0px;	font-size: 1.4em;">'+v_title+'</p>'+
+							'<div>'+
+							'<h5 style="padding:0 5px 0 5px;font-size: 1.4em;font-weight: bold;"><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a></h5>'+
 							'</div>'+
-							'<div style="width: 100%; display: block; height: 20px; padding-left: 0px;">'+
-							'<p style="margin: 5px 0px 0px 0px;	font-size: 1.0em; color: #6e6779;">'+id+' 조회수 '+v_hit+'</p>'+
+							'<div style="padding:0 5px 0 5px;">'+
+							'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
 							'</div></div>'
 							$("#videolist").append(div);
 						});

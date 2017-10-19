@@ -34,4 +34,7 @@ public class NoticeDAO {
 	public int getCount() {
 		return sqlSession.selectOne(NAMESPACE + ".getCount");
 	}
+	public int hit(int n_num) {
+		return sqlSession.update(NAMESPACE+".hit",n_num);
+	}
 }

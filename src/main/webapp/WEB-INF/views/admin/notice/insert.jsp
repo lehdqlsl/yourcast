@@ -95,7 +95,6 @@
 		// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
 		var content = document.getElementById("ir1").value;
 		var title = document.getElementById("title").value;
-		console.log("내용 : " + content);
 		if (content == null || content == "<p>&nbsp;</p>") {
 			alert("내용을 입력하세요!");
 			event.preventDefault();

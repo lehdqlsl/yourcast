@@ -36,270 +36,306 @@ import com.yourcast.app.vo.MemberVO;
 
 @Controller
 public class InfoController {
-	@Autowired private CategoryService c_service;
-	@Autowired private MemberService m_sevice;
-	@Autowired private MemberProfileService mp_service;
-	@Autowired private FanService f_service;
-	@Autowired private BlacklistService b_service;
-	@Autowired private StarUseService u_service;
+	@Autowired
+	private CategoryService c_service;
+	@Autowired
+	private MemberService m_sevice;
+	@Autowired
+	private MemberProfileService mp_service;
+	@Autowired
+	private FanService f_service;
+	@Autowired
+	private BlacklistService b_service;
+	@Autowired
+	private StarUseService u_service;
 
 	@RequestMapping(value = "/{id}/setting/info", method = RequestMethod.GET)
 	public String infoSetting(@PathVariable(value = "id") String id, Model model,
-									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		MemberVO voM = m_sevice.getInfo(id);
 		List<CategoryVO> clist = c_service.getList(voM.getM_num());
-		
+
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		
+
 		map.put("bj_num", voM.getM_num());
-		int totalRowCount=f_service.getCount(voM.getM_num());
-		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
-		map.put("startRow",pu.getStartRow());
-		map.put("endRow",pu.getEndRow());
-		
+		int totalRowCount = f_service.getCount(voM.getM_num());
+		PageUtil pu = new PageUtil(pageNum, 10, 5, totalRowCount);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+
 		List<FanVO> listF = f_service.getList(map);
 		List<BlacklistVO> listB = b_service.getList(voM.getM_num());
-//		List<MemberVO> listM = m_sevice.getList();
-		
+		// List<MemberVO> listM = m_sevice.getList();
+
 		model.addAttribute("clist", clist);
 		model.addAttribute("id", id);
 		model.addAttribute("voMP", voMP);
 		model.addAttribute("listF", listF);
 		model.addAttribute("pu", pu);
-		model.addAttribute("listB", listB);		
-//		model.addAttribute("listM", listM);
+		model.addAttribute("listB", listB);
+		// model.addAttribute("listM", listM);
 		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
 		model.addAttribute("flist", flist);
-		
+
 		return ".personnel.setting.info";
 	}
-	
+
 	@RequestMapping(value = "/{id}/setting/category", method = RequestMethod.GET)
 	public String categorySetting(@PathVariable(value = "id") String id, Model model,
-									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		MemberVO voM = m_sevice.getInfo(id);
 		List<CategoryVO> clist = c_service.getList(voM.getM_num());
-		
+
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		
+
 		map.put("bj_num", voM.getM_num());
-		int totalRowCount=f_service.getCount(voM.getM_num());
-		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
-		map.put("startRow",pu.getStartRow());
-		map.put("endRow",pu.getEndRow());
-		
+		int totalRowCount = f_service.getCount(voM.getM_num());
+		PageUtil pu = new PageUtil(pageNum, 10, 5, totalRowCount);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+
 		List<FanVO> listF = f_service.getList(map);
 		List<BlacklistVO> listB = b_service.getList(voM.getM_num());
-		
+
 		model.addAttribute("clist", clist);
 		model.addAttribute("id", id);
 		model.addAttribute("voMP", voMP);
 		model.addAttribute("listF", listF);
 		model.addAttribute("pu", pu);
-		model.addAttribute("listB", listB);		
+		model.addAttribute("listB", listB);
 		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
 		model.addAttribute("flist", flist);
 		return ".personnel.setting.category";
 	}
-	
-	@RequestMapping(value = "/{id}/setting/fanlist", method = RequestMethod.GET)
-	public String fanlistSetting(@PathVariable(value = "id") String id, Model model,
-									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
+
+	@RequestMapping(value = "/{id}/setting/main", method = RequestMethod.GET)
+	public String mainSetting(@PathVariable(value = "id") String id, Model model,
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		MemberVO voM = m_sevice.getInfo(id);
 		List<CategoryVO> clist = c_service.getList(voM.getM_num());
-		
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+
+		model.addAttribute("clist", clist);
+		model.addAttribute("id", id);
+		model.addAttribute("voMP", voMP);
+
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
+		return ".personnel.setting.main";
+	}
+
+	@RequestMapping(value = "/{id}/setting/fanlist", method = RequestMethod.GET)
+	public String fanlistSetting(@PathVariable(value = "id") String id, Model model,
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+		MemberVO voM = m_sevice.getInfo(id);
+		List<CategoryVO> clist = c_service.getList(voM.getM_num());
+
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		
+
 		map.put("bj_num", voM.getM_num());
-		int totalRowCount=f_service.getCount(voM.getM_num());
-		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
-		map.put("startRow",pu.getStartRow());
-		map.put("endRow",pu.getEndRow());
-		
+		int totalRowCount = f_service.getCount(voM.getM_num());
+		PageUtil pu = new PageUtil(pageNum, 10, 5, totalRowCount);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+
 		List<FanVO> listF = f_service.getList(map);
 		List<BlacklistVO> listB = b_service.getList(voM.getM_num());
-		
+
 		model.addAttribute("clist", clist);
 		model.addAttribute("id", id);
 		model.addAttribute("voMP", voMP);
 		model.addAttribute("listF", listF);
 		model.addAttribute("pu", pu);
-		model.addAttribute("listB", listB);		
+		model.addAttribute("listB", listB);
 		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
 		model.addAttribute("flist", flist);
-		if(listF.isEmpty()) {
-			model.addAttribute("err","팬 정보가 존재하지 않습니다.");
+		if (listF.isEmpty()) {
+			model.addAttribute("err", "팬 정보가 존재하지 않습니다.");
 		}
 		return ".personnel.setting.fanlist";
 	}
-	
+
 	@RequestMapping(value = "/{id}/setting/blacklist", method = RequestMethod.GET)
 	public String blacklistSetting(@PathVariable(value = "id") String id, Model model,
-									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		MemberVO voM = m_sevice.getInfo(id);
 		List<CategoryVO> clist = c_service.getList(voM.getM_num());
-		
+
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		
+
 		map.put("bj_num", voM.getM_num());
-		int totalRowCount=f_service.getCount(voM.getM_num());
-		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
-		map.put("startRow",pu.getStartRow());
-		map.put("endRow",pu.getEndRow());
-		
+		int totalRowCount = f_service.getCount(voM.getM_num());
+		PageUtil pu = new PageUtil(pageNum, 10, 5, totalRowCount);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+
 		List<FanVO> listF = f_service.getList(map);
 		List<BlacklistVO> listB = b_service.getList(voM.getM_num());
-		
+
 		model.addAttribute("clist", clist);
 		model.addAttribute("id", id);
 		model.addAttribute("voMP", voMP);
 		model.addAttribute("listF", listF);
 		model.addAttribute("pu", pu);
-		model.addAttribute("listB", listB);		
+		model.addAttribute("listB", listB);
 		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
 		model.addAttribute("flist", flist);
 		return ".personnel.setting.blacklist";
 	}
-	
-	
-	
-//	@RequestMapping(value = "/{id}/setting/page", method = RequestMethod.GET)
-//	@ResponseBody
-//	public PagingVO fanPaging(@PathVariable(value = "id") String id, Model model,
-//									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
-//		MemberVO voM = m_sevice.getInfo(id);
-//		HashMap<String, Integer> map = new HashMap<String, Integer>();
-//		
-//		map.put("bj_num", voM.getM_num());
-//		int totalRowCount=f_service.getCount(voM.getM_num());
-//
-//		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
-//		map.put("startRow",pu.getStartRow());
-//		map.put("endRow",pu.getEndRow());
-//
-//		List<FanVO> listF = f_service.getList(map);
-//		PagingVO list1 = new PagingVO();
-//		list1.setList(listF);
-//
-//		return list1;
-//	}
-	
-//	@RequestMapping(value = "/{id}/setting/pageNext", method = RequestMethod.GET)
-//	@ResponseBody
-//	public int fanPagingNext(@PathVariable(value = "id") String id, Model model,
-//									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
-//		MemberVO voM = m_sevice.getInfo(id);
-//		HashMap<String, Integer> map = new HashMap<String, Integer>();
-//		
-//		map.put("bj_num", voM.getM_num());
-//		int totalRowCount=f_service.getCount(voM.getM_num());
-//		
-//		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
-//
-//		int endPageNum = pu.getEndPageNum();
-//
-//		return endPageNum;
-//	}
-	
-//	@RequestMapping(value = "/{id}/setting/pagePre", method = RequestMethod.GET)
-//	@ResponseBody
-//	public int fanPagingPre(@PathVariable(value = "id") String id, Model model,
-//									@RequestParam(value="pageNum",defaultValue="1")  int pageNum) {		
-//		MemberVO voM = m_sevice.getInfo(id);
-//		HashMap<String, Integer> map = new HashMap<String, Integer>();
-//		
-//		map.put("bj_num", voM.getM_num());
-//		int totalRowCount=f_service.getCount(voM.getM_num());
-//
-//		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
-//
-//		int endPageNum = pu.getEndPageNum();
-//
-//		return endPageNum;
-//	}
+
+	// @RequestMapping(value = "/{id}/setting/page", method = RequestMethod.GET)
+	// @ResponseBody
+	// public PagingVO fanPaging(@PathVariable(value = "id") String id, Model model,
+	// @RequestParam(value="pageNum",defaultValue="1") int pageNum) {
+	// MemberVO voM = m_sevice.getInfo(id);
+	// HashMap<String, Integer> map = new HashMap<String, Integer>();
+	//
+	// map.put("bj_num", voM.getM_num());
+	// int totalRowCount=f_service.getCount(voM.getM_num());
+	//
+	// PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
+	// map.put("startRow",pu.getStartRow());
+	// map.put("endRow",pu.getEndRow());
+	//
+	// List<FanVO> listF = f_service.getList(map);
+	// PagingVO list1 = new PagingVO();
+	// list1.setList(listF);
+	//
+	// return list1;
+	// }
+
+	// @RequestMapping(value = "/{id}/setting/pageNext", method = RequestMethod.GET)
+	// @ResponseBody
+	// public int fanPagingNext(@PathVariable(value = "id") String id, Model model,
+	// @RequestParam(value="pageNum",defaultValue="1") int pageNum) {
+	// MemberVO voM = m_sevice.getInfo(id);
+	// HashMap<String, Integer> map = new HashMap<String, Integer>();
+	//
+	// map.put("bj_num", voM.getM_num());
+	// int totalRowCount=f_service.getCount(voM.getM_num());
+	//
+	// PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
+	//
+	// int endPageNum = pu.getEndPageNum();
+	//
+	// return endPageNum;
+	// }
+
+	// @RequestMapping(value = "/{id}/setting/pagePre", method = RequestMethod.GET)
+	// @ResponseBody
+	// public int fanPagingPre(@PathVariable(value = "id") String id, Model model,
+	// @RequestParam(value="pageNum",defaultValue="1") int pageNum) {
+	// MemberVO voM = m_sevice.getInfo(id);
+	// HashMap<String, Integer> map = new HashMap<String, Integer>();
+	//
+	// map.put("bj_num", voM.getM_num());
+	// int totalRowCount=f_service.getCount(voM.getM_num());
+	//
+	// PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
+	//
+	// int endPageNum = pu.getEndPageNum();
+	//
+	// return endPageNum;
+	// }
+
+	@RequestMapping(value = "/{id}/setting/main", method = RequestMethod.POST)
+	public String mainUpdate(@PathVariable(value = "id") String id, Model model,String content) {
+		MemberVO voM = m_sevice.getInfo(id);
+		List<CategoryVO> clist = c_service.getList(voM.getM_num());
+		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
+		voMP.setProfile_content(content);
+		mp_service.contentUpdate(voMP);
+		model.addAttribute("clist", clist);
+		model.addAttribute("id", id);
+		model.addAttribute("voMP", voMP);
+
+		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
+		model.addAttribute("flist", flist);
+		return ".personnel.setting.main";
+	}
 	
 	@RequestMapping(value = "/{id}/setting/baseinfo_update", method = RequestMethod.POST)
-	public String baseInfoUpdate(@PathVariable(value = "id") String id, Model model,
-										String profile_msg, String profile_content, String profile_title,
-										MultipartFile profileImg, HttpSession session) {
+	public String baseInfoUpdate(@PathVariable(value = "id") String id, Model model, String profile_msg,
+			String profile_content, String profile_title, MultipartFile profileImg, HttpSession session) {
 
 		MemberVO vo = m_sevice.getInfo(id);
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id", id);
-		
+
 		String path = session.getServletContext().getRealPath("/resources/upload");
 		String profile_orgfilename = profileImg.getOriginalFilename();
 		String profile_savefilename = UUID.randomUUID() + "_" + profile_orgfilename;
-		
-		if(profile_orgfilename==null || profile_orgfilename.equals("")) {
+
+		if (profile_orgfilename == null || profile_orgfilename.equals("")) {
 			profile_orgfilename = voMP.getProfile_orgfilename();
 			profile_savefilename = voMP.getProfile_savefilename();
-		}else {
+		} else {
 			new File(path + "//" + voMP.getProfile_savefilename()).delete();
 			try {
-				FileCopyUtils.copy(profileImg.getInputStream(), new FileOutputStream(path + "\\" + profile_savefilename));
+				FileCopyUtils.copy(profileImg.getInputStream(),
+						new FileOutputStream(path + "\\" + profile_savefilename));
 				System.out.println(path + "\\" + profile_savefilename + "�봽濡쒗븘�궗吏� �뾽濡쒕뱶 �꽦怨�");
-				
-			}catch(IOException ie) {
+
+			} catch (IOException ie) {
 				System.out.println(ie.getMessage());
-				model.addAttribute("result","�뿉�윭濡� �씤�븳 �떎�뙣");
-				return ".personnel.setting.result"; 
+				model.addAttribute("result", "�뿉�윭濡� �씤�븳 �떎�뙣");
+				return ".personnel.setting.result";
 			}
 		}
-		
-		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, profile_content, profile_orgfilename, profile_savefilename, vo.getM_num(),profile_title));
-		if(n>0) {
-			model.addAttribute("result","湲곕낯�젙蹂� �닔�젙 �꽦怨�");
-		}else {
-			model.addAttribute("result","湲곕낯�젙蹂� �닔�젙 �떎�뙣");
+
+		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, profile_content,
+				profile_orgfilename, profile_savefilename, vo.getM_num(), profile_title));
+		if (n > 0) {
+			model.addAttribute("result", "湲곕낯�젙蹂� �닔�젙 �꽦怨�");
+		} else {
+			model.addAttribute("result", "湲곕낯�젙蹂� �닔�젙 �떎�뙣");
 		}
-		
+
 		return ".personnel.setting.result";
 	}
-	
+
 	@RequestMapping(value = "/{id}/setting/blacklistI", method = RequestMethod.GET)
 	@ResponseBody
-	public int blacklistInsert(@PathVariable(value = "id") String id,String option) {
+	public int blacklistInsert(@PathVariable(value = "id") String id, String option) {
 		int bj_num = m_sevice.getInfo(id).getM_num();
 		int m_num = m_sevice.getInfo(option).getM_num();
 		BlacklistVO vo = new BlacklistVO(0, m_num, bj_num);
-		if(b_service.check(vo)==null) {
+		if (b_service.check(vo) == false) {
 			b_service.insert(vo);
 			return m_num;
-		}else {
+		} else {
 			return 0;
-		}		
+		}
 	}
-	
+
 	@RequestMapping(value = "/{id}/setting/blacklistD", method = RequestMethod.GET)
 	@ResponseBody
-	public int blacklistDelete(@PathVariable(value = "id") String id,int option) {
+	public int blacklistDelete(@PathVariable(value = "id") String id, int option) {
 		int bj_num = m_sevice.getInfo(id).getM_num();
 		BlacklistVO vo = new BlacklistVO(0, option, bj_num);
-		int n = b_service.delete(vo);		
+		int n = b_service.delete(vo);
 		return n;
 	}
-	
+
 	@RequestMapping(value = "/{id}/setting/category_delete", method = RequestMethod.GET)
 	@ResponseBody
 	public int category_Delete(int option) {
-		int n = c_service.delete(new CategoryVO(option, null, 0, 0));		
+		int n = c_service.delete(new CategoryVO(option, null, 0, 0));
 		return n;
 	}
-	
+
 	@RequestMapping(value = "/{id}/setting/category_insert", method = RequestMethod.GET)
 	@ResponseBody
-	public int category_Insert(@PathVariable(value = "id") String id,String keyword) {
+	public int category_Insert(@PathVariable(value = "id") String id, String keyword) {
 		int bj_num = m_sevice.getInfo(id).getM_num();
 		c_service.insert(new CategoryVO(0, keyword, 0 ,bj_num));
 		CategoryVO vo = c_service.getCategory_num(new CategoryVO(0, keyword, 0, bj_num));
-
 		return vo.getCategory_num();
 	}
 }

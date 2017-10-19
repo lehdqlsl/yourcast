@@ -170,14 +170,6 @@
 		<!-- 페이징 -->
 		<div class="w3-bar-all w3-center" style="width:980px;">
 		<c:choose>
-			<c:when test="${pu.pageNum>1 }">
-				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${1 }'/>" class="w3-bar-item w3-button w3-hover-black">«</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-			</c:otherwise>
-		</c:choose>
-		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
 				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.startPageNum-1 }'/>" class="w3-bar-item w3-button w3-hover-black">이전</a>
 			</c:when>
@@ -201,14 +193,6 @@
 			</c:when>
 			<c:otherwise>
 				<a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a>
-			</c:otherwise>
-		</c:choose>
-		<c:choose>
-			<c:when test="${pu.startPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.totalPageCount }'/>" class="w3-bar-item w3-button w3-hover-black">»</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
 			</c:otherwise>
 		</c:choose>
 		</div>
