@@ -42,10 +42,16 @@
 		            }
 		        });
 				$("form").submit(function(event) {
+					var imgname = document.getElementById('imgfile').value;
+					imgname = imgname.slice(imgname.indexOf(".") + 1).toLowerCase(); 
+					
 					if($("input[name='profile_title']").val()==''){
 						alert("방송국 이름을 입력하세요");
 						$("input[name='profile_title']").focus();
 						event.preventDefault();
+					}else if(imgname != "jpg" && imgname != "png" &&  imgname != "gif" &&  imgname != "bmp"){
+						alert('썸네일은 이미지 파일(jpg, png, gif, bmp)만 등록 가능합니다.');
+						return false;
 					}
 				});
 			});

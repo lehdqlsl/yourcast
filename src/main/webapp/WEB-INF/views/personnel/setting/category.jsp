@@ -30,6 +30,19 @@
 
 		<script type="text/javascript">
 			$(function(){
+				String.prototype.byteLength = function() {
+					var l = 0;
+					for (var idx = 0; idx < this.length; idx++) {
+						var c = escape(this.charAt(idx));
+						if (c.length == 1)
+							l++;
+						else if (c.indexOf("%u") != -1)
+							l += 3;
+						else if (c.indexOf("%") != -1)
+							l += c.length / 3;
+					}
+					return l;
+				};
 				$("#c_delete").click(function(){
 					var opt = document.createElement("option");
 					var optionV = $("#menulist option:selected").val();
@@ -53,17 +66,21 @@
 						alert("게시판명을 입력해주세요.");
 						return false;
 					}
-					if ($("#c_keyword").val().length > 10) {
-						alert("게시판 제목이 너무 깁니다. (한글 10글자이하, 영문 50자 이하의 제목만 입력가능합니다.)");
+					if ($("#c_keyword").val().byteLength()>30) {
+						alert("게시판 제목이 너무 깁니다. (한글 10글자이하, 영문 30자 이하의 제목만 입력가능합니다.)");
 						return false;
 					}
 					$.ajax({
 						url:"<c:url value='/${requestScope.id}/setting/category_insert'/>",
 						data:{"keyword":c_keyword},
 						success:function(data){
-							$("#menulist").append("<option value='" + data + "'>" + c_keyword + "</option>");
-							$("#c_keyword").focus().val("");
-							alert(c_keyword + " 게시판이 추가되었습니다.");
+							if(data==0){
+								alert("동일한 이름의 게시판이 존재합니다.");
+							}else{
+								$("#menulist").append("<option value='" + data + "'>" + c_keyword + "</option>");
+								$("#c_keyword").focus().val("");
+								alert(c_keyword + " 게시판이 추가되었습니다.");
+							}
 						}
 					});
 				});

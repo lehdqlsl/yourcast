@@ -228,6 +228,10 @@ public class VideoController {
 		}
 		model.addAttribute("list",list);
 		
+		if(list.isEmpty()) {
+			model.addAttribute("err","영상목록이 존재하지 않습니다.");
+		}
+		
 		return ".personnel.video.list";
 	}
 	

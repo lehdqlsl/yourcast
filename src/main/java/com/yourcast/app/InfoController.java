@@ -280,11 +280,11 @@ public class InfoController {
 			try {
 				FileCopyUtils.copy(profileImg.getInputStream(),
 						new FileOutputStream(path + "\\" + profile_savefilename));
-				System.out.println(path + "\\" + profile_savefilename + "�봽濡쒗븘�궗吏� �뾽濡쒕뱶 �꽦怨�");
+				System.out.println(path + "\\" + profile_savefilename + "프로필 이미지 업로드 완료");
 
 			} catch (IOException ie) {
 				System.out.println(ie.getMessage());
-				model.addAttribute("result", "�뿉�윭濡� �씤�븳 �떎�뙣");
+				model.addAttribute("result", "오류로 인해 파일의 업로드가 실패하였습니다.");
 				return ".personnel.setting.result";
 			}
 		}
@@ -292,9 +292,9 @@ public class InfoController {
 		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, profile_content,
 				profile_orgfilename, profile_savefilename, vo.getM_num(), profile_title));
 		if (n > 0) {
-			model.addAttribute("result", "湲곕낯�젙蹂� �닔�젙 �꽦怨�");
+			model.addAttribute("result", "방송국 기본정보의 수정이 완료되었습니다.");
 		} else {
-			model.addAttribute("result", "湲곕낯�젙蹂� �닔�젙 �떎�뙣");
+			model.addAttribute("result", "오류로 인해 실패하였습니다.");
 		}
 
 		return ".personnel.setting.result";
@@ -334,8 +334,12 @@ public class InfoController {
 	@ResponseBody
 	public int category_Insert(@PathVariable(value = "id") String id, String keyword) {
 		int bj_num = m_sevice.getInfo(id).getM_num();
-		c_service.insert(new CategoryVO(0, keyword, 0 ,bj_num));
-		CategoryVO vo = c_service.getCategory_num(new CategoryVO(0, keyword, 0, bj_num));
-		return vo.getCategory_num();
+		if(c_service.isCategory(new CategoryVO(0, keyword, 0, bj_num))) {
+			return 0;
+		}else {
+			c_service.insert(new CategoryVO(0, keyword, 0 ,bj_num));
+			CategoryVO vo = c_service.getCategory_num(new CategoryVO(0, keyword, 0, bj_num));
+			return vo.getCategory_num();
+		}
 	}
 }

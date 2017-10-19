@@ -60,7 +60,7 @@ button{border:0 none;cursor:pointer;background:transparent;outline: none;}
 }
 
 /* Link Css */
-a {cursor:pointer;color:#666}
+a {cursor:pointer;}
 a:link,  a:visited,  a:active {text-decoration:none}
 a:hover{text-decoration:none}
 
