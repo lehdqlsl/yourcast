@@ -59,7 +59,7 @@
 		 <div>
 			<a href="<c:url value='/${requestScope.id}/setting/info'/>" class="w3-bar-item w3-button" style="text-decoration: none;">기본정보관리</a>
 			<a href="<c:url value='/${requestScope.id}/setting/category'/>" class="w3-bar-item w3-button" style="text-decoration: none;" >게시판관리</a>
-			<a href="#" class="w3-bar-item w3-button" style="text-decoration: none;">대문관리</a>
+			<a href="<c:url value='/${requestScope.id}/setting/main'/>" class="w3-bar-item w3-button" style="text-decoration: none;">대문관리</a>
 			<a href="<c:url value='/${requestScope.id}/setting/fanlist'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">팬 목록</a>
 			<a href="<c:url value='/${requestScope.id}/setting/blacklist'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">블랙리스트</a>
 		</div>
@@ -92,10 +92,6 @@
 				</tr>
 				<tr>
 					<th></th><td style="color:#9A9A9A">방송국의 웹페이지의 좌측 프로필에 들어가는 자기소개입니다.</td>
-				</tr>
-				<tr style="height:20px;"></tr>
-				<tr>
-					<th>내용</th><td><input type="text" name="profile_content" value="${voMP.profile_content }"></td>
 				</tr>
 				<tr>
 					<th></th><td style="color:#9A9A9A">메인페이지의 내용을 수정할 수 있습니다.</td>

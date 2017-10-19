@@ -626,41 +626,58 @@ dd.name {
 			var black = '${requestScope.black}';
 			
 			//블랙리스트 처리		
-			console.log(black);
 			if(black == 'true'){
 				alert("BJ에 의해 블랙리스트로 등록되어 방송을 시청할 수 없습니다.");
 				history.back('http://192.168.0.4/app');
-			}
-			
-			if(bjid != s_id){
-				//비밀번호가 있을경우
-				if(bvo != ''){
-					var pwd = prompt("방송을 보려면 BJ가 정해놓은 비밀번호를 입력해야 합니다.", "");
-				    if (pwd != null) {
-				    	$.ajax({
-							url:"<c:url value='/broadcast/password?bjid="+bjid+"&pwd="+pwd+"'/>",
-							dataType:"json",
-							success:function(data){
-								if(!data.result){
-									history.back('http://192.168.0.4/app');
-									alert('비밀번호가 일치하지 않습니다.');	
-								}else{
-									init();
-								}
+			}else{
+				if(bjid != s_id){
+					//성인처리
+					var adult = '${requestScope.bvo.age_grade_num}';
+					if(adult != 1){
+						if(s_id==''){
+							alert('이 정보내용은 청소년 유해매체물로서 먼저 로그인이 필요합니다.');
+							location.replace('http://192.168.0.4:8082/app/member/login'); 
+						}else{
+							//민증검사
+							var dt1 = new Date();
+							var year1 = dt1.getFullYear();
+							var test = '${requestScope.vo.birth}';
+							var year2 = test.substring(test.length-4,test.length);
+							if(year1-year2 < 19){
+								alert('만 19세 미만의 청소년이 이용할 수 없습니다.');
+								history.back('http://192.168.0.4/app');
 							}
-						});
-				    }else{
-				    	//취소버튼
-				    	history.back('http://192.168.0.4/app');
-				    }
+						}
+					}
+					
+					//비밀번호가 있을경우
+					if(bvo != ''){
+						var pwd = prompt("방송을 보려면 BJ가 정해놓은 비밀번호를 입력해야 합니다.", "");
+					    if (pwd != null) {
+					    	$.ajax({
+								url:"<c:url value='/broadcast/password?bjid="+bjid+"&pwd="+pwd+"'/>",
+								dataType:"json",
+								success:function(data){
+									if(!data.result){
+										history.back('http://192.168.0.4/app');
+										alert('비밀번호가 일치하지 않습니다.');	
+									}else{
+										init();
+									}
+								}
+							});
+					    }else{
+					    	//취소버튼
+					    	history.back('http://192.168.0.4/app');
+					    }
+					}else{
+						//비밀번호 없는경우
+						init();
+					}
 				}else{
-					//비밀번호 없는경우
 					init();
 				}
-			}else{
-				init();
 			}
-		
 		});
 
 		function init(){
@@ -735,9 +752,9 @@ dd.name {
 
 		//아이디 클릭
 		$("#chat_area").on('click','.test',function(){
-			var s_id = '${requestScope.vo.id}';
+			var bjid = '${bjvo.id }';
 			var r_id = '${sessionScope.id}';
-			if(s_id == r_id){
+			if(bjid == r_id){
 				var id = $(this).attr("user_id");
 				var name = $(this).attr("user_nick");
 				var result = confirm(id+'님을 강퇴하시겠습니까?'); 
@@ -784,6 +801,7 @@ dd.name {
 					}
 				}
 				
+				
 				var objDiv = document.getElementById("chat_area");
 				objDiv.scrollTop = objDiv.scrollHeight;
 			}else if(packet == '3'){
@@ -809,22 +827,26 @@ dd.name {
 			}else if(packet == '5'){
 				var title = list.title;
 				var pwd = list.pwd;
+				var adult = list.adult;
 				$("#broadcast_title").html(title);
+				
+				var bjid = '${bjvo.id }';
+				var s_id = '${sessionScope.id}';
 				if(pwd != ''){
-					var bjid = '${bjvo.id }';
-					var s_id = '${sessionScope.id}';
-			
 					if(bjid != s_id){
 						$("#container").toggle();
 						var pwd = prompt("방송을 보려면 BJ가 정해놓은 비밀번호를 입력해야 합니다.", "");
 						 if (pwd != null) {
 						    	$.ajax({
-									url:"<c:url value='/broadcast/password?bjid="+bjid+"&pwd="+pwd+"'/>",
+						    		url:"<c:url value='/broadcast/password?bjid="+bjid+"&pwd="+pwd+"'/>",
 									dataType:"json",
 									success:function(data){
+										console.log(data.result);
 										if(!data.result){
 											history.back('http://192.168.0.4/app');
 											alert('비밀번호가 일치하지 않습니다.');	
+										}else{
+											$("#container").toggle();
 										}
 									}
 								});
@@ -834,6 +856,26 @@ dd.name {
 						    }
 					}
 				}
+				if(bjid != s_id){
+					if(adult){
+						if(s_id==''){
+							alert('이 정보내용은 청소년 유해매체물로서 먼저 로그인이 필요합니다.');
+							location.replace('http://192.168.0.4:8082/app/member/login'); 
+						}else{
+							//민증검사
+							var dt1 = new Date();
+							var year1 = dt1.getFullYear();
+							var test = '${requestScope.vo.birth}';
+							var year2 = test.substring(test.length-4,test.length);
+							if(year1-year2 < 19){
+								alert('만 19세 미만의 청소년이 이용할 수 없습니다.');
+								history.back('http://192.168.0.4/app');
+							}
+						}
+					}
+				}
+
+				
 			}else if(packet == '6'){
 				location.href="http://192.168.0.4:8082/app/";
 				alert("강퇴당하였습니다.");
@@ -842,6 +884,12 @@ dd.name {
 				var id = list.id;
 				$("#chat_area").append('<p class="notice"><a href="javascript:;" user_id="'+id+'" user_nick="'+name+'" etcinfo="1">'+name+'<em>('+id+')</em></a> 님이 <span class="caution">강제퇴장</span> 처리되었습니다.</p>');
 				var objDiv = document.getElementById("chat_area");
+				$("#chat_area dl dt a").each(function(){
+					var uid = $(this).attr("user_id");
+					if(uid == id){
+						$(this).parent().parent().detach();
+					}
+				});
 				objDiv.scrollTop = objDiv.scrollHeight;
 			}
 		}
