@@ -49,4 +49,7 @@ public class VideoService {
 	public int allCount() {
 		return dao.allCount();
 	}
+	public List<VideoVO> getBookmarkList(int m_num){
+		return dao.getBookmarkList(m_num);
+	}
 }

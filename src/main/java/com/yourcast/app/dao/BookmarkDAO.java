@@ -1,5 +1,6 @@
 package com.yourcast.app.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -22,12 +23,15 @@ public class BookmarkDAO {
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public List<BookmarkVO> getList() {
-		List<BookmarkVO> mlist = sqlSession.selectList(NAMESPACE + ".getList");
+	public List<BookmarkVO> getList(int m_num) {
+		List<BookmarkVO> mlist = sqlSession.selectList(NAMESPACE + ".getList",m_num);
 		return mlist;
 	}
 
-	public int delete(int num) {
-		return sqlSession.delete(NAMESPACE + ".delete", num);
+	public int delete(HashMap<String, Object> map) {
+		return sqlSession.delete(NAMESPACE + ".delete", map);
+	}
+	public BookmarkVO check(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE+".check",map);
 	}
 }

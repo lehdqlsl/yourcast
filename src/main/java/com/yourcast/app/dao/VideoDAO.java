@@ -62,5 +62,7 @@ public class VideoDAO {
 	public int allCount() {
 		return sqlSession.selectOne(NAMESPACE+".allCount");
 	}
-	
+	public List<VideoVO> getBookmarkList(int m_num){
+		return sqlSession.selectList(NAMESPACE+".bookmarkList",m_num);
+	}
 }

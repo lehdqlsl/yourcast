@@ -14,7 +14,10 @@
     <h4><b>동영상</b></h4>
     <p class="w3-text-grey"><a href="<c:url value="/"/>" style="text-decoration: none">실시간 방송</a></p>
   </div>
-    
+  <c:if test="${not empty sessionScope.id }">
+  	<a href="<c:url value='/bookmark/list'/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>즐겨찾기</a>
+  </c:if>
+   <hr>
   <div class="w3-bar-block">
   	<a href='<c:url value="/videomain"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-smile-o w3-margin-right"></i>전체보기</a>
     <c:forEach var="vo" items="${glist }">
