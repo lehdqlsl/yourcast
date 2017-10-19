@@ -42,9 +42,9 @@
 							+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
 							+
 							'<div>'+
-							'<h5 style="padding:0 5px 0 5px;font-size: 1.4em;font-weight: bold;"><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a></h5>'+
+							'<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a>'+
 							'</div>'+
-							'<div style="padding:0 5px 0 5px;">'+
+							'<div style="padding:0 10px 0 10px;">'+
 							'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
 							'</div></div>'
 							$("#videolist").append(div);
@@ -77,9 +77,9 @@
 							<a href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>'><img src='<c:url value="/resources/upload/${vo.v_savethumbnail }"/>' style="width: 100%;height: 250px;" class="w3-round-large w3-border w3-hover-opacity"></a>
 						</div>
 						<div>
-							<h5 style="padding:0 5px 0 5px;font-size: 1.4em;font-weight: bold;"><a href="<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>" class="title_list ">${vo.v_title}</a></h5>
+							<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>" class="title_list ">${vo.v_title}</a>
 						</div>
-						<div style="padding:0 5px 0 5px;">
+						<div style="padding:0 10px 0 10px;">
 							<p><span style="color: #328fde;"><a href="<c:url value='/${vo.id }'/>" style="text-decoration: none;">${vo.id }</a></span> 조회수 ${vo.v_hit }</p>
 						</div> 
 					</div>

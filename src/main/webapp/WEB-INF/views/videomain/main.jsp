@@ -35,9 +35,9 @@
 					+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
 					+
 					'<div>'+
-					'<h5 style="padding:0 5px 0 5px;font-size: 1.4em;font-weight: bold;"><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a></h5>'+
+					'<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a>'+
 					'</div>'+
-					'<div style="padding:0 5px 0 5px;">'+
+					'<div style="padding:0 10px 0 10px;">'+
 					'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
 					'</div></div>'
 					$("#videolist").append(div);
@@ -71,9 +71,9 @@
 							+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
 							+
 							'<div>'+
-							'<h5 style="padding:0 5px 0 5px;font-size: 1.4em;font-weight: bold;"><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a></h5>'+
+							'<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a>'+
 							'</div>'+
-							'<div style="padding:0 5px 0 5px;">'+
+							'<div style="padding:0 10px 0 10px;">'+
 							'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
 							'</div></div>'
 							$("#videolist").append(div);
@@ -87,6 +87,7 @@
 <!-- 메인페이지 -->
 <!-- 전체 동영상 리스트 출력-->
 <div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
+	
 	<div class="w3-container w3-padding-32" id="about">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">전체 보기</h3>
 	</div>

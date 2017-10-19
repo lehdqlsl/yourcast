@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/list.css'/>?ver=3">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/list.css'/>?ver=5">
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -38,8 +38,11 @@
 							</div><span class="time"></span>
 						</div>
 						<div class="v_title">
-						<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>' style="text-decoration: none;">${vo.b_title }</a>
-							<span class="noti"></span>
+							<c:if test="${vo.b_notice == 1 }">
+								<span class="noti"></span>
+							</c:if>
+							<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>' style="text-decoration: none;">${vo.b_title }</a>
+
 						</div>
 						<div class="view">${vo.b_content }</div>
 					</div>

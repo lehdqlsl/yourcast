@@ -44,8 +44,8 @@
 								style="table-layout: fixed;">
 								<tr>
 									<th width="10%">글번호</th>
-									<th width="30%">제목</th>
-									<th width="30%">내용</th>
+									<th width="40%">제목</th>
+									<th width="20%">작성자</th>
 									<th width="20%">등록일</th>
 									<th width="10%">조회수</th>
 								</tr>
@@ -53,7 +53,7 @@
 									<tr>
 										<td width="10%">${vo.n_num }</td>
 										<td><a href="<c:url value='/admin/notice/getInfo?n_num=${vo.n_num }&pageNum=${pu.pageNum }'/>">${vo.n_title }</a></td>
-										<td class="test">${vo.n_content }</td>
+										<td width="20%">admin</td>
 										<td width="20%">${vo.n_regdate }</td>
 										<td width="10%">${vo.n_hit }</td>
 									</tr>
