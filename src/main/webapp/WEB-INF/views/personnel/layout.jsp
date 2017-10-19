@@ -22,11 +22,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <!-- 메인페이지 레이아웃 -->
 <body>
 	<div id="wrap">
-		<div id="sidebar">
-			<tiles:insertAttribute name="sidebar" />
+		<div id="header">
+			<tiles:insertAttribute name="header" />
 		</div>
-		<div id="content">
-			<tiles:insertAttribute name="content" />
+		<div id="content" style="margin-top:60px;">
+			<div id="sidebar">
+				<tiles:insertAttribute name="sidebar" />
+			</div>
+			<div id="main">
+				<tiles:insertAttribute name="content" />
+			</div>
 		</div>
 	</div>
 </body>

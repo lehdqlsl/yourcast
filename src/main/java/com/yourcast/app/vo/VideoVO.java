@@ -19,10 +19,13 @@ public class VideoVO {
 	private String id;
 	private String profile_savefilename;
 	private int v_report;
+	private String name;
+	private int vrcnt;
+	private int vucnt;
 	
 	public VideoVO() {}
 
-	public VideoVO(int v_num, String v_title, String id, int v_report,String genre_name,String age_grade_name,String v_savethumbnail) {
+	public VideoVO(int v_num, String v_title, String id, int v_report,String genre_name,String age_grade_name,String v_savethumbnail,String name, int vrcnt,int vucnt) {
 		super();
 		this.v_num = v_num;
 		this.v_title = v_title;
@@ -31,6 +34,9 @@ public class VideoVO {
 		this.genre_name = genre_name;
 		this.age_grade_name = age_grade_name;
 		this.v_savethumbnail = v_savethumbnail;
+		this.name = name;
+		this.vrcnt = vrcnt;
+		this.vucnt = vucnt;
 	}
 
 	public VideoVO(int v_num, String v_title, String v_content, String v_regdate, int v_hit, String v_orgfilename,
@@ -95,6 +101,31 @@ public class VideoVO {
 		this.profile_savefilename=profile_savefilename;
 	}
 	
+	
+	public int getVrcnt() {
+		return vrcnt;
+	}
+
+	public void setVrcnt(int vrcnt) {
+		this.vrcnt = vrcnt;
+	}
+
+	public int getVucnt() {
+		return vucnt;
+	}
+
+	public void setVucnt(int vucnt) {
+		this.vucnt = vucnt;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getV_report() {
 		return v_report;
 	}

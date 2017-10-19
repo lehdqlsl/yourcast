@@ -16,9 +16,10 @@
 	
 	<select id="getListAdmin" resultType="video" parameterType="hashmap">
 		select * from
-		(select aa.v_num,m.id,v.v_title,aa.v_report,v.v_savethumbnail,g.genre_name,a.age_grade_name,rownum rnum from 
-		(select v_num,count(v_num) v_report from video_report group by v_num order by v_report desc)aa, video v, member m,genre g,age_grade a
-		where aa.v_num=v.v_num and v_delete=0 and m.m_num=v.m_num and a.age_grade_num=v.age_grade_num and g.genre_num=v.genre_num)
+		(select b.*,rownum rnum from
+		(select aa.v_num,m.id,v.v_title,aa.v_report,v.v_savethumbnail,g.genre_name,a.age_grade_name from 
+		(select v_num,count(v_num) v_report from video_report group by v_num)aa, video v, member m,genre g,age_grade a
+		where aa.v_num=v.v_num and v_delete=0 and m.m_num=v.m_num and a.age_grade_num=v.age_grade_num and g.genre_num=v.genre_num order by v_report desc)b)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	

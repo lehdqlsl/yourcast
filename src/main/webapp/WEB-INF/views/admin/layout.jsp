@@ -17,6 +17,8 @@
 <!-- Bootstrap core CSS     -->
 <link href="<c:url value='/resources/admin/css/bootstrap.min.css'/>" rel="stylesheet" />
 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <!-- Animation library for notifications   -->
 <link href="<c:url value='/resources/admin/css/animate.min.css'/>" rel="stylesheet"/>
 

@@ -21,19 +21,7 @@
 				<h1>
 					<b>${voMP.profile_title }</b>
 				</h1>
-				<div class="w3-section w3-bottombar w3-padding-16">
-					<span class="w3-margin-right">Filter:</span>
-					<button class="w3-button w3-black">ALL</button>
-					<button class="w3-button w3-white">
-						<i class="fa fa-diamond w3-margin-right"></i>Design
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-photo w3-margin-right"></i>Photos
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-map-pin w3-margin-right"></i>Art
-					</button>
-				</div>
+				<div class="w3-section w3-bottombar w3-padding-16" style="width: 1000px;"></div>
 			</div>
 		</header>
 
@@ -231,6 +219,20 @@
 		var sHTML = oEditors.getById["ir1"].getIR();
 		alert(sHTML);
 	}
+	
+	String.prototype.byteLength = function() {
+		var l = 0;
+		for (var idx = 0; idx < this.length; idx++) {
+			var c = escape(this.charAt(idx));
+			if (c.length == 1)
+				l++;
+			else if (c.indexOf("%u") != -1)
+				l += 3;
+			else if (c.indexOf("%") != -1)
+				l += c.length / 3;
+		}
+		return l;
+	};
 
 	$('#frm').submit(function() {
 		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
@@ -238,6 +240,9 @@
 		// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
 		if($("#v_title").val()==null || $("#v_title").val()==""){
 			alert("제목을 입력하세요.");
+			return false;
+		}else if($("#v_title").val().byteLength()>100){
+			alert("제목이 너무 깁니다!");
 			return false;
 		}else if(document.getElementById("ir1").value==null || document.getElementById("ir1").value==""){
 			alert("내용을 입력하세요.");

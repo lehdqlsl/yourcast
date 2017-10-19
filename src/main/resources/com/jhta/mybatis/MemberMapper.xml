@@ -18,7 +18,7 @@
 		select * from
 		(select a.*,rownum rnum from
 		(select m.*,g.grade_name,gg.gender_name from member m,grade g,gender gg
-		where m.grade_num=g.grade_num and m.gender_num=gg.gender_num order by m_num desc)a
+		where m.grade_num=g.grade_num and m.gender_num=gg.gender_num order by g.grade_num desc)a
 		<where>
 			<if test="name!=null">
 				name like '%' || #{keyword} || '%'
