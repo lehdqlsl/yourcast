@@ -302,6 +302,9 @@ public class BoardController {
 		model.addAttribute("clist", clist);
 		model.addAttribute("blist", blist);
 		
+		String board_name = request.getParameter("category_name");
+		model.addAttribute("board_name",board_name);
+		
 		MemberProfileVO voMP = mp_service.getInfo(mvo.getM_num());
 		model.addAttribute("voMP", voMP);
 		List<StarUseVO> flist = u_service.getHotfList(mvo.getM_num());
