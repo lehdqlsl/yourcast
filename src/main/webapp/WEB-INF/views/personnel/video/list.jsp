@@ -22,19 +22,7 @@
 				<h1>
 					<b>${voMP.profile_title }</b>
 				</h1>
-				<div class="w3-section w3-bottombar w3-padding-16">
-					<span class="w3-margin-right">Filter:</span>
-					<button class="w3-button w3-black">ALL</button>
-					<button class="w3-button w3-white">
-						<i class="fa fa-diamond w3-margin-right"></i>Design
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-photo w3-margin-right"></i>Photos
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-map-pin w3-margin-right"></i>Art
-					</button>
-				</div>
+				<div class="w3-section w3-bottombar w3-padding-16" style="width: 1000px;"></div>
 			</div>
 		</header>
 
@@ -83,7 +71,7 @@
 						location.href="<c:url value='/${requestScope.id}/video/update?v_num=" + v_num + "'/>";
 					}
 				});
-				$("#insert").on("click",function(){
+				$(".insert").on("click",function(){
 					location.href="<c:url value='/${requestScope.id}/video/insert'/>"
 				});
 			});
@@ -92,7 +80,10 @@
 		<h2 style="margin-left:30px;">동영상 리스트</h2>
 		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">Video List</p>
 		
+
+		
 		<br>
+		
 		
 		<form method="post" action="<c:url value='/${requestScope.id}/video/delete'/>" onsubmit="return deleteV()">
 		<!-- 
@@ -123,64 +114,61 @@
 			</c:forEach>
 		</table>
 		 -->
+		 <!-- 
 		 <c:if test="${err==null || err eq null}">	 
 			 <div style="float: left;margin-left:50px;"><input type="checkbox" id="chkAll" onclick="All()"></div>
 			 <br>
 		 </c:if>
+		  --> 
 		 <c:forEach var="vo" items="${list }">	
 
 		<div class="wrap_view">
-			<c:choose>
-				<c:when test="${err==null || err eq null}">
-					<div class="img_profile">
-						<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width:50px;" class="w3-round">
-					</div>
-					<div class="img_thumbnail">
-						<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
-							<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="height:180px;" class="w3-round">
-						</a>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="img_profile">
-						<img src="<c:url value='/resources/upload/default.jpg'/>" style="width:50px;" class="w3-round">
-					</div>
-					<div class="v_title">
-						${err }
-					</div>
-				</c:otherwise>			
-			</c:choose>
-			
+			<div class="img_profile">
+				<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width: 50px;height: 50px;border-radius: 25px;">
+			</div>
+			<div class="img_thumbnail">
+				<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
+					<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="height:130px;" class="w3-round">
+				</a>
+			</div>
 			<div class="v_article">
-				<div> ${id } &nbsp;&nbsp; ${vo.v_regdate }</div>
+				<div><span style="color: #1559ff;font-weight: bold;">${vo.name}</span>&nbsp;<span style="color: #4B4B4B;">(${id })&nbsp;&nbsp;&nbsp;${vo.v_regdate }</span></div>
 				<div class="v_title">
 					<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
 				</div>
 				<div class="view">${vo.v_content }</div>
 			</div>	
-			<span class="chk"><input type="checkbox" value="${vo.v_num }" name="chk"></span>	
+			<div class="watch_area">
+				<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vucnt }</b></span>
+				<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vrcnt}</b></span>
+			</div>	
+			<!-- 
+			<span class="chk"><input type="checkbox" value="${vo.v_num }" name="chk"></span>
+			 -->	
 		</div>
-
 		</c:forEach>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("p").css({"text-overflow":"ellipsis","white-space":"nowrap","overflow":"hidden"});
+			});
+		</script>
+		
 		<div style="padding-top:10px;">
 		<c:if test="${sessionScope.id==requestScope.id }">
+		<!-- 
 			<button type="submit" class="w3-button w3-black w3-round-large" style="float: right;margin-right:100px;"><i class="fa fa-trash-o"></i>삭제</button>
 			<button type="button" class="w3-button w3-black w3-round-large" id="update" style="float: right;margin-right:5px;"><i class="fa fa-cogs"></i>수정</button>
-			<button type="button" class="w3-button w3-black w3-round-large" id="insert" style="float: right;margin-right:5px;"><i class="fa fa-upload"></i>동영상업로드</button>
+		 -->
+			<button type="button" class="insert w3-button w3-black w3-round-large" style="float: right;margin-right:300px;"><i class="fa fa-upload"></i>동영상업로드</button>
 		</c:if>
 		</div>
 		</form>	
 		
-		<c:if test="${empty list}">
-			<script type="text/javascript">
-				$(function(){
-					$("#page").css("margin-left","550px");
-				});
-			</script>
-		</c:if>
-
+		<br><br>
+		
 		<!-- 페이징 -->
-		<div class="w3-bar" id="page" style="margin-left:450px;">
+		<div class="w3-bar-all w3-center" style="width:980px;">
 		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
 				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.startPageNum-1 }'/>" class="w3-bar-item w3-button w3-hover-black">이전</a>

@@ -334,8 +334,8 @@ public class InfoController {
 	@ResponseBody
 	public int category_Insert(@PathVariable(value = "id") String id, String keyword) {
 		int bj_num = m_sevice.getInfo(id).getM_num();
-		c_service.insert(new CategoryVO(0, keyword, 0, bj_num));
-		int category_num = c_service.getCategory_num(new CategoryVO(0, keyword, 0, bj_num));
-		return category_num;
+		c_service.insert(new CategoryVO(0, keyword, 0 ,bj_num));
+		CategoryVO vo = c_service.getCategory_num(new CategoryVO(0, keyword, 0, bj_num));
+		return vo.getCategory_num();
 	}
 }

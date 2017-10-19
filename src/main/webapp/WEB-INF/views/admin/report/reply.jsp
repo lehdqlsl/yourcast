@@ -37,10 +37,10 @@
                 <div class="card">
                     <div class="header">
                     
-                    	<a href="<c:url value='/admin/report/board'/>" style="color: inherit;">글신고</a>
-                    	<a href="#">덧글신고</a> 
-                    	<a href="<c:url value='/admin/report/video'/>" style="color: inherit;">동영상신고</a>
-                    	<a href="<c:url value='/admin/report/videoReply'/>" style="color: inherit;">동영상덧글신고</a>
+                    	<a href="<c:url value='/admin/report/board'/>" class="w3-bar-item w3-button" style="color: inherit;">글신고</a>
+                    	<a href="#" class="w3-bar-item w3-button" style="background-color: #cccccc;">덧글신고</a> 
+                    	<a href="<c:url value='/admin/report/video'/>" class="w3-bar-item w3-button" style="color: inherit;">동영상신고</a>
+                    	<a href="<c:url value='/admin/report/videoReply'/>" class="w3-bar-item w3-button" style="color: inherit;">동영상덧글신고</a>
                     	
                         <h4 class="title">덧글 신고 목록</h4>
                         <p class="category">BoardReply Report List</p>

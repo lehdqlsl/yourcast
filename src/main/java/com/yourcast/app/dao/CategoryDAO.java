@@ -38,7 +38,7 @@ public class CategoryDAO {
 		return sqlSession.selectList(NAMESPACE + ".getlist", m_num);
 	}
 	
-	public int getCategory_num(CategoryVO vo) {
+	public CategoryVO getCategory_num(CategoryVO vo) {
 		return sqlSession.selectOne(NAMESPACE + ".getCate_num", vo);
 	}
 }

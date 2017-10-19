@@ -191,7 +191,7 @@ public class VideoController {
 		map.put("endRow",pu.getEndRow());
 		
 		List<VideoVO> list = v_service.getMemberList(map);
-		model.addAttribute("list",list);
+		
 		model.addAttribute("pu",pu);
 		
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
@@ -199,9 +199,15 @@ public class VideoController {
 		List<StarUseVO> flist = u_service.getHotfList(voM.getM_num());
 		model.addAttribute("flist", flist);
 		
-		if(list.isEmpty()) {
-			model.addAttribute("err","동영상이 존재하지 않습니다.");
+		int vrcnt = 0;
+		int vucnt = 0;
+		for(VideoVO vvo:list) {
+			vrcnt = vr_service.getCount(vvo.getV_num());
+			vucnt = vu_service.getCount(vvo.getV_num());
+			vvo.setVrcnt(vrcnt);
+			vvo.setVucnt(vucnt);
 		}
+		model.addAttribute("list",list);
 		
 		return ".personnel.video.list";
 	}

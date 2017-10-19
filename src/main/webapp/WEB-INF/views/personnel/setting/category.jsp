@@ -39,7 +39,7 @@
 		</header>
 
 		<!-- 여기작성 -->
-		
+
 		<script type="text/javascript">
 			$(function(){
 				$("#c_delete").click(function(){
@@ -57,10 +57,16 @@
 						}
 					});
 				});
+
 				$("#c_insert").click(function(){
 					var opt = document.createElement("option");
 					var c_keyword = $("#c_keyword").val();
 					if(c_keyword==null || c_keyword==""){
+						alert("게시판명을 입력해주세요.");
+						return false;
+					}
+					if ($("#c_keyword").val().length > 10) {
+						alert("게시판 제목이 너무 깁니다. (한글 10글자이하, 영문 50자 이하의 제목만 입력가능합니다.)");
 						return false;
 					}
 					$.ajax({
@@ -69,10 +75,11 @@
 						success:function(data){
 							$("#menulist").append("<option value='" + data + "'>" + c_keyword + "</option>");
 							$("#c_keyword").focus().val("");
+							alert(c_keyword + " 게시판이 추가되었습니다.");
 						}
 					});
 				});
-			});				
+			});
 		</script>
 		
 		<div>
