@@ -17,6 +17,7 @@ public class BoardVO {
 
 	private int b_report;
 	private String bj_id;
+	private String profile_savefilename;
 
 	private int brcnt;// 댓글 개수
 	private int bucnt;// 좋아요 개수
@@ -25,7 +26,7 @@ public class BoardVO {
 	}
 
 	public BoardVO(int b_num, String b_title, String id, int b_report, String bj_id, int category_num,
-			String category_name) {
+			String category_name, String profile_savefilename) {
 		super();
 		this.b_num = b_num;
 		this.b_title = b_title;
@@ -34,6 +35,7 @@ public class BoardVO {
 		this.b_report = b_report;
 		this.category_num = category_num;
 		this.category_name = category_name;
+		this.profile_savefilename = profile_savefilename;
 	}
 
 	public BoardVO(int b_num, String b_title, String b_content, String b_regdate, int b_hit, int b_notice, int b_delete,
@@ -86,6 +88,16 @@ public class BoardVO {
 		this.category_num = category_num;
 		this.brcnt = brcnt;
 		this.bucnt = bucnt;
+	}
+
+	
+	
+	public String getProfile_savefilename() {
+		return profile_savefilename;
+	}
+
+	public void setProfile_savefilename(String profile_savefilename) {
+		this.profile_savefilename = profile_savefilename;
 	}
 
 	public String getName() {

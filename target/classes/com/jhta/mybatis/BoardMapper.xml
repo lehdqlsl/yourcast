@@ -19,9 +19,9 @@
 	</select>
 	<select id="getList" resultType="board" parameterType="hashmap">
 		<!--  select b.*,m.id from board b, member m where b.bj_num=m.m_num and b.category_num=#{category_num} and b.b_delete=0 order by b.b_num desc-->
-		select * from(select aa.*, rownum rnum from(select b.*,m.id,m.name,c.category_name from board b, member m, category c 
+		select * from(select aa.*, rownum rnum from(select b.*,m.id,m.name,mp.profile_savefilename,c.category_name from board b, member m, member_profile mp, category c 
 		<where>
-			b.m_num=m.m_num and b.category_num=c.category_num
+			b.m_num=m.m_num and b.category_num=c.category_num and m.m_num=mp.m_num
 			<if test="category_num == null">
 				and b.bj_num=#{bj_num}
 			</if>

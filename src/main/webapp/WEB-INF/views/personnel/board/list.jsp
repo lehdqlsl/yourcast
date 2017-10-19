@@ -21,13 +21,25 @@
 			
 		</header>
 		<!-- 여기작성 -->
-		<div style="margin-top: 38px;">
+		<c:choose>
+			<c:when test="${not empty board_name }">
+				<h2 style="margin-left:30px;">${board_name }</h2>
+			</c:when>
+			<c:otherwise>
+				<h2 style="margin-left:30px;">전체 글</h2>
+			</c:otherwise>
+		</c:choose>
+		
+		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">board List</p>
+		
+		<br>
+		
 		<c:forEach var="vo" items="${blist }">
 		<ul>
 			<li class="notice" id="list_item_26185726">
 				<div class="wrap_view">
 					<div class="img_profile">
-						<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>"
+						<img src="<c:url value='/resources/upload/${vo.profile_savefilename }'/>"
 							onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';" style="width: 50px;height: 50px;border-radius: 25px;">
 					</div>
 					<div class="v_article">
