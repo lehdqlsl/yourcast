@@ -29,7 +29,7 @@
 				and b.category_num=#{category_num} 
 			</if>
 		</where>
-		and b.b_delete=0 order by b.b_num desc) aa)
+		and b.b_delete=0 order by b.b_notice desc,b.b_num desc) aa)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	<update id="delete" parameterType="int">

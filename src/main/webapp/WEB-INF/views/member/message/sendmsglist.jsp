@@ -49,9 +49,10 @@
 	
 	<div>
 		<a href="<c:url value='/message/recv/list'/>" class="w3-bar-item w3-button" style="text-decoration: none;">받은 쪽지함</a>
-		<a href="<c:url value='/message/send/list'/>" class="w3-bar-item w3-button" style="text-decoration: none;" >보낸 쪽지함</a>
+		<a href="<c:url value='/message/send/list'/>" class="w3-bar-item w3-button" style="text-decoration: none;background-color: #cccccc;" >보낸 쪽지함</a>
 		<a href='#' onclick="window.open('<%=request.getContextPath()%>/message/send','_blank','resizable=no,width=400 height=400');" class="w3-bar-item w3-button" style="text-decoration: none;" >쪽지보내기</a>
 	</div>
+	<hr>
 	<div>
 		<table class="w3-table w3-table-all">
 			<tr>

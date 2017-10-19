@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/getinfo.css'/>?ver=3">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/getinfo.css'/>?ver=4">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -314,7 +314,10 @@
 			<div class="hit">조회수&nbsp;&nbsp;<b>${vo.b_hit }</b>&nbsp;&nbsp; | &nbsp;&nbsp;
 			<a href="#" id="report" class="w3-hover-opacity" style="text-decoration: none">신고</a></div>
 			<div id="info">
-				작성자 : <span style="color: #1559ff;font-weight: bold;">${vo.id }</span>&nbsp;&nbsp;${vo.b_regdate }<br><h4>${vo.b_title }</h4>
+				작성자 : <span style="color: #1559ff;font-weight: bold;">${vo.id }</span>&nbsp;&nbsp;${vo.b_regdate }<br>
+						<h4><c:if test="${vo.b_notice == 1 }">
+								<span class="noti"></span>
+							</c:if>${vo.b_title }</h4>
 				
 			</div>
 			<div id="b_content">
