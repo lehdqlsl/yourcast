@@ -2,7 +2,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<style>
+	a{
+		text-decoration: none;
+	}
+	.title{
+		overflow: hidden;
+	}
+</style>
 <div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;">
 	<div class="w3-container w3-padding-32" id="projects">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">공지사항</h3>
@@ -11,14 +18,16 @@
 		<table class="w3-table w3-table-all">
 			<tr>
 				<th style="width:10%;text-align: center">글번호</th>
-				<th style="width:70%;text-align: center">제목</th>
+				<th style="width:60%;text-align: center">제목</th>
 				<th style="width:20%;text-align: center">등록일</th>
+				<th style="width:10%;text-align: center">조회수</th>
 			</tr>
 			<c:forEach var="vo" items="${nlist }">
 				<tr>
 					<td style="width:10%;text-align: center">${vo.n_num }</td>
-					<td style="width:70%;text-align: center"><a href="<c:url value='/member/notice/getInfo?n_num=${vo.n_num }&pageNum=${pu.pageNum }'/>">${vo.n_title }</a></td>
+					<td style="width:60%;text-align: center" class="title"><a href="<c:url value='/member/notice/getInfo?n_num=${vo.n_num }&pageNum=${pu.pageNum }'/>">${vo.n_title }</a></td>
 					<td style="width:20%;text-align: center">${vo.n_regdate }</td>
+					<td style="width:10%;text-align: center">${vo.n_hit }</td>
 				</tr>
 			</c:forEach>
 		</table>
