@@ -13,7 +13,7 @@
     
     <span class="w3-text-grey" id="id">${requestScope.id}</span>
     <c:if test="${requestScope.id==sessionScope.id}">	
-    	&nbsp&nbsp<span><a href="<c:url value='/${requestScope.id }/setting/info'/>" style="text-decoration: none;" class="fa fa-cog w3-hover-opacity"></a></span>
+    	&nbsp&nbsp<span><a href="<c:url value='/${requestScope.id }/setting/info'/>" style="text-decoration: none;" class="fa fa-cog w3-hover-opacity"> 관리</a></span>
     </c:if>
     
   </div>

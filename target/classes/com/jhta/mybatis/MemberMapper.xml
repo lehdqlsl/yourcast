@@ -5,7 +5,7 @@
 <mapper namespace="com.jhta.mybatis.MemberMapper">
 	<insert id="insert" parameterType="member">
 		insert into member
-		values(seq_m_num.nextval,#{id},#{pwd},#{name},sysdate,#{money},sysdate,#{star_candy},#{gender_num},#{grade_num})
+		values(seq_m_num.nextval,#{id},#{pwd},#{name},#{birth},#{money},sysdate,#{star_candy},#{gender_num},#{grade_num})
 	</insert>
 	<update id="update" parameterType="member">
 		update member set
@@ -18,7 +18,7 @@
 		select * from
 		(select a.*,rownum rnum from
 		(select m.*,g.grade_name,gg.gender_name from member m,grade g,gender gg
-		where m.grade_num=g.grade_num and m.gender_num=gg.gender_num order by m_num desc)a
+		where m.grade_num=g.grade_num and m.gender_num=gg.gender_num order by g.grade_num desc)a
 		<where>
 			<if test="name!=null">
 				name like '%' || #{keyword} || '%'

@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript"
 	src="<c:url value='/resources/se2/js/HuskyEZCreator.js'/>"></script>
-
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -21,91 +18,72 @@
 				<h1>
 					<b>${voMP.profile_title }</b>
 				</h1>
-				<div class="w3-section w3-bottombar w3-padding-16" style="width: 1000px;"></div>
+				<div class="w3-section w3-bottombar w3-padding-16">
+					<span class="w3-margin-right">Filter:</span>
+					<button class="w3-button w3-black">ALL</button>
+					<button class="w3-button w3-white">
+						<i class="fa fa-diamond w3-margin-right"></i>Design
+					</button>
+					<button class="w3-button w3-white w3-hide-small">
+						<i class="fa fa-photo w3-margin-right"></i>Photos
+					</button>
+					<button class="w3-button w3-white w3-hide-small">
+						<i class="fa fa-map-pin w3-margin-right"></i>Art
+					</button>
+				</div>
 			</div>
 		</header>
-		
-		<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#cancel").on("click",function(){
-					location.href="<c:url value='/${requestScope.id}/video/list'/>";
+			$(function() {
+				$("#imgfile").change(function() {
+					if (this.files && this.files[0]) {
+						$("#br").empty();
+						var reader = new FileReader();
+						$("#br").append("<br>");
+						reader.onload = function(e) {
+							$('#imgLogo').attr('src', e.target.result);
+						}
+						reader.readAsDataURL(this.files[0]);
+					}
 				});
-				$("#imgfile").change(function () {
-		            if (this.files && this.files[0]) {
-		            	$("#br").empty();
-		                var reader = new FileReader();
-		                $("#br").append("<br>");
-		                reader.onload = function (e) {
-		                    $('#imgLogo').attr('src', e.target.result);
-		                }
-		                reader.readAsDataURL(this.files[0]);
-		            }
-		        });
 			});
 		</script>
-
 		<!-- 여기작성 -->
+		<div>
+			<a href="<c:url value='/${requestScope.id}/setting/info'/>"
+				class="w3-bar-item w3-button" style="text-decoration: none;">기본정보관리</a>
+			<a href="<c:url value='/${requestScope.id}/setting/category'/>"
+				class="w3-bar-item w3-button" style="text-decoration: none;">게시판관리</a>
+			<a href="<c:url value='/${requestScope.id}/setting/main'/>"
+				class="w3-bar-item w3-button" style="text-decoration: none;">대문관리</a>
+			<a href="<c:url value='/${requestScope.id}/setting/fanlist'/>"
+				class="w3-bar-item w3-button" style="text-decoration: none;">팬
+				목록</a> <a href="<c:url value='/${requestScope.id}/setting/blacklist'/>"
+				class="w3-bar-item w3-button" style="text-decoration: none;">블랙리스트</a>
+		</div>
 
-		<h2 style="margin-left:30px;">동영상 업로드</h2>
-		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">Video Upload</p>
-		
 		<br>
-		
-		<form id="frm" method="post" action="<c:url value="/${requestScope.id}/video/insert"/>" enctype="multipart/form-data">
-		<table class="w3-table w3-bordered">
-			<tr>
-				<th>장르</th>
-				<td>
-				<!-- 
-					<select name="genre">
-					<c:forEach var="gvo" items="${glist }">
-						<option value="${gvo.genre_num }">${gvo.genre_name }</option>
-					</c:forEach>
-					</select>
-				-->
-				<c:forEach var="gvo" items="${glist }">
-					<c:choose>
-						<c:when test="${gvo.genre_num==1}">
-							<input type="radio"  name="genre_num" checked="checked" value="${gvo.genre_num }">${gvo.genre_name }
-						</c:when>
-						<c:otherwise>
-							<input type="radio"  name="genre_num" value="${gvo.genre_num }">${gvo.genre_name }
-							<c:if test="${gvo.genre_num%10==0}">		
-								<br>
-							</c:if>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				</td>
-			</tr>
-			<tr>
-				<th>관람등급</th>
-				<td><input type="checkbox" name="age_grade_num" value="2">&nbsp;&nbsp;성인</td>
-			</tr>
-			<tr>
-				<th>제목</th><td><input type="text" name="v_title" id="v_title"><td>
-			</tr>
-			<tr>
-				<th>내용</th><td><textarea name="v_content" id="ir1" rows="10" cols="100"
-							style="width: 766px; height: 412px; display: none;"></textarea></td>
-			</tr>
-			<tr>
-				<th>동영상</th><td><input type="file" name="vfile" id="vfile"></td>
-			</tr>
-			<tr>
-				<th>썸네일</th><td><input type="file" name="imgfile" id="imgfile"><span id="br"></span><img src="#" height="100" id="imgLogo"></td>
-			</tr>
-			<tr>
-				<th colspan="2" style="text-align:center;"><button type="submit" class="w3-button w3-black w3-round-large"><i class="fa fa-upload"></i>업로드</button>
-				<button type="reset" class="w3-button w3-black w3-round-large"><i class="fa fa-refresh"></i>다시입력</button>
-				<button type="button" id="cancel" class="w3-button w3-black w3-round-large"><i class="fa fa-times"></i>취소</button></th>
-			</tr>
-		</table>
-		</form>
-		
-		<!-- 작성END -->
 
+		<h2 style="margin-left: 30px;">대문 관리</h2>
+
+		<p style="margin-left: 30px; margin-top: -10px; color: #9A9A9A">메인페이지의
+			내용을 수정할 수 있습니다.</p>
+
+		<br>
+
+		<div style="margin-left: 30px;">
+			<form method="post"
+				action='<c:url value="/${requestScope.id}/setting/main"/>'
+				id="target">
+				<textarea name="content" id="ir1" rows="10" cols="100"
+					style="width: 1000px; height: 600px; display: none;">${voMP.profile_content }</textarea>
+			</form>
+			<!-- 작성END -->
+							<div class="w3-bar-all w3-center">
+					<button type="submit" form="target" value="Submit"
+						class="w3-button w3-black w3-round-large">확인</button>
+				</div>
+		</div>
 		<footer class="w3-container w3-padding-32 w3-dark-grey">
 			<div class="w3-row-padding">
 				<div class="w3-third">
@@ -160,11 +138,7 @@
 			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
 				title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a>
 		</div>
-
-
-
 	</div>
-	
 </body>
 <script type="text/javascript">
 	var oEditors = [];
@@ -201,7 +175,8 @@
 		var sHTML = oEditors.getById["ir1"].getIR();
 		alert(sHTML);
 	}
-	
+
+	//글자 바이트
 	String.prototype.byteLength = function() {
 		var l = 0;
 		for (var idx = 0; idx < this.length; idx++) {
@@ -216,27 +191,25 @@
 		return l;
 	};
 
-	$('#frm').submit(function() {
-		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
+	$('#target').submit(function(event) {
 
+		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
 		// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-		if($("#v_title").val()==null || $("#v_title").val()==""){
-			alert("제목을 입력하세요.");
-			return false;
-		}else if($("#v_title").val().byteLength()>100){
+		var content = document.getElementById("ir1").value;
+		var title = document.getElementById("title").value;
+		console.log("내용 : " + content);
+		if (content == null || content == "<p>&nbsp;</p>") {
+			alert("내용을 입력하세요!");
+			event.preventDefault();
+		} else if (title == null || title == "") {
+			alert("제목을 입력하세요!");
+			event.preventDefault();
+		} else if (title.byteLength() > 100) {
 			alert("제목이 너무 깁니다!");
-			return false;
-		}else if(document.getElementById("ir1").value==null || document.getElementById("ir1").value==""){
-			alert("내용을 입력하세요.");
-			return false;
-		}else if($("#vfile").val()==null || $("#vfile").val()==""){
-			alert("동영상을 선택하세요.");
-			return false;
-		}else if($("#imgfile").val()==null || $("#imgfile").val()==""){
-			alert("썸네일을 선택하세요");
-			return false;
+			event.preventDefault();
 		} else {
 			try {
+				alert("대문설정이 완료되었습니다.");
 				elClickedObj.form.submit();
 			} catch (e) {
 			}

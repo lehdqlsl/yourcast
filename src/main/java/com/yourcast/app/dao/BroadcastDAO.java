@@ -37,4 +37,8 @@ public class BroadcastDAO {
 	public int update(BroadcastVO vo) {
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
+
+	public List<BroadcastVO> getList(int genre_num) {
+		return sqlSession.selectList(NAMESPACE + ".getlist1",genre_num);
+	}
 }

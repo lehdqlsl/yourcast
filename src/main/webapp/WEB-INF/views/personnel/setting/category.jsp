@@ -27,7 +27,7 @@
 		</header>
 
 		<!-- 여기작성 -->
-		
+
 		<script type="text/javascript">
 			$(function(){
 				$("#c_delete").click(function(){
@@ -45,10 +45,16 @@
 						}
 					});
 				});
+
 				$("#c_insert").click(function(){
 					var opt = document.createElement("option");
 					var c_keyword = $("#c_keyword").val();
 					if(c_keyword==null || c_keyword==""){
+						alert("게시판명을 입력해주세요.");
+						return false;
+					}
+					if ($("#c_keyword").val().length > 10) {
+						alert("게시판 제목이 너무 깁니다. (한글 10글자이하, 영문 50자 이하의 제목만 입력가능합니다.)");
 						return false;
 					}
 					$.ajax({
@@ -57,16 +63,17 @@
 						success:function(data){
 							$("#menulist").append("<option value='" + data + "'>" + c_keyword + "</option>");
 							$("#c_keyword").focus().val("");
+							alert(c_keyword + " 게시판이 추가되었습니다.");
 						}
 					});
 				});
-			});				
+			});
 		</script>
 		
 		<div>
 			<a href="<c:url value='/${requestScope.id}/setting/info'/>" class="w3-bar-item w3-button" style="text-decoration: none;">기본정보관리</a>
 			<a href="<c:url value='/${requestScope.id}/setting/category'/>" class="w3-bar-item w3-button" style="text-decoration: none;" ><span style="color: #337AB7; font-weight: bold;">게시판관리</span></a>
-			<a href="#" class="w3-bar-item w3-button" style="text-decoration: none;">대문관리</a>
+			<a href="<c:url value='/${requestScope.id}/setting/main'/>" class="w3-bar-item w3-button" style="text-decoration: none;">대문관리</a>
 			<a href="<c:url value='/${requestScope.id}/setting/fanlist'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">팬 목록</a>
 			<a href="<c:url value='/${requestScope.id}/setting/blacklist'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">블랙리스트</a>
 		</div>

@@ -31,7 +31,60 @@ h3 {
 <div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
 	<!-- 내용 -->
 	<div class="w3-container w3-padding-32" id="projects">
-		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">전체</h3>
+		<c:choose>
+			<c:when test="${genre_num == 0 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">전체</h3>
+			</c:when>
+			<c:when test="${genre_num == 1 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">게임</h3>
+			</c:when>
+			<c:when test="${genre_num == 2 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">모바일게임</h3>
+			</c:when>
+			<c:when test="${genre_num == 3 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">스포츠</h3>
+			</c:when>
+			<c:when test="${genre_num == 4 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">토크/캠방</h3>
+			</c:when>
+			<c:when test="${genre_num == 5 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">먹방/쿡방</h3>
+			</c:when>
+			<c:when test="${genre_num == 6 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">펫방</h3>
+			</c:when>
+			<c:when test="${genre_num == 7 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">음악</h3>
+			</c:when>
+			<c:when test="${genre_num == 8 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">학습</h3>
+			</c:when>
+			<c:when test="${genre_num == 9 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">생활/정보</h3>
+			</c:when>
+			<c:when test="${genre_num == 10 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">시사/현장</h3>
+			</c:when>
+			<c:when test="${genre_num == 11 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">더빙/라디오</h3>
+			</c:when>
+			<c:when test="${genre_num == 12 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">주식/금융</h3>
+			</c:when>
+			<c:when test="${genre_num == 13 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">애니</h3>
+			</c:when>
+			<c:when test="${genre_num == 14 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">지상파/케이블</h3>
+			</c:when>
+			<c:when test="${genre_num == 15 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">음악(스트리밍)</h3>
+			</c:when>
+			<c:when test="${genre_num == 16 }">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">성인</h3>
+			</c:when>
+		</c:choose>
+
 	</div>
 
 	<c:set var="doneLoop" value="false" />
@@ -47,53 +100,53 @@ h3 {
 						<div class="w3-col l3 m6 w3-margin-bottom">
 
 							<div class="w3-display-container">
-								<a
-									href="http://192.168.0.4:8082/app/bs/${blist[status2.index].id}" style=" text-decoration: none !important;">
-									<img
+								<c:choose>
+									<c:when test="${blist[status2.index].age_grade_num == 1}">
+									<a
+									href="http://192.168.0.4:8082/app/bs/${blist[status2.index].id}"
+									style="text-decoration: none !important;"> <img
 									src="http://192.168.0.31:3030/${blist[status2.index].stream_key }.png"
-									class = "w3-round-large w3-border w3-hover-opacity"
+									class="w3-round-large w3-border w3-hover-opacity"
 									style="width: 100%;">
-
-																
-								  <div class="w3-container">
-								      <h5><b>${blist[status2.index].broadcast_title}</b></h5></a>
-								      <p><a href="http://192.168.0.4:8082/app/${blist[status2.index].id}" class="w3-hover-opacity" style="color: #328fde;text-decoration: none;">${blist[status2.index].name}</a>
-											시청자수 ${blist[status2.index].cnt}</p>
-								    </div>
-
+									</c:when>
+									<c:otherwise>
+										<a
+									href="http://192.168.0.4:8082/app/bs/${blist[status2.index].id}"
+									style="text-decoration: none !important;"> <img
+									src="<c:url value='/resources/upload/adult.png'/>"
+									class="w3-round-large w3-border w3-hover-opacity"
+									style="width: 100%;">
+									</c:otherwise>
+								</c:choose>
+									<div class="w3-container">
+										<h5>
+											<b>${blist[status2.index].broadcast_title}</b>
+										</h5></a>
+								<p>
+									<a
+										href="http://192.168.0.4:8082/app/${blist[status2.index].id}"
+										class="w3-hover-opacity"
+										style="color: #328fde; text-decoration: none;">${blist[status2.index].name}</a>
+									시청자수 ${blist[status2.index].cnt}
+								</p>
 							</div>
+
 						</div>
-						<c:if test="${status2.index == requestScope.end}">
-							<c:set var="doneLoop" value="true" />
-						</c:if>
-					</c:if>
-				</c:forEach>
 			</div>
-		</c:forEach>
+			<c:if test="${status2.index == requestScope.end}">
+				<c:set var="doneLoop" value="true" />
+			</c:if>
 	</c:if>
-
-	<!-- About Section -->
-	<div class="w3-container w3-padding-32" id="about">
-		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">About</h3>
-		<p>test</p>
-	</div>
-
-	
-
-	<!-- Contact Section -->
-	<div class="w3-container w3-padding-32" id="contact">
-		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact</h3>
-		<p>Lets get in touch and talk about your and our next project.</p>
-		<form action="/action_page.php" target="_blank">
-			<input class="w3-input" type="text" placeholder="Name" required name="Name"> 
-			<input class="w3-input w3-section" type="text" placeholder="Email" required name="Email">
-			<input	class="w3-input w3-section" type="text" placeholder="Subject" required name="Subject"> 
-			<input class="w3-input w3-section" type="text" placeholder="Comment" required name="Comment">
-			<button class="w3-button w3-black w3-section" type="submit"><i class="fa fa-paper-plane"></i> SEND MESSAGE</button>
-		</form>
-	</div>
-
-	<!-- End page content -->
+	</c:forEach>
 </div>
+</c:forEach>
+</c:if>
+<script>
+	var time = Math.random()*1000;
+	$("img").each(function(){
+		var src = $(this).attr('src')+"?time="+time;
+		$(this).attr('src', src);
+	});
+</script>
 
 

@@ -7,21 +7,19 @@
 
 .wrap_view {
 	border-bottom: 1px solid #CFCFCF;
-	width:1200px; 
-	height:200px;
-	margin:auto;
-	margin-top:10px;
+	width:980px; 
+	margin-left: 40px;
+	margin-bottom:10px;
 }
 
 .img_profile {
 	float: left;
-	margin-left: 30px;
 	margin-right: 10px;
 }
 
 .img_thumbnail{
 	float: right;
-	margin-right: 50px;
+	margin-right: 20px;
 }
 
 .chk{
@@ -36,7 +34,14 @@
 }
 
 .view{
-	margin-left: 90px;
-	margin-top: 20px;
+	margin-left: 10px;
+	width:200px;
+	height:32px;
 	text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+}
+
+.watch_area {
+	margin-left: 10px;
+	margin-top: 30px;
+	margin-bottom: 10px;
 }

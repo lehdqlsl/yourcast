@@ -37,7 +37,7 @@ public class CategoryService {
 		return dao.getList(m_num);
 	}
 	
-	public int getCategory_num(CategoryVO vo) {
+	public CategoryVO getCategory_num(CategoryVO vo) {
 		return dao.getCategory_num(vo);
 	}
 }

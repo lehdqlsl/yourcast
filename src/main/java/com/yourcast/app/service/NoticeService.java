@@ -27,4 +27,7 @@ public class NoticeService {
 	public int getCount() {
 		return dao.getCount();
 	}
+	public int hit(int n_num) {
+		return dao.hit(n_num);
+	}
 }

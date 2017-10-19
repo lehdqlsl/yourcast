@@ -26,7 +26,7 @@
 		select * from category where m_num = #{m_num} and category_delete = 0
 	</select>
 	
-	<select id="getCate_num" parameterType="category" resultType="int">
+	<select id="getCate_num" parameterType="category" resultType="category">
 		select * from category where m_num=#{m_num} and category_name=#{category_name}
 	</select>
 

@@ -24,6 +24,10 @@ public class BroadcastService {
 	public List<BroadcastVO> getList() {
 		return dao.getList();
 	}
+	
+	public List<BroadcastVO> getList(int genre_num) {
+		return dao.getList(genre_num);
+	}
 
 	public int insert(BroadcastVO vo) {
 		return dao.insert(vo);

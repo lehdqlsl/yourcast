@@ -5,9 +5,9 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.min.css'/>?ver=1">
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.theme.min.css'/>?ver=1">
 <style>
-#v_delete{
-	float: right
-}
+	a{
+		text-decoration: none;
+	}
 </style>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script>
 <script>
@@ -33,7 +33,11 @@
 						arr.push(id);
 					}
 				});
-				location.href="<c:url value='/message/send/deleteList?arr="+arr+"'/>";
+				if(arr.length>0){
+					location.href="<c:url value='/message/send/deleteList?arr="+arr+"'/>";
+				}else{
+					alert("쪽지를 선택해주세요!");
+				}
 			}
 		});
 	});
@@ -75,7 +79,7 @@
 	</div>
 	<br>
 	<div>
-		<button class="w3-button w3-black w3-round-large" id="v_delete"><i class='fa fa-trash-o' aria-hidden='true'></i>삭제</button>
+		<button id="v_delete" class="w3-btn w3-white w3-border w3-border-blue w3-round-large" style="margin-left: 882px;"><span style="color: #0072ff"><i class='fa fa-trash-o' aria-hidden='true'></i>삭제</span></button>
 	</div>
 	<br>
 	<br>

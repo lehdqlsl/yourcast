@@ -24,9 +24,10 @@
 	
 	<select id="getMemberList" resultType="video" parameterType="hashmap">
 		select * from
-		(select b.*,g.GENRE_NAME,a.AGE_GRADE_NAME,rownum rnum 
-		from genre g,age_grade a,(select * from video where m_num=#{m_num} and v_delete=0 order by v_num desc) b 
-		where g.genre_num=b.genre_num and a.age_grade_num=b.age_grade_num)
+		(select b.*,m.name,g.GENRE_NAME,a.AGE_GRADE_NAME,vr.v_reply_cnt,rownum rnum 
+		from genre g,age_grade a,(select * from video where m_num=#{m_num} and v_delete=0 order by v_num desc) b,
+		member m,(select v_num,NVL(count(vr_num),0) v_reply_cnt from video_reply group by v_num)vr
+		where g.genre_num=b.genre_num and a.age_grade_num=b.age_grade_num and b.m_num=m.m_num and vr.v_num(+)=b.v_num)
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>	
 	</select>
 	<select id="getGenreList" resultType="video" parameterType="hashmap">
