@@ -89,7 +89,11 @@ h3 {
 
 	<c:set var="doneLoop" value="false" />
 	<c:set var="vo" value="${requestScope.blist }" />
-
+	<c:if test="${empty blist}">
+		<div class="w3-row-padding ">
+			<h5 style="font-weight: bold;">해당 카테고리에 대한 방송이 존재하지 않습니다.</h5>
+		</div>
+	</c:if>
 	<c:if test="${requestScope.cnt>0}">
 		<c:forEach varStatus="status1" begin="0" end="${requestScope.cnt }"
 			step="1">
@@ -98,7 +102,6 @@ h3 {
 					end="${status1.index*4+3}" step="1">
 					<c:if test="${not doneLoop}">
 						<div class="w3-col l3 m6 w3-margin-bottom">
-
 							<div class="w3-display-container">
 								<c:choose>
 									<c:when test="${blist[status2.index].age_grade_num == 1}">

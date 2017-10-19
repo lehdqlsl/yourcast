@@ -66,4 +66,9 @@
 	<select id="allCount" resultType="int">
 		select NVL(count(m_num),0) cnt from video where v_delete=0
 	</select>
+	<select id="bookmarkList" parameterType="int" resultType="video">
+		select * from(select aa.* from
+		(select v.*,m.id from video v, member m,(select * from bookmark where m_num=#{m_num}) b 
+		where v.m_num=m.m_num and v.v_num=b.v_num and v.v_delete=0 order by v.v_num desc) aa)
+	</select>
 </mapper>

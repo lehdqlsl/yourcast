@@ -221,6 +221,12 @@
 		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
 
 		// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+		var videoname = document.getElementById('vfile').value;
+		videoname = videoname.slice(videoname.indexOf(".") + 1).toLowerCase();
+		
+		var imgname = document.getElementById('imgfile').value;
+		imgname = imgname.slice(imgname.indexOf(".") + 1).toLowerCase(); 
+		
 		if($("#v_title").val()==null || $("#v_title").val()==""){
 			alert("제목을 입력하세요.");
 			return false;
@@ -236,7 +242,13 @@
 		}else if($("#imgfile").val()==null || $("#imgfile").val()==""){
 			alert("썸네일을 선택하세요");
 			return false;
-		} else {
+		} else if(imgname != "jpg" && imgname != "png" &&  imgname != "gif" &&  imgname != "bmp"){
+			alert('썸네일은 이미지 파일(jpg, png, gif, bmp)만 등록 가능합니다.');
+			return false;
+		}else if(videoname != "mp4"){
+			alert('동영상은 확장자가 mp4인 파일만 등록 가능합니다.');
+			return false;
+		}else {
 			try {
 				elClickedObj.form.submit();
 			} catch (e) {

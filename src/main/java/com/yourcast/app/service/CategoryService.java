@@ -40,4 +40,13 @@ public class CategoryService {
 	public CategoryVO getCategory_num(CategoryVO vo) {
 		return dao.getCategory_num(vo);
 	}
+	
+	public boolean isCategory(CategoryVO vo) {
+		CategoryVO cvo = dao.getCategory_num(vo);
+		if(cvo != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

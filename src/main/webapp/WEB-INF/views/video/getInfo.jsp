@@ -320,13 +320,48 @@ dd.name {
 				}
 			}
 		});
+		//즐겨찾기
+		$("#bookmark").click(function(){
+			var color=$("#star").css("color");
+			//alert(color);
+			if(color == "rgb(255, 165, 0)"){//즐겨찾기 취소
+				$.ajax({
+					url:"<c:url value='/bookmark/delete?v_num=${vvo.v_num}'/>",
+					dataType:"json",
+					success:function(data){
+						
+					}
+				});
+				$("#star").css("color","#BDBDBD");
+			}else{//즐겨찾기 등록
+				$.ajax({
+					url:"<c:url value='/bookmark/insert?v_num=${vvo.v_num}'/>",
+					dataType:"json",
+					success:function(data){
+						
+					}
+				});
+				$("#star").css("color","orange");
+			}
+		});
 	});
 </script>
 
 <div class="w3-main" style="margin-left: 300px; margin-top: 54px;">
 	<video controls="controls" style="width: 1300px;height:735px; ">
 		<source src="<c:url value='/resources/upload/${vvo.v_savefilename}'/>" type="video/mp4">
-	</video>	
+	</video>
+	<div>
+		<c:choose>
+			<c:when test="${bookmark==true }">
+				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:orange" id="star"></i>&nbsp;즐겨찾기</button>
+			</c:when>
+			<c:otherwise>
+				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:#BDBDBD" id="star"></i>&nbsp;즐겨찾기</button>
+			</c:otherwise>
+		</c:choose>
+		<hr style="width: 81%">
+	</div>	
 	<!-- 동영상 정보 -->
 	<div class="info">
 		<div class="bjlogo">
@@ -337,6 +372,7 @@ dd.name {
 			<dt>${vvo.v_title }</dt>
 		</dl>
 	</div>
+	
 	<div class="etc">
 		<c:choose>
 			<c:when test="${sessionScope.id eq vvo.id }">

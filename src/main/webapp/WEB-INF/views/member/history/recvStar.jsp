@@ -73,10 +73,12 @@ em {
 		<span id="preRecv"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingRecv">
-		
-				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-					<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black"><span>${i }</span></a>
-				</c:forEach>
+		<c:if test="${err!=null }">
+			<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black">1</a>
+		</c:if>
+			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+				<a href="#" class="pagingR w3-bar-item w3-button w3-hover-black">${i }</a>
+			</c:forEach>
 			
 		</span>
 		
@@ -123,11 +125,13 @@ em {
 	</c:if>
 	</table>
 	
-	<div class="w3-bar-all w3-center" id="pageX">
+	<div class="w3-bar-all w3-center">
 		<span id="preEx"><a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a></span>
 		
 		<span id="pagingEx">
-
+		<c:if test="${errr!=null }">
+			<a href="#" class="pagingE w3-bar-item w3-button w3-hover-black">1</a>
+		</c:if>
 		<c:forEach var="i" begin="${puEx.startPageNum }" end="${puEx.endPageNum }">
 			<a href="#" class="pagingE w3-bar-item w3-button w3-hover-black">${i }</a>
 		</c:forEach>
@@ -137,14 +141,6 @@ em {
 		<span id="nextEx"><a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a></span>
 	</div>
 	</div>
-	
-	<c:if test="${err!=null }">
-		<script type="text/javascript">
-			$(function(){
-				$("#pageX").css("margin-left","400px");
-			});
-		</script>
-	</c:if>
 
 	<br>
 		

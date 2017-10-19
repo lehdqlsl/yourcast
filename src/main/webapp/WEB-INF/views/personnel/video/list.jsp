@@ -121,33 +121,43 @@
 			 <br>
 		 </c:if>
 		  --> 
-		 <c:forEach var="vo" items="${list }">	
-
-		<div class="wrap_view">
-			<div class="img_profile">
-				<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width: 50px;height: 50px;border-radius: 25px;">
+		
+		<c:choose>
+			<c:when test="${empty list }">
+			<div class="wrap_view">
+				<h5 style="font-weight: bold;text-align: center;">해당 게시판에 영상이 존재하지 않습니다.</h5>
 			</div>
-			<div class="img_thumbnail">
-				<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
-					<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="height:130px;" class="w3-round">
-				</a>
-			</div>
-			<div class="v_article">
-				<div><span style="color: #1559ff;font-weight: bold;">${vo.name}</span>&nbsp;<span style="color: #4B4B4B;">(${id })&nbsp;&nbsp;&nbsp;${vo.v_regdate }</span></div>
-				<div class="v_title">
-					<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
+			</c:when>
+			<c:otherwise>
+			 <c:forEach var="vo" items="${list }">	
+				<div class="wrap_view">
+				<div class="img_profile">
+					<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width: 50px;height: 50px;border-radius: 25px;">
 				</div>
-				<div class="view">${vo.v_content }</div>
-			</div>	
-			<div class="watch_area">
-				<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vucnt }</b></span>
-				<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vrcnt}</b></span>
-			</div>	
-			<!-- 
-			<span class="chk"><input type="checkbox" value="${vo.v_num }" name="chk"></span>
-			 -->	
-		</div>
-		</c:forEach>
+				<div class="img_thumbnail">
+					<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
+						<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="height:130px;" class="w3-round">
+					</a>
+				</div>
+				<div class="v_article">
+					<div><span style="color: #1559ff;font-weight: bold;">${vo.name}</span>&nbsp;<span style="color: #4B4B4B;">(${id })&nbsp;&nbsp;&nbsp;${vo.v_regdate }</span></div>
+					<div class="v_title">
+						<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
+					</div>
+					<div class="view">${vo.v_content }</div>
+				</div>	
+				<div class="watch_area">
+					<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vucnt }</b></span>
+					<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vrcnt}</b></span>
+				</div>	
+				<!-- 
+				<span class="chk"><input type="checkbox" value="${vo.v_num }" name="chk"></span>
+				 -->	
+			</div>
+			</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		
 		
 		<script type="text/javascript">
 			$(function(){
@@ -178,6 +188,9 @@
 				<a href="#" class="w3-bar-item w3-button w3-hover-black">이전</a>
 			</c:otherwise>
 		</c:choose>
+			<c:if test="${err!=null }">
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">1</a>
+			</c:if>
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
 					<c:when test="${i==pu.pageNum }">

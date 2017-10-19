@@ -124,8 +124,7 @@ input[type="checkbox"]:checked + label:before {
 						
 						<label
 							for="check1"><span></span>성인방송 설정</label>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-
+							<br>
 						<div class="input_wrap off checkbox btn">
 							<c:choose>
 								<c:when test="${empty bvo.broadcast_pwd }">
@@ -154,11 +153,25 @@ input[type="checkbox"]:checked + label:before {
 <body>
 <script type="text/javascript">
 $(function() {
+ 	var val = $(':radio[name=genre_num]:checked').val();
+    if(val == 16){
+    	 $("input[name=frmAdult]").attr('checked', true) ;
+    }else{
+    	$("input[name=frmAdult]").attr('checked', false) ;
+    }
 	 $("#check3").change(function(){
 	        if($("#check3").is(":checked")){
 	            $("input[name=frmAccessCode]").attr("disabled",false);
 	        }else{
 	        	 $("input[name=frmAccessCode]").attr("disabled",true);
+	        }
+	    });
+	 $("input[type=radio][name=genre_num]").change(function(){
+		 	var val = $(':radio[name=genre_num]:checked').val();
+	        if(val == 16){
+	        	 $("input[name=frmAdult]").attr('checked', true) ;
+	        }else{
+	        	$("input[name=frmAdult]").attr('checked', false) ;
 	        }
 	    });
 	 $('#content').keyup(function (e){
@@ -200,8 +213,6 @@ $('#target').submit(function() {
 	sendmsg.pwd = pwd;
 	sendmsg.adult = adult;
 	wsocket.send( JSON.stringify(sendmsg));
-	
-
 });
 
 </script>

@@ -174,7 +174,7 @@
 		
 		<div style="margin-left:30px;">
 		
-		<table id="fanlist" class="w3-table w3-table-all">
+		<table id="fanlist" class="w3-table w3-table-all" style="width:980px;">
 			<thead>
 			<tr>
 				<th>팬 순위</th><th>팬아이디</th><th>팬이름</th><th>사용량</th>
@@ -199,14 +199,6 @@
 		</div>
 		
 		<br>
-		
-		<c:if test="${err!=null }">
-		<script type="text/javascript">
-				$(function(){
-					$("#paging").css("margin-left","550px");
-				});
-			</script>
-		</c:if>
 				
 		<!-- 
 		<div>
@@ -223,16 +215,8 @@
 		 -->
 
 		<!-- 페이징 -->
-		<div class="w3-bar" >
-		<div id="paging" style="margin-left:480px;">
-		<c:choose>
-			<c:when test="${pu.pageNum>1 }">
-				<a href="<c:url value='/${requestScope.id}/setting/fanlist?pageNum=${1 }'/>" class="w3-bar-item w3-button w3-hover-black">«</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-			</c:otherwise>
-		</c:choose>
+		<div class="w3-bar-all w3-center" style="width:980px;">
+		<div id="paging" style="margin-left:50px;">
 		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
 				<a href="<c:url value='/${requestScope.id}/setting/fanlist?pageNum=${pu.startPageNum-1 }'/>" class="w3-bar-item w3-button w3-hover-black">이전</a>
@@ -260,14 +244,6 @@
 			</c:when>
 			<c:otherwise>
 				<a href="#" class="w3-bar-item w3-button w3-hover-black">다음</a>
-			</c:otherwise>
-		</c:choose>
-		<c:choose>
-			<c:when test="${pu.startPageNum<pu.totalPageCount }">
-				<a href="<c:url value='/${requestScope.id}/setting/fanlist?pageNum=${pu.totalPageCount }'/>" class="w3-bar-item w3-button w3-hover-black">»</a>
-			</c:when>
-			<c:otherwise>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
 			</c:otherwise>
 		</c:choose>
 		</div>
