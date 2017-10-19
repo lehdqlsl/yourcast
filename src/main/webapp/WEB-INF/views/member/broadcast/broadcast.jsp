@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/radio.css'/>?ver=5">
 <style>
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -89,21 +90,22 @@ input[type="checkbox"]:checked + label:before {
 				</dl>
 				<dl>
 					<dt>방송 장르</dt>
+					<dd>
 					<br>
 					<c:forEach var="gvo" items="${glist }">
 						<c:choose>
 							<c:when test="${gvo.genre_num==bvo.genre_num}">
-								<input type="radio" name="genre_num" checked="checked"
-									value="${gvo.genre_num }">${gvo.genre_name }
+								<label style="font-family:굴림;font-size:13px;"><input type="radio" class="option-input radio" name="genre_num" value="${gvo.genre_num }" checked>${gvo.genre_name }</label>
 							</c:when>
 							<c:otherwise>
-								<input type="radio" name="genre_num" value="${gvo.genre_num }">${gvo.genre_name }
+								<label style="font-family:굴림;font-size:13px;"><input type="radio" class="option-input radio" name="genre_num" value="${gvo.genre_num }">${gvo.genre_name }</label>
 								<c:if test="${gvo.genre_num%10==0}">
 									<br>
 								</c:if>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
+					</dd>
 				</dl>
 				<dl>
 					<dt>방송 속성</dt>
@@ -143,7 +145,9 @@ input[type="checkbox"]:checked + label:before {
 					</dd>
 				</dl>
 			</div>
-			<input type="submit" class="w3-button w3-black w3-round-large" value="업데이트">
+			<button type="submit" form="target" value="Submit"
+				class="w3-button w3-border w3-round-large" style="background-color: #4C5870; float: left;"><i class="fa fa-check" style="color: white;"></i>
+				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;업데이트</span></button>
 		</form>
 	</div>
 </div>

@@ -65,7 +65,7 @@ label {
 }
 
 input[type="submit"] {
-  background: #009688;
+  background: #4C5870;
   border: 0;
   width: 350px;
   height: 40px;
@@ -76,7 +76,7 @@ input[type="submit"] {
   transition: background 0.3s ease-in-out;
 }
 input[type="submit"]:hover {
-  background: #60bab1;
+  background: #7D8BA8;
   animation-name: shake;
 }
 

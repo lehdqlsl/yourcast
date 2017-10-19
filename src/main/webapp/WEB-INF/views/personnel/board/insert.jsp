@@ -9,29 +9,17 @@
 
 		<!-- Header -->
 		<header id="portfolio">
-			<a href="#"><img src="/w3images/avatar_g2.jpg"
-				style="width: 65px;"
-				class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
 			<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
 				<h1>
-					<b>${voMP.profile_title }</b>
+					<a href="<c:url value='/${requestScope.id }'/>" class="getinfo">
+					<b>${voMP.profile_title }</b></a>
 				</h1>
-				<div class="w3-section w3-bottombar w3-padding-16">
-					<span class="w3-margin-right">Filter:</span>
-					<button class="w3-button w3-black">ALL</button>
-					<button class="w3-button w3-white">
-						<i class="fa fa-diamond w3-margin-right"></i>Design
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-photo w3-margin-right"></i>Photos
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-map-pin w3-margin-right"></i>Art
-					</button>
+				<div class="w3-section w3-bottombar w3-padding-16"  style="width: 1000px;">
 				</div>
 			</div>
+			
 		</header>
 
 		<!-- 여기작성 -->
@@ -62,7 +50,9 @@
 			<br>
 			<!-- <input type="submit" value="등록" id="reg"> -->
 			<div class="w3-bar-all w3-center">
-				<button type="submit" form="target" value="Submit" class="w3-button w3-black w3-round-large">등록</button>
+				<button type="submit" form="target" value="Submit"
+				class="w3-button w3-border w3-round-large" style="background-color: #4C5870;"><i class="fa fa-check" style="color: white;"></i>
+				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;등록</span></button>
 			</div>
 		</form>
 		<br>

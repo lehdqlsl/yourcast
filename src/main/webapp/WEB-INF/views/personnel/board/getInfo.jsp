@@ -5,9 +5,6 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/getinfo.css'/>?ver=5">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<style>
-</style>
 <script>
 	$(document).ready(function(){
 		//댓글 유효성 검사
@@ -188,7 +185,7 @@
 						if(data.result=="true") {
 							alert("이미 추천 하셨습니다");
 						} else {
-						  	$("#"+br_num).html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>" + data.replygetCount);
+						  	$("#"+br_num).html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>" + data.replygetCount + "</b>");
 						}
 					}
 				});

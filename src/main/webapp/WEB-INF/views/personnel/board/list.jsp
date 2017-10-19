@@ -13,7 +13,7 @@
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
 				<h1>
-					<a href="<c:url value='/${requestScope.id }'/>" class="list">
+					<a href="<c:url value='/${requestScope.id }'/>" class="getinfo">
 					<b>${voMP.profile_title }</b></a>
 				</h1>
 				<div class="w3-section w3-bottombar w3-padding-16"  style="width: 1000px;">
@@ -133,7 +133,7 @@
 		<!-- 작성END -->
 
 			<footer>
-				<div class="w3-light-grey w3-center w3-padding-24" style="width: 1000px; font-size: 11px; border-top: 1px solid #CFCFCF; margin-top: 100px; margin-left: 42px;">
+				<div class="w3-light-grey w3-center w3-padding-24" style="width: 1000px; font-size: 11px; border-top: 1px solid #CFCFCF; margin-top: 100px; margin-left: 300px;">
 					All Contents Copyright ©Your Cast...Co.,Ltd. All Rights Reserved.
 				</div>
 			</footer>

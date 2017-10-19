@@ -18,12 +18,13 @@
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
 				<h1>
-					<a href="<c:url value='/${requestScope.id }'/>" class="home">
+					<a href="<c:url value='/${requestScope.id }'/>" class="getinfo">
 					<b>${voMP.profile_title }</b></a>
 				</h1>
 				<div class="w3-section w3-bottombar w3-padding-16"  style="width: 1000px;">
 				</div>
 			</div>
+			
 		</header>
 
 		<!-- 여기작성 -->
@@ -52,7 +53,8 @@
 		</script>
 		 
 		 <div>
-			<a href="<c:url value='/${requestScope.id}/setting/info'/>" class="w3-bar-item w3-button" style="text-decoration: none;"><span style="color: #337AB7; font-weight: bold;">기본정보관리</span></a>
+			<a href="<c:url value='/${requestScope.id}/setting/info'/>" class="w3-bar-item w3-button" style="text-decoration: none;">
+			<span style="color: #337AB7; font-weight: bold;">기본정보관리</span></a>
 			<a href="<c:url value='/${requestScope.id}/setting/category'/>" class="w3-bar-item w3-button" style="text-decoration: none;" >게시판관리</a>
 			<a href="<c:url value='/${requestScope.id}/setting/main'/>" class="w3-bar-item w3-button" style="text-decoration: none;">대문관리</a>
 			<a href="<c:url value='/${requestScope.id}/setting/fanlist'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">팬 목록</a>

@@ -19,6 +19,18 @@
 body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Raleway", sans-serif
 }
+a.getinfo:link{
+	text-decoration: none;	
+}
+a.getinfo:visited{
+	text-decoration: none;	
+}
+a.getinfo:hover{
+	text-decoration: underline;
+}
+a.getinfo:active{
+	text-decoration: underline;
+}
 </style>
 </head>
 <!-- 메인페이지 레이아웃 -->

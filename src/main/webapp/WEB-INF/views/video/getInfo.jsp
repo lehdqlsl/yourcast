@@ -89,13 +89,13 @@ dd.name {
 						var vrucnt=$(this).find("vrucnt").text();
 						var p='';
 						if(id=="${sessionScope.id}"){
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+vr_regdate+"<br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-black w3-round-large vr_delete'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
-							"&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large vr_up' id='"+vr_num+"'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button>"+
+							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+							"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button>"+
 							"<span style='visibility:hidden;'>"+vr_num+"</span>"+
 							"</p>";
 						}else{
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+vr_regdate+"<br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-red w3-round-large vr_report'>"+
-							"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large vr_up' id='"+vr_num+"'>"+
+							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report' style='float:right;'>"+
+							"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'>"+
 							"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button><span style='visibility:hidden;'>"+vr_num+"</span></p>";
 						}
 						$.ajax({
@@ -131,14 +131,14 @@ dd.name {
 							var vrucnt=$(this).find("vrucnt").text();
 							var p='';
 							if(id=="${sessionScope.id}"){
-								p="<p class='reply'>"+id+"&nbsp;&nbsp;"+vr_regdate+"<br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-black w3-round-large vr_delete'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 								
-								"&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large vr_up' id='"+vr_num+"'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button>"+
+								"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button>"+
 								"<span style='visibility:hidden;'>"+vr_num+"</span>"+
 								"</p>";
 							}else{
-								p="<p class='reply'>"+id+"&nbsp;&nbsp;"+vr_regdate+"<br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-red w3-round-large vr_report'>"+
-								"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large vr_up' id='"+vr_num+"'>"+
+								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report' style='float:right;'>"+
+								"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'>"+
 								"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button><span style='visibility:hidden;'>"+vr_num+"</span></p>";
 							}
 							$.ajax({
@@ -170,14 +170,14 @@ dd.name {
 					//alert(id+", "+vr_regdate+", "+vr_content+", "+vrucnt);
 					var p='';
 					if(id=="${sessionScope.id}"){
-						p="<p class='reply'>"+id+"&nbsp;&nbsp;"+vr_regdate+"<br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-black w3-round-large vr_delete'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
-						"&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large vr_up' id='"+vr_num+"'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button>"+
+						p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+						"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button>"+
 						"<span style='visibility:hidden;'>"+vr_num+"</span>"+
 						"</p>";
 					}else{
-						p="<p class='reply'>"+id+"&nbsp;&nbsp;"+vr_regdate+"<br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-red w3-round-large vr_report'>"+
-						"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large vr_up' id='"+vr_num+"'>"+
-						"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button><span style='visibility:hidden;'>"+vr_num+"</span></p>";
+						p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report' style='float:right;'>"+
+						"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'>"+
+						"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button><span style='visibility:hidden;'>"+vr_num+"</span></p>";
 					}
 					$("#replylist").append(p);
 				});
@@ -206,14 +206,14 @@ dd.name {
 						//alert(id+", "+vr_regdate+", "+vr_content+", "+vrucnt);
 						var p='';
 						if(id=="${sessionScope.id}"){
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+vr_regdate+"<br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-black w3-round-large vr_delete'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 							
-							"&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large vr_up' id='"+vr_num+"'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button>"+
+							"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button>"+
 							"<span style='visibility:hidden;'>"+vr_num+"</span>"+
 							"</p>";
 						}else{
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+vr_regdate+"<br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-red w3-round-large vr_report'>"+
-							"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large vr_up' id='"+vr_num+"'>"+
+							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report'>"+
+							"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"'>"+
 							"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button><span style='visibility:hidden;'>"+vr_num+"</span></p>";
 						}
 						$("#replylist").append(p);
@@ -256,7 +256,7 @@ dd.name {
 					dataType:"json",
 					success:function(data){
 						if(data.result){
-							$("#v_upcount").text(data.vucount);
+							$("#v_upcount").html("&nbsp;&nbsp;<b>" + data.vucount + "</b>");
 						}else{
 							alert("이미 추천한 동영상입니다.");
 						}
@@ -307,7 +307,7 @@ dd.name {
 					dataType:"json",
 					success:function(data){
 						if(data.result){
-							$("#"+btnid).html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+data.vrucount);
+							$("#"+btnid).html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+data.vrucount+"</b>");
 						}else{
 							alert("이미 추천한 댓글입니다.");
 						}
@@ -340,12 +340,12 @@ dd.name {
 	<div class="etc">
 		<c:choose>
 			<c:when test="${sessionScope.id eq vvo.id }">
-				<button class="w3-button w3-black w3-round-large" id="v_update"><i class="fa fa-cogs" aria-hidden="true"></i></button>
-				<button class="w3-button w3-black w3-round-large" id="v_delete"><i class='fa fa-trash-o' aria-hidden='true'></i></button>
+				<button class="w3-button w3-light-grey w3-border w3-round-large" id="v_update"><i class="fa fa-cogs" aria-hidden="true"></i></button>
+				<button class="w3-button w3-light-grey w3-border w3-round-large" id="v_delete"><i class='fa fa-trash-o' aria-hidden='true'></i></button><br><br>
 			</c:when>
 			<c:otherwise>
-				<button class="w3-button w3-black w3-round-large" id="v_report"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
-				<button class="w3-button w3-black w3-round-large" id="v_up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span id="v_upcount">${vucount }</span></button>
+				<button class="w3-button w3-light-grey w3-border w3-round-large" id="v_report"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+				<button class="w3-button w3-light-grey w3-border w3-round-large" id="v_up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span id="v_upcount">&nbsp;&nbsp;<b>${vucount }</b></span></button><br><br>
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -358,14 +358,31 @@ dd.name {
 			<textarea rows="4" cols="70" id="vr_content" name="vr_content" placeholder="다른 사람의 권리를 침해하는 내용은 제재 받을 수 있습니다" style="padding: 12px 20px;box-sizing: border-box;border: 2px solid #ccc;border-radius: 4px;background-color: #f8f8f8;resize: none;"></textarea>
 		</div>
 		<div>
-			<button class="w3-button w3-black w3-round-large" id="vr_reg">등록</button>
+			<button type="submit" form="target" value="Submit"  id="vr_reg"
+			class="w3-button w3-border w3-round-large" style="background-color: #4C5870;"><i class="fa fa-check" style="color: white;"></i>
+			<span style="color: #EBEDEC; font-weight: bold;">&nbsp;등록</span></button>
 		</div>
 	</div>
 	<div id="vrcount">
-		<h6>댓글 : <span id="totalvrcount">${vrcount }</span></h6>
+		<h6 style="font-weight: bold;">댓글 : <span id="totalvrcount" style="color: #1559ff">${vrcount }</span></h6>
 	</div>
 	<div id="replylist">
 	
 	</div>
-	<button class="w3-button w3-black" id="more" style="width: 1300px">더보기</button>
+	<button class="w3-button w3-light-grey" id="more" style="width: 1300px"><b style="color: #00416D;">댓글 더보기 ∨</b></button>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
