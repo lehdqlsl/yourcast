@@ -84,7 +84,8 @@ public class MessageController {
 	}
 	//쪽지 전송 페이지로 이동
 	@RequestMapping(value="/message/send",method=RequestMethod.GET)
-	public String msgSendForm() {
+	public String msgSendForm(Model model, String id) {
+		model.addAttribute("id",id);
 		return "/member/message/send";
 	}
 	//쪽지 전송

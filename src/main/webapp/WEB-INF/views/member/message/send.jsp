@@ -56,7 +56,7 @@
 		<div class="sendMemo">
 			<dl class="listType1">
 			<dt>아이디</dt>
-			<dd><input type="text" class="oid" id="recv_id" name="recv_id" value=""></dd>
+			<dd><input type="text" class="oid" id="recv_id" name="recv_id" value="${requestScope.id }"></dd>
 			</dl>
 			<dl class="listType1">
 			<dt>제목</dt>

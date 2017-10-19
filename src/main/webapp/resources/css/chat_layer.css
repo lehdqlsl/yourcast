@@ -1,6 +1,21 @@
 @charset "euc-kr";
 
-@import url("//res.afreecatv.com/css/global/chat_emoticon.css");
+/* common */
+body, ul, ol, li, dt, dl, dd, div, h1, h2, h3, h4, h5, h6, p, form, fieldset, blockquote, iframe, input, object, table, tr, th, td{margin:0;padding:0}
+
+/* chat emoticon */
+#emoticonBox {position:relative;overflow:hidden;width:246px;height:292px;border:1px solid #898687;background:#fff}
+#emoticonBox .clear {clear:both;}
+#emoticonBox img {border:none;}
+#emoticonBox h1 {height:30px;line-height:32px;text-align:center;border-bottom:1px solid #d7d7d7;color:#434343;font-weight:bold;font-size:12px}
+#emoticonBox .scroll_area {overflow-y:scroll;overflow-x:hidden;height:260px;padding:0 0 0 12px}
+#emoticonBox .scroll_area span{float:left;overflow:hidden;width:30px;height:30px;margin:12px 5px 0 0}
+#emoticonBox .scroll_area span a {display:block;width:30px;height:30px;}
+#emoticonBox .scroll_area span a:hover{background:url(//www.afreecatv.com/images/chat/emoticon/bg_box.gif) no-repeat}
+#emoticonBox .scroll_area span a img{width:26px;height:26px;vertical-align:top;margin:2px 0 0 2px;}
+#emoticonBox .btn_close {position:absolute;top:3px;right:0;}
+#emoticonBox .btn_close a {display:block;width:23px;height:23px;text-indent:-9999px;background:url('/images/chat/emoticon/btn_close.gif') no-repeat 7px 7px}
+
 
 .wrap_lv {display:none; position:absolute; left:-1px; top:24px; z-index:99; width:300px; background:#fff;}
 .list_viewer {width:298px;height:222px;padding:1px;overflow-y:auto;border:1px solid #a2a2a2;border-bottom:none;position:relative;}

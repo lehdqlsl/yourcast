@@ -50,8 +50,8 @@
 						
 					<div class="w3-dropdown-click" >
 						<a href="#" class="w3-bar-item w3-button" onclick="myFunction()" style="text-decoration: none;">${sessionScope.id }</a>
-						<div id="dropdown-menu" class="w3-dropdown-content w3-card-4 w3-animate-zoom">
-							<div class="h"><a href="<c:url value='/${sessionScope.id }'/>"><i class="fa fa-home"></i>&nbsp;Home</a></div>
+						<div id="dropdown-menu" class="w3-dropdown-content w3-card-4">
+							<div class="h"><a href="<c:url value='/${sessionScope.id }'/>" target="_blank"><i class="fa fa-home"></i>&nbsp;Home</a></div>
 							<div class="h" style="border-top:1px solid #ccc!important;"><a href="<c:url value='/message/recv/list'/>"><i class="fa fa-envelope"></i>&nbsp;쪽지보관함</a></div>
 							<div class="h"><a href="<c:url value='/member/charge/star'/>"><i class="fa fa-krw"></i>&nbsp;별사탕 구매</a></div>
 							<div class="h"><a href="<c:url value='/member/history/pay'/>"><i class="fa fa-database "></i>&nbsp;내역 및 환전</a></div>
