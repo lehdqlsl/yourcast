@@ -11,13 +11,13 @@
 	<div>
 		<a href="<c:url value='/member/history/pay'/>" class="w3-bar-item w3-button" style="text-decoration: none;">결제내역</a>
 		<a href="<c:url value='/member/history/buy'/>" class="w3-bar-item w3-button" style="text-decoration: none;background-color: #cccccc;" >구매내역</a>
-		<a href="<c:url value='/member/history/useStar'/>" class="w3-bar-item w3-button" style="text-decoration: none;">선물한 별사탕내역</a>
-		<a href="<c:url value='/member/history/recvStar'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">선물받은 별사탕내역</a>
+		<a href="<c:url value='/member/history/useStar'/>" class="w3-bar-item w3-button" style="text-decoration: none;">선물한 별풍선내역</a>
+		<a href="<c:url value='/member/history/recvStar'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">선물받은 별풍선내역</a>
 	</div>
 		<hr>
 	<table class="w3-table w3-table-all">
 		<tr>
-			<th>구매한 별사탕</th>
+			<th>구매한 별풍선</th>
 			<th>가격</th>
 			<th>구매일</th>
 		</tr>
@@ -35,7 +35,7 @@
 		</c:if>
 	</table>
 
-	<div>보유중인 별사탕 : ${mvo.star_candy }</div>
+	<div>보유중인 별풍선 : ${mvo.star_candy }</div>
 	<div>${mvo.id }님의 보유중인 금액은 ${mvo.money }원 입니다.</div>
 	
 	<br>

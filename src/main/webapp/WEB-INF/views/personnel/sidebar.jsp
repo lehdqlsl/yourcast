@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-collapse w3-white" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container">
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width:45%;" class="w3-round"><br><br>
+    <a href="<c:url value='/${sessionScope.id }'/>">
+    <img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width:45%; text-decoration: none;" class="w3-round"></a><br><br>
     <p class="w3-text-grey">${voMP.profile_msg }</p>
     
     <span class="w3-text-grey" id="id">${requestScope.id}</span>
@@ -16,10 +17,12 @@
     </c:if>
     
   </div>
-	<button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom" style="width: 100%" id="btn1"><i class="fa fa-pencil fa-fw w3-margin-right"></i>글 쓰 기</button>
+	<div style="margin-top: 25px;margin-bottom: 25px;">
+		<button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom" style="width: 100%;" id="btn1"><i class="fa fa-pencil fa-fw w3-margin-right"></i>글 쓰 기</button>
+	</div>
   <div class="w3-bar-block">
 
-
+	<hr>
   	<a href="<c:url value='/${requestScope.id }/board/list'/>" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bars fa-fw w3-margin-right"></i>전체보기</a>
 	<c:forEach var="vo" items="${clist }">
     	<a href="<c:url value='/${requestScope.id }/board/list?category_num=${vo.category_num }'/>" class="w3-bar-item w3-button w3-padding">
@@ -28,7 +31,7 @@
       <a href="<c:url value="/${requestScope.id }/video/list"/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-play fa-fw w3-margin-right" aria-hidden="true"></i>Video</a>
   </div>
   
-  <c:if test="${not empty flist}">
+  <c:if test="${not empty flist}"><hr>
   <div class="w3-row-padding">
   	<ul class="w3-ul w3-border w3-white w3-center">
   		<li class="w3-light-grey" style="text-align: left;">열혈팬 Top5</li>

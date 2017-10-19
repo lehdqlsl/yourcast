@@ -63,7 +63,7 @@ function getCookie(cookieName) {
     return unescape(cookieValue);
 }
 </script>
-<div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;height: 600px;">
+<div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;height: 500px;">
 <div class="w3-container w3-padding-32" id="projects">
 
 <div class="login">

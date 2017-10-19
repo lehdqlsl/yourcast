@@ -113,7 +113,7 @@ public class HistoryController {
 		model.addAttribute("total_send_ea",total_send_ea);
 		
 		if(uselist.isEmpty()) {
-			model.addAttribute("err","선물한 별사탕내역이 존재하지 않습니다.");
+			model.addAttribute("err","선물한 별풍선내역이 존재하지 않습니다.");
 		}
 		
 		return ".member.history.useStar";
@@ -160,7 +160,7 @@ public class HistoryController {
 			model.addAttribute("errr","환전내역이 존재하지 않습니다.");
 		}
 		if(recvlist.isEmpty()) {
-			model.addAttribute("err","선물받은 별사탕내역이 존재하지 않습니다.");
+			model.addAttribute("err","선물받은 별풍선내역이 존재하지 않습니다.");
 		}
 		
 		return ".member.history.recvStar";
