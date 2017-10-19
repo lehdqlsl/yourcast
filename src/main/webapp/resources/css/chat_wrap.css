@@ -17,7 +17,7 @@ em { font-style: normal;}
 .chatbox {position:absolute; right:0; top:0; bottom:0; width:320px; background:#fff; min-height:517px;}
 .chatbox h2 {height:18px; padding:6px 0 0 8px; border-bottom:1px solid #e1e1e1; font-weight:bold; font-size:12px; color:#3d82f6;}
 
-.chatbox .chat_area {position:absolute; left:0; right:0; top:57px; bottom:117px; padding:0; z-index:1; overflow:auto; overflow-x:hidden;}
+.chatbox .chat_area {position:absolute; left:0; right:0; top:57px; bottom:117px; padding:0;overflow:auto; overflow-x:hidden;}
 
 .chatbox .setbox {position:absolute; right:0; top:0;}
 .chatbox .setbox .btnset li {float:left; position:relative;}

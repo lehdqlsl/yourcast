@@ -28,6 +28,7 @@ import com.util.page.PageUtil;
 import com.util.page.VideoAllList;
 import com.util.page.VideoMainList;
 import com.yourcast.app.service.AgeGradeService;
+import com.yourcast.app.service.BookmarkService;
 import com.yourcast.app.service.CategoryService;
 import com.yourcast.app.service.GenreService;
 import com.yourcast.app.service.MemberProfileService;
@@ -37,6 +38,7 @@ import com.yourcast.app.service.VideoReplyService;
 import com.yourcast.app.service.VideoService;
 import com.yourcast.app.service.VideoUpService;
 import com.yourcast.app.vo.AgeGradeVO;
+import com.yourcast.app.vo.BookmarkVO;
 import com.yourcast.app.vo.CategoryVO;
 import com.yourcast.app.vo.GenreVO;
 import com.yourcast.app.vo.MemberProfileVO;
@@ -58,6 +60,7 @@ public class VideoController {
 	@Autowired private VideoUpService vu_service;
 	@Autowired private AgeGradeService age_service;
 	@Autowired private StarUseService u_service;
+	@Autowired private BookmarkService b_service;
 	////////////////////////////////video 메인 페이지 관련 내용(민지)//////////////////////////////////
 	//클릭 시 비디오 메인 페이지로 이동
 	@RequestMapping(value="/videomain",method=RequestMethod.GET)
@@ -66,6 +69,7 @@ public class VideoController {
 		model.addAttribute("glist", glist);
 		return ".videomain";
 	}
+	
 	//동영상 전체 목록 출력(카테고리 무관)
 	@RequestMapping(value="/videomain/alllist")
 	@ResponseBody
@@ -137,12 +141,27 @@ public class VideoController {
 	//동영상 조회
 	@RequestMapping(value="/videomain/getInfo")
 	public String videoMainGetInfo(HttpServletRequest request, Model model) {
-		
 		String vnum=request.getParameter("v_num");
 		int v_num=Integer.parseInt(vnum);
 		VideoVO vvo= v_service.getInfo(v_num);
 		int vrcount=vr_service.getCount(v_num);
 		int vucount=vu_service.getCount(v_num);
+		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		MemberVO mvo= m_service.getInfo(id);
+		int m_num=mvo.getM_num();
+		
+		//북마크 확인
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("m_num", m_num);
+		map.put("v_num", v_num);
+		BookmarkVO bmvo= b_service.check(map);
+		if(bmvo==null) {//북마크 안한 경우
+			model.addAttribute("bookmark", false);
+		}else {//북마크 한경우
+			model.addAttribute("bookmark", true);
+		}
 		
 		//조회수
 		v_service.hitUpdate(v_num);

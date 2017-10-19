@@ -16,16 +16,59 @@
     <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>즐겨찾기</a>
     <hr>
    <c:forEach var="vo" items="${glist }">
-    	<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>${vo.genre_name }</a>
-    </c:forEach>
-  </div>
-  <div class="w3-panel w3-large">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    	
+   		<c:choose>
+    		<c:when test="${vo.genre_name eq '게임' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-gamepad w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '모바일게임' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-optin-monster w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '스포츠' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-futbol-o w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '토크/캠방' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-commenting-o w3-margin-right" ></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '먹방/쿡방' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-birthday-cake w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '펫방' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-paw w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '음악' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-music w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '학습' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '생활/정보' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-info-circle w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '시사/현장' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-video-camera w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '더빙/라디오' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-microphone w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '주식/금융' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-area-chart w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '애니' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-play-circle w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '지상파/케이블' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-television w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '음악(스트리밍)' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-volume-up w3-margin-right"></i>${vo.genre_name }</a>
+    		</c:when>
+    		<c:when test="${vo.genre_name eq '성인' }">
+    			<a href='<c:url value="/?genre_num=${vo.genre_num }"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding">19&nbsp;&nbsp;${vo.genre_name }</a>
+    		</c:when>
+    	</c:choose>	 
+   </c:forEach>
+    
   </div>
 </nav>
 

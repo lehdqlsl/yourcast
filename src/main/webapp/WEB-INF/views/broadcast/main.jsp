@@ -144,9 +144,9 @@ dd.name {
 }
 </style>
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/chat_wrap.css'/>?ver=16">
+	href="<c:url value='/resources/css/chat_wrap.css'/>?ver=18">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/chat_layer.css'/>?ver=1">
+	href="<c:url value='/resources/css/chat_layer.css'/>?ver=3">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/pop_layer.css'/>?ver=1">
 <link rel="stylesheet" type="text/css"
@@ -506,7 +506,20 @@ dd.name {
 		</div>
 		<div class="btn_wrap"><a href="javascript:;" class="btn_st1">선물하기</a> <a href="javascript:;" class="btn_st2">취소</a></div>
 		<a href="javascript:;" class="btn_close2">닫기&lt;</a>
-	</div></div>
+	</div>
+	</div>
+	  
+     <div id="Demo"  class="w3-dropdown-content w3-bar-block w3-border" style="z-index: 100" user_id="" user_nick="">
+      <a href="#" class="w3-bar-item w3-button" target="_blank">아이디</a>
+      <a href="#" class="w3-bar-item w3-button" id="msg1">쪽지보내기</a>
+      <a href="#" class="w3-bar-item w3-button" id="kick">강퇴</a>
+      <a href="#" class="w3-bar-item w3-button" id="black">블랙리스트</a>
+    </div>
+    
+     <div id="Demo1"  class="w3-dropdown-content w3-bar-block w3-border" style="z-index: 100" user_id="" user_nick="">
+      <a href="#" class="w3-bar-item w3-button" target="_blank">아이디</a>
+      <a href="#" class="w3-bar-item w3-button" id="msg2">쪽지보내기</a>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -628,15 +641,15 @@ dd.name {
 			//블랙리스트 처리		
 			if(black == 'true'){
 				alert("BJ에 의해 블랙리스트로 등록되어 방송을 시청할 수 없습니다.");
-				history.back('http://192.168.0.4/app');
+				location.replace('http://192.168.0.4:8082/app');
 			}else{
 				if(bjid != s_id){
 					//성인처리
 					var adult = '${requestScope.bvo.age_grade_num}';
 					if(adult != 1){
 						if(s_id==''){
+							location.replace('http://192.168.0.4:8082/app/member/login');
 							alert('이 정보내용은 청소년 유해매체물로서 먼저 로그인이 필요합니다.');
-							location.replace('http://192.168.0.4:8082/app/member/login'); 
 						}else{
 							//민증검사
 							var dt1 = new Date();
@@ -644,8 +657,8 @@ dd.name {
 							var test = '${requestScope.vo.birth}';
 							var year2 = test.substring(test.length-4,test.length);
 							if(year1-year2 < 19){
+								location.replace('http://192.168.0.4:8082/app');
 								alert('만 19세 미만의 청소년이 이용할 수 없습니다.');
-								history.back('http://192.168.0.4/app');
 							}
 						}
 					}
@@ -659,7 +672,7 @@ dd.name {
 								dataType:"json",
 								success:function(data){
 									if(!data.result){
-										history.back('http://192.168.0.4/app');
+										location.replace('http://192.168.0.4:8082/app');
 										alert('비밀번호가 일치하지 않습니다.');	
 									}else{
 										init();
@@ -668,7 +681,7 @@ dd.name {
 							});
 					    }else{
 					    	//취소버튼
-					    	history.back('http://192.168.0.4/app');
+					    	location.replace('http://192.168.0.4:8082/app');
 					    }
 					}else{
 						//비밀번호 없는경우
@@ -750,23 +763,92 @@ dd.name {
 			}
 		});
 
+		$("#kick").click(function(){
+			var x = document.getElementById("Demo");
+			var id = $("#Demo").attr("user_id");
+			var name = $("#Demo").attr("user_nick");
+			var result = confirm(id+'님을 강퇴하시겠습니까?'); 
+			if(result) {
+				var sendmsg = {};
+				sendmsg.packet = 6;
+				sendmsg.bj_num = ${requestScope.bj_num};
+				sendmsg.id = id;
+				sendmsg.name = name;
+				wsocket.send( JSON.stringify(sendmsg));
+			}  
+			x.className = x.className.replace(" w3-show", "");
+		});
+		
+		$("#msg1").click(function(){
+			var id = $("#Demo").attr("user_id");
+			window.open('/app/message/send?id='+id,'_blank','resizable=no,width=400 height=400');	
+			var x = document.getElementById("Demo");
+			x.className = x.className.replace(" w3-show", "");
+		});
+		$("#msg2").click(function(){
+			var id = $("#Demo1").attr("user_id");
+			window.open('/app/message/send?id='+id,'_blank','resizable=no,width=400 height=400');	
+			var x = document.getElementById("Demo1");
+			x.className = x.className.replace(" w3-show", "");
+		});
+		
+		$("#black").click(function(){
+			var x = document.getElementById("Demo");
+			var id = $("#Demo").attr("user_id");
+			var name = $("#Demo").attr("user_nick");
+			var result = confirm(id+'님을 블랙리스트에 추가하시겠습니까?'); 
+			if(result) {
+				$.ajax({
+					url:"<c:url value='/${requestScope.id}/setting/blacklistI'/>",
+					data:{"option":id},
+					success:function(data){
+						var sendmsg = {};
+						sendmsg.packet = 6;
+						sendmsg.bj_num = ${requestScope.bj_num};
+						sendmsg.id = id;
+						sendmsg.name = name;
+						wsocket.send( JSON.stringify(sendmsg));				 
+						x.className = x.className.replace(" w3-show", "");
+					}
+				});
+			} 
+		});
 		//아이디 클릭
 		$("#chat_area").on('click','.test',function(){
+		    var offset = $(this).offset();
+		    var top = offset.top;
+		    var left = offset.left;		
 			var bjid = '${bjvo.id }';
 			var r_id = '${sessionScope.id}';
-			if(bjid == r_id){
-				var id = $(this).attr("user_id");
-				var name = $(this).attr("user_nick");
-				var result = confirm(id+'님을 강퇴하시겠습니까?'); 
-				if(result) {
-					var sendmsg = {};
-					sendmsg.packet = 6;
-					sendmsg.bj_num = ${requestScope.bj_num};
-					sendmsg.id = id;
-					sendmsg.name = name;
-					wsocket.send( JSON.stringify(sendmsg));
-				} 
-			}
+			var id = $(this).attr("user_id");
+			var name = $(this).attr("user_nick");
+			if(id != r_id){
+				if(bjid == r_id){
+				    var x = document.getElementById("Demo");
+					if (x.className.indexOf("w3-show") == -1) {
+				        x.className += " w3-show";
+					    $("#Demo").offset({ top: top+15, left: left-20 });
+					    $("#Demo a:nth-child(1)").html(id);
+					    $("#Demo").attr("user_id",id);
+					    $("#Demo").attr("user_nick",name);
+					    $("#Demo a:nth-child(1)").attr('href','http://192.168.0.4:8082/app/'+id);
+				    } else { 
+				        x.className = x.className.replace(" w3-show", "");
+				    }
+				}else if(r_id != ''){
+				    var x = document.getElementById("Demo1");
+					if (x.className.indexOf("w3-show") == -1) {
+				        x.className += " w3-show";
+					    $("#Demo1").offset({ top: top+15, left: left-20 });
+					    $("#Demo1 a:nth-child(1)").html(id);
+					    $("#Demo1").attr("user_id",id);
+					    $("#Demo1").attr("user_nick",name);
+					    $("#Demo1 a:nth-child(1)").attr('href','http://192.168.0.4:8082/app/'+id);
+				    } else { 
+				        x.className = x.className.replace(" w3-show", "");
+				    }
+				}
+			}			
 		});
 		function onMessage(evt){
 			
@@ -781,7 +863,7 @@ dd.name {
 				
 				if(gender == '1'){
 					if(grade == 'bj'){
-						$("#chat_area").append('<dl class="bj"><dt class="man"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="#" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
+						$("#chat_area").append('<dl class="bj"><dt class="man"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="#" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
 					}else if(grade == 'hot'){
 						$("#chat_area").append('<dl class=""><dt class="hot_m"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
 					}else if(grade == 'fan'){
@@ -791,7 +873,7 @@ dd.name {
 					}
 				}else{
 					if(grade == 'bj'){
-						$("#chat_area").append('<dl class="bj"><dt class="woman"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
+						$("#chat_area").append('<dl class="bj"><dt class="woman"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
 					}else if(grade == 'hot'){
 						$("#chat_area").append('<dl class=""><dt class="hot_w"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
 					}else if(grade == 'fan'){
