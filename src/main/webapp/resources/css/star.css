@@ -97,7 +97,7 @@ input {font-family:Dotum, "돋움", verdana, sans-serif;font-size:12px;}
 .st_area .buy .area .num strong{font-size:16px;color:#0e54ff;margin-left:2px}
 .gift_banner{width:960px;margin:38px auto 10px auto;border:1px solid #ffe1ae;background:#fff9e6;display:block;text-align:center}
 .gift_banner img{margin:9px 0}
-.notice{border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;background:#f8f8f8;padding:9px 0 57px 0}
+.notice{border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;background:#f8f8f8;padding:9px 0 57px 40px;}
 .notice dl{width:960px;margin:48px auto 0 auto}
 .notice dt{color:#222;font-size:17px;margin-bottom:17px}
 .notice dd{color:#888;font-size:14px;margin-bottom:10px;background:url(/images/item/bul_sq_gry.gif) 1px 7px no-repeat;padding:0 0 0 11px}
@@ -117,7 +117,15 @@ input {font-family:Dotum, "돋움", verdana, sans-serif;font-size:12px;}
 .sinfo ul li .box_gry dd{font-size:14px;color:#777;line-height:1.5em}
 .sinfo ul li .box_gry dd span{color:#5788ff}
 
-.sinfo ul li .box_gry .img{background:url(/images/item/balloon_desc.png) -9999em -9999em no-repeat;width:144px;height:95px;display:block;position:absolute;top:50px;left:43px}
+.sinfo ul li .box_gry .img{
+	background:url('<c:url value="/resources/img/balloon_desc.png"/>') -9999em -9999em no-repeat;
+	width:144px;
+	height:95px;
+	display:block;
+	position:absolute;
+	top:50px;
+	left:43px
+}
 .sinfo ul li.desc1 .img{background-position:0 0px}
 .sinfo ul li.desc2 .img{background-position:0 -105px}
 .sinfo ul li.desc3 .img{background-position:0 -207px}

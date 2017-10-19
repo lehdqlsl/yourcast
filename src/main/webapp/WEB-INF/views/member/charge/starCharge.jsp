@@ -423,7 +423,7 @@ span.tax em {font-weight:normal;font-style:normal;color:#393939;}
 											} else {
 												alert(parseInt($("#ea").text()
 														* $("#buy_ea2").val())
-														+ "개의 별사탕이 충전되었습니다.");
+														+ "개의 별풍선이 충전되었습니다.");
 												$('form').submit();
 											}
 										});

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/getinfo.css'/>?ver=4">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/getinfo.css'/>?ver=5">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -51,14 +51,14 @@
 						var brucnt=$(this).find("brucnt").text();
 						var p="";
 						if(id=="${sessionScope.id}"){
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_regdate+"<br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-black w3-round-large br_delete'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
-							"&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large br_up' id='"+br_num+"'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+brucnt+"</button>"+
+							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+							"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button>"+
 							"<span style='visibility:hidden;'>"+br_num+"</span>"+
 							"</p>";
 						}else{
-							p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_regdate+"<br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-red w3-round-large br_report'>"+
-							"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large br_up' id='"+br_num+"'>"+
-							"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+brucnt+"</button><span style='visibility:hidden;'>"+br_num+"</span></p>";
+							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
+							"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'>"+
+							"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button><span style='visibility:hidden;'>"+br_num+"</span></p>";
 						}
 						$("#replylist").append(p);
 					});
@@ -90,14 +90,14 @@
 							var brucnt=$(this).find("brucnt").text();
 							var p="";
 							if(id=="${sessionScope.id}"){
-								p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_regdate+"<br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-black w3-round-large br_delete'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
-								"&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large br_up' id='"+br_num+"'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+brucnt+"</button>"+
+								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+								"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button>"+
 								"<span style='visibility:hidden;'>"+br_num+"</span>"+
 								"</p>";
 							}else{
-								p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_regdate+"<br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-red w3-round-large br_report'>"+
-								"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large br_up' id='"+br_num+"'>"+
-								"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+brucnt+"</button><span style='visibility:hidden;'>"+br_num+"</span></p>";
+								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
+								"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'>"+
+								"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button><span style='visibility:hidden;'>"+br_num+"</span></p>";
 							}
 							$("#replylist").append(p);
 						});
@@ -125,14 +125,14 @@
 					var brucnt=$(this).find("brucnt").text();
 					var p="";
 					if(id=="${sessionScope.id}"){
-						p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_regdate+"<br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-black w3-round-large br_delete'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
-						"&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large br_up' id='"+br_num+"'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+brucnt+"</button>"+
+						p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+						"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button>"+
 						"<span style='visibility:hidden;'>"+br_num+"</span>"+
 						"</p>";
 					}else{
-						p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_regdate+"<br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-red w3-round-large br_report'>"+
-						"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large br_up' id='"+br_num+"'>"+
-						"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+brucnt+"</button><span style='visibility:hidden;'>"+br_num+"</span></p>";
+						p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
+						"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'>"+
+						"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button><span style='visibility:hidden;'>"+br_num+"</span></p>";
 					}
 					$("#replylist").append(p);
 				});
@@ -162,14 +162,14 @@
 							//console.log(id);
 							var p="";
 							if(id=="${sessionScope.id}"){
-								p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_regdate+"<br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-black w3-round-large br_delete'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
-								"&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large br_up' id='"+br_num+"'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+brucnt+"</button>"+
+								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+								"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button>"+
 								"<span style='visibility:hidden;'>"+br_num+"</span>"+
 								"</p>";
 							}else{
-								p="<p class='reply'>"+id+"&nbsp;&nbsp;"+br_regdate+"<br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-red w3-round-large br_report'>"+
-								"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-teal w3-round-large br_up' id='"+br_num+"'>"+
-								"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+brucnt+"</button><span style='visibility:hidden;'>"+br_num+"</span></p>";
+								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
+								"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'>"+
+								"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button><span style='visibility:hidden;'>"+br_num+"</span></p>";
 							}
 							$("#replylist").append(p);
 						});
@@ -261,7 +261,7 @@
 						if(data.result=="true") {
 							alert("이미 추천 하셨습니다.");
 						} else {
-							$("#thumbs_up").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i><b>" + data.getCount + "</b>");
+							$("#thumbs_up").html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>" + data.getCount + "</b>");
 						}
 					}
 				});
@@ -280,30 +280,17 @@
 
 		<!-- Header -->
 		<header id="portfolio">
-			<a href="#"><img src="/w3images/avatar_g2.jpg" style="width: 65px;"
-			 class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
 			<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
 				<h1>
-					<b>${voMP.profile_title }</b>
+					<a href="<c:url value='/${requestScope.id }'/>" class="getinfo">
+					<b>${voMP.profile_title }</b></a>
 				</h1>
-				<div class="w3-section w3-bottombar w3-padding-16">
-					<span class="w3-margin-right">Filter:</span>
-					<button class="w3-button w3-black">ALL</button>
-					<button class="w3-button w3-white">
-						<i class="fa fa-diamond w3-margin-right"></i>Design
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-photo w3-margin-right"></i>Photos
-					</button>
-					<button class="w3-button w3-white w3-hide-small">
-						<i class="fa fa-map-pin w3-margin-right"></i>Art
-					</button>
+				<div class="w3-section w3-bottombar w3-padding-16"  style="width: 1000px;">
 				</div>
 			</div>
 		</header>
-
 		<!-- 여기작성 -->
 	
 		<div class="wrap_view">
@@ -346,16 +333,16 @@
 				<div id="replyinsert">
 					<textarea rows="4" cols="70" id="br_content" name="br_content" placeholder="다른 사람의 권리를 침해하는 내용은 제재 받을 수 있습니다" style="padding: 12px 20px;box-sizing: border-box;border: 2px solid #ccc;border-radius: 4px;background-color: #f8f8f8;resize: none;"></textarea>
 				</div>
-				<button class="w3-button w3-border w3-round-large" id="br_reg" style="background-color: #337AB7"><span style="color: white; font-weight: bold;">등록</span></button>
+				<button class="w3-button w3-border w3-round-large" id="br_reg" style="background-color: #4C5870"><span style="color: #EBEDEC; font-weight: bold;">등록</span></button>
 			</div>
 			<h6 style="font-weight: bold;">댓글 : <span id="totalbrcount" style="color: #1559ff">${brcount }</span> </h6>
 			<div id="replylist">
 				
 			</div>
-			<button class="w3-button w3-light-grey" id="more" style="width: 980px"><b style="color: #003399;">댓글 더보기 ∨</b></button>
+			<button class="w3-button w3-light-grey" id="more" style="width: 980px"><b style="color: #00416D;">댓글 더보기 ∨</b></button>
 			
-			<div class="w3-light-grey w3-center w3-padding-24" style="width: 980px; font-size: 10px;">
-				All Contents Copyright ©Your Cast...Co.,Ltd. All Rights Reserved.</a>
+			<div class="w3-light-grey w3-center w3-padding-24" style="width: 980px; font-size: 11px; border-top: 1px solid #CFCFCF;margin-top: 100px;">
+				All Contents Copyright ©Your Cast...Co.,Ltd. All Rights Reserved.
 			</div>
 		</div>
 

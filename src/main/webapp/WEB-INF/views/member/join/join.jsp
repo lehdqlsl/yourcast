@@ -11,12 +11,11 @@
 	src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script>
 <script type="text/javascript">
 		$(document).ready(function(){
-			$("#id").keyup(function(){
+			$("#id").keyup(function(event){
 				var id=$("#id").val();
 				$.getJSON("<c:url value='/usingid/json'/>",{"id":id},function(data){
 					if(data.using){
 						$("#idcheck").html("<font color=red>사용중인 아이디입니다</font>");
-						$("input[name=id]").val('');
 					}else{
 						$("#idcheck").html("<font color=blue>사용가능한 아이디입니다</font>");
 					}
@@ -27,6 +26,10 @@
 				if($("input[name='id']").val()==''){
 					alert("아이디를 입력하세요");
 					$("input[name='id']").focus();
+					event.preventDefault();
+				}
+				else if($("#idcheck").text()=='사용중인 아이디입니다') {
+					alert("중복확인을 해주세요");
 					event.preventDefault();
 				}
 				//비밀번호가 5자이상일때 submit되도록 하기
@@ -79,7 +82,7 @@
 		});
 
 </script>
-<div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;height: 600px;">
+<div class="w3-main" style="margin: 60px auto 100px auto; width: 960px;height: 600px;">
 <div class="w3-container w3-padding-32" id="projects">
 
 <div class="login">
