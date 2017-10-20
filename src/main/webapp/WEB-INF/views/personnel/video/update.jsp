@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/radio.css'/>?ver=5">
 <script type="text/javascript"
 	src="<c:url value='/resources/se2/js/HuskyEZCreator.js'/>"></script>
 
@@ -18,10 +18,12 @@
 			<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
+				<div class="link-2">
 				<h1>
-					<a href="<c:url value='/${requestScope.id }'/>" class="getinfo">
+					<a href="<c:url value='/${requestScope.id }'/>" class="maintitle">
 					<b>${voMP.profile_title }</b></a>
 				</h1>
+			</div>
 				<div class="w3-section w3-bottombar w3-padding-16" style="width: 1000px;"></div>
 			</div>
 		</header>
@@ -62,20 +64,20 @@
 						<c:when test="${gvo.genre_num==1}">
 							<c:choose>
 								<c:when test="${gvo.genre_num==vo.genre_num }">
-									<input type="radio"  name="genre_num" checked="checked" value="${gvo.genre_num }">${gvo.genre_name }
+									<label style="font-family:굴림;font-size:13px;"><input type="radio" class="option-input radio" name="genre_num" checked="checked" value="${gvo.genre_num }">${gvo.genre_name }</label>
 								</c:when>
 								<c:otherwise>
-									<input type="radio"  name="genre_num" value="${gvo.genre_num }">${gvo.genre_name }
+									<label style="font-family:굴림;font-size:13px;"><input type="radio" class="option-input radio"name="genre_num" value="${gvo.genre_num }">${gvo.genre_name }</label>
 								</c:otherwise>
 							</c:choose>							
 						</c:when>
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${gvo.genre_num==vo.genre_num }">
-									<input type="radio"  name="genre_num" checked="checked" value="${gvo.genre_num }">${gvo.genre_name }
+									<label style="font-family:굴림;font-size:13px;"><input type="radio" class="option-input radio" name="genre_num" checked="checked" value="${gvo.genre_num }">${gvo.genre_name }</label>
 								</c:when>
 								<c:otherwise>
-									<input type="radio"  name="genre_num" value="${gvo.genre_num }">${gvo.genre_name }
+									<label style="font-family:굴림;font-size:13px;"><input type="radio" class="option-input radio" name="genre_num" value="${gvo.genre_num }">${gvo.genre_name }</label>
 								</c:otherwise>
 							</c:choose>	
 							<c:if test="${gvo.genre_num%10==0}">		
@@ -116,72 +118,29 @@
 				<th colspan="2" style="color:red;"># 파일을 업로드하지 않을 경우, 이전 파일로 유지됩니다.</th>
 			</tr>
 			<tr>
-				<th colspan="2" style="text-align:center;"><button type="submit" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;color: #EBEDEC; font-weight: bold;"><i class="fa fa-upload" style="color: white;"></i>업로드</button>
-				<button type="reset" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;color: #EBEDEC; font-weight: bold;"><i class="fa fa-refresh" style="color: white;"></i>다시입력</button>
-				<button type="button" id="cancel" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;color: #EBEDEC; font-weight: bold;"><i class="fa fa-times" style="color: white;"></i>취소</button></th>
+
+				<th colspan="2" style="text-align:left;">
+				
+				<button type="submit" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;">
+				<i class="fa fa-upload" style="color: white;"></i>
+				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;업로드</span></button>
+				
+				<button type="reset" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;">
+				<i class="fa fa-refresh" style="color: white;"></i>
+				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;다시입력</span></button>
+				
+				<button type="button" id="cancel"  class="w3-button w3-border w3-round-large" style="background-color: #4C5870;">
+				<i class="fa fa-times" style="color: white;"></i>
+				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;취소</span></button>
 			</tr>
 		</table>
 		</form>
-		
 		<!-- 작성END -->
-
-		<footer class="w3-container w3-padding-32 w3-dark-grey">
-			<div class="w3-row-padding">
-				<div class="w3-third">
-					<h3>FOOTER</h3>
-					<p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
-						condimentum, porta lectus vitae, ultricies congue gravida diam non
-						fringilla.</p>
-					<p>
-						Powered by <a href="https://www.w3schools.com/w3css/default.asp"
-							target="_blank">w3.css</a>
-					</p>
-				</div>
-
-				<div class="w3-third">
-					<h3>BLOG POSTS</h3>
-					<ul class="w3-ul w3-hoverable">
-						<li class="w3-padding-16"><img src="/w3images/workshop.jpg"
-							class="w3-left w3-margin-right" style="width: 50px"> <span
-							class="w3-large">Lorem</span><br> <span>Sed mattis
-								nunc</span></li>
-						<li class="w3-padding-16"><img src="/w3images/gondol.jpg"
-							class="w3-left w3-margin-right" style="width: 50px"> <span
-							class="w3-large">Ipsum</span><br> <span>Praes tinci
-								sed</span></li>
-					</ul>
-				</div>
-
-				<div class="w3-third">
-					<h3>POPULAR TAGS</h3>
-					<p>
-						<span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span
-							class="w3-tag w3-grey w3-small w3-margin-bottom">New York</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">London</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">IKEA</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">NORWAY</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">DIY</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Ideas</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Baby</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Family</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">News</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Clothing</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Shopping</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span>
-						<span class="w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
-					</p>
-				</div>
-
-			</div>
+		<footer>
+			<div class="w3-light-grey w3-center w3-padding-24"
+				style="width: 1000px; font-size: 11px; border-top: 1px solid #CFCFCF; margin-top: 100px; ">
+				All Contents Copyright ©Your Cast...Co.,Ltd. All Rights Reserved.</div>
 		</footer>
-
-		<div class="w3-black w3-center w3-padding-24">
-			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a>
-		</div>
-
-
-
 	</div>
 </body>
 <script type="text/javascript">

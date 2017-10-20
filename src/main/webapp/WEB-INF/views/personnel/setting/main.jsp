@@ -12,10 +12,12 @@
 			<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
+				<div class="link-2">
 				<h1>
-					<a href="<c:url value='/${requestScope.id }'/>" class="getinfo">
+					<a href="<c:url value='/${requestScope.id }'/>" class="maintitle">
 					<b>${voMP.profile_title }</b></a>
 				</h1>
+			</div>
 				<div class="w3-section w3-bottombar w3-padding-16"  style="width: 1000px;">
 				</div>
 			</div>
@@ -68,7 +70,7 @@
 					style="width: 1000px; height: 600px; display: none;">${voMP.profile_content }</textarea>
 			</form>
 			<!-- 작성END -->
-			<div class="w3-bar-all w3-center">
+			<div class="w3-bar-all">
 				<button type="submit" form="target" value="Submit"
 				class="w3-button w3-border w3-round-large" style="background-color: #4C5870; float: left;"><i class="fa fa-check" style="color: white;"></i>
 				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;확인</span></button>
