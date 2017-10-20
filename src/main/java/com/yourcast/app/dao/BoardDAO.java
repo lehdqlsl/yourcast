@@ -49,4 +49,10 @@ public class BoardDAO {
 	public int getCount(HashMap<String, Object>map) {
 		return sqlSession.selectOne(NAMESPACE + ".getCount",map);
 	}
+	public List<BoardVO> mainNoticeList(int bj_num){
+		return sqlSession.selectList(NAMESPACE+".mainNoticeList",bj_num);
+	}
+	public List<BoardVO> mainBoardList(int bj_num){
+		return sqlSession.selectList(NAMESPACE+".mainBoardList",bj_num);
+	}
 }

@@ -12,3 +12,12 @@ a.home:hover{
 a.home:active{
 	text-decoration: underline;
 }
+.noti {
+    background: url(/app/resources/img/mybs.png) 0 0 no-repeat;
+    display: inline-block;
+    text-indent: -9999px;
+    width: 33px;
+    height: 22px;
+    margin-right: 5px;
+    vertical-align: middle;
+}

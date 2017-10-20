@@ -36,4 +36,10 @@ public class BoardService {
 	public int getCount(HashMap<String, Object> map) {
 		return dao.getCount(map);
 	}
+	public List<BoardVO> mainNoticeList(int bj_num){
+		return dao.mainNoticeList(bj_num);
+	}
+	public List<BoardVO> mainBoardList(int bj_num){
+		return dao.mainBoardList(bj_num);
+	}
 }

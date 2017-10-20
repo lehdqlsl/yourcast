@@ -2,6 +2,7 @@ package com.yourcast.app;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -237,5 +238,29 @@ public class MemberController {
 		bro_service.update(bvo);
 
 		return "redirect:/member/broadcast";
+	}
+	@RequestMapping(value="/adult/check",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String adultCheck(HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		String id=(String) session.getAttribute("id");
+		MemberVO mvo=mservice.getInfo(id);
+		
+		Date birth= mvo.getBirth();
+		
+		Calendar c1=Calendar.getInstance();
+		c1.setTimeInMillis(birth.getTime());
+		int birthyear=c1.get(Calendar.YEAR);
+		
+		Calendar c2=Calendar.getInstance();
+		int year=c2.get(Calendar.YEAR);
+		
+		JSONObject json=new JSONObject();
+		if(year-birthyear>=19) {
+			json.put("result", true);
+		}else {
+			json.put("result", false);
+		}
+		return json.toString();
 	}
 }

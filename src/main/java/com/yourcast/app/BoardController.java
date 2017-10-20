@@ -286,9 +286,6 @@ public class BoardController {
 		int brcnt=0;
 		int bucnt=0;
 		for(BoardVO bvo:blist) {
-			System.out.println("글번호 : "+bvo.getB_num());
-			System.out.println("댓글 개수 : "+br_service.getCount(bvo.getB_num()));
-			System.out.println("좋아요 개수 : "+bu_service.getCount(bvo.getB_num()));
 			brcnt=br_service.getCount(bvo.getB_num());
 			bucnt=bu_service.getCount(bvo.getB_num());
 			bvo.setBrcnt(brcnt);

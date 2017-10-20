@@ -72,4 +72,8 @@
 		(select v.*,m.id from video v, member m,(select * from bookmark where m_num=#{m_num}) b 
 		where v.m_num=m.m_num and v.v_num=b.v_num and v.v_delete=0 order by v.v_num desc) aa)
 	</select>
+	<select id="mainVideoList" parameterType="int" resultType="video">
+		select * from(select v.*,rownum rnum from (select * from video where m_num=#{m_num} order by v_num desc) v)
+		<![CDATA[ where rnum>=1 and rnum<=10 ]]>
+	</select>
 </mapper>
