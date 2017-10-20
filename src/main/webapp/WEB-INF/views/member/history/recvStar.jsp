@@ -86,13 +86,23 @@ em {
 	</div>
 	</div>
 	
+	<script type="text/javascript">
+		$(function(){
+			function numberWithCommas(x) {
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+			$("#sc").text(numberWithCommas("${mvo.star_candy }"));
+			$("#t_ea").text(numberWithCommas("${total_recv_ea }"));
+		});
+	</script>
+	
 	<div class="section1">
 	<h5><b>별풍선 환전하기</b><span class="stit">별풍선 보유현황 확인 및 별풍선 환전 신청을 하실 수 있습니다</span></h5>
 	<div>
-	<span style="color:#0089cf">${sessionScope.id }</span>님이 보유하신 환전 가능 별풍선은 <em><b>${mvo.star_candy }</b></em>개 입니다</div>
+	<span style="color:#0089cf">${sessionScope.id }</span>님이 보유하신 환전 가능 별풍선은 <em><b id="sc">${mvo.star_candy }</b></em>개 입니다</div>
 		
 	<div>
-	선물받은 누적 별풍선 : <b>${total_recv_ea }개</b>
+	선물받은 누적 별풍선 : <b id="t_ea">${total_recv_ea }</b>개
 	</div>
 	<div><br><button type="button" class="w3-btn w3-white w3-border w3-border-blue w3-round-large" style="margin-left:420px;" id="exchange"><span style="color: #0072ff">환전신청하기</span></button></div>
 	</div>
@@ -113,7 +123,7 @@ em {
 		<tr>
 			<th>${exvo.e_ea }</th>
 			<th>${exvo.e_fee }%</th>
-			<th>${exvo.e_money }원</th>
+			<th>${exvo.price }원</th>
 			<th>${exvo.e_regdate }</th>
 		</tr>
 	</c:forEach>
@@ -299,9 +309,9 @@ em {
 						$(data).find("exlist").each(function(){
 							var e_ea = $(this).find("e_ea").text();
 							var e_fee = $(this).find("e_fee").text();
-							var sum = parseFloat(e_ea)*parseFloat(e_fee);
+							var price = $(this).find("price").text();
 							var e_regdate = $(this).find("e_regdate").text();
-							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "%</th><th>" + parseInt(sum) + "원</th><th>" + e_regdate + "</th></tr>");						
+							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "%</th><th>" + price + "원</th><th>" + e_regdate + "</th></tr>");						
 						});
 					}
 				});
@@ -347,9 +357,9 @@ em {
 						$(data).find("exlist").each(function(){
 							var e_ea = $(this).find("e_ea").text();
 							var e_fee = $(this).find("e_fee").text();
-							var sum = parseFloat(e_ea)*parseFloat(e_fee);
+							var price = $(this).find("price").text();
 							var e_regdate = $(this).find("e_regdate").text();
-							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "%</th><th>" + parseInt(sum) + "원</th><th>" + e_regdate + "</th></tr>");						
+							$("#exlistB").append("<tr><th>" + e_ea + "</th><th>" + e_fee + "%</th><th>" + price + "원</th><th>" + e_regdate + "</th></tr>");						
 						});
 					}
 				});

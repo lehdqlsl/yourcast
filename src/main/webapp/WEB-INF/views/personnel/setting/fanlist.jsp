@@ -226,12 +226,12 @@
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${err!=null }">
-			<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+			<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color:red">1</span></a>
 		</c:if>
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
 					<c:when test="${i==pu.pageNum }">
-						<a href="#" class="w3-bar-item w3-black w3-button">${i }</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color:red">${i }</span></a>
 					</c:when>
 					<c:otherwise>
 						<a href="<c:url value='/${requestScope.id}/setting/fanlist?pageNum=${i }'/>" class="w3-bar-item w3-button w3-hover-black">${i }</a>

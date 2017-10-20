@@ -22,7 +22,7 @@
 		<c:forEach var="pvo" items="${plist }">
 			<tr>
 				<th>${pvo.p_name }</th>
-				<th>${pvo.pay_money }</th>
+				<th>${pvo.money }원</th>
 				<th>${pvo.pay_regdate }</th>
 			</tr>
 		</c:forEach>
@@ -33,7 +33,7 @@
 		</c:if>
 	</table>
 	
-	<div>${mvo.id }님의 보유중인 금액은 ${mvo.money }원 입니다.</div>
+	<div>${mvo.id }님의 보유중인 금액은 <b style="color:red;">${mvo.moneyS }</b>원 입니다.</div>
 	
 	<br>
 	
@@ -49,7 +49,7 @@
 			</c:otherwise>
 		</c:choose>
 			<c:if test="${err!=null }">
-				<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+				<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color: red">1</span></a>
 			</c:if>
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>

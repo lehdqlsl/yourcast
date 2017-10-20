@@ -171,7 +171,7 @@
 			<button type="submit" class="w3-button w3-black w3-round-large" style="float: right;margin-right:100px;"><i class="fa fa-trash-o"></i>삭제</button>
 			<button type="button" class="w3-button w3-black w3-round-large" id="update" style="float: right;margin-right:5px;"><i class="fa fa-cogs"></i>수정</button>
 		 -->
-			<button type="button" class="insert w3-button w3-black w3-round-large" style="float: right;margin-right:300px;"><i class="fa fa-upload"></i>동영상업로드</button>
+			<button type="button" class="insert w3-button w3-border w3-round-large" style="float: right;margin-right:300px;background-color: #4C5870;color: #EBEDEC; font-weight: bold;"><i class="fa fa-upload" style="color: white;"></i>동영상업로드</button>
 		</c:if>
 		</div>
 		</form>	
@@ -179,7 +179,7 @@
 		<br><br>
 		
 		<!-- 페이징 -->
-		<div class="w3-bar-all w3-center" style="width:980px;">
+		<div class="w3-bar-all w3-center" style="width:980px;margin-bottom:50px;">
 		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
 				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.startPageNum-1 }'/>" class="w3-bar-item w3-button w3-hover-black">이전</a>
@@ -189,12 +189,12 @@
 			</c:otherwise>
 		</c:choose>
 			<c:if test="${err!=null }">
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">1</a>
+				<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color:red">1</span></a>
 			</c:if>
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
 					<c:when test="${i==pu.pageNum }">
-						<a href="#" class="w3-bar-item w3-button w3-hover-black">${i }</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color:red">${i }</span></a>
 					</c:when>
 					<c:otherwise>
 						<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${i }'/>" class="w3-bar-item w3-button w3-hover-black">${i }</a>
