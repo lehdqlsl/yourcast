@@ -149,18 +149,22 @@ public class VideoController {
 		
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		MemberVO mvo= m_service.getInfo(id);
-		int m_num=mvo.getM_num();
 		
-		//ºÏ¸¶Å© È®ÀÎ
-		HashMap<String, Object> map=new HashMap<String, Object>();
-		map.put("m_num", m_num);
-		map.put("v_num", v_num);
-		BookmarkVO bmvo= b_service.check(map);
-		if(bmvo==null) {//ºÏ¸¶Å© ¾ÈÇÑ °æ¿ì
-			model.addAttribute("bookmark", false);
-		}else {//ºÏ¸¶Å© ÇÑ°æ¿ì
-			model.addAttribute("bookmark", true);
+		if(id==null) {
+			
+		}else {
+			MemberVO mvo= m_service.getInfo(id);
+			int m_num=mvo.getM_num();
+			//ºÏ¸¶Å© È®ÀÎ
+			HashMap<String, Object> map=new HashMap<String, Object>();
+			map.put("m_num", m_num);
+			map.put("v_num", v_num);
+			BookmarkVO bmvo= b_service.check(map);
+			if(bmvo==null) {//ºÏ¸¶Å© ¾ÈÇÑ °æ¿ì
+				model.addAttribute("bookmark", false);
+			}else {//ºÏ¸¶Å© ÇÑ°æ¿ì
+				model.addAttribute("bookmark", true);
+			}
 		}
 		
 		//Á¶È¸¼ö
@@ -169,7 +173,6 @@ public class VideoController {
 		model.addAttribute("vucount",vucount);
 		model.addAttribute("vvo",vvo);
 		model.addAttribute("vrcount", vrcount);
-		//return ".broadcast.getInfo";
 		return ".video.getInfo";
 	}
 	///////////////////////////////////////////////////////////////////////////////////////

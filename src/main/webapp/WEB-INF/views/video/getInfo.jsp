@@ -352,7 +352,8 @@ dd.name {
 		<source src="<c:url value='/resources/upload/${vvo.v_savefilename}'/>" type="video/mp4">
 	</video>
 	<div>
-		<c:choose>
+		<c:if test="${not empty sessionScope.id }">
+			<c:choose>
 			<c:when test="${bookmark==true }">
 				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:orange" id="star"></i>&nbsp;즐겨찾기</button>
 			</c:when>
@@ -360,6 +361,7 @@ dd.name {
 				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:#BDBDBD" id="star"></i>&nbsp;즐겨찾기</button>
 			</c:otherwise>
 		</c:choose>
+		</c:if>
 		<hr style="width: 81%">
 	</div>	
 	<!-- 동영상 정보 -->

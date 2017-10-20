@@ -20,7 +20,6 @@
 			url:'<c:url value="/videomain/alllist?pageNum=1"/>',
 			dataType:'xml',
 			success:function(data){
-				//alert(data);
 				count = $(data).find("count").text();
 				$(data).find("list").each(function(){
 					var img=$(this).find("v_savethumbnail").text();
@@ -28,18 +27,30 @@
 					var id=$(this).find("id").text();
 					var v_hit=$(this).find("v_hit").text();
 					var v_num=parseInt($(this).find("v_num").text());
-					//alert(v_num);
-					
-					var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
-					'<div><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
-					+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
-					+
-					'<div>'+
-					'<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a>'+
-					'</div>'+
-					'<div style="padding:0 10px 0 10px;">'+
-					'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
-					'</div></div>'
+					var age=parseInt($(this).find("age_grade_num").text());
+					if(age==1){
+						var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
+						'<div><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
+						+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
+						+
+						'<div>'+
+						'<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a>'+
+						'</div>'+
+						'<div style="padding:0 10px 0 10px;">'+
+						'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
+						'</div></div>'
+					}else{
+						var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
+						'<div><a class="adult" id="'+v_num+'" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
+						+'<img src="/app/resources/upload/adult.png" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
+						+
+						'<div>'+
+						'<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a>'+
+						'</div>'+
+						'<div style="padding:0 10px 0 10px;">'+
+						'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
+						'</div></div>'
+					}
 					$("#videolist").append(div);
 				});
 			}
@@ -56,7 +67,6 @@
 					url:'<c:url value="/videomain/alllist?pageNum='+vlc+'"/>',
 					dataType:'xml',
 					success:function(data){
-						//alert(data);
 						count = $(data).find("count").text();
 						$(data).find("list").each(function(){
 							var img=$(this).find("v_savethumbnail").text();
@@ -64,22 +74,57 @@
 							var id=$(this).find("id").text();
 							var v_hit=$(this).find("v_hit").text();
 							var v_num=parseInt($(this).find("v_num").text());
-							//alert(v_num);
-							
-							var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
-							'<div><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
-							+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
-							+
-							'<div>'+
-							'<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a>'+
-							'</div>'+
-							'<div style="padding:0 10px 0 10px;">'+
-							'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
-							'</div></div>'
+							var age=parseInt($(this).find("age_grade_num").text());
+							if(age==1){
+								var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
+								'<div><a href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'">'
+								+'<img src="/app/resources/upload/'+img+'" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
+								+
+								'<div>'+
+								'<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a>'+
+								'</div>'+
+								'<div style="padding:0 10px 0 10px;">'+
+								'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
+								'</div></div>'
+							}else{
+								var div='<div class="w3-col l3 m6 w3-margin-bottom videolist">'+
+								'<div><a class="adult" id="'+v_num+'" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" >'
+								+'<img src="/app/resources/upload/adult.png" style="width:100%;height:250px;" class="w3-round-large w3-border w3-hover-opacity"></a></div>'
+								+
+								'<div>'+
+								'<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<%=request.getContextPath()%>/videomain/getInfo?v_num='+v_num+'" class="title_list">'+v_title+'</a>'+
+								'</div>'+
+								'<div style="padding:0 10px 0 10px;">'+
+								'<p><span style="color: #328fde;"><a href="<%=request.getContextPath()%>/'+id+'" style="text-decoration: none;">'+id+'</a></span> 조회수 '+v_hit+'</p>'+
+								'</div></div>'
+							}
 							$("#videolist").append(div);
 						});
 					}
 				});
+			}
+		});
+		//성인방송 검사
+		$("#videolist").on("click",".adult",function(event){
+			event.preventDefault();
+			var v_num=$(this).attr("id");
+			if("${sessionScope.id}"){
+				$.ajax({ 
+					url:"<c:url value='/adult/check'/>",
+					dataType:"json",
+					success:function(data){
+						if(data.result==true){
+							location.href='<c:url value="/videomain/getInfo?v_num='+v_num+'"/>';
+						}else{
+							alert("성인만 조회가 가능합니다.");
+						}
+					}
+				});
+			}else{
+				var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
+				if(flag){
+					location.href="<c:url value='/member/login'/>";
+				}
 			}
 		});
 	});

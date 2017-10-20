@@ -52,4 +52,7 @@ public class VideoService {
 	public List<VideoVO> getBookmarkList(int m_num){
 		return dao.getBookmarkList(m_num);
 	}
+	public List<VideoVO> mainVideoList(int m_num){
+		return dao.mainVideoList(m_num);
+	}
 }

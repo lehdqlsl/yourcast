@@ -54,4 +54,12 @@
 				and b_delete = 0
 			</where>
 	</select>
+	<select id="mainNoticeList" parameterType="int" resultType="board">
+		select * from(select b.*,rownum rnum from (select * from board where bj_num=#{bj_num} and b_notice=1 and b_delete=0 order by b_num desc) b)
+		<![CDATA[ where rnum>=1 and rnum<=10 ]]>
+	</select>
+	<select id="mainBoardList" parameterType="int" resultType="board">
+		select * from(select b.*,rownum rnum from (select * from board where bj_num=#{bj_num} and b_notice=0 and b_delete=0 order by b_num desc) b)
+		<![CDATA[ where rnum>=1 and rnum<=10 ]]>
+	</select>
 </mapper>
