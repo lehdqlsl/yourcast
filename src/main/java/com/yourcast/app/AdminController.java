@@ -19,6 +19,7 @@ import com.yourcast.app.service.BoardService;
 import com.yourcast.app.service.GradeService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.NoticeService;
+import com.yourcast.app.service.ProfitService;
 import com.yourcast.app.service.VideoReplyReportService;
 import com.yourcast.app.service.VideoReplyService;
 import com.yourcast.app.service.VideoReportService;
@@ -31,6 +32,7 @@ import com.yourcast.app.vo.GradeVO;
 import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.NoticeVO;
 import com.yourcast.app.vo.PagingVO;
+import com.yourcast.app.vo.ProfitVO;
 import com.yourcast.app.vo.VideoReplyReportVO;
 import com.yourcast.app.vo.VideoReplyVO;
 import com.yourcast.app.vo.VideoReportVO;
@@ -51,6 +53,7 @@ public class AdminController {
 	@Autowired private VideoReplyReportService vrr_service;
 	@Autowired private GradeService g_service;
 	@Autowired private NoticeService n_service;
+	@Autowired private ProfitService p_service;
   
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin() {
@@ -74,6 +77,24 @@ public class AdminController {
 		return ".admin.member.list";
 	}
 	
+	@RequestMapping(value = "/admin/profit/list", method = RequestMethod.GET)
+	public String profitList(Model model, @RequestParam(value="pageNum",defaultValue="1")  int pageNum) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int totalRowCount=p_service.getCount(map);	
+		PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);	
+		map.put("startRow",pu.getStartRow());
+		map.put("endRow",pu.getEndRow());
+
+		List<ProfitVO> plist = p_service.getList(map);
+		List<ProfitVO> rlist = p_service.getRank();
+
+		model.addAttribute("plist",plist);
+		model.addAttribute("rlist",rlist);
+		model.addAttribute("pu",pu);
+		
+		return ".admin.profit.list";
+	}
 	@RequestMapping(value = "/admin/member/listFind", method = RequestMethod.GET)
 	public String memberListFind(@RequestParam(value="pageNum",defaultValue="1")  int pageNum,
 											@RequestParam(value="name",defaultValue="")  String name,

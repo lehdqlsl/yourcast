@@ -58,7 +58,7 @@
 			<div id="sidebar">
 				<tiles:insertAttribute name="sidebar" />
 			</div>
-			<div id="main">
+			<div id="main" class="main-panel">
 				<tiles:insertAttribute name="content" />
 			</div>
 		</div>

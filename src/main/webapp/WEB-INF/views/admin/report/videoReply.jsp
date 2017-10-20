@@ -27,7 +27,7 @@
 	});
 </script>
 
-<div class="content" style="margin-left: 250px;">
+<div class="content">
 <div class="container-fluid">
 	<div class="row">
 		<div class="content">

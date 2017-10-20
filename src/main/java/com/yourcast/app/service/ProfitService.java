@@ -18,10 +18,14 @@ public class ProfitService {
 	public int insert(ProfitVO vo) {
 		return dao.insert(vo);
 	}
-	public List<ProfitVO> getList(){
-		return dao.getList();
+	public List<ProfitVO> getList(HashMap<String,Object> map){
+		return dao.getList(map);
 	}
-	public int getCount(HashMap<String, Integer> map) {
+	public int getCount(HashMap<String, Object> map) {
 		return dao.getCount(map);
+	}
+	
+	public List<ProfitVO> getRank(){
+		return dao.getRank();
 	}
 }

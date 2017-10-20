@@ -34,7 +34,7 @@
                 </li>
                 
                 <li class="active">                
-                    <a href="#">
+                    <a href="<c:url value='/admin/profit/list'/>">
                         <i class="pe-7s-graph"></i>
                         <p>매출현황</p>
                     </a>

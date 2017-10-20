@@ -24,12 +24,18 @@ public class ProfitDAO {
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-	public List<ProfitVO> getList() {
-		List<ProfitVO> plist = sqlSession.selectList(NAMESPACE + ".getList");
+	public List<ProfitVO> getList(HashMap<String, Object> map) {
+		List<ProfitVO> plist = sqlSession.selectList(NAMESPACE + ".getList",map);
 		return plist;
 	}
 
-	public int getCount(HashMap<String, Integer> map) {
+	public int getCount(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE + ".getCount",map);
+	}
+	
+
+	public List<ProfitVO> getRank() {
+		List<ProfitVO> plist = sqlSession.selectList(NAMESPACE + ".getRank");
+		return plist;
 	}
 }
