@@ -118,6 +118,7 @@
 				<th colspan="2" style="color:red;"># 파일을 업로드하지 않을 경우, 이전 파일로 유지됩니다.</th>
 			</tr>
 			<tr>
+
 				<th colspan="2" style="text-align:left;">
 				
 				<button type="submit" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;">

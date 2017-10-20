@@ -10,11 +10,11 @@
 		});
 	});
 </script>
-<div class="content" style="margin-left: 250px;">
+<div class="content">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="content">
-	            <div class="col-md-6 col-md-offset-3">
+	            <div class="col-md-12">
 	                <div class="card">
 	                    <div class="header">
 	                        <h4 class="title">공지사항 조회</h4>

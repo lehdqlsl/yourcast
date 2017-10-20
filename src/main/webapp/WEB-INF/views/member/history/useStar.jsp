@@ -33,8 +33,18 @@
 		</c:if>
 	</table>
 	
-	<div>이미 사용한 별풍선 : ${total_send_ea }</div>
-	<div>보유중인 별풍선 : ${mvo.star_candy }</div>
+	<script type="text/javascript">
+		$(function(){
+			function numberWithCommas(x) {
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+			$("#sc").text(numberWithCommas("${mvo.star_candy }"));
+			$("#t_ea").text(numberWithCommas("${total_send_ea }"));
+		});
+	</script>
+	
+	<div>보유중인 별풍선 : <b id="sc" style="color:red;"></b>개</div>
+	<div>이미 사용한 별풍선 : <b id="t_ea"></b>개</div>
 	
 	<br>
 	
@@ -49,7 +59,7 @@
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${err!=null }">
-			<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+			<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color: red">1</span></a>
 		</c:if>
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>

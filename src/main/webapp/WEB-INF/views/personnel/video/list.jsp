@@ -184,7 +184,7 @@
 		<br><br>
 		
 		<!-- 페이징 -->
-		<div class="w3-bar-all w3-center" style="width:980px;">
+		<div class="w3-bar-all w3-center" style="width:980px;margin-bottom:50px;">
 		<c:choose>
 			<c:when test="${pu.startPageNum>5 }">
 				<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${pu.startPageNum-1 }'/>" class="w3-bar-item w3-button w3-hover-black">이전</a>
@@ -194,12 +194,12 @@
 			</c:otherwise>
 		</c:choose>
 			<c:if test="${err!=null }">
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">1</a>
+				<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color:red">1</span></a>
 			</c:if>
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>
 					<c:when test="${i==pu.pageNum }">
-						<a href="#" class="w3-bar-item w3-button w3-hover-black">${i }</a>
+						<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color:red">${i }</span></a>
 					</c:when>
 					<c:otherwise>
 						<a href="<c:url value='/${requestScope.id}/video/list?pageNum=${i }'/>" class="w3-bar-item w3-button w3-hover-black">${i }</a>

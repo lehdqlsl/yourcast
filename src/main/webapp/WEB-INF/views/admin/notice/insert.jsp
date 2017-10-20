@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="<c:url value='/resources/se2/js/HuskyEZCreator.js'/>"></script>
-<div class="content" style="margin-left: 250px;">
+<div class="content">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="content">

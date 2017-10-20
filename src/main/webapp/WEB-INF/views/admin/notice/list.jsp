@@ -24,7 +24,7 @@
 		});
 	});
 </script>
-<div class="content" style="margin-left: 250px;">
+<div class="content">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="content">
@@ -42,6 +42,7 @@
 						<div class="content table-responsive table-full-width">
 							<table class="table table-hover table-striped"
 								style="table-layout: fixed;">
+								<thead>
 								<tr>
 									<th width="10%">글번호</th>
 									<th width="40%">제목</th>
@@ -49,6 +50,7 @@
 									<th width="20%">등록일</th>
 									<th width="10%">조회수</th>
 								</tr>
+								</thead>
 								<c:forEach var="vo" items="${nlist }">
 									<tr>
 										<td width="10%">${vo.n_num }</td>

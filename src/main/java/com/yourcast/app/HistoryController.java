@@ -1,5 +1,6 @@
 package com.yourcast.app;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,11 +54,22 @@ public class HistoryController {
 
 		model.addAttribute("plist",plist);
 		model.addAttribute("pu",pu);
+		
+		DecimalFormat df = new DecimalFormat("#,##0");
+		String mm = df.format(mvo.getMoney());
+		mvo.setMoneyS(mm);
+		
 		model.addAttribute("mvo",mvo);
 		
 		if(plist.isEmpty()) {
 			model.addAttribute("err","결제내역이 존재하지 않습니다.");
 		}
+		
+		for(PayVO pvo:plist) {			
+			String m = df.format(pvo.getPay_money());
+			pvo.setMoney(m);
+		}
+		
 		
 		return ".member.history.pay";
 	}
@@ -80,10 +92,20 @@ public class HistoryController {
 		
 		model.addAttribute("buylist",buylist);
 		model.addAttribute("pu",pu);
+		
+		DecimalFormat df = new DecimalFormat("#,##0");
+		String mm = df.format(mvo.getMoney());
+		mvo.setMoneyS(mm);
+		
 		model.addAttribute("mvo",mvo);
 		
 		if(buylist.isEmpty()) {
 			model.addAttribute("err","구매내역이 존재하지 않습니다.");
+		}
+		
+		for(BuyVO bvo:buylist) {			
+			String m = df.format(bvo.getBuy_ea()*110);
+			bvo.setMoney(m);
 		}
 				
 		return ".member.history.buy";
@@ -147,14 +169,24 @@ public class HistoryController {
 		mapEx.put("endRow",puEx.getEndRow());
 		
 		List<ExchangeVO> exlist = ex_service.getList(mapEx);
-
+		
+		DecimalFormat dff = new DecimalFormat("#,##0");	
+		String tmoney = dff.format(ex_service.getexMoney(bj_num));
+		
+		model.addAttribute("total_recv_ea",use_service.getRecvEa(bj_num));
+		model.addAttribute("total_ex_ea",ex_service.getexEa(bj_num));
+		model.addAttribute("total_ex_money",tmoney);		
+		
+		for(ExchangeVO evo:exlist) {			
+			String m = dff.format(evo.getE_money());
+			evo.setMoney(m);
+			String p = dff.format(evo.getE_ea()*evo.getE_fee());
+			evo.setPrice(p);
+		}
+		
 		model.addAttribute("exlist",exlist);
 		model.addAttribute("puEx",puEx);
 		model.addAttribute("mvo",mvo);
-
-		model.addAttribute("total_recv_ea",use_service.getRecvEa(bj_num));
-		model.addAttribute("total_ex_ea",ex_service.getexEa(bj_num));
-		model.addAttribute("total_ex_money",ex_service.getexMoney(bj_num));
 		
 		if(exlist.isEmpty()) {
 			model.addAttribute("errr","환전내역이 존재하지 않습니다.");
@@ -291,6 +323,15 @@ public class HistoryController {
 		map.put("endRow",pu.getEndRow());
 		
 		List<ExchangeVO> exlist = ex_service.getList(map);
+		
+		DecimalFormat df = new DecimalFormat("#,##0");	
+		for(ExchangeVO evo:exlist) {			
+			String m = df.format(evo.getE_money());
+			evo.setMoney(m);
+			String p = df.format(evo.getE_ea()*evo.getE_fee());
+			evo.setPrice(p);
+		}
+		
 		PagingVO listp = new PagingVO();
 		listp.setExlist(exlist);
 

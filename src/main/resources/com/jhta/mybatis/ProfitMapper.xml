@@ -5,18 +5,30 @@
 <mapper namespace="com.jhta.mybatis.ProfitMapper">
 	<select id="insert" resultType="profit">
 		insert into profit values(
-					seq_p_num.nextval, #{profit_money}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{m_num}
-					)
+		seq_p_num.nextval, #{profit_money}, TO_CHAR(SYSDATE, 'YYYY-MM-DD
+		HH24:MI'), #{m_num}
+		)
 	</select>
-	<select id="getList" resultType="profit">
-		select * from profit
+	<select id="getList" resultType="profit" parameterType="hashmap">
+		select * from (select a.*,rownum rnum from (select
+		p.profit_num,p.profit_money, p.profit_regdate, m.id from profit p join
+		member m on p.m_num = m.m_num order by p.profit_regdate desc) a)  
+		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	<select id="getCount" parameterType="hashmap" resultType="int">
-			select NVL(count(m_num),0) cnt from profit
-			<where>
-				<if test="m_num != null">
-					m_num = #{m_num}
-				</if>
-			</where>
+		select count(*) from profit
+		<where>
+			<if test="m_num != null">
+				m_num = #{m_num}
+			</if>
+		</where>
+	</select>
+
+	<select id="getRank" resultType="profit">
+		select * from (select a.*,rownum
+		rnum from (select sum(p.profit_money) total, m.id, g.grade_name from
+		profit p, member m, grade g where p.m_num = m.m_num and m.grade_num =
+		g.grade_num group by m.m_num,m.id,g.grade_name order by total desc)a)
+		<![CDATA[ where rnum<=5 ]]>
 	</select>
 </mapper>

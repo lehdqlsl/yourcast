@@ -7,6 +7,8 @@ public class ExchangeVO {
 	private String e_regdate;
 	private int m_num;
 	private int e_money;
+	private String money;
+	private String price;
 
 	public ExchangeVO(int e_num, int e_ea, double e_fee, String e_regdate, int m_num) {
 		super();
@@ -37,6 +39,34 @@ public class ExchangeVO {
 
 	public ExchangeVO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public ExchangeVO(int e_num, int e_ea, double e_fee, String e_regdate, int m_num, int e_money, String money,String price) {
+		super();
+		this.e_num = e_num;
+		this.e_ea = e_ea;
+		this.e_fee = e_fee;
+		this.e_regdate = e_regdate;
+		this.m_num = m_num;
+		this.e_money = e_money;
+		this.money = money;
+		this.price = price;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getMoney() {
+		return money;
+	}
+
+	public void setMoney(String money) {
+		this.money = money;
 	}
 
 	public int getE_num() {

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;">
 	<div class="w3-container w3-padding-32" id="projects">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">구매내역</h3>
@@ -15,6 +14,14 @@
 		<a href="<c:url value='/member/history/recvStar'/>"class="w3-bar-item w3-button"  style="text-decoration: none;">선물받은 별풍선내역</a>
 	</div>
 		<hr>
+	<script type="text/javascript">
+		$(function(){
+			function numberWithCommas(x) {
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+			$("#sc").text(numberWithCommas("${mvo.star_candy }"));
+		});
+	</script>
 	<table class="w3-table w3-table-all">
 		<tr>
 			<th>구매한 별풍선</th>
@@ -23,8 +30,8 @@
 		</tr>
 		<c:forEach var="bvo" items="${buylist }">
 			<tr>
-				<th>${bvo.buy_ea }</th>
-				<th>${bvo.buy_ea*100 }</th>
+				<th class="ea">${bvo.buy_ea }</th>
+				<th>${bvo.money }원</th>
 				<th>${bvo.buy_regdate }</th>
 			</tr>
 		</c:forEach>
@@ -35,8 +42,8 @@
 		</c:if>
 	</table>
 
-	<div>보유중인 별풍선 : ${mvo.star_candy }</div>
-	<div>${mvo.id }님의 보유중인 금액은 ${mvo.money }원 입니다.</div>
+	<div>${mvo.id }님의 보유중인 금액은 <b style="color:red;">${mvo.moneyS }</b>원 입니다.</div>
+	<div>보유중인 별풍선 : <b id="sc"></b>개</div>
 	
 	<br>
 	
@@ -51,7 +58,7 @@
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${err!=null }">
-			<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+			<a href="#" class="w3-bar-item w3-button w3-hover-black"><span style="color: red">1</span></a>
 		</c:if>
 			<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 				<c:choose>

@@ -113,7 +113,6 @@
 				<button type="button" id="cancel"  class="w3-button w3-border w3-round-large" style="background-color: #4C5870;">
 				<i class="fa fa-times" style="color: white;"></i>
 				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;취소</span></button>
-				
 			</tr>
 		</table>
 		</form>

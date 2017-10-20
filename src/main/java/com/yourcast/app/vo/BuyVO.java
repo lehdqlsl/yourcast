@@ -5,6 +5,7 @@ public class BuyVO {
 	private String buy_regdate;
 	private int buy_ea;
 	private int m_num;
+	private String money;
 	
 	public BuyVO() {
 		
@@ -16,6 +17,23 @@ public class BuyVO {
 		this.buy_regdate = buy_regdate;
 		this.buy_ea = buy_ea;
 		this.m_num = m_num;
+	}
+
+	public BuyVO(int buy_num, String buy_regdate, int buy_ea, int m_num, String money) {
+		super();
+		this.buy_num = buy_num;
+		this.buy_regdate = buy_regdate;
+		this.buy_ea = buy_ea;
+		this.m_num = m_num;
+		this.money = money;
+	}
+
+	public String getMoney() {
+		return money;
+	}
+
+	public void setMoney(String money) {
+		this.money = money;
 	}
 
 	public int getBuy_num() {

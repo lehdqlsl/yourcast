@@ -15,6 +15,7 @@ public class MemberVO {
 	private int grade_num;
 	private String grade_name;
 	private String gender_name;
+	private String moneyS;
 
 	public MemberVO(int m_num, String id, String pwd, String name, Date birth, int money, Date limit_date,
 			int star_candy, int gender_num, int grade_num) {
@@ -48,6 +49,38 @@ public class MemberVO {
 		this.grade_num = grade_num;
 		this.grade_name = grade_name;
 		this.gender_name = gender_name;
+	}
+
+
+
+	public MemberVO(int m_num, String id, String pwd, String name, Date birth, int money, Date limit_date,
+			int star_candy, int gender_num, int grade_num, String grade_name, String gender_name, String moneyS) {
+		super();
+		this.m_num = m_num;
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.birth = birth;
+		this.money = money;
+		this.limit_date = limit_date;
+		this.star_candy = star_candy;
+		this.gender_num = gender_num;
+		this.grade_num = grade_num;
+		this.grade_name = grade_name;
+		this.gender_name = gender_name;
+		this.moneyS = moneyS;
+	}
+
+
+
+	public String getMoneyS() {
+		return moneyS;
+	}
+
+
+
+	public void setMoneyS(String moneyS) {
+		this.moneyS = moneyS;
 	}
 
 
