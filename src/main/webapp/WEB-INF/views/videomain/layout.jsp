@@ -25,9 +25,9 @@
 				<tiles:insertAttribute name="content" />
 			</div>
 		</div>
-		<div id="footer">
+		<%-- <div id="footer">
 			<tiles:insertAttribute name="footer" />
-		</div>
+		</div> --%>
 	</div>
 </body>
 </html>

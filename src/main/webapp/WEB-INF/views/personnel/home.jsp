@@ -14,9 +14,13 @@
   <header id="portfolio">
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
     <div class="w3-container">
-    <h1><a href="<c:url value='/${requestScope.id }'/>" class="getinfo">
-    <b>${voMP.profile_title }</b></a></h1>
-    <div class="w3-section w3-bottombar w3-padding-16">
+	<div class="link-2">
+				<h1>
+					<a href="<c:url value='/${requestScope.id }'/>" class="maintitle">
+					<b>${voMP.profile_title }</b></a>
+				</h1>
+			</div>
+	<div class="w3-section w3-bottombar w3-padding-16">
     </div>
     </div>
   </header>

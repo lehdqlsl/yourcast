@@ -17,10 +17,12 @@
 			<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
 				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
+				<div class="link-2">
 				<h1>
-					<a href="<c:url value='/${requestScope.id }'/>" class="getinfo">
+					<a href="<c:url value='/${requestScope.id }'/>" class="maintitle">
 					<b>${voMP.profile_title }</b></a>
 				</h1>
+			</div>
 				<div class="w3-section w3-bottombar w3-padding-16"  style="width: 1000px;">
 				</div>
 			</div>

@@ -95,8 +95,13 @@
 	<div class="w3-row-padding" id="videolist">
 		
 	</div>
-	<button class="w3-button w3-block w3-black" id="more">더보기</button>
+	<button class="w3-button w3-light-grey" id="more" style="width: 1600px"><b style="color: #00416D;">댓글 더보기 ∨</b></button>
 	<br>
+	<footer>
+		<div class="w3-light-grey w3-center w3-padding-24"
+			style="width: 1600px; font-size: 11px; border-top: 1px solid #CFCFCF; margin-top: 100px;">
+			All Contents Copyright ©Your Cast...Co.,Ltd. All Rights Reserved.</div>
+	</footer>
 </div>
 
 
