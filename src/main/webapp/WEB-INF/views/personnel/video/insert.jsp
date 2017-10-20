@@ -98,9 +98,9 @@
 				<th>썸네일</th><td><input type="file" name="imgfile" id="imgfile"><span id="br"></span><img src="#" height="100" id="imgLogo"></td>
 			</tr>
 			<tr>
-				<th colspan="2" style="text-align:center;"><button type="submit" class="w3-button w3-black w3-round-large"><i class="fa fa-upload"></i>업로드</button>
-				<button type="reset" class="w3-button w3-black w3-round-large"><i class="fa fa-refresh"></i>다시입력</button>
-				<button type="button" id="cancel" class="w3-button w3-black w3-round-large"><i class="fa fa-times"></i>취소</button></th>
+				<th colspan="2" style="text-align:center;"><button type="submit" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;color: #EBEDEC; font-weight: bold;"><i class="fa fa-upload" style="color: white;"></i>업로드</button>
+				<button type="reset" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;color: #EBEDEC; font-weight: bold;"><i class="fa fa-refresh" style="color: white;"></i>다시입력</button>
+				<button type="button" id="cancel" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;color: #EBEDEC; font-weight: bold;"><i class="fa fa-times" style="color: white;"></i>취소</button></th>
 			</tr>
 		</table>
 		</form>
