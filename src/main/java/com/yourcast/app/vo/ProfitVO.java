@@ -14,10 +14,15 @@ public class ProfitVO {
 	private int total;
 	private String money;
 	private String totalmoney;
-
+	
+	private String p_date;
+	private int grade_num;
 	public ProfitVO() {
+		
 	}
 
+	
+	
 	public ProfitVO(int total, String id, String grade_name, int rnum) {
 		this.total = total;
 		this.id = id;
@@ -40,6 +45,26 @@ public class ProfitVO {
 		this.profit_regdate = profit_regdate;
 		this.id = id;
 	}
+
+	public String getP_date() {
+		return p_date;
+	}
+
+	public void setP_date(String p_date) {
+		this.p_date = p_date;
+	}
+
+	public int getGrade_num() {
+		return grade_num;
+	}
+
+
+
+	public void setGrade_num(int grade_num) {
+		this.grade_num = grade_num;
+	}
+
+
 
 	public String getMoney() {
 		money = df.format(profit_money) + "¿ø";

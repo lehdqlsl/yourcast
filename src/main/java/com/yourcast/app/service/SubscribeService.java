@@ -28,4 +28,13 @@ public class SubscribeService {
 	public List<SubscribeVO> getList(int m_num) {
 		return dao.getList(m_num);
 	}
+
+	public boolean isBookmark(SubscribeVO vo) {
+		SubscribeVO vo1 = dao.isBookMark(vo);
+		if (vo1 != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

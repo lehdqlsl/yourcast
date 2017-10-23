@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,7 @@ import com.yourcast.app.service.GenreService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.StarUseService;
+import com.yourcast.app.service.SubscribeService;
 import com.yourcast.app.service.VideoReplyService;
 import com.yourcast.app.service.VideoService;
 import com.yourcast.app.vo.BoardVO;
@@ -67,6 +71,9 @@ public class HomeController {
 	@Autowired
 	private GenreService g_service;
 
+	@Autowired
+	private SubscribeService sub_service;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(@RequestParam(value = "genre_num", defaultValue = "0") int genre_num, Model model) {
 		List<BroadcastVO> blist = null;
@@ -88,6 +95,26 @@ public class HomeController {
 		return ".main";
 	}
 
+	@RequestMapping(value = "/broadcast/bookmark", method = RequestMethod.GET)
+	public String home(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id= (String)session.getAttribute("id");
+		MemberVO mvo = m_sevice.getInfo(id);
+		int m_num = mvo.getM_num();
+		List<BroadcastVO> blist_on = b_service.bookmarkOn(m_num);
+		List<BroadcastVO> blist_off = b_service.bookmarkOff(m_num);
+
+		int cnt = (int) Math.ceil(blist_on.size() / 4.0);
+
+		List<GenreVO> glist = g_service.getList();
+		model.addAttribute("glist", glist);
+		model.addAttribute("blist", blist_on);
+		model.addAttribute("blist_off", blist_off);
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("end", blist_on.size() - 1);
+
+		return ".main";
+	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String personnel(@PathVariable(value = "id") String id, Model model) {
@@ -128,7 +155,7 @@ public class HomeController {
 			model.addAttribute("voMP", voMP);
 			return ".personnel";
 		} else {
-			return ".personnel.board.nomember";
+			return ".member.nopage";
 		}
 	}
 }

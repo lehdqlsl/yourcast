@@ -111,7 +111,7 @@
 					<div class="w3-col l3 m6 w3-margin-bottom videolist">
 						<div>
 							<c:choose>
-								<c:when test="${vo.genre_num==16 }">
+								<c:when test="${vo.genre_num==16 || vo.age_grade_num==2}">
 									<a href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>'class="adult" id="${vo.v_num }"><img src='<c:url value="/resources/upload/adult.png"/>' style="width: 100%;height: 250px;" class="w3-round-large w3-border w3-hover-opacity"></a>
 								</c:when>
 								<c:otherwise>

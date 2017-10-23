@@ -28,4 +28,7 @@ public class ProfitService {
 	public List<ProfitVO> getRank(){
 		return dao.getRank();
 	}
+	public List<ProfitVO> getProfit() {
+		return dao.getProfit();
+	}
 }

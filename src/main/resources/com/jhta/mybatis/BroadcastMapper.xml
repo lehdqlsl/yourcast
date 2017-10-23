@@ -42,5 +42,12 @@
 		broadcast where
 		onair = 1
 	</select>
+	
+	<select id="bookmarkOn" parameterType="int" resultType="broadcast">
+        select s.*, m.id, m.name from broadcast b, (select * from subscribe where m_num=#{m_num}) s, member m where b.m_num=s.bj_num and m.m_num=s.bj_num and b.onair=1
+	</select>
 
+	<select id="bookmarkOff" parameterType="int" resultType="broadcast">
+        select s.*, m.id, m.name from broadcast b, (select * from subscribe where m_num=#{m_num}) s, member m where b.m_num=s.bj_num and m.m_num=s.bj_num and b.onair=0
+	</select>
 </mapper>

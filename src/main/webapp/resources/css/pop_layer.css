@@ -20,7 +20,10 @@
 .layer_s {display:none; position:fixed; left:50%; top:50%; z-index:999999;height:600px;width:280px;border:1px solid #2c84ce; background:#fff;}
 .layer_s_chat {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:238px;border:1px solid #2c84ce; background:#fff;}
 .layer_m {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:330px;border:1px solid #2c84ce; background:#fff;}
-.layer_l {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:380px;border:1px solid #2c84ce; background:#fff;}
+.layer_l {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:380px;border:1px solid #2c84ce; background:#fff;margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: 'µ¸¿ò',dotum;}
 .layer_xl {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:425px;border:1px solid #2c84ce; background:#fff;}
 .layer_xxl {display:none; position:fixed; left:50%; top:50%; z-index:999999; width:440px;border:1px solid #2c84ce; background:#fff;}
 

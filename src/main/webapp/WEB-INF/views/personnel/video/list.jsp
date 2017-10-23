@@ -77,6 +77,54 @@
 				$(".insert").on("click",function(){
 					location.href="<c:url value='/${requestScope.id}/video/insert'/>"
 				});
+				//성인방송 검사1
+				$("#thumbnaillist").on("click",".thumb",function(event){
+					event.preventDefault();
+					var v_num=$(this).attr("id");
+					if("${sessionScope.id}"){
+						$.ajax({ 
+							url:"<c:url value='/adult/check'/>",
+							dataType:"json",
+							success:function(data){
+								if(data.result==true){
+									location.href='<c:url value="/videomain/getInfo?v_num='+v_num+'"/>';
+								}else{
+									alert("성인만 조회가 가능합니다.");
+								}
+							}
+						});
+					}else{
+						var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
+						if(flag){
+							location.href="<c:url value='/member/login'/>";
+						}
+					}
+				});
+				//성인방송 검사2
+				$("#titlelist").on("click",".onetitle",function(event){
+					event.preventDefault();
+					var v_num=$(this).attr("id");
+					v_num=v_num.replace(/[^0-9]/g,'');
+					if("${sessionScope.id}"){
+						$.ajax({ 
+							url:"<c:url value='/adult/check'/>",
+							dataType:"json",
+							success:function(data){
+								if(data.result==true){
+									location.href='<c:url value="/videomain/getInfo?v_num='+v_num+'"/>';
+								}else{
+									alert("성인만 조회가 가능합니다.");
+								}
+							}
+						});
+					}else{
+						var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
+						if(flag){
+							location.href="<c:url value='/member/login'/>";
+						}
+					}
+				});
+						
 			});
 		</script>
 
@@ -136,15 +184,24 @@
 				<div class="img_profile">
 					<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width: 50px;height: 50px;border-radius: 25px;">
 				</div>
-				<div class="img_thumbnail">
-					<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
-						<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="height:130px;" class="w3-round">
-					</a>
+				<div class="img_thumbnail" id="thumbnaillist">
+					<c:choose>
+						<c:when test="${vo.age_grade_num==2 }">
+							<a id="${vo.v_num }" class="thumb" href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
+								<img src="<c:url value='/resources/upload/adult.png'/>" style="height:130px;" class="w3-round">
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
+								<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="height:130px;" class="w3-round">
+							</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="v_article">
 					<div><span style="color: #1559ff;font-weight: bold;">${vo.name}</span>&nbsp;<span style="color: #4B4B4B;">(${id })&nbsp;&nbsp;&nbsp;${vo.v_regdate }</span></div>
-					<div class="v_title">
-						<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
+					<div class="v_title" id="titlelist">
+						<a id="t${vo.v_num }" class="onetitle" href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
 					</div>
 					<div class="view">${vo.v_content }</div>
 				</div>	

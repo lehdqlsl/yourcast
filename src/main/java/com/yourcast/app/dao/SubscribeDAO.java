@@ -29,4 +29,8 @@ public class SubscribeDAO {
 	public List<SubscribeVO> getList(int m_num) {
 		return sqlSession.selectList(NAMESPACE + ".getlist", m_num);
 	}
+	
+	public SubscribeVO isBookMark(SubscribeVO vo) {
+		return sqlSession.selectOne(NAMESPACE + ".isBookmark", vo);
+	}
 }

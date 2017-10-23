@@ -71,19 +71,22 @@ public class MemberController {
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("id", id);
-		map.put("pwd", pwd);
-		boolean r = mservice.isMembers(map);
-		if (r) {
-			HttpSession session = request.getSession();
-			session.setAttribute("id", id);
-
-			// 로그인 후 이전페이지로 가지게
-			return "redirect:/";
-		} else {
-			request.setAttribute("errMsg", "아이디 혹은 비밀번호가 맞지않습니다");
-			return ".member.join.login";
+		if(id.equals("admin")) {
+			return ".admin";
+		}else {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("id", id);
+			map.put("pwd", pwd);
+			boolean r = mservice.isMembers(map);
+			if (r) {
+				HttpSession session = request.getSession();;
+				session.setAttribute("id", id);
+				// 로그인 후 이전페이지가지게
+				return "redirect:/";
+			} else {
+				request.setAttribute("errMsg", "아이디 혹은 비밀번호가 맞지않습니다");
+				return ".member.join.login";
+			}
 		}
 	}
 

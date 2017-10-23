@@ -83,6 +83,9 @@ h3 {
 			<c:when test="${genre_num == 16 }">
 				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">성인</h3>
 			</c:when>
+			<c:otherwise>
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">즐겨찾기</h3>
+			</c:otherwise>
 		</c:choose>
 
 	</div>

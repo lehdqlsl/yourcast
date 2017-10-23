@@ -25,17 +25,21 @@ public class ProfitDAO {
 	}
 
 	public List<ProfitVO> getList(HashMap<String, Object> map) {
-		List<ProfitVO> plist = sqlSession.selectList(NAMESPACE + ".getList",map);
+		List<ProfitVO> plist = sqlSession.selectList(NAMESPACE + ".getList", map);
 		return plist;
 	}
 
 	public int getCount(HashMap<String, Object> map) {
-		return sqlSession.selectOne(NAMESPACE + ".getCount",map);
+		return sqlSession.selectOne(NAMESPACE + ".getCount", map);
 	}
-	
 
 	public List<ProfitVO> getRank() {
 		List<ProfitVO> plist = sqlSession.selectList(NAMESPACE + ".getRank");
+		return plist;
+	}
+
+	public List<ProfitVO> getProfit() {
+		List<ProfitVO> plist = sqlSession.selectList(NAMESPACE + ".getProfit");
 		return plist;
 	}
 }
