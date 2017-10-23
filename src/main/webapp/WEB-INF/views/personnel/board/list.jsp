@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/list.css'/>?ver=5">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/list.css'/>?ver=1">
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
@@ -29,7 +29,7 @@
 				<h2 style="margin-left:30px;">${board_name }</h2>
 			</c:when>
 			<c:otherwise>
-				<h2 style="margin-left:30px;">전체 글</h2>
+				<h2 style="margin-left:30px;">전체보기</h2>
 			</c:otherwise>
 		</c:choose>
 		

@@ -30,7 +30,7 @@
 		</tr>
 		<c:forEach var="bvo" items="${buylist }">
 			<tr>
-				<th class="ea">${bvo.buy_ea }</th>
+				<th class="ea">${bvo.buy_ea }개</th>
 				<th>${bvo.money }원</th>
 				<th>${bvo.buy_regdate }</th>
 			</tr>

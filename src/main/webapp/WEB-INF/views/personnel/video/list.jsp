@@ -80,7 +80,7 @@
 			});
 		</script>
 
-		<h2 style="margin-left:30px;">동영상 리스트</h2>
+		<h2 style="margin-left:30px;">Video</h2>
 		<p style="margin-left:30px;margin-top:-10px;color:#9A9A9A">Video List</p>
 		
 
@@ -176,7 +176,7 @@
 			<!-- <button type="button" class="insert w3-button w3-black w3-round-large" style="float: right;margin-right:300px;"><i class="fa fa-upload"></i>동영상업로드</button> -->
 			<button type="button" class="insert w3-button w3-border w3-round-large" style="background-color: #4C5870;float: right;margin-right:300px;">
 			<i class="fa fa-video-camera" aria-hidden="true" style="color: white;"></i>
-			<span style="color: #EBEDEC; font-weight: bold;">&nbsp;동영상 업로드</span></button>
+			<span style="color: #EBEDEC;">&nbsp;동영상 업로드</span></button>
 		</c:if>
 		</div>
 		</form>	

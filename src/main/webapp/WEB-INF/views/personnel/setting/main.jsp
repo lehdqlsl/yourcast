@@ -73,7 +73,7 @@
 			<div class="w3-bar-all">
 				<button type="submit" form="target" value="Submit"
 				class="w3-button w3-border w3-round-large" style="background-color: #4C5870; float: left;"><i class="fa fa-check" style="color: white;"></i>
-				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;확인</span></button>
+				<span style="color: #EBEDEC;">&nbsp;확인</span></button>
 			</div>
 		</div>
 		<footer>

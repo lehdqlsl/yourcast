@@ -4,6 +4,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/help_fix.css'/>?ver=1">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
+<style>
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+* {
+	font-family: 'Hanna', serif;
+}
+</style>
 <script>
 	$(document).ready(function(){
 		$("#back").click(function(){

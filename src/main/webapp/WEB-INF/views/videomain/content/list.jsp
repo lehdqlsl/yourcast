@@ -132,6 +132,6 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<button class="w3-button w3-light-grey" id="more" style="width: 1600px"><b style="color: #00416D;">댓글 더보기 ∨</b></button>
+	<button class="w3-button w3-light-grey" id="more" style="width: 1600px"><b style="color: #00416D;">더보기 ∨</b></button>
 	<br>
 </div>

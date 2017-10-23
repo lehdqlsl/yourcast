@@ -8,10 +8,10 @@
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <h4><b>실시간 방송</b></h4>
-    <p class="w3-text-grey"><a href="<c:url value="/videomain"/>" style="text-decoration: none">동영상</a></p>
+    <h4 class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom" style="width: 100%;"><span style="color: white;">실시간 방송</span></h4>
+    <p class="w3-text-grey" style="text-align: center;"><a href="<c:url value="/videomain"/>">동영상</a></p>
   </div>
-    
+  <hr>
   <div class="w3-bar-block">
     <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>즐겨찾기</a>
     <hr>

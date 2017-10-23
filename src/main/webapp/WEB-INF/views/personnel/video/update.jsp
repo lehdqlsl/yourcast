@@ -123,15 +123,15 @@
 				
 				<button type="submit" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;">
 				<i class="fa fa-upload" style="color: white;"></i>
-				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;업로드</span></button>
+				<span style="color: #EBEDEC;">&nbsp;업로드</span></button>
 				
 				<button type="reset" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;">
 				<i class="fa fa-refresh" style="color: white;"></i>
-				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;다시입력</span></button>
+				<span style="color: #EBEDEC;">&nbsp;다시입력</span></button>
 				
 				<button type="button" id="cancel"  class="w3-button w3-border w3-round-large" style="background-color: #4C5870;">
 				<i class="fa fa-times" style="color: white;"></i>
-				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;취소</span></button>
+				<span style="color: #EBEDEC;">&nbsp;취소</span></button>
 			</tr>
 		</table>
 		</form>
