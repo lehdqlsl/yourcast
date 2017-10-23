@@ -3,12 +3,19 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	a{
-		text-decoration: none;
-	}
-	.title{
-		overflow: hidden;
-	}
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+* {
+	font-family: 'Hanna', serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+.title {
+	overflow: hidden;
+}
 </style>
 <div class="w3-main" style="margin: 60px auto 0 auto; width: 960px;">
 	<div class="w3-container w3-padding-32" id="projects">

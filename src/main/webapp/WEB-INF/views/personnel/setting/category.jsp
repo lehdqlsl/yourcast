@@ -115,9 +115,9 @@
 		</select>
 		<div>		
 			<button type="button" id="c_insert" class="w3-button w3-border w3-round-large" style="background-color: #4C5870; margin-left: 27px;"><i class="fa fa-check" style="color: white;"></i>
-			<span style="color: #EBEDEC; font-weight: bold;">&nbsp;추가</span></button>
+			<span style="color: #EBEDEC;">&nbsp;추가</span></button>
 			<button type="button" id="c_delete" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;"><i class="fa fa-trash-o" style="color: white;"></i>
-			<span style="color: #EBEDEC; font-weight: bold;">&nbsp;삭제</span></button>
+			<span style="color: #EBEDEC;">&nbsp;삭제</span></button>
 		</div>
 		<!-- 작성END -->
 

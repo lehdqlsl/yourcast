@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.min.css'/>?ver=1">
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery-ui.theme.min.css'/>?ver=1"> 
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-ui.min.js'/>"></script> 
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/star.css'/>?ver=3">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/star.css'/>?ver=4">
 
 <style>
 .st_area {
@@ -22,7 +22,14 @@
 		url('<c:url value="/resources/img/balloon_desc.png"/>') -9999em -9999em 
 		no-repeat;
 	*zoom: 1
-} 
+	
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+* {
+	font-family: 'Hanna', serif;
+	margin: 0;
+	padding: 0;
+}
 .sinfo ul li.desc1 .img{background-position:0 0px}
 .sinfo ul li.desc2 .img{background-position:0 -105px}
 .sinfo ul li.desc3 .img{background-position:0 -207px}

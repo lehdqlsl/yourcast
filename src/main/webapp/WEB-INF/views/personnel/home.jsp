@@ -72,8 +72,9 @@
       <!-- 공지사항 -->
       
       <div class="w3-third w3-margin-bottom">
-    	<div class="w3-bottombar">
-    		<h5 style="margin-left: 20px;font-weight: bold">공지사항</h5><span style="width:100px;height:5px;margin-left:370px;font-size: 10px;color: #353535"><a href="<c:url value='/${requestScope.id }/board/list'/>">더보기</a></span>
+    	<div style="border-bottom: 3px solid #bbb">
+    		<h5 style="margin-left: 20px;font-weight: bold"><i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;&nbsp;공지사항</h5>
+    		<span style="width:100px;height:5px;margin-left:370px;font-size: 12px;color: #757575"><a href="<c:url value='/${requestScope.id }/board/list'/>">더보기</a></span>
     	</div>
         <table class="w3-table w3-bordered">
         	<c:choose>
@@ -88,10 +89,10 @@
 		        			<td>
 		        				<span class="title_list">
 		        					<span class="noti"></span>
-		        					<span><a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>' style="text-decoration: none;">${vo.b_title }</a></span>
+		        					<span><a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>' style="text-decoration: none; font-size: 13px;">${vo.b_title }</a></span>
 		        				
 		        				</span>
-		        				<span style="float: right"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.brcnt }</span>
+		        				<span style="float: right;font-size: 12px;color: #7b7474;"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.brcnt }</span>
 		        			</td>
 		        		</tr>
 		        	</c:forEach>
@@ -102,8 +103,9 @@
       <!-- 최신글 -->
       
       <div class="w3-third w3-margin-bottom">
-      	<div class="w3-bottombar">
-      		<h5 style="margin-left: 20px;font-weight: bold">최신글목록</h5><span style="width:100px;height:5px;margin-left:370px;font-size: 10px;color: #353535"><a href="<c:url value='/${requestScope.id }/board/list'/>">더보기</a></span>
+      	<div style="border-bottom: 3px solid #bbb">
+      		<h5 style="margin-left: 20px;font-weight: bold"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;최신글목록</h5>
+      		<span style="width:100px;height:5px;margin-left:370px;font-size: 12px;color: #757575"><a href="<c:url value='/${requestScope.id }/board/list'/>">더보기</a></span>
       	</div>
       	
   
@@ -119,9 +121,9 @@
 		        		<tr>
 		        			<td>
 		        				<span class="title_list">
-		        					<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>' style="text-decoration: none;">${vo.b_title }</a>
+		        					<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>' style="text-decoration: none;font-size: 13px;">${vo.b_title }</a>
 		        				</span>
-		        				<span style="float: right"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.brcnt }</span>
+		        				<span style="float: right;font-size: 12px;color: #7b7474"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.brcnt }</span>
 		        			</td>
 		        		</tr>
 		        	</c:forEach>
@@ -132,8 +134,9 @@
       <!-- 동영상 목록 -->
       
       <div class="w3-third">
-      	<div class="w3-bottombar">	
-      		<h5 style="margin-left: 20px;font-weight: bold">VOD</h5><span style="width:100px;height:5px;margin-left:370px;font-size: 10px;color: #353535"><a href="<c:url value="/${requestScope.id }/video/list"/>">더보기</a></span>
+      	<div style="border-bottom: 3px solid #bbb">	
+      		<h5 style="margin-left: 20px;font-weight: bold"><i class="fa fa-film" aria-hidden="true"></i>&nbsp;&nbsp;VOD</h5>
+      		<span style="width:100px;height:5px;margin-left:370px;font-size: 12px;color: #757575"><a href="<c:url value="/${requestScope.id }/video/list"/>">더보기</a></span>
       	</div>
         <table class="w3-table w3-bordered">
         	<c:choose>
@@ -148,12 +151,12 @@
 		        			<td>
 		        				<c:choose>
 		        					<c:when test="${vo.age_grade_num==2 }">
-		        						<span class="title_list" id="video_list"><a id="${vo.v_num }" class="onevideo" href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>' style="text-decoration: none;">${vo.v_title }</a></span>
-		        						<span style="float: right"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.vrcnt }</span>
+		        						<span class="title_list" id="video_list"><a id="${vo.v_num }" class="onevideo" href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>' style="text-decoration: none;font-size: 13px;">${vo.v_title }</a></span>
+		        						<span style="float: right;font-size: 12px;color: #7b7474;"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.vrcnt }</span>
 		        					</c:when>
 		        					<c:otherwise>
-		        						<span class="title_list" ><a href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>' style="text-decoration: none;">${vo.v_title }</a></span>
-		        						<span style="float: right"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.vrcnt }</span>
+		        						<span class="title_list"><a href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>' style="text-decoration: none;font-size: 13px;">${vo.v_title }</a></span>
+		        				    <span style="float: right;font-size: 12px;color: #7b7474;"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.vrcnt }</span>
 		        					</c:otherwise>
 		        				</c:choose>
 		        			</td>
@@ -168,49 +171,11 @@
   
 
   <!-- Footer -->
-  <footer class="w3-container w3-padding-32 w3-dark-grey">
-  <div class="w3-row-padding">
-    <div class="w3-third">
-      <h3>FOOTER</h3>
-      <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-    </div>
-  
-    <div class="w3-third">
-      <h3>BLOG POSTS</h3>
-      <ul class="w3-ul w3-hoverable">
-        <li class="w3-padding-16">
-          <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
-          <span class="w3-large">Lorem</span><br>
-          <span>Sed mattis nunc</span>
-        </li>
-        <li class="w3-padding-16">
-          <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
-          <span class="w3-large">Ipsum</span><br>
-          <span>Praes tinci sed</span>
-        </li> 
-      </ul>
-    </div>
-
-    <div class="w3-third">
-      <h3>POPULAR TAGS</h3>
-      <p>
-        <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">London</span>
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">DIY</span>
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Family</span>
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Shopping</span>
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
-      </p>
-    </div>
-
-  </div>
-  </footer>
-  
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-
-<!-- End page content -->
+		<footer>
+			<div class="w3-light-grey w3-center w3-padding-24"
+				style="width: 1300px; font-size: 11px; border-top: 1px solid #CFCFCF; margin-top: 100px;">
+				All Contents Copyright ©Your Cast...Co.,Ltd. All Rights Reserved.</div>
+		</footer>
 </div>
-
-
 </body>
 </html>

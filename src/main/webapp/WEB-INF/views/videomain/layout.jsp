@@ -10,6 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+* {
+font-family: 'Hanna', serif;
+}
+</style>
 </head>
 <!-- 비디오페이지 레이아웃 -->
 <body>

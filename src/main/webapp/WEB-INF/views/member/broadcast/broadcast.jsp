@@ -4,6 +4,11 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/radio.css'/>?ver=5">
 <style>
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+* {
+font-family: 'Hanna', serif;
+}
 
 /*Page styles*/
 
@@ -146,7 +151,7 @@ input[type="checkbox"]:checked + label:before {
 			</div>
 			<button type="submit" form="target" value="Submit"
 				class="w3-button w3-border w3-round-large" style="background-color: #4C5870; float: left;"><i class="fa fa-check" style="color: white;"></i>
-				<span style="color: #EBEDEC; font-weight: bold;">&nbsp;업데이트</span></button>
+				<span style="color: #EBEDEC;">&nbsp;업데이트</span></button>
 		</form>
 	</div>
 </div>

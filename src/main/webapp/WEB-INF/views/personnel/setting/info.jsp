@@ -104,7 +104,7 @@
 				<tr style="height:20px;"></tr>
 				<tr>
 					<th colspan="2"><button type="submit" style="margin-right:400px;background-color: #4C5870;" class="w3-button w3-border w3-round-large">
-					<i class="fa fa-check" style="color: white;"></i><span style="color: #EBEDEC; font-weight: bold;">&nbsp;확인</span></button></th>
+					<i class="fa fa-check" style="color: white;"></i><span style="color: #EBEDEC;">&nbsp;확인</span></button></th>
 				</tr>
 			</table>
 		</form>

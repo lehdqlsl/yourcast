@@ -16,8 +16,13 @@
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
 
 <style>
-body, h1, h2, h3, h4, h5, h6 {
+/* body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Raleway", sans-serif
+} */
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+* {
+font-family: 'Hanna', serif;
 }
 a.getinfo:link{
 	text-decoration: none;	

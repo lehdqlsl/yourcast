@@ -52,7 +52,7 @@ em {
 		<tbody id="recvlistB">
 		<c:forEach var="rvo" items="${recvlist }">
 			<tr>
-				<th>${rvo.use_ea }</th>
+				<th>${rvo.use_ea }개</th>
 				<th>${rvo.id }</th>
 				<th>${rvo.use_regdate }</th>
 			</tr>
@@ -121,7 +121,7 @@ em {
 	<tbody id="exlistB">
 	<c:forEach var="exvo" items="${exlist }">
 		<tr>
-			<th>${exvo.e_ea }</th>
+			<th>${exvo.e_ea }개</th>
 			<th>${exvo.e_fee }%</th>
 			<th>${exvo.price }원</th>
 			<th>${exvo.e_regdate }</th>

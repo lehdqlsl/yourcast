@@ -12,6 +12,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+* {
+font-family: 'Hanna', serif;
+}
+</style>
 </head>
 <!-- 메인페이지 레이아웃 -->
 <body>

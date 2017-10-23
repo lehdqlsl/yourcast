@@ -1,6 +1,7 @@
 @charset "euc-kr";
 @import url("/css/global/common_set.css");
 
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 /*common*/
 .white_b{color:#fff}

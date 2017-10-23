@@ -332,7 +332,7 @@
 				<div id="replyinsert">
 					<textarea rows="4" cols="70" id="br_content" name="br_content" placeholder="다른 사람의 권리를 침해하는 내용은 제재 받을 수 있습니다" style="padding: 12px 20px;box-sizing: border-box;border: 2px solid #ccc;border-radius: 4px;background-color: #f8f8f8;resize: none;"></textarea>
 				</div>
-				<button class="w3-button w3-border w3-round-large" id="br_reg" style="background-color: #4C5870"><span style="color: #EBEDEC; font-weight: bold;">등록</span></button>
+				<button class="w3-button w3-border w3-round-large" id="br_reg" style="background-color: #4C5870"><span style="color: #EBEDEC;">등록</span></button>
 			</div>
 			<h6 style="font-weight: bold;">댓글 : <span id="totalbrcount" style="color: #1559ff">${brcount }</span> </h6>
 			<div id="replylist">

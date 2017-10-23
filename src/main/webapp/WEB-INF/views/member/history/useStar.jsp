@@ -21,7 +21,7 @@
 		</tr>
 		<c:forEach var="uvo" items="${uselist }">
 			<tr>
-				<th>${uvo.use_ea }</th>
+				<th>${uvo.use_ea }개</th>
 				<th>${uvo.id }</th>
 				<th>${uvo.use_regdate }</th>
 			</tr>
