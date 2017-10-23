@@ -17,6 +17,34 @@
 	text-overflow: ellipsis;
 }
 </style>
+<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//성인방송 검사
+		$("#video_list").on("click",".onevideo",function(event){
+			event.preventDefault();
+			var v_num=$(this).attr("id");
+			if("${sessionScope.id}"){
+				$.ajax({ 
+					url:"<c:url value='/adult/check'/>",
+					dataType:"json",
+					success:function(data){
+						if(data.result==true){
+							location.href='<c:url value="/videomain/getInfo?v_num='+v_num+'"/>';
+						}else{
+							alert("성인만 조회가 가능합니다.");
+						}
+					}
+				});
+			}else{
+				var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
+				if(flag){
+					location.href="<c:url value='/member/login'/>";
+				}
+			}
+		});
+	});
+</script>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px">
@@ -118,8 +146,16 @@
         			<c:forEach var="vo" items="${vlist }">
 		        		<tr>
 		        			<td>
-		        				<span class="title_list"><a href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>' style="text-decoration: none;">${vo.v_title }</a></span>
-		        				<span style="float: right"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.vrcnt }</span>
+		        				<c:choose>
+		        					<c:when test="${vo.age_grade_num==2 }">
+		        						<span class="title_list" id="video_list"><a id="${vo.v_num }" class="onevideo" href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>' style="text-decoration: none;">${vo.v_title }</a></span>
+		        						<span style="float: right"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.vrcnt }</span>
+		        					</c:when>
+		        					<c:otherwise>
+		        						<span class="title_list" ><a href='<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>' style="text-decoration: none;">${vo.v_title }</a></span>
+		        						<span style="float: right"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${vo.vrcnt }</span>
+		        					</c:otherwise>
+		        				</c:choose>
 		        			</td>
 		        		</tr>
 		        	</c:forEach>

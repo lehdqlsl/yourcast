@@ -46,11 +46,16 @@ public class BookmarkController {
 
 		//북마크 추가 작업
 		BookmarkVO bvo=new BookmarkVO(0, m_num, v_num);
-		b_service.insert(bvo);
+		int n = b_service.insert(bvo);
 		
 		//json
 		JSONObject json=new JSONObject();
-		json.put("result", true);
+		if(n>0) {
+			json.put("result", true);
+		}else {
+			json.put("result", false);
+		}
+		
 		return json.toString();
 	}
 	
@@ -69,11 +74,16 @@ public class BookmarkController {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("m_num", m_num);
 		map.put("v_num", v_num);
-		b_service.delete(map);
+		int n=b_service.delete(map);
 		
 		//json
 		JSONObject json=new JSONObject();
-		json.put("result", true);
+		if(n>0) {
+			json.put("result", true);
+		}else {
+			json.put("result", false);
+		}
+		
 		return json.toString();
 	}
 	//북마크 동영상 목록

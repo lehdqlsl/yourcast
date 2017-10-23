@@ -329,19 +329,27 @@ dd.name {
 					url:"<c:url value='/bookmark/delete?v_num=${vvo.v_num}'/>",
 					dataType:"json",
 					success:function(data){
-						
+						if(data.result){
+							$("#star").css("color","#BDBDBD");
+						}else{
+							alert("오류가 발생했습니다.");
+						}
 					}
 				});
-				$("#star").css("color","#BDBDBD");
+				
 			}else{//즐겨찾기 등록
 				$.ajax({
 					url:"<c:url value='/bookmark/insert?v_num=${vvo.v_num}'/>",
 					dataType:"json",
 					success:function(data){
-						
+						if(data.result){
+							$("#star").css("color","orange");
+						}else{
+							alert("오류가 발생했습니다.");
+						}
 					}
 				});
-				$("#star").css("color","orange");
+				
 			}
 		});
 	});
