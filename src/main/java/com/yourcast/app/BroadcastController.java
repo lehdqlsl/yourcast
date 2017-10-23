@@ -22,12 +22,14 @@ import com.yourcast.app.service.FanService;
 import com.yourcast.app.service.MemberProfileService;
 import com.yourcast.app.service.MemberService;
 import com.yourcast.app.service.StarUseService;
+import com.yourcast.app.service.SubscribeService;
 import com.yourcast.app.vo.BlacklistVO;
 import com.yourcast.app.vo.BroadcastVO;
 import com.yourcast.app.vo.FanVO;
 import com.yourcast.app.vo.MemberProfileVO;
 import com.yourcast.app.vo.MemberVO;
 import com.yourcast.app.vo.StarUseVO;
+import com.yourcast.app.vo.SubscribeVO;
 
 @Controller
 public class BroadcastController {
@@ -48,67 +50,79 @@ public class BroadcastController {
 
 	@Autowired
 	private MemberProfileService profile_service;
-	
-	@Autowired BlacklistService black_service;
-	
+
+	@Autowired
+	private BlacklistService black_service;
+
+	@Autowired
+	private SubscribeService sub_service;
+
 	@RequestMapping(value = "/bs/{id}", method = RequestMethod.GET)
 	public String home(@PathVariable(value = "id") String id, Model model, HttpServletRequest request) {
 		
 		MemberVO bjvo = mservice.getInfo(id);
-		MemberProfileVO provo = profile_service.getInfo(bjvo.getM_num());
-		BroadcastVO bvo = bservice.getInfo(bjvo.getM_num());
-		String stream_key = bservice.getInfo(bjvo.getM_num()).getStream_key();
-		String url = "rtmp://192.168.0.31:3535/myapp/" + stream_key;
+		if(bjvo!=null) {
+			MemberProfileVO provo = profile_service.getInfo(bjvo.getM_num());
+			BroadcastVO bvo = bservice.getInfo(bjvo.getM_num());
+			String stream_key = bservice.getInfo(bjvo.getM_num()).getStream_key();
+			String url = "rtmp://192.168.0.31:3535/myapp/" + stream_key;
 
-		HttpSession session = request.getSession();
-		String uid = (String) session.getAttribute("id");
-		model.addAttribute("black", "false");
-		MemberVO vo = null;
-		if (uid != null) {
-			vo = mservice.getInfo(uid);
-			model.addAttribute("vo", vo);
+			HttpSession session = request.getSession();
+			String uid = (String) session.getAttribute("id");
+			model.addAttribute("black", "false");
+			MemberVO vo = null;
+			if (uid != null) {
+				vo = mservice.getInfo(uid);
+				model.addAttribute("vo", vo);
 
-			// ¿­Ç÷ÆÒ ¸®½ºÆ®
-			List<StarUseVO> list = star_service.getHotfList(bjvo.getM_num());
+				// ¿­Ç÷ÆÒ ¸®½ºÆ®
+				List<StarUseVO> list = star_service.getHotfList(bjvo.getM_num());
 
-			// ÆÒ °Ë»ö
-			HashMap<String, Integer> map = new HashMap<String, Integer>();
-			map.put("m_num", vo.getM_num());
-			map.put("bj_num", bjvo.getM_num());
-			boolean isFan = f_service.isFan(map);
-
-			// ÆÒµî±Þ°Ë»ö
-			if (id.equals(uid)) {
-				// bj
-				model.addAttribute("grade", "bj");
-			} else if (isFan) {
-				model.addAttribute("grade", "fan");
-				// ¿­Ç÷ÆÒ È®ÀÎ
-				for (StarUseVO svo : list) {
-					if (svo.getM_num() == vo.getM_num()) {
-						model.addAttribute("grade", "hot");
-						break;
+				// ÆÒ °Ë»ö
+				HashMap<String, Integer> map = new HashMap<String, Integer>();
+				map.put("m_num", vo.getM_num());
+				map.put("bj_num", bjvo.getM_num());
+				System.out.println("ÁñÃ£:"+sub_service.isBookmark(new SubscribeVO(vo.getM_num(), bjvo.getM_num())));
+				model.addAttribute("bookmark", sub_service.isBookmark(new SubscribeVO(vo.getM_num(), bjvo.getM_num())));
+				boolean isFan = f_service.isFan(map);
+				
+				// ÆÒµî±Þ°Ë»ö
+				if (id.equals(uid)) {
+					// bj
+					model.addAttribute("grade", "bj");
+				} else if (isFan) {
+					model.addAttribute("grade", "fan");
+					// ¿­Ç÷ÆÒ È®ÀÎ
+					for (StarUseVO svo : list) {
+						if (svo.getM_num() == vo.getM_num()) {
+							model.addAttribute("grade", "hot");
+							break;
+						}
 					}
+				} else {
+					model.addAttribute("grade", "user");
 				}
-			} else {
-				model.addAttribute("grade", "user");
+				
+				//ºí·¢¸®½ºÆ® È®ÀÎ
+				boolean black = black_service.check(new BlacklistVO(0, vo.getM_num(), bjvo.getM_num()));
+				if(black) {
+					model.addAttribute("black", "true");
+				}
+				
 			}
-			
-			//ºí·¢¸®½ºÆ® È®ÀÎ
-			boolean black = black_service.check(new BlacklistVO(0, vo.getM_num(), bjvo.getM_num()));
-			if(black) {
-				model.addAttribute("black", "true");
-			}
-		}
 
+			
+			model.addAttribute("url", url);
+			model.addAttribute("bj_num", bjvo.getM_num());
+			model.addAttribute("bjvo", bjvo);
+			model.addAttribute("bvo", bvo);
+			model.addAttribute("voMP", provo);
+			
+			return ".broadcast";
+		}else {
+			return ".member.nopage";
+		}
 		
-		model.addAttribute("url", url);
-		model.addAttribute("bj_num", bjvo.getM_num());
-		model.addAttribute("bjvo", bjvo);
-		model.addAttribute("bvo", bvo);
-		model.addAttribute("voMP", provo);
-		
-		return ".broadcast";
 	}
 
 	@RequestMapping(value = "/broadcast/starcandy", produces = "application/json;charset=utf-8")
@@ -133,6 +147,8 @@ public class BroadcastController {
 
 			json.put("result", uvo.getStar_candy() - cnt);
 			json.put("fancnt", null);
+			
+		
 			StarUseVO star = new StarUseVO(0, null, cnt, uvo.getM_num(), bjvo.getM_num());
 
 			sservice.insert(star, bjvo, uvo);
@@ -167,19 +183,52 @@ public class BroadcastController {
 		}
 		return json.toString();
 	}
-	
+
 	@RequestMapping(value = "/broadcast/password", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String password(String bjid,String pwd) {
+	public String password(String bjid, String pwd) {
 		JSONObject json = new JSONObject();
 		try {
 			MemberVO bjvo = mservice.getInfo(bjid);
 			BroadcastVO bvo = bservice.getInfo(bjvo.getM_num());
-			if(pwd.equals(bvo.getBroadcast_pwd())) {
-				json.put("result", true);	
-			}else {
+			if (pwd.equals(bvo.getBroadcast_pwd())) {
+				json.put("result", true);
+			} else {
 				json.put("result", false);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return json.toString();
+	}
+
+	@RequestMapping(value = "/broadcast/bookmark/insert", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String bookmarkInsert(String bjid, HttpServletRequest request) {
+		JSONObject json = new JSONObject();
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("id");
+		MemberVO user = mservice.getInfo(uid);
+		MemberVO bj = mservice.getInfo(bjid);
+		try {
+			sub_service.insert(new SubscribeVO(user.getM_num(), bj.getM_num()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return json.toString();
+	}
+	
+	@RequestMapping(value = "/broadcast/bookmark/delete", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String bookmarkDelete(String bjid,HttpServletRequest request) {
+		JSONObject json = new JSONObject();
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("id");
+		MemberVO user = mservice.getInfo(uid);
+		MemberVO bj = mservice.getInfo(bjid);
+		
+		try {
+			sub_service.delete(new SubscribeVO(user.getM_num(), bj.getM_num()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

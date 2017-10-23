@@ -12,7 +12,7 @@
 	<select id="getList" resultType="profit" parameterType="hashmap">
 		select * from (select a.*,rownum rnum from (select
 		p.profit_num,p.profit_money, p.profit_regdate, m.id from profit p join
-		member m on p.m_num = m.m_num order by p.profit_regdate desc) a)  
+		member m on p.m_num = m.m_num order by p.profit_num desc) a)  
 		<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
 	</select>
 	<select id="getCount" parameterType="hashmap" resultType="int">
@@ -26,9 +26,21 @@
 
 	<select id="getRank" resultType="profit">
 		select * from (select a.*,rownum
-		rnum from (select sum(p.profit_money) total, m.id, g.grade_name from
-		profit p, member m, grade g where p.m_num = m.m_num and m.grade_num =
-		g.grade_num group by m.m_num,m.id,g.grade_name order by total desc)a)
+		rnum from (select sum(p.profit_money)
+		total, m.id, g.grade_name from
+		profit p, member m, grade g where
+		p.m_num = m.m_num and m.grade_num =
+		g.grade_num group by
+		m.m_num,m.id,g.grade_name order by total desc)a)
 		<![CDATA[ where rnum<=5 ]]>
+	</select>
+
+	<select id="getProfit" resultType="profit">
+		select * from(select to_char(to_date(p.profit_regdate,'YYYY-MM-DD
+		HH24:MI'),'YYMMDD') p_date,sum(p.profit_money) total, m.grade_num
+		from profit p, member m where p.m_num = m.m_num group by
+		grade_num,to_char(to_date(profit_regdate,'YYYY-MM-DD
+		HH24:MI'),'YYMMDD') order by p_date)aa where
+		to_char(sysdate,'YYMMDD')-aa.p_date <![CDATA[ <= 7 ]]>
 	</select>
 </mapper>

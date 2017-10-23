@@ -11,7 +11,13 @@
 		select * from subscribe where m_num = #{m_num}
 	</select>
 	
+	<select id="isBookmark" parameterType="subscribe" resultType="subscribe">
+		select * from subscribe where m_num = #{m_num} and bj_num=#{bj_num}
+	</select>
+	
 	<delete id="delete" parameterType="subscribe">
 		delete from subscribe where m_num = #{m_num} and bj_num = #{bj_num}
 	</delete>
+	
+	
 </mapper>

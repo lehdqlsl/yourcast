@@ -180,7 +180,7 @@ public class HistoryController {
 		for(ExchangeVO evo:exlist) {			
 			String m = dff.format(evo.getE_money());
 			evo.setMoney(m);
-			String p = dff.format(evo.getE_ea()*evo.getE_fee());
+			String p = dff.format(evo.getE_ea()*(100-evo.getE_fee()));
 			evo.setPrice(p);
 		}
 		

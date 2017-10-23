@@ -88,9 +88,10 @@ public class AdminController {
 
 		List<ProfitVO> plist = p_service.getList(map);
 		List<ProfitVO> rlist = p_service.getRank();
-
+		List<ProfitVO> glist = p_service.getProfit();
 		model.addAttribute("plist",plist);
 		model.addAttribute("rlist",rlist);
+		model.addAttribute("glist",glist);
 		model.addAttribute("pu",pu);
 		
 		return ".admin.profit.list";

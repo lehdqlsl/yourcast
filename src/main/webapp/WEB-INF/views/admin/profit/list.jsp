@@ -184,17 +184,12 @@
 			 <div class="col-md-8">
 	                      <div class="card">
 	                          <div class="header">
-	                              <h4 class="title">Users Behavior!</h4>
+	                              <h4 class="title">Users Behavior!!!</h4>
 	                              <p class="category">24 Hours performance</p>
 	                          </div>
 	                          <div class="content">
-	                              <div id='chart_div'></div>
+	                              <div id='curve_chart' style="height: 300px;"></div>
 	                              <div class="footer">
-	                                  <div class="legend">
-	                                      <i class="fa fa-circle text-info"></i> Open
-	                                      <i class="fa fa-circle text-danger"></i> Click
-	                                      <i class="fa fa-circle text-warning"></i> Click Second Time
-	                                  </div>
 	                                  <hr>
 	                              </div>
 	                          </div>
@@ -223,41 +218,67 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type='text/javascript'>
-  google.charts.load('current', {'packages':['annotationchart']});
-  google.charts.setOnLoadCallback(drawChart);
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('date', 'Date');
-    data.addColumn('number', 'Kepler-22b mission');
-    data.addColumn('string', 'Kepler title');
-    data.addColumn('string', 'Kepler text');
-    data.addColumn('number', 'Gliese 163 mission');
-    data.addColumn('string', 'Gliese title');
-    data.addColumn('string', 'Gliese text');
-    data.addRows([
-      [new Date(2314, 2, 15), 12400, undefined, undefined,
-                              10645, undefined, undefined],
-      [new Date(2314, 2, 16), 24045, 'Lalibertines', 'First encounter',
-                              12374, undefined, undefined],
-      [new Date(2314, 2, 17), 35022, 'Lalibertines', 'They are very tall',
-                              15766, 'Gallantors', 'First Encounter'],
-      [new Date(2314, 2, 18), 12284, 'Lalibertines', 'Attack on our crew!',
-                              34334, 'Gallantors', 'Statement of shared principles'],
-      [new Date(2314, 2, 19), 8476, 'Lalibertines', 'Heavy casualties',
-                              66467, 'Gallantors', 'Mysteries revealed'],
-      [new Date(2314, 2, 20), 0, 'Lalibertines', 'All crew lost',
-                              79463, 'Gallantors', 'Omniscience achieved']
-    ]);
+      function drawChart() {
+    	 var myArray = new Array( new Array(7), new Array(7) );
 
-    var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
+    	 var bar = new Array(5);
+    	 
+	    	//for문을 돌면서 배열을 선언합니다.
+	    for(var i=0; i<bar.length; i++) {
+	    	 bar[i] = new Array(4);
+	    }
+         var data1 = [
+             ['날짜', '일반 BJ', '베스트 BJ','파트너 BJ'],
+             ['2004',  1000,      400,1],
+             ['2005',  1170,      460,1],
+             ['2006',  660,       1120,1],
+             ['2007',  1030,      540,1]
+           ];
+         var i,j;
+         
+     	 var cnt=1;
+     	bar[0][0] = '날짜';
+     	bar[0][1] = '일반 BJ';
+     	bar[0][2] = '베스트 BJ';
+     	bar[0][3] = '파트너 BJ';
+   	 	<c:forEach var="mvo" items="${glist }" varStatus="status">
+   	 	if((${status.index} != 0)){
+   	 		var d1 = '${glist[status.index-1].p_date}';
+   		 	var d2 = '${glist[status.index].p_date}';
+   	 		if(d1 != d2){
+   	 			cnt++;
+   	 		}
+   	 	}
+   	 	bar[cnt][0] = '${mvo.p_date}';
+       	var grade = ${mvo.grade_num}	
+      	bar[cnt][grade] = ${mvo.total};	
+       	</c:forEach>
+       	
+       	for(i=0;i<5;i++){
+       		for(j=0;j<4;j++){
+       			if(bar[i][j] == undefined){
+       				bar[i][j]=0;
+       			}
+       			console.log('['+ i +']'+'['+ j +']'+bar[i][j]);
+       		}
+       	}
+           	
+         
+        var data = google.visualization.arrayToDataTable(bar);
 
-    var options = {
-      displayAnnotations: true
-    };
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
 
-    chart.draw(data, options);
-  }
-</script>
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>

@@ -40,4 +40,13 @@ public class BroadcastService {
 	public int update(BroadcastVO vo) {
 		return dao.update(vo);
 	}
+
+	public List<BroadcastVO> bookmarkOn(int m_num) {
+		return dao.bookmarkOn(m_num);
+	}
+
+	public List<BroadcastVO> bookmarkOff(int m_num) {
+		return dao.bookmarkOff(m_num);
+	}
+
 }

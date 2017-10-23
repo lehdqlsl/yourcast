@@ -41,4 +41,10 @@ public class BroadcastDAO {
 	public List<BroadcastVO> getList(int genre_num) {
 		return sqlSession.selectList(NAMESPACE + ".getlist1",genre_num);
 	}
+	public List<BroadcastVO> bookmarkOn(int m_num) {
+		return sqlSession.selectList(NAMESPACE + ".bookmarkOn",m_num);
+	}
+	public List<BroadcastVO> bookmarkOff(int m_num) {
+		return sqlSession.selectList(NAMESPACE + ".bookmarkOff",m_num);
+	}
 }

@@ -148,7 +148,7 @@ dd.name {
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/chat_layer.css'/>?ver=3">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/pop_layer.css'/>?ver=1">
+	href="<c:url value='/resources/css/pop_layer.css'/>?ver=2">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/chat.css'/>?ver=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -161,7 +161,16 @@ dd.name {
 		</div>
 		<div class="player_list">
 			<ul>
-				<li><button class="w3-button w3-white"><i class="fa fa-star-o fa-lg"></i>  즐겨찾기</button></li>
+				<li><c:if test="${not empty sessionScope.id }">
+			<c:choose>
+			<c:when test="${bookmark==true }">
+				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:orange" id="star"></i>&nbsp;즐겨찾기</button>
+			</c:when>
+			<c:otherwise>
+				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:#BDBDBD" id="star"></i>&nbsp;즐겨찾기</button>
+			</c:otherwise>
+		</c:choose>
+		</c:if></li>
 			</ul>
 		</div>
 
@@ -197,21 +206,12 @@ dd.name {
 					class="emo_tiplayer" id="emoLayer" style="display: none;"><em
 						class="txt">이모티콘은 한번에 3개까지만 사용가능합니다.</em><span class="icon"></span>
 						<button type="button" class="close">닫기</button></span></li>
-				<!-- 활성화  class="on" 추가 -->
-				<li id="btn_police" class="police"><a href="javascript:;">신고</a><em
-					class="ttip">신고<span></span></em></li>
-				<li id="btn_translation" class="translation" style="display: none;"><em></em><a
-					href="#n">번역</a><em class="ttip">번역<span></span></em></li>
 			</ul>
 			<ul id="ul2" class="ul2">
 				<li id="btn_hope" class="hope" style="display: none;"><a
 					href="javascript:;">희망풍선 선물하기</a><em class="ttip">희망풍선 선물하기<span></span></em></li>
 				<li id="btn_star" class="star"><a href="javascript:;">별풍선
 						선물하기</a><em class="ttip" style="display: none;">별풍선 선물하기<span></span></em></li>
-				<li id="btn_sticker" class="sticker"><a href="javascript:;">스티커
-						선물하기</a><em class="ttip">스티커 선물하기<span></span></em></li>
-				<li id="btn_choco" class="choco"><a href="javascript:;">초콜릿
-						선물하기</a><em class="ttip" style="display: none;">초콜릿 선물하기<span></span></em></li>
 			</ul>
 			<!-- //버튼들 -->
 			<!-- chat_write -->
@@ -995,6 +995,27 @@ dd.name {
 			$("#write_area").append($(this).clone());
 		});
 		
+		$("#bookmark").click(function(){
+			var color=$("#star").css("color");
+			var bjid = '${bjvo.id }';
+			if(color == "rgb(255, 165, 0)"){//즐겨찾기 취소
+				$.ajax({
+					url:"<c:url value='/broadcast/bookmark/delete?bjid=${bjvo.id }'/>",
+					dataType:"json",
+					success:function(data){
+						$("#star").css("color","#BDBDBD");
+					}
+				});
+			}else{//즐겨찾기 등록
+				$.ajax({
+					url:"<c:url value='/broadcast/bookmark/insert?bjid=${bjvo.id }'/>",
+					dataType:"json",
+					success:function(data){
+						$("#star").css("color","orange");
+					}
+				});
+			}
+		});
 		setInterval(function(){ 
 			var sendmsg = {};
 			sendmsg.packet = 3;
