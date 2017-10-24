@@ -300,7 +300,7 @@
 			<div class="hit">조회수&nbsp;&nbsp;<b>${vo.b_hit }</b>&nbsp;&nbsp; | &nbsp;&nbsp;
 			<a href="#" id="report" class="w3-hover-opacity" style="text-decoration: none">신고</a></div>
 			<div id="info">
-				작성자 : <span style="color: #1559ff;font-weight: bold;">${vo.id }</span>&nbsp;&nbsp;${vo.b_regdate }<br>
+				작성자 : <span style="color: #1559ff;font-weight: bold;">${vo.name }</span>&nbsp;<span style="color: #4B4B4B;">(${vo.id })&nbsp;&nbsp;${vo.b_regdate }</span><br>
 						<h4><c:if test="${vo.b_notice == 1 }">
 								<span class="noti"></span>
 							</c:if>${vo.b_title }</h4>
