@@ -61,8 +61,8 @@
 						<div class="view">${vo.b_content }</div>
 					</div>
 					<div class="watch_area">
-						<span class="w3-button w3-light-grey w3-border w3-round-large" id="likeT_26185493"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.bucnt }</b></span>
-						<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.brcnt }</b></span>
+						<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>' style="text-decoration: none;"><span class="w3-button w3-light-grey w3-border w3-round-large" id="likeT_26185493"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.bucnt }</b></span></a>
+						<a href='<c:url value="/${requestScope.id }/board/getInfo?b_num=${vo.b_num }&category_num=${vo.category_num }"/>' style="text-decoration: none;"><span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.brcnt }</b></span></a>
 					</div>			
 				</div>
 			</li>

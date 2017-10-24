@@ -125,6 +125,30 @@
 						}
 					}
 				});
+				//성인방송 검사3
+				$(".watch_area").on("click",".checking",function(event){
+					event.preventDefault();
+					var v_num=$(this).attr("id");
+					v_num=v_num.replace(/[^0-9]/g,'');
+					if("${sessionScope.id}"){
+						$.ajax({ 
+							url:"<c:url value='/adult/check'/>",
+							dataType:"json",
+							success:function(data){
+								if(data.result==true){
+									location.href='<c:url value="/videomain/getInfo?v_num='+v_num+'"/>';
+								}else{
+									alert("만 19세 미만의 청소년은 이용할 수 없습니다.");
+								}
+							}
+						});
+					}else{
+						var flag=confirm("먼저 로그인 하셔야 합니다. 로그인 페이지로 이동하시겠습니까?");
+						if(flag){
+							location.href="<c:url value='/member/login'/>";
+						}
+					}
+				});
 						
 			});
 		</script>
@@ -179,8 +203,16 @@
 					<div class="view">${vo.v_content }</div>
 				</div>	
 				<div class="watch_area">
-					<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vucnt }</b></span>
-					<span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vrcnt}</b></span>
+					<c:choose>
+						<c:when test="${vo.age_grade_num==2 }">
+							<a class="checking" id="u${vo.v_num }" href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>"><span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vucnt }</b></span></a>
+							<a class="checking" id="br${vo.v_num }" href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>"><span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vrcnt}</b></span></a>
+						</c:when>
+						<c:otherwise>
+							<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>"><span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vucnt }</b></span></a>
+							<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>"><span class="w3-button w3-light-grey w3-border w3-round-large"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<b>${vo.vrcnt}</b></span></a>
+						</c:otherwise>
+					</c:choose>
 				</div>	
 				<!-- 
 				<span class="chk"><input type="checkbox" value="${vo.v_num }" name="chk"></span>
@@ -189,6 +221,7 @@
 			</c:forEach>
 			</c:otherwise>
 		</c:choose>
+		
 		
 		
 		<script type="text/javascript">
