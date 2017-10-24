@@ -9,7 +9,7 @@
     </a>
     <a href="<c:url value='/${requestScope.id }'/>">
     <img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width:45%; text-decoration: none;" class="w3-round"></a><br><br>
-    <p class="w3-text-grey">${voMP.profile_msg }</p>
+    <p class="w3-text-grey">${profile_msg1 }</p>
     
     <span class="w3-text-grey" id="id">${requestScope.id}</span>
     <c:if test="${requestScope.id==sessionScope.id}">	

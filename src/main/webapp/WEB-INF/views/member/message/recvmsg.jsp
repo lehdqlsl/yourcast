@@ -16,6 +16,12 @@
 				location.href="<c:url value='/message/recv/deleteOne?msg_num="+msg_num+"'/>";
 			}
 		});
+		
+		$("#res").click(function(){
+			var id = "${msgvo.id}";
+			window.open('/app/message/send?id='+id,'_blank','resizable=no,width=400 height=400');	
+			self.close();
+		});
 	});
 </script>
 <div class="popup" style="width:388px;">
@@ -39,7 +45,9 @@
 
 		<div id="content" class="memo_cnt_area">${msgvo.msg_content }</div>
 		<br>
-		<ul id="manageBtn" class="btn_buttom1"><li><a href="javascript:;" onclick="delNoteView('70528677');" id="delete"><img src="http://www.afreecatv.com/images/popup/button/btn_del.gif" alt="삭제"></a></li></ul>
+		<ul id="manageBtn" class="btn_buttom1">
+		<li><a href="javascript:;" id="res"><img src="http://www.afreecatv.com/images/popup/button/btn_reply.gif" alt="답장"></a></li>
+		<li><a href="javascript:;"  id="delete"><img src="http://www.afreecatv.com/images/popup/button/btn_del.gif" alt="삭제"></a></li></ul>
 	</div>
 </div>
 
