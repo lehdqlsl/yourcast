@@ -34,10 +34,11 @@
 			var br_content=$("#br_content").val();
 			var b_num="${vo.b_num}";
 			$.ajax({
-				url:"<c:url value='/${vo.id}/boardreply/insert?br_content="+br_content+"&b_num="+b_num+"'/>",
+				url:"<c:url value='/${vo.id}/boardreply/insert'/>",
+				method:"POST",
+				data:{"br_content":br_content,"b_num":b_num},		
 				dataType:"xml",
 				success:function(data){
-					//alert(data);
 					$("#br_content").val("");
 					$("#replylist").empty();
 					$(data).find("list").each(function(){

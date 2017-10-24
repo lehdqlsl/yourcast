@@ -187,61 +187,6 @@ public class InfoController {
 		return ".personnel.setting.blacklist";
 	}
 
-	// @RequestMapping(value = "/{id}/setting/page", method = RequestMethod.GET)
-	// @ResponseBody
-	// public PagingVO fanPaging(@PathVariable(value = "id") String id, Model model,
-	// @RequestParam(value="pageNum",defaultValue="1") int pageNum) {
-	// MemberVO voM = m_sevice.getInfo(id);
-	// HashMap<String, Integer> map = new HashMap<String, Integer>();
-	//
-	// map.put("bj_num", voM.getM_num());
-	// int totalRowCount=f_service.getCount(voM.getM_num());
-	//
-	// PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
-	// map.put("startRow",pu.getStartRow());
-	// map.put("endRow",pu.getEndRow());
-	//
-	// List<FanVO> listF = f_service.getList(map);
-	// PagingVO list1 = new PagingVO();
-	// list1.setList(listF);
-	//
-	// return list1;
-	// }
-
-	// @RequestMapping(value = "/{id}/setting/pageNext", method = RequestMethod.GET)
-	// @ResponseBody
-	// public int fanPagingNext(@PathVariable(value = "id") String id, Model model,
-	// @RequestParam(value="pageNum",defaultValue="1") int pageNum) {
-	// MemberVO voM = m_sevice.getInfo(id);
-	// HashMap<String, Integer> map = new HashMap<String, Integer>();
-	//
-	// map.put("bj_num", voM.getM_num());
-	// int totalRowCount=f_service.getCount(voM.getM_num());
-	//
-	// PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
-	//
-	// int endPageNum = pu.getEndPageNum();
-	//
-	// return endPageNum;
-	// }
-
-	// @RequestMapping(value = "/{id}/setting/pagePre", method = RequestMethod.GET)
-	// @ResponseBody
-	// public int fanPagingPre(@PathVariable(value = "id") String id, Model model,
-	// @RequestParam(value="pageNum",defaultValue="1") int pageNum) {
-	// MemberVO voM = m_sevice.getInfo(id);
-	// HashMap<String, Integer> map = new HashMap<String, Integer>();
-	//
-	// map.put("bj_num", voM.getM_num());
-	// int totalRowCount=f_service.getCount(voM.getM_num());
-	//
-	// PageUtil pu=new PageUtil(pageNum, 10, 5, totalRowCount);
-	//
-	// int endPageNum = pu.getEndPageNum();
-	//
-	// return endPageNum;
-	// }
-
 	@RequestMapping(value = "/{id}/setting/main", method = RequestMethod.POST)
 	public String mainUpdate(@PathVariable(value = "id") String id, Model model,String content) {
 		MemberVO voM = m_sevice.getInfo(id);
@@ -259,15 +204,14 @@ public class InfoController {
 	}
 	
 	@RequestMapping(value = "/{id}/setting/baseinfo_update", method = RequestMethod.POST)
-	public String baseInfoUpdate(@PathVariable(value = "id") String id, Model model, String profile_msg,
-			String profile_content, String profile_title, MultipartFile profileImg, HttpSession session) {
+	public String baseInfoUpdate(@PathVariable(value = "id") String id, Model model, String profile_msg, String profile_title, MultipartFile profileImg, HttpSession session) {
 
 		MemberVO vo = m_sevice.getInfo(id);
 		List<CategoryVO> clist = c_service.getList(vo.getM_num());
 		MemberProfileVO voMP = mp_service.getInfo(vo.getM_num());
 		model.addAttribute("clist", clist);
 		model.addAttribute("id", id);
-
+		profile_msg = profile_msg.replace("\r\n","<br>");
 		String path = session.getServletContext().getRealPath("/resources/upload");
 		String profile_orgfilename = profileImg.getOriginalFilename();
 		String profile_savefilename = UUID.randomUUID() + "_" + profile_orgfilename;
@@ -289,7 +233,7 @@ public class InfoController {
 			}
 		}
 
-		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, profile_content,
+		int n = mp_service.update(new MemberProfileVO(voMP.getProfile_num(), profile_msg, null,
 				profile_orgfilename, profile_savefilename, vo.getM_num(), profile_title));
 		if (n > 0) {
 			model.addAttribute("result", "방송국 기본정보의 수정이 완료되었습니다.");
