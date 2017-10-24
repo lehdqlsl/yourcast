@@ -22,12 +22,12 @@
 		$("#b_delete").click(function(){
 			var flag=confirm("정말 삭제하시겠습니까?");
 			if(flag){
-				location.href='<c:url value="/${sessionScope.id }/board/delete?b_num=${vo.b_num }&category_num=${category_num }"/>';
+				location.href='<c:url value="/${requestScope.id }/board/delete?b_num=${vo.b_num }&category_num=${category_num }"/>';
 			}
 		});
 		//글 수정 하기(o)
 		$("#b_update").click(function(){
-			location.href='<c:url value="/${sessionScope.id }/board/update?b_num=${vo.b_num }&category_num=${category_num }"/>';
+			location.href='<c:url value="/${requestScope.id }/board/update?b_num=${vo.b_num }&category_num=${category_num }"/>';
 		});
 		//댓글 추가 하기(o)
 		$("#br_reg").click(function(){
@@ -297,7 +297,7 @@
 	
 		<div class="wrap_view">
 			<div class="img_profile">
-				<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>"
+				<img src="<c:url value='/resources/upload/${voimg.profile_savefilename }'/>"
 					onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';" style="width: 50px;height: 50px;border-radius: 25px;">
 			</div>
 			<div class="hit">조회수&nbsp;&nbsp;<b>${vo.b_hit }</b>&nbsp;&nbsp; | &nbsp;&nbsp;
