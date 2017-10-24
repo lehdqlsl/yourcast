@@ -4,6 +4,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/videogetInfo.css'/>?ver=1">
+<link href="http://vjs.zencdn.net/6.2.8/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+<script src="http://vjs.zencdn.net/6.2.8/video.js"></script>
 <style type="text/css">
 .info {
 	position: relative;
@@ -356,9 +359,14 @@ dd.name {
 </script>
 
 <div class="w3-main" style="margin-left: 300px; margin-top: 54px;">
-	<video controls="controls" style="width: 1300px;height:735px; ">
+	<!-- <video controls="controls" style="width: 1300px;height:735px; "> -->
+	<video id="example_video_1" class="video-js vjs-default-skin"
+		controls preload="auto" width="1300" height="735"
+		poster="http://video-js.zencoder.com/oceans-clip.png"
+		data-setup='{"example_option":true}'>
 		<source src="<c:url value='/resources/upload/${vvo.v_savefilename}'/>" type="video/mp4">
-	</video>
+		</video>
+	<!-- </video> -->
 	<div>
 		<c:if test="${not empty sessionScope.id }">
 			<c:choose>
@@ -378,7 +386,7 @@ dd.name {
 			<a href='<c:url value="/${vvo.id }"/>'><img src='<c:url value="/resources/upload/${vvo.profile_savefilename }"/>' style="width: 80px;height: 80px;"></a>
 		</div>
 		<dl class="bj">
-			<dd class="name">${vvo.id }</dd>
+			<dd class="name">${vvo.id }&nbsp;&nbsp; <span style="color: #5D5D5D;font-size: 11px;">${vvo.v_regdate }</span></dd>
 			<dt>${vvo.v_title }</dt>
 		</dl>
 	</div>

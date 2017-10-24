@@ -157,7 +157,7 @@
 							<td width="19"><img
 								src="//res.afreecatv.com/img/newpopup_blt_01.gif"></td>
 							<td align="left"><b>구매할 상품 : <span id="ea">${ea }</span>
-								&nbsp;x&nbsp;&nbsp;<input type="text" id="buy_ea2" name="buy_ea2" size="5"><br></td>
+								&nbsp;x&nbsp;&nbsp;<input type="text" id="buy_ea2" name="buy_ea2" size="5" autocomplete=off><br></td>
 						</tr>
 					</tbody>
 				</table>

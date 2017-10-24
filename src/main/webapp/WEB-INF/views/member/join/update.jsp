@@ -38,11 +38,11 @@ $(document).ready(function() {
 <div class="login">
 <h2>Information</h2>
 <form method="post" action="<c:url value='/member/join/update'/>">
-	<input name='id' placeholder='Id' type='text' value="${vo.id }" ><br>
+	<input name='id' placeholder='Id' type='text' value="${vo.id }"  readonly="readonly" autocomplete=off><br>
 	<input id='pw' name='pwd' placeholder='Password' type='password' ><br>
 	<input id='pwd1' name='pwd1' placeholder='Password Confirm' type='password'><br>
 	<div id="errMsg" style="font-size: small;color: red;"></div>
-	<input id="name" name="name" placeholder='Nickname' type="text" value="${vo.name }">
+	<input id="name" name="name" placeholder='Nickname' type="text" value="${vo.name }" autocomplete=off>
 	<span id="nickcheck" style="color: red; font-size: 12px"></span><br>
 	<input class='animated' type='submit' value='Modify' style="margin-top: 20px;">
 </form>
