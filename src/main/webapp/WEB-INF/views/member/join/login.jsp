@@ -69,14 +69,14 @@ function getCookie(cookieName) {
 <div class="login">
 <h2>LOGIN</h2>
 <form method="post" action="<c:url value='/member/login'/>">
-	<input name='id' placeholder='Id' type='text' autocomplete=off><br>
-	<input id='pw' placeholder='Password' type='password' name='pwd'>
+	<input name='id' placeholder='아이디' type='text' autocomplete=off><br>
+	<input id='pw' placeholder='비밀번호' type='password' name='pwd'>
 	<div id="errMsg" style="font-size: small;color: red;">${requestScope.errMsg}</div>
 	<div class='agree'>
 		<input id='agree' name='agree' type='checkbox'>
 		<label for='agree'></label> ID저장
 	</div> 
-	<input class='animated' type='submit' value='login'>
+	<input class='animated' type='submit' value='로그인'>
 	<a class='forgot' href="<c:url value='/member/join'/>">회원가입</a>
 </form>
 </div>
