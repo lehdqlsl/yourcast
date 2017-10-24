@@ -42,7 +42,7 @@
 						<div id="dropdown-menu" class="w3-dropdown-content w3-card-4">
 							<a href="<c:url value='/${sessionScope.id }'/>" target="_blank" class="h w3-bar-item w3-button"><i class="fa fa-home"></i>&nbsp;Home</a><br>
 							<a href="<c:url value='/message/recv/list'/>" style="border-top:1px solid #ccc!important;" class="h w3-bar-item w3-button"><i class="fa fa-envelope"></i>&nbsp;쪽지보관함</a><br>
-							<a href="<c:url value='/member/charge/star'/>" class="h w3-bar-item w3-button"><i class="fa fa-krw"></i>&nbsp;별사탕 구매</a><br>
+							<a href="<c:url value='/member/charge/star'/>" class="h w3-bar-item w3-button"><i class="fa fa-krw"></i>&nbsp;별풍선 구매</a><br>
 							<a href="<c:url value='/member/history/pay'/>" class="h w3-bar-item w3-button"><i class="fa fa-database "></i>&nbsp;내역 및 환전</a><br>
 							<a href="<c:url value='/member/broadcast'/>" class="h w3-bar-item w3-button"><i class="fa fa-video-camera"></i>&nbsp;방송 설정</a><br>
 							<a href="<c:url value='/member/join/update'/>" class="h w3-bar-item w3-button"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;회원 정보</a><br>

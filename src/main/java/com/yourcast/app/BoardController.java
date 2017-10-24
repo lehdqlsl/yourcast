@@ -235,7 +235,6 @@ public class BoardController {
 		BoardVO bvo = b_service.getInfo(b_num);
 		CategoryVO cvo = c_service.getInfo(category_num);
 		List<CategoryVO> clist = c_service.getList(cvo.getM_num());// 카테고리 목록
-		
 		int brcount=br_service.getCount(b_num);
 		
 		b_service.hitUpdate(b_num);
@@ -250,8 +249,13 @@ public class BoardController {
 
 		MemberProfileVO voMP = mp_service.getInfo(cvo.getM_num());
 		model.addAttribute("voMP", voMP);
+		
 		List<StarUseVO> flist = u_service.getHotfList(cvo.getM_num());
 		model.addAttribute("flist", flist);
+		
+		MemberProfileVO voimg = mp_service.getInfo(bvo.getM_num());
+		model.addAttribute("voimg",voimg);
+		
 
 		return ".personnel.board.getInfo";
 	}
