@@ -8,6 +8,7 @@ public class VideoReplyVO {
 	private int v_num;
 	private int m_num;
 	private String id;
+	private String name;
 	private int vrucnt;
 	private int v_report;
 	private String age_grade_name;
@@ -18,7 +19,7 @@ public class VideoReplyVO {
 	
 	public VideoReplyVO() {}
 
-	public VideoReplyVO(int vr_num, String vr_content, int v_num, String id, int v_report,String age_grade_name,String genre_name,String v_savethumbnail,String bj_id,String v_title) {
+	public VideoReplyVO(int vr_num, String vr_content, int v_num, String id, int v_report,String age_grade_name,String genre_name,String v_savethumbnail,String bj_id,String v_title,String name) {
 		super();
 		this.vr_num = vr_num;
 		this.vr_content = vr_content;
@@ -30,6 +31,7 @@ public class VideoReplyVO {
 		this.v_savethumbnail = v_savethumbnail;
 		this.bj_id = bj_id;
 		this.v_title = v_title;
+		this.name = name;
 	}
 
 	public VideoReplyVO(int vr_num, String vr_content, String vr_regdate, int vr_delete, int v_num, int m_num) {
@@ -41,7 +43,7 @@ public class VideoReplyVO {
 		this.v_num = v_num;
 		this.m_num = m_num;
 	}
-	public VideoReplyVO(int vr_num, String vr_content, String vr_regdate, int vr_delete, int v_num, int m_num,String id,int vrucnt) {
+	public VideoReplyVO(int vr_num, String vr_content, String vr_regdate, int vr_delete, int v_num, int m_num,String id,int vrucnt, String name) {
 		super();
 		this.vr_num = vr_num;
 		this.vr_content = vr_content;
@@ -51,9 +53,18 @@ public class VideoReplyVO {
 		this.m_num = m_num;
 		this.id=id;
 		this.vrucnt=vrucnt;
+		this.name=name;
 	}
 
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getV_title() {
 		return v_title;
 	}

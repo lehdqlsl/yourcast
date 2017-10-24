@@ -9,8 +9,8 @@ public class BoardReplyVO {
 	private int b_num;
 	private int m_num;
 	private String id;
+	private String name;
 	private int brucnt;
-	
 	private int brrcnt;
 	private int category_num;
 	private String category_name;
@@ -54,7 +54,7 @@ public class BoardReplyVO {
 		this.m_num = m_num;
 		this.id=id;
 	}
-	public BoardReplyVO(int br_num, String br_content, String br_regdate, int br_delete, int b_num, int m_num,String id,int brucnt) {
+	public BoardReplyVO(int br_num, String br_content, String br_regdate, int br_delete, int b_num, int m_num,String id,int brucnt,String name) {
 		//super();
 		this.br_num = br_num;
 		this.br_content = br_content;
@@ -64,8 +64,18 @@ public class BoardReplyVO {
 		this.m_num = m_num;
 		this.id=id;
 		this.brucnt=brucnt;
+		this.name=name;
 	}
 	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getWriter_id() {
 		return writer_id;
 	}

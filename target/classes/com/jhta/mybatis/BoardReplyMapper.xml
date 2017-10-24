@@ -17,7 +17,7 @@
 	</select>
 	<select id="getList" parameterType="hashmap" resultType="boardreply">
 		select * from(
-		select bb.*,rownum rnum from(select br.*,m.id,aa.brucnt,rownum r1 from board_reply br,member m,
+		select bb.*,rownum rnum from(select br.*,m.id,m.name,aa.brucnt,rownum r1 from board_reply br,member m,
 		(select br.br_num, count(bru.br_num) brucnt from board_reply br, board_reply_up bru 
 		where br.br_num=bru.br_num(+) and br.br_delete=0 and br.b_num=#{b_num} group by br.br_num) aa
 		where br.br_num=aa.br_num and br.m_num=m.m_num order by br.br_num desc)bb)
