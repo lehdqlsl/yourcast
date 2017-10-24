@@ -7,7 +7,7 @@
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <a href="<c:url value='/${sessionScope.id }'/>">
+    <a href="<c:url value='/${requestScope.id }'/>">
     <img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width:45%; text-decoration: none;" class="w3-round"></a><br><br>
     <p class="w3-text-grey">${voMP.profile_msg }</p>
     
