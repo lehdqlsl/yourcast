@@ -88,13 +88,13 @@
 <div class="login">
 	<h2>Register</h2>
 	<form action="<c:url value='/member/join'/>" method="post" style="margin: auto;">
-		<input name='id' placeholder='Id' type='text' id="id" autocomplete=off>
+		<input name='id' placeholder='아이디' type='text' id="id" autocomplete=off>
 		<span id="idcheck" style="color: red; font-size: 12px"></span><br>
-		<input id='pwd' name='pwd' placeholder='Password' type='password'><br>
-		<input id='pwd1' name='pwd1' placeholder='Password Confirm'
-			type='password'><br> <input name='name' placeholder='Nickname'
+		<input id='pwd' name='pwd' placeholder='비밀번호' type='password'><br>
+		<input id='pwd1' name='pwd1' placeholder='비밀번호 확인'
+			type='password'><br> <input name='name' placeholder='닉네임'
 			type='text' id="name" autocomplete=off><br> <input type="text"
-			id="datepicker" name="birth" placeholder='birth'><br> <br>
+			id="datepicker" name="birth" placeholder='생년월일'><br> <br>
 		<!-- <input type="text"  placeholder='남1 여2' name="gender"> -->
 		<input name="gender" value="1" type="radio" class="gender">남자
 		&nbsp;&nbsp; <input name="gender" value="2" type="radio"
@@ -104,9 +104,7 @@
 				for='agree'></label><a href="<c:url value='/member/service'/>"
 				style="text-decoration: underline;">이용약관</a>에 동의 합니다.
 		</div>
-		<input class='animated' type='submit' value='Register'> <a
-			class='forgot' href="<c:url value='/member/login'/>">Already have
-			an account?</a>
+		<input class='animated' type='submit' value='회원가입'>
 	</form>
 	</div>
 	</div>
