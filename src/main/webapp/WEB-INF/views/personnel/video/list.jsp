@@ -78,9 +78,10 @@
 					location.href="<c:url value='/${requestScope.id}/video/insert'/>"
 				});
 				//성인방송 검사1
-				$("#thumbnaillist").on("click",".thumb",function(event){
+				$(".img_thumbnail").on("click",".thumbs",function(event){
 					event.preventDefault();
 					var v_num=$(this).attr("id");
+					console.log("v_num:" + v_num);
 					if("${sessionScope.id}"){
 						$.ajax({ 
 							url:"<c:url value='/adult/check'/>",
@@ -101,7 +102,7 @@
 					}
 				});
 				//성인방송 검사2
-				$("#titlelist").on("click",".onetitle",function(event){
+				$(".v_title").on("click",".onetitle",function(event){
 					event.preventDefault();
 					var v_num=$(this).attr("id");
 					v_num=v_num.replace(/[^0-9]/g,'');
@@ -137,41 +138,6 @@
 		
 		
 		<form method="post" action="<c:url value='/${requestScope.id}/video/delete'/>" onsubmit="return deleteV()">
-		<!-- 
-		<table class="w3-table w3-table-all" style="margin-bottom: 5px;">
-			<tr>
-				<th><input type="checkbox" id="chkAll" onclick="All()"></th><th>글번호</th><th>장르</th><th>관람등급</th><th>썸네일</th><th>제목</th><th>내용</th>
-				<th>등록일</th><th>조회수</th>
-			</tr>
-			<c:if test="${empty list}">
-				<tr>
-					<th colspan="9" style="text-align:center;vertical-align: middle;height:200px;">동영상이 존재하지 않습니다.</th>
-				</tr>
-			</c:if>
-			<c:forEach var="vo" items="${list }">
-				<tr>
-					<td style="vertical-align: middle;"><input type="checkbox" value="${vo.v_num }" name="chk"></td>
-					<td style="vertical-align: middle;">${vo.v_num }</td>
-					<td style="vertical-align: middle;">${vo.genre_name }</td>
-					<td style="vertical-align: middle;">${vo.age_grade_name }</td>
-					<td style="vertical-align: middle;"><a href="<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>">
-							<img src="<c:url value='/resources/upload/${vo.v_savethumbnail }'/>" style="height:100px;">
-							</a></td>
-					<td style="vertical-align: middle;">${vo.v_title }</td>
-					<td style="vertical-align: middle;">${vo.v_content }</td>
-					<td style="vertical-align: middle;">${vo.v_regdate }</td>				
-					<td style="vertical-align: middle;">${vo.v_hit }</td>
-				</tr>
-			</c:forEach>
-		</table>
-		 -->
-		 <!-- 
-		 <c:if test="${err==null || err eq null}">	 
-			 <div style="float: left;margin-left:50px;"><input type="checkbox" id="chkAll" onclick="All()"></div>
-			 <br>
-		 </c:if>
-		  --> 
-		
 		<c:choose>
 			<c:when test="${empty list }">
 			<div class="wrap_view">
@@ -184,10 +150,10 @@
 				<div class="img_profile">
 					<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>" style="width: 50px;height: 50px;border-radius: 25px;">
 				</div>
-				<div class="img_thumbnail" id="thumbnaillist">
+				<div class="img_thumbnail" >
 					<c:choose>
 						<c:when test="${vo.age_grade_num==2 }">
-							<a id="${vo.v_num }" class="thumb" href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
+							<a id="${vo.v_num }" class="thumbs" href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>" style="text-decoration:none;">
 								<img src="<c:url value='/resources/upload/adult.png'/>" style="height:130px;" class="w3-round">
 							</a>
 						</c:when>
@@ -200,8 +166,15 @@
 				</div>
 				<div class="v_article">
 					<div><span style="color: #1559ff;font-weight: bold;">${vo.name}</span>&nbsp;<span style="color: #4B4B4B;">(${id })&nbsp;&nbsp;&nbsp;${vo.v_regdate }</span></div>
-					<div class="v_title" id="titlelist">
-						<a id="t${vo.v_num }" class="onetitle" href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
+					<div class="v_title">
+						<c:choose>
+							<c:when test="${vo.age_grade_num==2 }">
+								<a id="t${vo.v_num }" class="onetitle" href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
+							</c:when>
+							<c:otherwise>
+								<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }(일반)</a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="view">${vo.v_content }</div>
 				</div>	

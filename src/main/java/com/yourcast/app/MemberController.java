@@ -298,6 +298,9 @@ public class MemberController {
 		Calendar c2=Calendar.getInstance();
 		int year=c2.get(Calendar.YEAR);
 		
+		System.out.println("생일 : "+birthyear);
+		System.out.println("연도 : "+year);
+		
 		JSONObject json=new JSONObject();
 		if(year-birthyear>=19) {
 			json.put("result", true);
