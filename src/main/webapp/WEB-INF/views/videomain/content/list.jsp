@@ -79,7 +79,7 @@
 						if(data.result==true){
 							location.href='<c:url value="/videomain/getInfo?v_num='+v_num+'"/>';
 						}else{
-							alert("성인만 조회가 가능합니다.");
+							alert("만 19세 미만의 청소년은 이용할 수 없습니다.");
 						}
 					}
 				});
