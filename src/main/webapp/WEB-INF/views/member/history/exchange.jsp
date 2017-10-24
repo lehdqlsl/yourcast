@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/msg.css'/>?ver=5">
 <div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
 	<div class="w3-container w3-padding-32" id="projects">
 		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">환전내역</h3>

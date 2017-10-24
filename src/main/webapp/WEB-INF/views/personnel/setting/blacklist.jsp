@@ -101,9 +101,9 @@
 		</select>
 			<div style="margin-bottom:5px;">
 			<button type="button" onclick="blackListInsert()" id="blacklistI" name="blacklistI" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;margin-left: 27px;">
-			<i class="fa fa-check" style="color: #EBEDEC;"></i><span style="color: white; font-weight: bold;">&nbsp;추가</span></button>
+			<i class="fa fa-check" style="color: #EBEDEC;"></i><span style="color: white;">&nbsp;추가</span></button>
 			<button type="button" onclick="blackListDelete()" id="blacklistD" name="blacklistD" class="w3-button w3-border w3-round-large" style="background-color: #4C5870;">
-			<i class="fa fa-trash-o" style="color: #EBEDEC;"></i><span style="color: white; font-weight: bold;">&nbsp;삭제</span></button>
+			<i class="fa fa-trash-o" style="color: #EBEDEC;"></i><span style="color: white;">&nbsp;삭제</span></button>
 			</div>
 
 		<!-- 작성END -->

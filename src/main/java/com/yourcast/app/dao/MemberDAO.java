@@ -56,6 +56,9 @@ public class MemberDAO {
 	public MemberVO getInfo(int m_num) {
 		return sqlSession.selectOne(NAMESPACE + ".getInfo2", m_num);
 	}
+	public MemberVO chkNic(String name) {
+		return sqlSession.selectOne(NAMESPACE + ".chkNic", name);
+	}
 	public MemberVO isMember(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE + ".isMember", map);
 	}
