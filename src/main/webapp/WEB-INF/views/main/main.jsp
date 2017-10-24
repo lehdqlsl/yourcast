@@ -33,7 +33,7 @@ h3 {
 	<div class="w3-container w3-padding-32" id="projects">
 		<c:choose>
 			<c:when test="${genre_num == 0 }">
-				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">전체</h3>
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">전체보기</h3>
 			</c:when>
 			<c:when test="${genre_num == 1 }">
 				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">게임</h3>

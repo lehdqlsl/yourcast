@@ -29,11 +29,13 @@ public class MemberService {
 	public MemberVO getInfo(String id) {
 		return dao.getInfo(id);
 	}
-  public MemberVO getInfo(int m_num) {
+	public MemberVO getInfo(int m_num) {
 		return dao.getInfo(m_num);
 	}
-
-
+	public MemberVO chkNic(String name) {
+		return dao.chkNic(name);
+	}
+	
 	public List<MemberVO> getList(HashMap<String, Object> map) {
 		return dao.getList(map);
 	}

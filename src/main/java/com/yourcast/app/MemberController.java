@@ -89,8 +89,35 @@ public class MemberController {
 			}
 		}
 	}
+	//update
+	@RequestMapping(value="/member/join/update",method=RequestMethod.GET)
+	public String getinfo(HttpServletRequest request,Model model) {
+		HttpSession session = request.getSession();
+		String id=(String)session.getAttribute("id");
+		MemberVO vo = mservice.getInfo(id);
+		model.addAttribute("vo", vo);
+		return ".member.join.update";
+	}
+	
+	@RequestMapping(value="/member/join/update",method=RequestMethod.POST)
+	public String update(HttpServletRequest request) {
+		String pwd = request.getParameter("pwd");
+		String name = request.getParameter("name");
+		HttpSession session = request.getSession();
+		String id=(String)session.getAttribute("id");
+		MemberVO vo1 = mservice.getInfo(id);
+		
+		MemberVO vo = new MemberVO(vo1.getM_num(), id, pwd, name, null, 0, null, 0, 0, 0);
+		
+		int n = mservice.update(vo);
+		if(n>0) {
+			return "redirect:/";
+		} else {
+			return ".main";
+		}
+	}
 
-	// �쉶�썝媛��엯
+	// 회원가입
 	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
 	public String join(Model model, HttpServletRequest request) {
 		String email = request.getParameter("id");
@@ -129,6 +156,19 @@ public class MemberController {
 			json.put("using", true);
 		} else {
 			json.put("using", false);
+		}
+		return json.toString();
+	}
+	//닉네임 중복
+	@RequestMapping(value = "/usingname/json", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String usingNick(String name) {
+		MemberVO vo = mservice.chkNic(name);
+		JSONObject json = new JSONObject();
+		if (vo != null) {
+			json.put("user", true);
+		} else {
+			json.put("user", false);
 		}
 		return json.toString();
 	}

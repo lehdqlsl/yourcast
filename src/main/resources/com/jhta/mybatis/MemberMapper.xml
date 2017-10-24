@@ -33,6 +33,9 @@
 	<select id="getInfo2" parameterType="int" resultType="member">
 		select * from member where m_num=#{m_num}
 	</select>
+	<select id="chkNic" parameterType="string" resultType="member">
+		select * from member where name=#{name}
+	</select>
 	
 	<select id="getCount" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) from member

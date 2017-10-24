@@ -8,8 +8,8 @@
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <h4 class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom" style="width: 100%;"><span style="color: white;">실시간 방송</span></h4>
-    <p class="w3-text-grey" style="text-align: center;"><a href="<c:url value="/videomain"/>">동영상</a></p>
+    <button class="w3-button w3-dark-grey w3-padding-large" style="width: 100%;margin: 0px;"><span style="color: white;">실시간 방송</span></button>
+    <a href="<c:url value="/videomain"/>"><button class="w3-button w3-white w3-padding-large" style="width: 100%;text-align: center;margin: 0px;padding: 0px;">동영상</button></a>
   </div>
   <hr>
   <div class="w3-bar-block">

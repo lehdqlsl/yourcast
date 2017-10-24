@@ -92,7 +92,7 @@
 		<span id="idcheck" style="color: red; font-size: 12px"></span><br>
 		<input id='pwd' name='pwd' placeholder='Password' type='password'><br>
 		<input id='pwd1' name='pwd1' placeholder='Password Confirm'
-			type='password'><br> <input name='name' placeholder='Username'
+			type='password'><br> <input name='name' placeholder='Nickname'
 			type='text' id="name" autocomplete=off><br> <input type="text"
 			id="datepicker" name="birth" placeholder='birth'><br> <br>
 		<!-- <input type="text"  placeholder='남1 여2' name="gender"> -->
