@@ -44,7 +44,7 @@
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td><input type="text" name="title" id="title" autocomplete=off></td>
+					<td><input type="text" name="title" id="title" autocomplete=off style="width: 770px;"></td>
 				</tr>
 				<tr>
 					<th>내용</th>

@@ -86,18 +86,19 @@ dd.name {
 					$("#replylist").empty();
 					$(data).find("list").each(function(){
 						var id=$(this).find("id").text();
+						var name=$(this).find("name").text();
 						var vr_regdate=$(this).find("vr_regdate").text();
 						var vr_content=$(this).find("vr_content").text();
 						var vr_num=$(this).find("vr_num").text();
 						var vrucnt=$(this).find("vrucnt").text();
 						var p='';
 						if(id=="${sessionScope.id}"){
-							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+							p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 							"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button>"+
 							"<span style='visibility:hidden;'>"+vr_num+"</span>"+
 							"</p>";
 						}else{
-							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report' style='float:right;'>"+
+							p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report' style='float:right;'>"+
 							"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'>"+
 							"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button><span style='visibility:hidden;'>"+vr_num+"</span></p>";
 						}
@@ -128,19 +129,20 @@ dd.name {
 						$("#replylist").empty();
 						$(data).find("list").each(function(){
 							var id=$(this).find("id").text();
+							var name=$(this).find("name").text();
 							var vr_regdate=$(this).find("vr_regdate").text();
 							var vr_content=$(this).find("vr_content").text();
 							var vr_num=$(this).find("vr_num").text();
 							var vrucnt=$(this).find("vrucnt").text();
 							var p='';
 							if(id=="${sessionScope.id}"){
-								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+								p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 								
 								"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button>"+
 								"<span style='visibility:hidden;'>"+vr_num+"</span>"+
 								"</p>";
 							}else{
-								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report' style='float:right;'>"+
+								p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report' style='float:right;'>"+
 								"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'>"+
 								"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button><span style='visibility:hidden;'>"+vr_num+"</span></p>";
 							}
@@ -166,6 +168,7 @@ dd.name {
 				console.log(data);
 				$(data).find("list").each(function(){
 					var id=$(this).find("id").text();
+					var name=$(this).find("name").text();
 					var vr_regdate=$(this).find("vr_regdate").text();
 					var vr_content=$(this).find("vr_content").text();
 					var vr_num=$(this).find("vr_num").text();
@@ -173,12 +176,12 @@ dd.name {
 					//alert(id+", "+vr_regdate+", "+vr_content+", "+vrucnt);
 					var p='';
 					if(id=="${sessionScope.id}"){
-						p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+						p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 						"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button>"+
 						"<span style='visibility:hidden;'>"+vr_num+"</span>"+
 						"</p>";
 					}else{
-						p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report' style='float:right;'>"+
+						p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report' style='float:right;'>"+
 						"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'>"+
 						"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button><span style='visibility:hidden;'>"+vr_num+"</span></p>";
 					}
@@ -202,6 +205,7 @@ dd.name {
 					console.log(data);
 					$(data).find("list").each(function(){
 						var id=$(this).find("id").text();
+						var name=$(this).find("name").text();
 						var vr_regdate=$(this).find("vr_regdate").text();
 						var vr_content=$(this).find("vr_content").text();
 						var vr_num=$(this).find("vr_num").text();
@@ -209,13 +213,13 @@ dd.name {
 						//alert(id+", "+vr_regdate+", "+vr_content+", "+vrucnt);
 						var p='';
 						if(id=="${sessionScope.id}"){
-							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+							p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_delete' style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 							
 							"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+vrucnt+"</b></button>"+
 							"<span style='visibility:hidden;'>"+vr_num+"</span>"+
 							"</p>";
 						}else{
-							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report'>"+
+							p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+vr_regdate+"</span><br>"+vr_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_report'>"+
 							"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large vr_up' id='"+vr_num+"'>"+
 							"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>"+vrucnt+"</button><span style='visibility:hidden;'>"+vr_num+"</span></p>";
 						}
@@ -386,7 +390,7 @@ dd.name {
 			<a href='<c:url value="/${vvo.id }"/>'><img src='<c:url value="/resources/upload/${vvo.profile_savefilename }"/>' style="width: 80px;height: 80px;"></a>
 		</div>
 		<dl class="bj">
-			<dd class="name">${vvo.id }&nbsp;&nbsp; <span style="color: #5D5D5D;font-size: 11px;">${vvo.v_regdate }</span></dd>
+			<dd class="name"><span style="color: #00416d;font-weight: bold;">${vvo.name }</span>&nbsp;<span style="color: #8f9299;">(${vvo.id })&nbsp;&nbsp;${vvo.v_regdate }</span></dd>
 			<dt>${vvo.v_title }</dt>
 		</dl>
 	</div>

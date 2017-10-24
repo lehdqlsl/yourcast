@@ -16,7 +16,7 @@
 	</update>
 	<select id="getInfo" parameterType="int" resultType="video">
 		<!-- select * from video where v_num = #{v_num}-->
-		select v.*,m.id,mp.PROFILE_SAVEFILENAME from video v, member_profile mp, member m where v.m_num=mp.m_num and mp.m_num=m.m_num and v.v_num=#{v_num}
+		select v.*,m.id,m.name,mp.PROFILE_SAVEFILENAME from video v, member_profile mp, member m where v.m_num=mp.m_num and mp.m_num=m.m_num and v.v_num=#{v_num}
 	</select>
 	<select id="getList" resultType="video">
 		select * from video where v_delete=0
