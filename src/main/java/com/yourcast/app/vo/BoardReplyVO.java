@@ -34,7 +34,6 @@ public class BoardReplyVO {
 		this.writer_id = writer_id;
 	}
 
-
 	public BoardReplyVO(int br_num, String br_content, String br_regdate, int br_delete, int b_num, int m_num) {
 		//super();
 		this.br_num = br_num;
@@ -66,7 +65,6 @@ public class BoardReplyVO {
 		this.brucnt=brucnt;
 		this.name=name;
 	}
-	
 	
 	public String getName() {
 		return name;

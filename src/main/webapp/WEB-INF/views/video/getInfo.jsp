@@ -79,10 +79,8 @@ dd.name {
 			var sid="${sessionScope.id}";
 			var id="${vvo.id}";
 			$.ajax({
-				url:'<c:url value="/'+id+'/videoreply/insert"/>',
-				method:"POST",		
+				url:'<c:url value="/'+id+'/videoreply/insert?vr_content='+vr_content+'&sid='+sid+'&v_num='+v_num+'"/>',
 				dataType:"xml",
-				data:{"vr_content":vr_content,"sid":sid,"v_num":v_num},
 				success:function(data){
 					$("#vr_content").val("");
 					$("#replylist").empty();

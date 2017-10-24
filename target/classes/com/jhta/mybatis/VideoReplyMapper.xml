@@ -27,4 +27,5 @@
 	<select id="getCount" parameterType="int" resultType="int">
 		select NVL(count(*),0) from video_reply where v_num=#{v_num} and vr_delete=0
 	</select>
+	
 </mapper>

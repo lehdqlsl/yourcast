@@ -55,7 +55,6 @@ public class VideoReplyVO {
 		this.vrucnt=vrucnt;
 		this.name=name;
 	}
-
 	
 	public String getName() {
 		return name;

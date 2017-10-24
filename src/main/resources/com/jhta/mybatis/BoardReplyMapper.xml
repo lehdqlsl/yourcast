@@ -26,5 +26,4 @@
 	<select id="getCount" parameterType="int" resultType="int">
 		select NVL(count(br_num),0) cnt from board_reply where b_num=#{b_num} and br_delete=0
 	</select>
-	
 </mapper>

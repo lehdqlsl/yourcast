@@ -34,11 +34,10 @@
 			var br_content=$("#br_content").val();
 			var b_num="${vo.b_num}";
 			$.ajax({
-				url:"<c:url value='/${vo.id}/boardreply/insert'/>",
-				method:"POST",
-				data:{"br_content":br_content,"b_num":b_num},		
+				url:"<c:url value='/${vo.id}/boardreply/insert?br_content="+br_content+"&b_num="+b_num+"'/>",
 				dataType:"xml",
 				success:function(data){
+					//alert(data);
 					$("#br_content").val("");
 					$("#replylist").empty();
 					$(data).find("list").each(function(){
@@ -298,7 +297,7 @@
 	
 		<div class="wrap_view">
 			<div class="img_profile">
-				<img src="<c:url value='/resources/upload/${voimg.profile_savefilename }'/>"
+				<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>"
 					onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';" style="width: 50px;height: 50px;border-radius: 25px;">
 			</div>
 			<div class="hit">조회수&nbsp;&nbsp;<b>${vo.b_hit }</b>&nbsp;&nbsp; | &nbsp;&nbsp;
