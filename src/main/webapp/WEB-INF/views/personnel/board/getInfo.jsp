@@ -43,18 +43,19 @@
 					$("#replylist").empty();
 					$(data).find("list").each(function(){
 						var id=$(this).find("id").text();
+						var name=$(this).find("name").text();
 						var br_regdate=$(this).find("br_regdate").text();
 						var br_content=$(this).find("br_content").text();
 						var br_num=$(this).find("br_num").text();
 						var brucnt=$(this).find("brucnt").text();
 						var p="";
 						if(id=="${sessionScope.id}"){
-							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+							p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 							"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button>"+
 							"<span style='visibility:hidden;'>"+br_num+"</span>"+
 							"</p>";
 						}else{
-							p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
+							p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
 							"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'>"+
 							"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button><span style='visibility:hidden;'>"+br_num+"</span></p>";
 						}
@@ -82,18 +83,19 @@
 						$("#replylist").empty();
 						$(data).find("list").each(function(){
 							var id=$(this).find("id").text();
+							var name=$(this).find("name").text();
 							var br_regdate=$(this).find("br_regdate").text();
 							var br_content=$(this).find("br_content").text();
 							var br_num=$(this).find("br_num").text();
 							var brucnt=$(this).find("brucnt").text();
 							var p="";
 							if(id=="${sessionScope.id}"){
-								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+								p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 								"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button>"+
 								"<span style='visibility:hidden;'>"+br_num+"</span>"+
 								"</p>";
 							}else{
-								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
+								p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
 								"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'>"+
 								"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button><span style='visibility:hidden;'>"+br_num+"</span></p>";
 							}
@@ -117,18 +119,19 @@
 			success:function(data){
 				$(data).find("list").each(function(){
 					var id=$(this).find("id").text();
+					var name=$(this).find("name").text();
 					var br_regdate=$(this).find("br_regdate").text();
 					var br_content=$(this).find("br_content").text();
 					var br_num=$(this).find("br_num").text();
 					var brucnt=$(this).find("brucnt").text();
 					var p="";
 					if(id=="${sessionScope.id}"){
-						p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+						p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 						"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button>"+
 						"<span style='visibility:hidden;'>"+br_num+"</span>"+
 						"</p>";
 					}else{
-						p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
+						p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
 						"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'>"+
 						"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button><span style='visibility:hidden;'>"+br_num+"</span></p>";
 					}
@@ -152,7 +155,7 @@
 					success:function(data){
 						$(data).find("list").each(function(){
 							var id=$(this).find("id").text();
-							//alert(id);
+							var name=$(this).find("name").text();
 							var br_regdate=$(this).find("br_regdate").text();
 							var br_content=$(this).find("br_content").text();
 							var br_num=$(this).find("br_num").text();
@@ -160,12 +163,12 @@
 							//console.log(id);
 							var p="";
 							if(id=="${sessionScope.id}"){
-								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
+								p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_delete'  style='float:right;'><i class='fa fa-trash-o' aria-hidden='true'></i></button>"+
 								"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button>"+
 								"<span style='visibility:hidden;'>"+br_num+"</span>"+
 								"</p>";
 							}else{
-								p="<p class='reply'><span style='color: #00416D;font-weight: bold;'>"+id+"</span>&nbsp;&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
+								p="<p class='reply'><span style='color: #1559ff;font-weight: bold;'>"+name+"</span>&nbsp;&nbsp;<span style='color:#8F9299'>("+ id + ")</span>&nbsp;<span style='color: #8F9299;'>"+br_regdate+"</span><br>"+br_content+"&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_report'  style='float:right;'>"+
 								"<i class='fa fa-exclamation-triangle' aria-hidden='true'></i></button>&nbsp;&nbsp;<button class='w3-button w3-light-grey w3-border w3-round-large br_up' id='"+br_num+"' style='float:right;'>"+
 								"<i class='fa fa-thumbs-o-up' aria-hidden='true'></i>&nbsp;&nbsp;<b>"+brucnt+"</b></button><span style='visibility:hidden;'>"+br_num+"</span></p>";
 							}
@@ -295,13 +298,13 @@
 	
 		<div class="wrap_view">
 			<div class="img_profile">
-				<img src="<c:url value='/resources/upload/${voMP.profile_savefilename }'/>"
+				<img src="<c:url value='/resources/upload/${voimg.profile_savefilename }'/>"
 					onerror="this.src='http://www.afreecatv.com/images/afmain/img_thumb_profile.gif';" style="width: 50px;height: 50px;border-radius: 25px;">
 			</div>
 			<div class="hit">조회수&nbsp;&nbsp;<b>${vo.b_hit }</b>&nbsp;&nbsp; | &nbsp;&nbsp;
 			<a href="#" id="report" class="w3-hover-opacity" style="text-decoration: none">신고</a></div>
 			<div id="info">
-				작성자 : <span style="color: #1559ff;font-weight: bold;">${vo.id }</span>&nbsp;&nbsp;${vo.b_regdate }<br>
+				작성자 : <span style="color: #1559ff;font-weight: bold;">${vo.name }</span>&nbsp;<span style="color: #4B4B4B;">(${vo.id })&nbsp;&nbsp;${vo.b_regdate }</span><br>
 						<h4><c:if test="${vo.b_notice == 1 }">
 								<span class="noti"></span>
 							</c:if>${vo.b_title }</h4>

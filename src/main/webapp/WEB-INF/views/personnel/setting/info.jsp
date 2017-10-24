@@ -93,7 +93,7 @@
 				</tr>
 				<tr style="height:20px;"></tr>
 				<tr>
-					<th>프로필</th><td><input type="text" class="w3-input w3-section" name="profile_msg" value="${voMP.profile_msg }"></td>
+					<th>프로필</th><td><textarea rows="4" cols="70" class="w3-input w3-section" name="profile_msg">${voMP.profile_msg }</textarea></td>
 				</tr>
 				<tr>
 					<th></th><td style="color:#9A9A9A">방송국의 웹페이지의 좌측 프로필에 들어가는 자기소개입니다.</td>

@@ -87,7 +87,7 @@
 				<td><input type="checkbox" name="age_grade_num" value="2">&nbsp;&nbsp;성인</td>
 			</tr>
 			<tr>
-				<th>제목</th><td><input type="text" name="v_title" id="v_title" autocomplete=off><td>
+				<th>제목</th><td><input type="text" name="v_title" id="v_title" autocomplete=off style="width: 770px;"><td>
 			</tr>
 			<tr>
 				<th>내용</th><td><textarea name="v_content" id="ir1" rows="10" cols="100"

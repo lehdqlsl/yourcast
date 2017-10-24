@@ -18,7 +18,7 @@
 	<select id="getList" parameterType="hashmap" resultType="videoreply">
 		select * from(
         select bb.*,rownum rnum from(
-		select vr.*,m.id,aa.vrucnt,rownum r1 from video_reply vr,member m,
+		select vr.*,m.id,m.name,aa.vrucnt,rownum r1 from video_reply vr,member m,
 		(select vr.vr_num, count(vru.vr_num) vrucnt from video_reply vr, video_reply_up vru 
 		where vr.vr_num=vru.vr_num(+) and vr.vr_delete=0 and vr.v_num=#{v_num} group by vr.vr_num order by vr.vr_num desc) aa
 		where vr.vr_num=aa.vr_num and vr.m_num=m.m_num) bb )

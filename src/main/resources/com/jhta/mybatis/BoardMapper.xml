@@ -15,7 +15,7 @@
 		where b_num=#{b_num}
 	</update>
 	<select id="getInfo" parameterType="int" resultType="board">
-		select b.*,m.id from board b, member m where b.m_num=m.m_num and b_num=#{b_num}
+		select b.*,m.id,m.name from board b, member m where b.m_num=m.m_num and b_num=#{b_num}
 	</select>
 	<select id="getList" resultType="board" parameterType="hashmap">
 		<!--  select b.*,m.id from board b, member m where b.bj_num=m.m_num and b.category_num=#{category_num} and b.b_delete=0 order by b.b_num desc-->
