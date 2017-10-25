@@ -1,11 +1,7 @@
 @charset "UTF-8";
 
 @import url("//res.afreecatv.com/css/global/layer.css");
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
-* {
-font-family: 'Hanna', serif;
-}
 
 BODY {
 	margin-left: 0;

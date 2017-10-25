@@ -21,6 +21,16 @@
 					}
 				});
 			});
+			$("#name").keyup(function(event){
+				var name=$("#name").val();
+				$.getJSON("<c:url value='/usingname/json'/>",{"name":name},function(data){
+					if(data.user){
+						$("#nickcheck").html("<font color=red>사용중인 닉네임입니다</font>");
+					}else{
+						$("#nickcheck").html("<font color=blue>사용가능한 닉네임입니다</font>");
+					}
+				});
+			});
 			//var chk=$("input[name='gender']").prop("checked");
 			$("form").submit(function(event) {
 				if($("input[name='id']").val()==''){
@@ -29,6 +39,10 @@
 					event.preventDefault();
 				}
 				else if($("#idcheck").text()=='사용중인 아이디입니다') {
+					alert("중복확인을 해주세요");
+					event.preventDefault();
+				}
+				else if($("#nickcheck").text()=='사용중인 닉네임입니다') {
 					alert("중복확인을 해주세요");
 					event.preventDefault();
 				}
@@ -91,14 +105,13 @@
 		<input name='id' placeholder='아이디' type='text' id="id" autocomplete=off>
 		<span id="idcheck" style="color: red; font-size: 12px"></span><br>
 		<input id='pwd' name='pwd' placeholder='비밀번호' type='password'><br>
-		<input id='pwd1' name='pwd1' placeholder='비밀번호 확인'
-			type='password'><br> <input name='name' placeholder='닉네임'
-			type='text' id="name" autocomplete=off><br> <input type="text"
-			id="datepicker" name="birth" placeholder='생년월일'><br> <br>
+		<input id='pwd1' name='pwd1' placeholder='비밀번호 확인' type='password'><br> 
+		<input name='name' placeholder='닉네임' type='text' id="name" autocomplete=off><br>
+		<span id="nickcheck" style="color: red; font-size: 12px"></span><br>
+		<input type="text" id="datepicker" name="birth" placeholder='생년월일'><br> <br>
 		<!-- <input type="text"  placeholder='남1 여2' name="gender"> -->
 		<input name="gender" value="1" type="radio" class="gender">남자
-		&nbsp;&nbsp; <input name="gender" value="2" type="radio"
-			class="gender">여자
+		&nbsp;&nbsp; <input name="gender" value="2" type="radio" class="gender">여자
 		<div class='agree'>
 			<input id='agree' name='agree' type='checkbox'> <label
 				for='agree'></label><a href="<c:url value='/member/service'/>"
