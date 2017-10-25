@@ -365,9 +365,9 @@ dd.name {
 <div class="w3-main" style="margin-left: 300px; margin-top: 54px;">
 	<!-- <video controls="controls" style="width: 1300px;height:735px; "> -->
 	<video id="example_video_1" class="video-js vjs-default-skin"
-		controls preload="auto" width="1300" height="735"
-		poster="http://video-js.zencoder.com/oceans-clip.png"
-		data-setup='{"example_option":true}'>
+		controls autoplay preload="auto" width="1300" height="735"
+		poster="<c:url value='/resources/upload/${vvo.v_savethumbnail}'/>"
+		data-setup='{ "controls": true, "autoplay": true "preload": "auto" }'>
 		<source src="<c:url value='/resources/upload/${vvo.v_savefilename}'/>" type="video/mp4">
 		</video>
 	<!-- </video> -->

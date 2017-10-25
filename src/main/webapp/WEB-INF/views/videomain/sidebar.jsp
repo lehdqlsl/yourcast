@@ -15,9 +15,14 @@
     <a href="<c:url value="/"/>" style="text-decoration: none"><button class="w3-button w3-white w3-padding-large" style="text-align: center;width: 100%;margin: 0px;padding: 0px;">실시간 방송</button></a>
   </div>
   <hr>
-  <c:if test="${not empty sessionScope.id }">
-  	<a href="<c:url value='/bookmark/list'/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>즐겨찾기</a>
-  </c:if>
+  <c:choose>
+  	<c:when test="${empty sessionScope.id }">
+  		<a href="<c:url value='/member/login'/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>즐겨찾기</a>
+  	</c:when>
+  	<c:otherwise>
+  		<a href="<c:url value='/bookmark/list'/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>즐겨찾기</a>
+  	</c:otherwise>
+  </c:choose>
    <hr>
   <div class="w3-bar-block">
   	<a href='<c:url value="/videomain"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-smile-o w3-margin-right"></i>전체보기</a>

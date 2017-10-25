@@ -16,7 +16,7 @@
 <script>
 	$(document).ready(function(){
 		$("#more").click(function(){
-			var vlcount=$(".videolist").length;
+			var vlcount=$(".v_title_list").length;
 			//alert(vlcount);
 			
 			var vlc=vlcount/20+1;
@@ -125,7 +125,7 @@
 							<a style="padding:0 10px 0 10px;font-size: 1.4em;font-weight: bold;" href="<c:url value="/videomain/getInfo?v_num=${vo.v_num }"/>" class="title_list ">${vo.v_title}</a>
 						</div>
 						<div style="padding:0 10px 0 10px;">
-							<p><span style="color: #328fde;"><a href="<c:url value='/${vo.id }'/>" style="text-decoration: none;">${vo.id }</a></span> 조회수 ${vo.v_hit }</p>
+							<p><span class="v_title_list" style="color: #328fde;"><a href="<c:url value='/${vo.id }'/>" style="text-decoration: none;">${vo.id }</a></span> 조회수 ${vo.v_hit }</p>
 						</div> 
 					</div>
 				</c:forEach>

@@ -13,7 +13,15 @@
   </div>
   <hr>
   <div class="w3-bar-block">
-    <a href="<c:url value="/broadcast/bookmark"/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>즐겨찾기</a>
+      <c:choose>
+  	<c:when test="${empty sessionScope.id }">
+  		<a href="<c:url value='/member/login'/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>즐겨찾기</a>
+  	</c:when>
+  	<c:otherwise>
+  		<a href="<c:url value="/broadcast/bookmark"/>" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>즐겨찾기</a>
+  	</c:otherwise>
+  </c:choose>
+    
     <hr>
     <a href='<c:url value="/"/>' onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-smile-o w3-margin-right"></i>전체보기</a>
    <c:forEach var="vo" items="${glist }">

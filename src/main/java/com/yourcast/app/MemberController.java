@@ -186,7 +186,7 @@ public class MemberController {
 		int m_num = mvo.getM_num();
 		int buy_ea = buy_ea1 * buy_ea2;
 		int star_candy = mvo.getStar_candy() + buy_ea;
-		int money = mvo.getMoney() - (buy_ea * 110);
+		int money = -(buy_ea * 110);
 
 		// mservice.moneyUpdate(new MemberVO(m_num, money, 0));
 		// mservice.starcandyUpdate(new MemberVO(m_num, 0, star_candy));
@@ -297,9 +297,6 @@ public class MemberController {
 		
 		Calendar c2=Calendar.getInstance();
 		int year=c2.get(Calendar.YEAR);
-		
-		System.out.println("생일 : "+birthyear);
-		System.out.println("연도 : "+year);
 		
 		JSONObject json=new JSONObject();
 		if(year-birthyear>=19) {
