@@ -56,7 +56,7 @@
 			<!-- <input type="submit" value="등록" id="reg"> -->
 			<div class="w3-bar-all w3-center">
 				<button type="submit" form="target" value="Submit"
-				class="w3-button w3-border w3-round-large" style="background-color: #4C5870;"><i class="fa fa-check" style="color: white;"></i>
+				class="w3-button w3-border w3-round-large" style="background-color: #4C5870;margin-right: 350px;"><i class="fa fa-check" style="color: white;"></i>
 				<span style="color: #EBEDEC;">&nbsp;등록</span></button>
 			</div>
 		</form>
