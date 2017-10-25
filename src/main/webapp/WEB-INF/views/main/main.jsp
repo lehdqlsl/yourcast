@@ -30,6 +30,8 @@ h3 {
 </style>
 <div class="w3-main" style="margin-left: 300px; margin-top: 60px;">
 	<!-- 내용 -->
+	<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
+				onclick="w3_open()"><i class="fa fa-bars"></i></span>
 	<div class="w3-container w3-padding-32" id="projects">
 		<c:choose>
 			<c:when test="${genre_num == 0 }">
