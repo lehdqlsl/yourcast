@@ -56,8 +56,8 @@ public class InfoController {
 		List<CategoryVO> clist = c_service.getList(voM.getM_num());
 
 		MemberProfileVO voMP = mp_service.getInfo(voM.getM_num());
-		String profile_msg1 = voMP.getProfile_msg();
-		voMP.setProfile_msg(voMP.getProfile_msg().replace("<br>","\r\n"));
+		String profile_msg1 = voMP.getProfile_msg().replace("<br>","\r\n");
+		voMP.setProfile_msg(voMP.getProfile_msg());
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 

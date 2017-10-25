@@ -164,10 +164,10 @@ dd.name {
 				<li><c:if test="${not empty sessionScope.id }">
 			<c:choose>
 			<c:when test="${bookmark==true }">
-				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:orange" id="star"></i>&nbsp;즐겨찾기</button>
+				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:orange" id="yellowstar"></i>&nbsp;즐겨찾기</button>
 			</c:when>
 			<c:otherwise>
-				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:#BDBDBD" id="star"></i>&nbsp;즐겨찾기</button>
+				<button class="w3-button w3-white" style="margin-left: 1185px" id="bookmark"><i class="fa fa-star" style="color:#BDBDBD" id="yellowstar"></i>&nbsp;즐겨찾기</button>
 			</c:otherwise>
 		</c:choose>
 		</c:if></li>
@@ -996,14 +996,14 @@ dd.name {
 		});
 		
 		$("#bookmark").click(function(){
-			var color=$("#star").css("color");
+			var color=$("#yellowstar").css("color");
 			var bjid = '${bjvo.id }';
 			if(color == "rgb(255, 165, 0)"){//즐겨찾기 취소
 				$.ajax({
 					url:"<c:url value='/broadcast/bookmark/delete?bjid=${bjvo.id }'/>",
 					dataType:"json",
 					success:function(data){
-						$("#star").css("color","#BDBDBD");
+						$("#yellowstar").css("color","#BDBDBD");
 					}
 				});
 			}else{//즐겨찾기 등록
@@ -1011,7 +1011,7 @@ dd.name {
 					url:"<c:url value='/broadcast/bookmark/insert?bjid=${bjvo.id }'/>",
 					dataType:"json",
 					success:function(data){
-						$("#star").css("color","orange");
+						$("#yellowstar").css("color","orange");
 					}
 				});
 			}
