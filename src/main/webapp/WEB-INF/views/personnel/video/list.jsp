@@ -10,7 +10,6 @@
 <body class="w3-light-grey w3-content" style="max-width: 1600px">
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 300px">
-
 		<!-- Header -->
 		<header id="portfolio">
 			<a href="#"><img src="/w3images/avatar_g2.jpg"
@@ -196,7 +195,7 @@
 								<a id="t${vo.v_num }" class="onetitle" href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
 							</c:when>
 							<c:otherwise>
-								<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }(일반)</a>
+								<a href="<c:url value='/videomain/getInfo?v_num=${vo.v_num }'/>">${vo.v_title }</a>
 							</c:otherwise>
 						</c:choose>
 					</div>

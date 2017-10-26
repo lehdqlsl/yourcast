@@ -184,8 +184,8 @@
 			 <div class="col-md-8">
 	                      <div class="card">
 	                          <div class="header">
-	                              <h4 class="title">Users Behavior!!!</h4>
-	                              <p class="category">24 Hours performance</p>
+	                              <h4 class="title">최근 7주일 매출</h4>
+	                              <p class="category">BJ등급별 매출</p>
 	                          </div>
 	                          <div class="content">
 	                              <div id='curve_chart' style="height: 300px;"></div>

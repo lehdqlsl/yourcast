@@ -65,7 +65,7 @@ public class AdminController {
 		if((id == null) || (!id.equals("admin"))) {
 			return ".member.nopage";
 		}else {
-			return ".admin";
+			return "redirect:/admin/profit/list'/>";
 		}
 		
 	}

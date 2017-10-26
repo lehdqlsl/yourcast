@@ -865,7 +865,7 @@ dd.name {
 					if(grade == 'bj'){
 						$("#chat_area").append('<dl class="bj"><dt class="man"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="#" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
 					}else if(grade == 'hot'){
-						$("#chat_area").append('<dl class=""><dt class="hot_m"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
+						$("#chat_area").append('<dl class=""><dt class="hot_m"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'" style="color:#DE4D71;">'+msg+'</dd></dl>');
 					}else if(grade == 'fan'){
 						$("#chat_area").append('<dl class=""><dt class="fan_m"><img src="http://www.afreecatv.com/images/new_app/chat/ic_fanclub.gif" alt="팬클럽" title="팬클럽"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'" style="color:#56a704;">'+msg+'</dd></dl>');	
 					}else{
@@ -875,7 +875,7 @@ dd.name {
 					if(grade == 'bj'){
 						$("#chat_area").append('<dl class="bj"><dt class="woman"><img src="http://www.afreecatv.com/images/new_app/chat/ic_bj.gif" alt="BJ" title="BJ"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="bj" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
 					}else if(grade == 'hot'){
-						$("#chat_area").append('<dl class=""><dt class="hot_w"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'">'+msg+'</dd></dl>');
+						$("#chat_area").append('<dl class=""><dt class="hot_w"><img src="http://www.afreecatv.com/images/new_app/chat/ic_hot.gif" alt="열혈팬" title="열혈팬"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'" style="color:#DE4D71;">'+msg+'</dd></dl>');
 					}else if(grade == 'fan'){
 						$("#chat_area").append('<dl class=""><dt class="fan_w"><img src="http://www.afreecatv.com/images/new_app/chat/ic_fanclub.gif" alt="팬클럽" title="팬클럽"><a href="javascript:;" user_id="'+id+'" user_nick="'+ name +'" userflag="589856" grade="fan" class="test">'+name+'<em>('+id+')</em></a> :</dt><dd id="'+(x++)+'" style="color:#56a704;">'+msg+'</dd></dl>');	
 					}else{

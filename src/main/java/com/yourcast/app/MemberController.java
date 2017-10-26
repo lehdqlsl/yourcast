@@ -1,5 +1,6 @@
 package com.yourcast.app;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -204,9 +205,11 @@ public class MemberController {
 	public String buyStar1(int ea, HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
 		MemberVO mvo = mservice.getInfo(id);
-
+		DecimalFormat df = new DecimalFormat("#,##0");
+		String money = df.format(mvo.getMoney());
 		model.addAttribute("ea", ea);
-		model.addAttribute("money", mvo.getMoney());
+		model.addAttribute("money", money);
+		model.addAttribute("money1", mvo.getMoney());
 		return "/member/charge/starCharge";
 	}
 
@@ -228,7 +231,7 @@ public class MemberController {
 
 		// mservice.moneyUpdate(new MemberVO(mvo.getM_num(), mvo.getMoney() + moneyC,
 		// 0));
-		mservice.chargeMoney(moneyC, new MemberVO(mvo.getM_num(), mvo.getMoney() + moneyC, 0));
+		mservice.chargeMoney(moneyC, new MemberVO(mvo.getM_num(), mvo.getMoney(), 0));
 		p_service.insert(new PayVO(0, moneyC, null, mvo.getM_num(), pay, null));
 
 		model.addAttribute("exit", "exit");

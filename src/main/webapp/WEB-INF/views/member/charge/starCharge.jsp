@@ -10,68 +10,7 @@
 </head>
 <script type="text/javascript"
 	src="<c:url value='/resources/js/jquery-3.2.1.min.js'/>"></script>
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						if ($("#hid").val() == "exit") {
-							self.close();
-						}
-						$("#buy_ea2").on(
-								"keyup",
-								function() {
-									$("#buy_ea1").val($("#ea").text());
-									$("#result")
-											.text(
-													parseInt($("#ea").text()
-															* $("#buy_ea2")
-																	.val()
-															* 110));
-									$("#resultT").text(
-											parseInt($("#ea").text()
-													* $("#buy_ea2").val()));
-									if (isNaN($("#result").text())) {
-										alert("숫자가 아닌 값이 있습니다");
-										$("#result").text("");
-										$("#resultT").text("");
-										$("#buy_ea1").val("");
-										$("#buy_ea2").val("");
-									}
-								});
 
-						$("#cancel").on("click", function() {
-							self.close();
-						});
-						$("#sm")
-								.on(
-										"click",
-										function() {
-											if ($("#buy_ea2").val() == null
-													|| $("#buy_ea2").val() == "") {
-												alert("충전수량을 입력하세요.");
-												$("#result").text("");
-												$("#resultT").text("");
-											} else if ($("#buy_ea2").val() == 0) {
-												alert("충전수량은 1 이상의 숫자만 입력가능합니다.");
-												$("#buy_ea2").val("");
-												$("#result").text("");
-												$("#resultT").text("");
-											} else if (parseInt($("#result")
-													.text()) > parseInt($(
-													"#money").text())) {
-												alert("소지금액이 부족합니다.");
-												$("#buy_ea2").val("");
-												$("#result").text("");
-												$("#resultT").text("");
-											} else {
-												alert(parseInt($("#ea").text()
-														* $("#buy_ea2").val())
-														+ "개의 별풍선이 충전되었습니다.");
-												$('form').submit();
-											}
-										});
-					});
-</script>
 <body>
 	<div>
 		<%-- <form method="post" action="<c:url value='/member/charge/buyStar'/>">
@@ -286,9 +225,76 @@
 										</tbody>
 									</table>
 								</div> <!--확인취소 버튼-->
-
 								</center>
 								</form>
 								</div>
 </body>
+<script type="text/javascript">
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	$(document).ready(function() {
+						if ($("#hid").val() == "exit") {
+							self.close();
+						}
+						$("#buy_ea2").on(
+								"keyup",
+								function(event) {
+									
+									var key = (event.key).charCodeAt(0);
+									if(key < 48 || key > 57){
+										if(key != 66){
+											alert("숫자가 아닌 값이 있습니다");
+											$("#result").text("");
+											$("#resultT").text("");
+											$("#buy_ea1").val("");
+											$("#buy_ea2").val("");	
+										}
+									}
+									
+									$("#buy_ea1").val($("#ea").text());
+									var money = parseInt($("#ea").text()* $("#buy_ea2").val()* 110);
+									$("#result")
+											.text(numberWithCommas(money)+"원");
+									$("#resultT").text(
+											parseInt($("#ea").text()
+													* $("#buy_ea2").val())+"개");
+								});
+
+						$("#cancel").on("click", function() {
+							self.close();
+						});
+						$("#sm")
+								.on(
+										"click",
+										function() {
+											console.log();
+											console.log();
+											
+										
+											
+											if ($("#buy_ea2").val() == null
+													|| $("#buy_ea2").val() == "") {
+												alert("충전수량을 입력하세요.");
+												$("#result").text("");
+												$("#resultT").text("");
+											} else if ($("#buy_ea2").val() == 0) {
+												alert("충전수량은 1 이상의 숫자만 입력가능합니다.");
+												$("#buy_ea2").val("");
+												$("#result").text("");
+												$("#resultT").text("");
+											} else if (${money1} < parseInt($("#buy_ea2").val())*parseInt($("#ea").text())*110) {
+												alert("소지금액이 부족합니다.");
+												$("#buy_ea2").val("");
+												$("#result").text("");
+												$("#resultT").text("");
+											} else {
+												alert(parseInt($("#ea").text()
+														* $("#buy_ea2").val())
+														+ "개의 별풍선이 충전되었습니다.");
+												$('form').submit();
+											}
+										});
+					});
+</script>
 </html>

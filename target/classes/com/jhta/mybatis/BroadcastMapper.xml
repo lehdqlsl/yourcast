@@ -23,12 +23,12 @@
 
 	<select id="getlist" resultType="broadcast">
 		select b.*, m.name, m.id from broadcast b join member m on b.m_num = m.m_num where
-		onair = 1
+		onair = 1 order by cnt desc
 	</select>
 
 	<select id="getlist1" resultType="broadcast" parameterType="int">
 		select b.*, m.name, m.id from broadcast b join member m on b.m_num = m.m_num where
-		onair = 1 and genre_num = #{genre_num}
+		onair = 1 and genre_num = #{genre_num} order by cnt desc
 	</select>
 	
 	<select id="getinfo" parameterType="int" resultType="broadcast">
