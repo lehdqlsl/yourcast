@@ -387,7 +387,7 @@ dd.name {
 	<!-- 동영상 정보 -->
 	<div class="info">
 		<div class="bjlogo">
-			<a href='<c:url value="/${vvo.id }"/>'><img src='<c:url value="/resources/upload/${vvo.profile_savefilename }"/>' style="width: 80px;height: 80px;"></a>
+			<a href='<c:url value="/${vvo.id }"/>'><img src='<c:url value="/resources/upload/${vvo.profile_savefilename }"/>' class="w3-circle" style="width: 80px;height: 80px;"></a>
 		</div>
 		<dl class="bj">
 			<dd class="name"><span style="color: #00416d;font-weight: bold;">${vvo.name }</span>&nbsp;<span style="color: #8f9299;">(${vvo.id })&nbsp;&nbsp;${vvo.v_regdate }</span></dd>
