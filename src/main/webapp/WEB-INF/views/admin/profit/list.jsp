@@ -226,7 +226,7 @@
       function drawChart() {
     	 var myArray = new Array( new Array(7), new Array(7) );
 
-    	 var bar = new Array(5);
+    	 var bar = new Array(8);
     	 
 	    	//for문을 돌면서 배열을 선언합니다.
 	    for(var i=0; i<bar.length; i++) {
@@ -264,7 +264,7 @@
        			if(bar[i][j] == undefined){
        				bar[i][j]=0;
        			}
-       			console.log('['+ i +']'+'['+ j +']'+bar[i][j]);
+       			//console.log('['+ i +']'+'['+ j +']'+bar[i][j]);
        		}
        	}
            	

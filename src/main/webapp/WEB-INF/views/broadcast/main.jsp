@@ -146,7 +146,7 @@ dd.name {
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/chat_wrap.css'/>?ver=18">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/chat_layer.css'/>?ver=3">
+	href="<c:url value='/resources/css/chat_layer.css'/>?ver=4">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/pop_layer.css'/>?ver=2">
 <link rel="stylesheet" type="text/css"
@@ -524,7 +524,10 @@ dd.name {
 
 <script type="text/javascript">
 	$("#btn_star").click(function(){
-		$("#layerStarGift").toggle();
+		var vo = '${requestScope.vo}';
+		if(vo != ''){
+			$("#layerStarGift").toggle();
+		}
 	});
 	
 	$(".btn_st1").click(function(){
@@ -727,10 +730,9 @@ dd.name {
 			if(vo == ''){
 				var result = confirm('채팅에 참여하시려면 로그인이 필요합니다. 로그인페이지로 이동하시겠습니까?'); 
 				if(result) { 
-					location.replace('http://192.168.0.4:8082/app/member/login'); 
+					location.replace('http://192.168.0.4:8082/app/member/login');
 				} else {
-					
-				}				
+				}			
 			}
 		});
 		
@@ -984,7 +986,10 @@ dd.name {
 		}
 		
 		$("#btn_emo").click(function(){
-			$("#emoticonArea").toggle();
+			var vo = '${requestScope.vo}';
+			if(vo != ''){
+				$("#emoticonArea").toggle();
+			}	
 		});
 		
 		$(".btn_close").click(function(){

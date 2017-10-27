@@ -14,7 +14,7 @@ body, ul, ol, li, dt, dl, dd, div, h1, h2, h3, h4, h5, h6, p, form, fieldset, bl
 #emoticonBox .scroll_area span a:hover{background:url(//www.afreecatv.com/images/chat/emoticon/bg_box.gif) no-repeat}
 #emoticonBox .scroll_area span a img{width:26px;height:26px;vertical-align:top;margin:2px 0 0 2px;}
 #emoticonBox .btn_close {position:absolute;top:3px;right:0;}
-#emoticonBox .btn_close a {display:block;width:23px;height:23px;text-indent:-9999px;background:url('/images/chat/emoticon/btn_close.gif') no-repeat 7px 7px}
+#emoticonBox .btn_close a {display:block;width:23px;height:23px;text-indent:-9999px;}
 
 
 .wrap_lv {display:none; position:absolute; left:-1px; top:24px; z-index:99; width:300px; background:#fff;}

@@ -65,7 +65,7 @@ public class AdminController {
 		if((id == null) || (!id.equals("admin"))) {
 			return ".member.nopage";
 		}else {
-			return "redirect:/admin/profit/list'/>";
+			return "redirect:/admin/profit/list";
 		}
 		
 	}
@@ -96,8 +96,12 @@ public class AdminController {
 		map.put("endRow",pu.getEndRow());
 
 		List<ProfitVO> plist = p_service.getList(map);
+
 		List<ProfitVO> rlist = p_service.getRank();
 		List<ProfitVO> glist = p_service.getProfit();
+		for(ProfitVO vo : glist) {
+			System.out.println(vo.getTotal());
+		}
 		model.addAttribute("plist",plist);
 		model.addAttribute("rlist",rlist);
 		model.addAttribute("glist",glist);

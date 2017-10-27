@@ -268,10 +268,10 @@
 								.on(
 										"click",
 										function() {
-											console.log();
-											console.log();
-											
-										
+											var mo = '${money1}';
+											if(mo == ''){
+												mo=0;
+											}
 											
 											if ($("#buy_ea2").val() == null
 													|| $("#buy_ea2").val() == "") {
@@ -283,7 +283,7 @@
 												$("#buy_ea2").val("");
 												$("#result").text("");
 												$("#resultT").text("");
-											} else if (${money1} < parseInt($("#buy_ea2").val())*parseInt($("#ea").text())*110) {
+											} else if (parseInt(mo) < parseInt($("#buy_ea2").val())*parseInt($("#ea").text())*110) {
 												alert("소지금액이 부족합니다.");
 												$("#buy_ea2").val("");
 												$("#result").text("");

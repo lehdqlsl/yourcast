@@ -73,7 +73,7 @@ public class MemberController {
 		String pwd = request.getParameter("pwd");
 
 		if(id.equals("admin")) {
-			return ".admin";
+			return "redirect:/admin/profit/list";
 		}else {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id", id);
@@ -229,9 +229,11 @@ public class MemberController {
 		String id = (String) session.getAttribute("id");
 		MemberVO mvo = mservice.getInfo(id);
 
+		System.out.println("페이:"+pay);
+		System.out.println("돈:"+moneyC);
 		// mservice.moneyUpdate(new MemberVO(mvo.getM_num(), mvo.getMoney() + moneyC,
 		// 0));
-		mservice.chargeMoney(moneyC, new MemberVO(mvo.getM_num(), mvo.getMoney(), 0));
+		mservice.chargeMoney(moneyC, new MemberVO(mvo.getM_num(), moneyC, 0));
 		p_service.insert(new PayVO(0, moneyC, null, mvo.getM_num(), pay, null));
 
 		model.addAttribute("exit", "exit");

@@ -113,7 +113,7 @@ input[type="checkbox"]:checked + label:before {
 					</dd>
 				</dl>
 				<dl>
-					<dt>방송 속성 : ${bvo.age_grade_num}</dt>
+					<dt>방송 속성</dt>
 					<dd>
 						<br>
 						<c:choose>
@@ -124,8 +124,6 @@ input[type="checkbox"]:checked + label:before {
 								<input type="checkbox" name="frmAdult" id="check1" value="19" checked="checked">
 							</c:otherwise>
 						</c:choose>
-						
-						
 						
 						<label
 							for="check1"><span></span>성인방송 설정</label>
